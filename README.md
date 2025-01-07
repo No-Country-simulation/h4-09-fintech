@@ -1,6 +1,7 @@
 # h4-09-fintech
 Iupi app
 
-## Presencia
+## Presencia (Integrantes)
 
 - [X] Lucel Da Silva
+- [X] Gabriel Gotlib
