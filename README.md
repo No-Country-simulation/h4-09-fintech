@@ -6,3 +6,4 @@ Iupi app
 - [X] Lucel Da Silva
 - [X] Gabriel Gotlib
 - [X] Catriel Escobar
+- [X] Benjamin Moreno
