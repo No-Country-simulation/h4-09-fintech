@@ -42,7 +42,7 @@ Ante la falta de opciones de crédito accesible, IUPI ofrece a las familias la p
 | Lucel Da Silva     | linkedin | github    | rol     |
 | Gabriel Gotlib   | linkedin  |   github    | rol       |
 | Leon Asturizaga    | linkedin | github  | rol       |
-| Edivaldo Gomes     | [Gabriel-Gotlib](https://www.linkedin.com/in/gabriel-gotlib-5855197b/) | [Gabriel Gtlib](https://github.com/Gagotlib)  | rol       |
+| Edivaldo Gomes     | [Gabriel-Gotlib](https://www.linkedin.com/in/gabriel-gotlib-5855197b/) | [Gabriel Gtlib](https://github.com/Gagotlib)  | Frontend       |
 | Jorge Hernriquez       | [jorge-henriquez-novoa](https://linkedin.com/in/jorge-henriquez-novoa/) | jorgea-hn       | Frontend        |
 
 ---
