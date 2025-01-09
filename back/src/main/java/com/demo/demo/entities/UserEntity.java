@@ -1,32 +1,32 @@
 package com.demo.demo.entities;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.io.Serializable;
 import java.util.*;
 import java.util.stream.Collectors;
 
 @Entity
-@Table(name = "users") // Define el nombre de la tabla en la base de datos
+@Table(name = "users")
 @Setter
 @Getter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class UserEntity implements UserDetails {
-
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "user_id")
     private UUID userId;
 
-    @Column(unique = true, nullable = false) // El nombre de usuario debe ser único y no nulo
+    @Column(unique = true, nullable = false)
     private String username;
 
-    @Column(nullable = false) // La contraseña no debe ser nula
+    @Column()
     private String password;
-
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
@@ -39,7 +39,7 @@ public class UserEntity implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return roles.stream()
-                .map(role -> new SimpleGrantedAuthority(role.getName()))
+                .map(role -> new SimpleGrantedAuthority(role.getRoleName()))
                 .collect(Collectors.toList());
     }
 }

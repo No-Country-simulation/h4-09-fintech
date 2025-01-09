@@ -9,6 +9,6 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface RoleRepository extends JpaRepository<RoleEntity, UUID> {
-    @Query(value = "SELECT r from  RoleEntity r where r.name = :name")
+    @Query(value = "SELECT r from  RoleEntity r where r.roleName = :name")
     Optional<RoleEntity> findRoleByName(@Param("name") String name);
 }
