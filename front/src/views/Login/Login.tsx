@@ -1,12 +1,29 @@
-import { logout, setUser } from '../../redux/userSlice'
-import { useAppDispatch, useAppSelector } from '../../redux/storehooks'
-import { useEffect } from 'react'
+import { setUser } from '../../redux/userSlice'
+import { useAppDispatch } from '../../redux/storehooks'
+import { useEffect, useState } from 'react'
+import style from './login.module.css'
+import axios from 'axios'
+import { Link, useNavigate } from 'react-router-dom'
+import { baseUrl } from '../../config/envs'
+import Spiner from '../../components/spiner/Spiner'
 
 export default function Login() {
+	const navigate = useNavigate()
 	//usar esto para obtener el estado global user
 	const dispatch = useAppDispatch()
-	const user = useAppSelector((state) => state.user)
-	console.log(user)
+
+	const [loginData, setLoginData] = useState({
+		email: '',
+		password: ''
+	})
+	const [isLoading, setIsLoading] = useState(false)
+	const handleChange = (e: { target: { name: string; value: string } }) => {
+		const { name, value } = e.target
+		setLoginData((user) => ({
+			...user,
+			[name]: value
+		}))
+	}
 
 	//uso esto para ver si hay un usuario en el localstorage
 	useEffect(() => {
@@ -17,36 +34,71 @@ export default function Login() {
 	}, [dispatch])
 
 	//funcion que hace login y lo guarda en estado global y localstorage
-	const handlelogin = () => {
-		dispatch(setUser({ email: 'email@mail', username: 'nombreusuario' }))
-		localStorage.setItem('user', JSON.stringify({ email: 'email@mail', username: 'nombreusuario' }))
+	const handleSubmit = async (e: { preventDefault: () => void }) => {
+		e.preventDefault()
+		setIsLoading(true)
+		console.log(loginData)
+
+		try {
+			//! enviar info al backend
+			const response = await axios.post(`${baseUrl}/users/login`, loginData)
+			// console.log(response.data) // control
+			const user = response.data.user
+			dispatch(setUser(user))
+			navigate('/')
+			alert('Login exitoso')
+		} catch (error) {
+			if (axios.isAxiosError(error) && error.response) {
+				console.error(error.response.data)
+			} else {
+				console.error(error)
+			}
+			alert('Usuario o contraseña invalidos')
+		} finally {
+			setIsLoading(false)
+		}
 	}
 
 	//funcion que hace logout y lo borra del estado global y localstorage
-	const handlelogout = () => {
-		dispatch(logout())
-		localStorage.removeItem('user')
-	}
+	// const handlelogout = () => {
+	// 	dispatch(logout())
+	// 	localStorage.removeItem('user')
+	// }
 
 	return (
-		<div style={{ textAlign: 'center', alignItems: 'center', justifyContent: 'center' }}>
+		<div className={style.loginview}>
 			<h1>Login</h1>
-
-			<p style={{ fontSize: '2em', color: 'red' }}>{`usuario: ${user.email} email: ${user.username}`}</p>
-
-			<button type='button' onClick={handlelogin}>
-				login
-			</button>
-			<button type='button' onClick={handlelogout}>
-				logout
-			</button>
-
-			<p>
-				<a href='/register'>register</a>
-			</p>
-			<p>
-				<a href='/'>home</a>
-			</p>
+			<form className={style.registerForm} onSubmit={handleSubmit}>
+				<div className={style.labelInput}>
+					<label htmlFor='email'></label>
+					<input type='email' id='email' name='email' required value={loginData.email} onChange={handleChange} placeholder='Email' />
+				</div>
+				<div className={style.labelInput}>
+					<label htmlFor='password'></label>
+					<input type='password' id='password' name='password' required value={loginData.password} onChange={handleChange} placeholder='Contraseña' />
+				</div>
+				{isLoading ? (
+					<button type='button' className={style.buttonEnabled} disabled>
+						<Spiner />
+					</button>
+				) : (
+					<>
+						{loginData.email === '' || loginData.password === '' ? (
+							<button className={style.buttonDisabled} type='submit' disabled>
+								Iniciar sesión
+							</button>
+						) : (
+							<button className={style.buttonEnabled} type='submit'>
+								Iniciar sesión
+							</button>
+						)}
+					</>
+				)}
+			</form>
+			<div className={style.registerdiv}>
+				<p>Si todavia no tienes una cuenta: </p>
+				<Link to='/register'>Registrate acá</Link>
+			</div>
 		</div>
 	)
 }

@@ -24,7 +24,8 @@ export default function Home() {
 
 	return (
 		<div style={{ textAlign: 'center', alignItems: 'center', justifyContent: 'center' }}>
-			<p style={{ fontSize: '2em', color: 'red' }}>{`usuario: ${user.email} email: ${user.username}`}</p>
+			{/* <p style={{ fontSize: '2em', color: 'red' }}>{`usuario: ${user.email} email: ${user.username}`}</p>
+		<p style={{ fontSize: '2em', color: 'red' }}>{`saldo: ${user.saldo}`}</p> */}
 
 			<p>
 				<a href='/login'>login</a>
