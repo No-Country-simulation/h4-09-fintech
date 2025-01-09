@@ -4,8 +4,9 @@ import './App.css'
 import Footer from './components/footer/Footer'
 import Navbar from './components/navbar/Navbar'
 import Home from './views/Home/Home'
-import Login from './views/Login/Login'
-import Register from './views/Register/Register'
+import Login from './views/auth/Login/Login'
+import Register from './views/auth/Register/Register'
+import Onboarding from './views/Onboarding/Onboarding'
 
 function App() {
 	return (
@@ -13,8 +14,13 @@ function App() {
 			<Navbar />
 			<Routes>
 				<Route path='/' element={<Home />} />
-				<Route path='/login' element={<Login />} />
-				<Route path='/register' element={<Register />} />
+				{/* rutas anidadas dentro de "/auth"  */}
+				<Route path='/auth/'>
+					<Route index element={<Login />} />
+					<Route path='login' element={<Login />} />
+					<Route path='register' element={<Register />} />
+				</Route>
+				<Route path='/onboarding' element={<Onboarding />} />
 			</Routes>
 			<Footer />
 		</>
