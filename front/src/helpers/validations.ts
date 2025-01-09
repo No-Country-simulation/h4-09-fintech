@@ -1,4 +1,4 @@
-import { IUserData } from "../views/Register/Register"
+import { IUserData } from '../views/auth/Register/Register'
 
 export function validateRegister(userData: IUserData, fieldName?: string) {
 	const errors: Partial<IUserData> = {}

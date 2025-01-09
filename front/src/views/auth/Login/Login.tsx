@@ -1,11 +1,11 @@
-import { setUser } from '../../redux/userSlice'
-import { useAppDispatch } from '../../redux/storehooks'
+import { setUser } from '../../../redux/userSlice'
+import { useAppDispatch } from '../../../redux/storehooks'
 import { useEffect, useState } from 'react'
 import style from './login.module.css'
 import axios from 'axios'
 import { Link, useNavigate } from 'react-router-dom'
-import { baseUrl } from '../../config/envs'
-import Spiner from '../../components/spiner/Spiner'
+import { baseUrl } from '../../../config/envs'
+import Spiner from '../../../components/spiner/Spiner'
 
 export default function Login() {
 	const navigate = useNavigate()
@@ -97,7 +97,7 @@ export default function Login() {
 			</form>
 			<div className={style.registerdiv}>
 				<p>Si todavia no tienes una cuenta: </p>
-				<Link to='/register'>Registrate acá</Link>
+				<Link to='/auth/register'>Registrate acá</Link>
 			</div>
 		</div>
 	)

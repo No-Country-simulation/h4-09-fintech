@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import axios from 'axios'
-import { validateRegister } from '../../helpers/validations'
+import { validateRegister } from '../../../helpers/validations'
 import styles from './register.module.css'
-import { baseUrl } from '../../config/envs'
-import Spinner from '../../components/spiner/Spiner'
+import { baseUrl } from '../../../config/envs'
+import Spinner from '../../../components/spiner/Spiner'
 import { Link } from 'react-router-dom'
 
 export interface IUserData {
@@ -112,7 +112,7 @@ export default function Register() {
 			</form>
 			<div className={styles.registerdiv}>
 				<p>Si ya tenes una cuenta: </p>
-				<Link to='/login'>Logueate acá</Link>
+				<Link to='/auth/login'>Logueate acá</Link>
 			</div>
 		</div>
 	)
