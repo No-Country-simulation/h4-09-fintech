@@ -49,7 +49,9 @@ public class AuthServiceImpl implements AuthService {
         Optional<UserEntity> userFound = userRepository.findByUsername(dto.getEmail());
         if(userFound.isPresent()) throw new BadRequestException(String.format("Email is already registered: %s",dto.getEmail()));
         RoleEntity role = roleRepository.findRoleByName("ROLE_USER").orElseThrow(() -> new NotFoundException(String.format("Role not found with name %s","ROLE_USER")));
-        UserEntity user = UserEntity.builder().username(dto.getEmail()).password(passwordEncoder.encode(dto.getPassword())).build();
+        UserEntity user = new UserEntity();
+        user.setUsername(dto.getEmail());
+        user.setPassword(passwordEncoder.encode(dto.getPassword()));
         user.getRoles().add(role);
         userRepository.save(user);
         String token = jwtUtil.generateToken(user);

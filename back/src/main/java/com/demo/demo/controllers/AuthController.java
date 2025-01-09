@@ -37,7 +37,7 @@ public class AuthController {
     }
 
 
-    @PostMapping("/check-login")
+    @GetMapping("/check-login")
     public ResponseEntity<UserEntity> checkLogin(@CurrentUser UserEntity user) {
         return ResponseEntity.status(200).body(user);
     }
