@@ -7,6 +7,7 @@ import Home from './views/Home/Home'
 import Login from './views/auth/Login/Login'
 import Register from './views/auth/Register/Register'
 import Onboarding from './views/Onboarding/Onboarding'
+import Error from "./views/Error/ErrorPage"
 
 function App() {
 	return (
@@ -21,6 +22,7 @@ function App() {
 					<Route path='register' element={<Register />} />
 				</Route>
 				<Route path='/onboarding' element={<Onboarding />} />
+				<Route path='/*' element={<Error/>} />
 			</Routes>
 			<Footer />
 		</>

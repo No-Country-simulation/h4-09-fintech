@@ -1,0 +1,131 @@
+.root{
+    --color-nav-li: #ffc700;
+	--color-fondo-navbar: #22282e;
+    --color-texto:#ffffffde;
+}
+
+
+.navbar {
+    background-color: var(--color-fondo-navbar);
+    height: 60px;
+    position: relative;
+    width: 100%;
+  }
+  
+  .logo {
+    float: left;
+    padding: 6px 20px;
+    width: auto;
+    height: 60px;
+  }
+  
+  .logo a {
+    display: block;
+    text-decoration: none;
+    text-align: center;
+    color: var(--color-texto);
+    font-weight: bold;
+    line-height: 44px;
+    text-transform: uppercase;
+  }
+  
+  .menu {
+    position: absolute;
+    top: 60px;
+    width: 100%;
+  }
+  
+  .navMenu {
+    max-height: 0;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 14px;
+    transition: max-height 0.4s ease;
+  }
+  
+  .navMenu li {
+    display: block;
+    background: var(--color-fondo-navbar);
+    text-transform: uppercase;
+    text-align: center;
+    border-bottom: 1px solid #282b30;
+  }
+  
+  .navMenu li a {
+    display: block;
+    color: var(--color-texto);
+    text-decoration: none;
+    line-height: 60px;
+    padding: 0 26px;
+  }
+  
+  .navMenu li a:hover {
+    color: var(--color-nav-li);
+  }
+  
+  .openMenu {
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    max-height: 400px;
+  }
+  
+  .navMobile {
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    float: right;
+    width: 60px;
+    height: 60px;
+    position: absolute;
+    right: 0;
+    top: -60px;
+    opacity: 0.6;
+    transition: opacity 0.3s ease;
+  }
+  
+  .navMobile.navOpen {
+    opacity: 1;
+  }
+  
+  .navMobile span {
+    display: block;
+    width: 60%;
+    margin: 4px auto;
+    height: 4px;
+    background: var(--color-texto);
+  }
+  
+  @media only screen and (min-width: 768px) {
+    .navMobile {
+      display: none;
+    }
+  
+    .menu {
+      width: auto;
+      float: right;
+      top: 0;
+      position: relative;
+    }
+  
+    .navMenu {
+      max-height: inherit;
+      display: flex;
+    }
+  
+    .navMenu li {
+      float: left;
+      border: 0;
+      background: transparent;
+    }
+  
+    .navMenu li a {
+      color: var(--color-texto);
+      padding: 0 26px;
+    }
+  
+    .navMenu li a:hover {
+      color: var(--color-nav-li);
+      background: var(--color-fondo-navbar_hover);
+    }
+  }
