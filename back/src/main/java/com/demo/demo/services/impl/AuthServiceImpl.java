@@ -1,6 +1,7 @@
 package com.demo.demo.services.impl;
 
 
+import com.demo.demo.config.mappers.UserMapper;
 import com.demo.demo.dtos.request.LoginRequestDto;
 import com.demo.demo.dtos.request.RegisterRequestDto;
 import com.demo.demo.dtos.response.AuthResponseDto;
@@ -29,6 +30,7 @@ public class AuthServiceImpl implements AuthService {
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
     private final JwtUtil jwtUtil;
+    private final UserMapper userMapper;
     @Override
     public AuthResponseDto login(LoginRequestDto dto) {
         try {
@@ -49,12 +51,11 @@ public class AuthServiceImpl implements AuthService {
         Optional<UserEntity> userFound = userRepository.findByUsername(dto.getEmail());
         if(userFound.isPresent()) throw new BadRequestException(String.format("Email is already registered: %s",dto.getEmail()));
         RoleEntity role = roleRepository.findRoleByName("ROLE_USER").orElseThrow(() -> new NotFoundException(String.format("Role not found with name %s","ROLE_USER")));
-        UserEntity user = new UserEntity();
-        user.setUsername(dto.getEmail());
-        user.setPassword(passwordEncoder.encode(dto.getPassword()));
-        user.getRoles().add(role);
-        userRepository.save(user);
-        String token = jwtUtil.generateToken(user);
+        UserEntity newUser = userMapper.toUserEntity(dto);
+        newUser.setPassword(passwordEncoder.encode(dto.getPassword()));
+        newUser.getRoles().add(role);
+        userRepository.save(newUser);
+        String token = jwtUtil.generateToken(newUser);
         return new AuthResponseDto(token);
     }
 }
