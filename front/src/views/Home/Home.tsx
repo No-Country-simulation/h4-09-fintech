@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { useAppSelector, useAppDispatch } from '../../redux/storehooks'
 import { logout, setUser } from '../../redux/userSlice'
+import { Link } from 'react-router-dom'
 
 export default function Home() {
 	//usar esto para obtener el estado global user
@@ -24,13 +25,14 @@ export default function Home() {
 
 	return (
 		<div style={{ textAlign: 'center', alignItems: 'center', justifyContent: 'center' }}>
-			<p style={{ fontSize: '2em', color: 'red' }}>{`usuario: ${user.email} email: ${user.username}`}</p>
+			{/* <p style={{ fontSize: '2em', color: 'red' }}>{`usuario: ${user.email} email: ${user.username}`}</p>
+		<p style={{ fontSize: '2em', color: 'red' }}>{`saldo: ${user.saldo}`}</p> */}
 
 			<p>
-				<a href='/login'>login</a>
+				<Link to='/auth/login'>login</Link>
 			</p>
 			<p>
-				<a href='/register'>register</a>
+				<Link to='/auth/register'>register</Link>
 			</p>
 
 			<button type='button' onClick={handlelogout}>
