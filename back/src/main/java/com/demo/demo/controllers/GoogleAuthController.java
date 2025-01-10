@@ -56,7 +56,8 @@ public class GoogleAuthController {
 
                 // Obtener el email del usuario y name
                 String email = payload.getEmail();
-                String name = (String) payload.get("name");
+                String name = (String) payload.get("given_name");
+                String lastName = (String) payload.get("family_name");
 
                 // Verificar si el usuario existe en la base de datos
                 UserEntity user = userRepository.findByUsername(email).orElseGet(() -> {
@@ -64,6 +65,7 @@ public class GoogleAuthController {
                     UserEntity newUser = new UserEntity();
                     newUser.setUsername(email);
                     newUser.setName(name);
+                    newUser.setLastName(lastName);
 
                     RoleEntity role = roleRepository.findRoleByName("ROLE_USER").orElseThrow(() -> new NotFoundException(String.format("Role not found with name %s","ROLE_USER")));
                     newUser.getRoles().add(role);
