@@ -23,10 +23,16 @@ public class UserEntity implements UserDetails {
     private UUID userId;
 
     @Column(unique = true, nullable = false)
-    private String username;
+    private String username; //es el mail
+
+    @Column()
+    private String name;
 
     @Column()
     private String password;
+
+
+
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
