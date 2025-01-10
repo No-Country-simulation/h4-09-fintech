@@ -21,7 +21,6 @@ public class EnumsController {
         enums.put("financialKnowledge", Arrays.asList(FinancialKnowledge.values()));
         enums.put("mainGoal", Arrays.asList(MainGoal.values()));
         enums.put("riskPreference", Arrays.asList(RiskPreference.values()));
-
         return ResponseEntity.ok(enums);
     }
 }
