@@ -1,0 +1,88 @@
+/* Root CSS Variables */
+:root {
+    --color-nav-li: #ffc700;
+    --color-fondo-navbar: #22282e;
+    --color-texto: #fff;
+  }
+  
+  .footer {
+    background-color: var(--color-fondo-navbar); 
+    color: var(--color-texto); 
+    padding: 10px 0;
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+    width: 100%;
+    position: relative;
+  }
+  
+  .footerContent {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  
+  .footerLeft, .footerCenter, .footerRight {
+    flex: 1;
+    margin: 10px;
+  }
+  
+  .footerLinks,
+  .socialLinks {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .footerLinks li,
+  .socialLinks li {
+    margin: 5px 0;
+  }
+  
+  .footerLinks li a,
+  .socialLinks li a {
+    color: var(--color-texto);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  
+  .footerLinks li a:hover,
+  .socialLinks li a:hover {
+    color: var(--color-nav-li); 
+  }
+  
+  @media (max-width: 768px) {
+    .footerContent {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .footerLeft,
+    .footerCenter,
+    .footerRight {
+      text-align: center;
+      margin: 10px 0;
+    }
+  
+    .footerCenter ul,
+    .socialLinks {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .footerContent {
+      padding: 0 10px;
+    }
+  
+    .footerLeft p,
+    .footerCenter ul,
+    .footerRight p {
+      font-size: 14px;
+    }
+  }
+  
