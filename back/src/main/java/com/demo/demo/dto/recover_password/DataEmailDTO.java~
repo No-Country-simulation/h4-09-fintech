@@ -1,0 +1,2 @@
+package com.demo.demo.dto.recover_password;public record DataEmailDTO() {
+}
