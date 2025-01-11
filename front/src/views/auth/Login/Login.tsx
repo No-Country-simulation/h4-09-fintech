@@ -6,6 +6,8 @@ import axios from 'axios'
 import { Link, useNavigate } from 'react-router-dom'
 import { baseUrl } from '../../../config/envs'
 import Spiner from '../../../components/spiner/Spiner'
+import { CredentialResponse, GoogleLogin } from '@react-oauth/google'
+import Cookies from 'js-cookie'
 
 export default function Login() {
 	const navigate = useNavigate()
@@ -29,7 +31,11 @@ export default function Login() {
 	useEffect(() => {
 		const user = localStorage.getItem('user')
 		if (user) {
+			console.log(user)
+
 			dispatch(setUser(JSON.parse(user)))
+		} else {
+			console.log('no hay usuario en localstorage')
 		}
 	}, [dispatch])
 
@@ -37,15 +43,16 @@ export default function Login() {
 	const handleSubmit = async (e: { preventDefault: () => void }) => {
 		e.preventDefault()
 		setIsLoading(true)
-		console.log(loginData)
 
 		try {
 			//! enviar info al backend
-			const response = await axios.post(`${baseUrl}/users/login`, loginData)
-			// console.log(response.data) // control
-			const user = response.data.user
-			dispatch(setUser(user))
-			navigate('/')
+			const response = await axios.post(`${baseUrl}/api/auth/login`, loginData)
+			const token = response.data.token
+			console.log(token) // control
+			Cookies.set('authToken', token, { expires: 7 })
+			// const user = response.data.user
+			// dispatch(setUser(user))
+			navigate('/dashboard')
 			alert('Login exitoso')
 		} catch (error) {
 			if (axios.isAxiosError(error) && error.response) {
@@ -59,23 +66,22 @@ export default function Login() {
 		}
 	}
 
-	//funcion que hace logout y lo borra del estado global y localstorage
-	// const handlelogout = () => {
-	// 	dispatch(logout())
-	// 	localStorage.removeItem('user')
-	// }
+	const googleLogin = (response: CredentialResponse) => {
+		//TODO enviar esta respuesta al back
+		console.log(response)
+	}
 
 	return (
 		<div className={style.loginview}>
-			<h1>Login</h1>
 			<form className={style.registerForm} onSubmit={handleSubmit}>
+				<h2>Login</h2>
 				<div className={style.labelInput}>
-					<label htmlFor='email'></label>
-					<input type='email' id='email' name='email' required value={loginData.email} onChange={handleChange} placeholder='Email' />
+					<label htmlFor='email'>Email</label>
+					<input type='email' id='email' name='email' required value={loginData.email} onChange={handleChange} placeholder='ejemplo@mail.com' />
 				</div>
 				<div className={style.labelInput}>
-					<label htmlFor='password'></label>
-					<input type='password' id='password' name='password' required value={loginData.password} onChange={handleChange} placeholder='Contraseña' />
+					<label htmlFor='password'>Contraseña</label>
+					<input type='password' id='password' name='password' required value={loginData.password} onChange={handleChange} placeholder='**********' />
 				</div>
 				{isLoading ? (
 					<button type='button' className={style.buttonEnabled} disabled>
@@ -94,11 +100,16 @@ export default function Login() {
 						)}
 					</>
 				)}
+				<Link to='#'>Olvidé mi contraseña</Link>
+				<div className={style.registerdiv}>
+					<span>No tenés una cuenta? </span>
+					<Link to='/auth/register'>Registrate acá</Link>
+				</div>
+				<div style={{ display: 'flex', flexDirection: 'column', gap: '8px', justifyContent: 'center', alignItems: 'center' }}>
+					<span style={{ color: '#ffffff' }}> o </span>
+					<GoogleLogin onSuccess={googleLogin} onError={() => console.log('error')} />
+				</div>
 			</form>
-			<div className={style.registerdiv}>
-				<p>Si todavia no tienes una cuenta: </p>
-				<Link to='/auth/register'>Registrate acá</Link>
-			</div>
 		</div>
 	)
 }
