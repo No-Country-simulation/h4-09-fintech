@@ -28,7 +28,7 @@ body {
 	min-width: 320px;
 	min-height: 100vh;
 	min-height: 100dvh;
-	background-color: var(--color-fondo);
+	background: radial-gradient(circle, var(--color-secundario) 0%, var(--color-fondo) 40%);
 }
 
 h1 {
@@ -36,6 +36,7 @@ h1 {
 	line-height: 1.1;
 	color: var(--color-primario);
 	text-align: center;
+	margin-bottom: 8px;
 }
 h2 {
 	font-size: clamp(2rem, calc(5vw + 1rem), 2.5rem);
@@ -60,6 +61,16 @@ p {
 	line-height: 1.5;
 	color: var(--color-primario);
 }
+span{
+	font-size: 1.3rem;
+	line-height: 1.5;
+	color: var(--color-primario);
+}
+small {
+	font-size: 0.9rem;
+	line-height: 1;
+	color: var(--color-primario);
+}
 label {
 	font-size: 1.3rem;
 	line-height: 1.5;
@@ -67,11 +78,11 @@ label {
 }
 
 button {
-	border-radius: 1rem;
+	border-radius: 0.5rem;
 	border: 1px solid transparent;
 	padding: 0.6rem 1.2rem;
 	font-size: 1.2rem;
-	font-weight: 300;
+	font-weight: 500;
 	font-family: inherit;
 	background-color: var(--color-boton-fondo);
 	color: var(--color-secundario);

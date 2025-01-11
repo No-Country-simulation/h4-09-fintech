@@ -3,9 +3,6 @@
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	/* margin-bottom: 5rem; */
-	background-color: var(--color-fondo);
-	/* height: calc(100vh - 3rem); */
 	min-height: 100vh;
 	min-height: 100dvh;
 	width: 100%;
@@ -22,19 +19,25 @@
 	text-align: center;
 	width: 90%;
 	font-size: larger;
+
+	border: 2px solid var(--color-secundario);
+	border-radius: 2rem;
+	max-width: 500px;
+	padding-bottom: 16px;
+	box-shadow: var(--color-secundario) 0px 0px 40px 0px;
 }
 
 .labelInput {
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
 	flex-wrap: wrap;
 	justify-content: center;
-	align-items: center;
+	align-items: start;
 
 	input,
 	select,
 	textarea {
-		border-radius: 1rem;
+		border-radius: 0.5rem;
 		size: medium;
 		padding: 0.8rem;
 		font-size: large;
@@ -42,9 +45,9 @@
 	}
 }
 .buttonEnabled {
-	border: 3px solid green;
+	/* border: 3px solid green;
 	color: white;
-	background-color: green;
+	background-color: green; */
 }
 .buttonDisabled {
 	border: 3px solid grey;
@@ -56,9 +59,18 @@
 }
 .registerdiv {
 	display: flex;
-	flex-direction: column;
+	flex-direction: row;
 	align-items: center;
-	a {
-		color: var(--color-secundario);
+	gap: 8px;
+	p {
+		margin: 0px;
 	}
+	span {
+		font-size: medium;
+	}
+}
+
+a {
+	color: var(--color-primario);
+	font-size: medium;
 }
