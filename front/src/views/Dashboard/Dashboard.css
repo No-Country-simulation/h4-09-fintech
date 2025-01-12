@@ -1,0 +1,14 @@
+/* ESTOS ESTILOS SON PROVISORIOS,MIENTRAS ESPERAMOS EL DISEÑO DE UX/UI */
+.dashboard {
+  border: solid white 1px;
+  min-width: 100vw;
+  min-height: 88vh;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+.dash-item {
+  border: solid white 1px;
+  flex: 1;
+}
+/*----------------------------------------- */
