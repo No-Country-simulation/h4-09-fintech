@@ -1,24 +1,43 @@
 import { IUserData } from '../views/auth/Register/Register'
 
-export function validateRegister(userData: IUserData, fieldName?: string) {
-	const errors: Partial<IUserData> = {}
+const validatePassword = (password: string) => {
+	// Regex que valida: al menos una minúscula, una mayúscula, un número, un carácter especial y longitud mínima de 8
+	const regexp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%?&])[A-Za-z\d@$!%?&]{8,}$/
+	return regexp.test(password)
+}
 
-	if ((!fieldName || fieldName === 'username') && !userData.username.trim()) {
-		errors.username = 'El nombre de usuario es obligatorio.'
-	} else if (userData.username.length < 3) {
-		errors.username = 'El nombre de usuario debe tener al menos 3 caracteres.'
+export const validateRegister = (data: Partial<IUserData>, fieldName?: string) => {
+	const errors: { [key: string]: string } = {}
+
+	if (data.name !== undefined && data.name.trim() === '') {
+		errors.name = 'El nombre es obligatorio'
 	}
 
-	if ((!fieldName || fieldName === 'email') && !userData.email.trim()) {
-		errors.email = 'El correo electrónico es obligatorio.'
-	} else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(userData.email)) {
-		errors.email = 'El correo electrónico no es válido.'
+	if (data.lastName !== undefined && data.lastName.trim() === '') {
+		errors.lastName = 'El apellido es obligatorio'
 	}
 
-	if ((!fieldName || fieldName === 'password') && !userData.password.trim()) {
-		errors.password = 'La contraseña es obligatoria.'
-	} else if (userData.password.length < 6) {
-		errors.password = 'La contraseña debe tener al menos 6 caracteres.'
+	if (data.email !== undefined && !/^\S+@\S+\.\S+$/.test(data.email)) {
+		errors.email = 'Correo inválido'
+	}
+
+	if (data.password !== undefined) {
+		if (data.password.length < 8) {
+			errors.password = 'La contraseña debe tener al menos 8 caracteres'
+		} else if (!validatePassword(data.password)) {
+			errors.password = 'La contraseña debe incluir al menos una letra mayúscula, una minúscula, un número y un carácter especial'
+		}
+	}
+
+	if (data.confirmPassword !== undefined && data.confirmPassword !== data.password) {
+		errors.confirmPassword = 'Las contraseñas no coinciden'
+	}
+
+	// Excluir booleanos como `olderThan18`.
+
+	// Retornar solo errores específicos si se pasa un campo
+	if (fieldName) {
+		return { [fieldName]: errors[fieldName] }
 	}
 
 	return errors

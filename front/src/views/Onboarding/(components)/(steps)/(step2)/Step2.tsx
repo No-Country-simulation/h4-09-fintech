@@ -1,7 +1,8 @@
-import Styles from './Step1.module.css'
+import React from 'react'
 import { IFormdata } from '../../../Onboarding'
+import Styles from './Step2.module.css'
 
-interface Step0Props {
+type Props = {
 	nextStep: () => void
 	step: number
 	formData: IFormdata
@@ -9,7 +10,7 @@ interface Step0Props {
 	options: string[] | undefined
 }
 
-export default function Step1({ nextStep, step, formData, setFormData, options }: Step0Props) {
+export default function Step2({ nextStep, step, formData, setFormData, options }: Props) {
 	const handleChange = (e: { target: { name: string; value: string } }) => {
 		const { name, value } = e.target
 		setFormData((data) => ({
@@ -23,14 +24,15 @@ export default function Step1({ nextStep, step, formData, setFormData, options }
 		console.log(formData)
 		nextStep()
 	}
+
 	return (
 		<div className={Styles.contentContainer}>
 			<form onSubmit={handleSubmit} className={Styles.formContainer}>
 				<p> Paso {step} de 3</p>
-				<label htmlFor='mainGoal' className={Styles.formContainer}>
+				<label htmlFor='financialKnowledge' className={Styles.formContainer}>
 					{' '}
-					¿Cúal es tu objetivo a alcanzar con tus inversiones?
-					<select name='mainGoal' id='mainGoal' onChange={handleChange} value={formData.mainGoal}>
+					¿Qué nivel de experiencia tienes en administrar cartera de inversiones?
+					<select name='financialKnowledge' id='financialKnowledge' onChange={handleChange} value={formData.financialKnowledge}>
 						<option value='' disabled>
 							Selecciona una opción
 						</option>

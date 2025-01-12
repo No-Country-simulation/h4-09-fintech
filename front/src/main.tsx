@@ -6,13 +6,18 @@ import App from './App.tsx'
 import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
 import { store } from './redux/store.ts'
+import { GoogleOAuthProvider } from '@react-oauth/google'
+import { GoogleClientId } from './config/envs.ts'
+
 
 createRoot(document.getElementById('root')!).render(
 	<>
 		<Provider store={store}>
-			<BrowserRouter>
-				<App />
-			</BrowserRouter>
+			<GoogleOAuthProvider clientId={GoogleClientId}>
+				<BrowserRouter>
+					<App />
+				</BrowserRouter>
+			</GoogleOAuthProvider>
 		</Provider>
 	</>
 )

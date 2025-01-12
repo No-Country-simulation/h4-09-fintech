@@ -2,8 +2,6 @@
   	display: flex;
 	flex-direction: column;
 	align-items: center;
-	background-color: var(--color-fondo);
-	/* height: calc(100vh - 3rem); */
 	min-height: 100vh;
 	min-height: 100dvh;
 	width: 95%;
