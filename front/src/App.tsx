@@ -1,35 +1,39 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+// import { useState } from 'react'
+import { Route, Routes } from "react-router-dom";
+import "./App.css";
+import Footer from "./components/footer/Footer";
+import Navbar from "./components/navbar/Navbar";
+import Home from "./views/Home/Home";
+import Login from "./views/auth/Login/Login";
+import Register from "./views/auth/Register/Register";
+import Onboarding from "./views/Onboarding/Onboarding";
+import Error from "./views/Error/ErrorPage";
+import { Dashboard } from "./views/Dashboard/Dashboard";
+import { Objetivos } from "./views/Dashboard/(components)/objetivos/Objetivos";
+import { Objetivo } from "./views/Dashboard/(components)/objetivos/Objetivo";
+import { Gestion } from "./views/Dashboard/(components)/gestion/Gestion";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        {/* rutas anidadas dentro de "/auth"  */}
+        <Route path="/auth/">
+          <Route index element={<Login />} />
+          <Route path="login" element={<Login />} />
+          <Route path="register" element={<Register />} />
+        </Route>
+        <Route path="/onboarding" element={<Onboarding />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/objetivos" element={<Objetivos />} />
+        <Route path="/objetivo/:nombre" element={<Objetivo />} />
+        <Route path="/gestion" element={<Gestion />} />
+        <Route path="/*" element={<Error />} />
+      </Routes>
+      <Footer />
     </>
-  )
+  );
 }
-
-export default App
+export default App;
