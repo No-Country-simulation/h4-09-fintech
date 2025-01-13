@@ -1,6 +1,5 @@
 package com.demo.demo.services;
 
-import com.demo.demo.dto.recover_password.EmailDataDTO;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import org.springframework.core.io.ClassPathResource;
@@ -55,11 +54,6 @@ public class EmailService {
                     content = content.replace("{{" + entry.getKey() + "}}", entry.getValue());
                 }
             }
-
-
-//            for (Map.Entry<String, String> entry : emailData.entrySet()) {
-//                content = content.replace("{{" + entry.getKey() + "}}", entry.getValue());
-//            }
 
             return content;
         }

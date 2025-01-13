@@ -11,6 +11,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -22,9 +23,10 @@ public class EmailService {
     public EmailService(JavaMailSender emailSender) {
         this.emailSender = emailSender;
     }
-    public void sendHtmlEmail(String to, String subject, String templatePath, Map<String, String> placeholders) throws MessagingException, IOException {
+
+    public void sendHtmlEmail(String to, String subject, String templatePath, List<Map<String, String>> emailData) throws MessagingException, IOException {
         // Leer el archivo HTML desde resources
-        String htmlContent = loadHtmlTemplate(templatePath, placeholders);
+        String htmlContent = loadHtmlTemplate(templatePath, emailData);
 
         // Crear el objeto MimeMessage
         MimeMessage message = emailSender.createMimeMessage();
@@ -36,7 +38,8 @@ public class EmailService {
 
         emailSender.send(message);
     }
-    private String loadHtmlTemplate(String templatePath, Map<String, String> placeholders) throws IOException {
+
+    private String loadHtmlTemplate(String templatePath, List<Map<String, String>> emailData) throws IOException {
         // Leer el archivo desde resources
         ClassPathResource resource = new ClassPathResource(templatePath);
         try (InputStream inputStream = resource.getInputStream();
@@ -44,10 +47,18 @@ public class EmailService {
             // Leer el archivo completo en un String
             String content = reader.lines().collect(Collectors.joining(System.lineSeparator()));
 
+
             // Reemplazar marcadores con los valores proporcionados
-            for (Map.Entry<String, String> entry : placeholders.entrySet()) {
-                content = content.replace("{{" + entry.getKey() + "}}", entry.getValue());
+            for (Map<String, String> data : emailData) {
+                for (Map.Entry<String, String> entry : data.entrySet()) {
+                    content = content.replace("{{" + entry.getKey() + "}}", entry.getValue());
+                }
             }
+
+
+//            for (Map.Entry<String, String> entry : emailData.entrySet()) {
+//                content = content.replace("{{" + entry.getKey() + "}}", entry.getValue());
+//            }
 
             return content;
         }

@@ -2,6 +2,7 @@ package com.demo.demo.services;
 
 import com.demo.demo.entities.UserEntity;
 import com.demo.demo.repositories.UserRepository;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -22,10 +23,7 @@ public class UserService implements UserDetailsService {
         UserEntity user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
 
-        return User.builder()
-                .username(user.getUsername())
-                .password(user.getPassword())
-                .roles("USER")
-                .build();
+        return user;
     }
 }
+

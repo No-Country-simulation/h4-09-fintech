@@ -1,4 +1,4 @@
-package com.demo.demo.dto.recover_password;
+package com.demo.demo.dtos.recover_password;
 
 
 import jakarta.validation.constraints.Email;
