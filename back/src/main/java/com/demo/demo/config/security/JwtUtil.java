@@ -1,8 +1,11 @@
 package com.demo.demo.config.security;
 
-import io.jsonwebtoken.*;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.JwtException;
+import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import io.jsonwebtoken.security.SignatureException;
+import org.mapstruct.ap.shaded.freemarker.core.ReturnInstruction;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -22,12 +25,13 @@ public class JwtUtil {
 
     @Value("${jwt.secret}")
     private  String JWT_SECRET ;
+
     public Date expiration() {
         return new Date(System.currentTimeMillis() + 1000 * 60 * 60);
     }
 
     private SecretKey getKey() {
-        return Keys.secretKeyFor(SignatureAlgorithm.HS256);
+        return Keys.hmacShaKeyFor(JWT_SECRET.getBytes());
     }
     public String createToken(String username, Map<String, Object> claims) {
 
@@ -82,25 +86,13 @@ public class JwtUtil {
                     .build()
                     .parseClaimsJws(token)
                     .getBody();
-        } catch (ExpiredJwtException e) {
-            System.out.println("Token has expired"+ e);
-            // manejar la excepción de token expirado
-        } catch (UnsupportedJwtException e) {
-            System.out.println("Token is not supported"+ e);
-            // manejar la excepción de token no compatible
-        } catch (SignatureException e) {
-            System.out.println("Token signature is invalid"+ e);
-            // manejar la excepción de firma inválida
-        } catch (Exception e) {
-            System.out.println("Error parsing token"+ e);
-            // manejar otras excepciones
-        }
+        } catch (JwtException e) {
 
-        return null;
+            throw new IllegalArgumentException("Token inválido", e);
+        }
         }
 
     public String getUsernameFromToken(String token) {
-        String username=getClaim(token, Claims::getSubject);
         return getClaim(token, Claims::getSubject);
     }
 
