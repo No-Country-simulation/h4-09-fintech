@@ -4,6 +4,8 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
+.env
+.env/
 ### STS ###
 .apt_generated
 .classpath
@@ -32,4 +34,4 @@ build/
 ### VS Code ###
 .vscode/
 .env
-env
+structure.json

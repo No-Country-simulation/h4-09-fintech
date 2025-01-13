@@ -61,7 +61,7 @@ public class AuthController {
 
     @Transactional
     @PostMapping("/reset_password")
-    public ResponseEntity<Map<String, String>> resetPassword(@RequestBody ResetPasswordDTO resetPasswordDTO) {
+    public ResponseEntity<Map<String, String>> resetPassword(@Valid @RequestBody ResetPasswordDTO resetPasswordDTO) {
         authService.applyNewPassword(resetPasswordDTO);
         return new ResponseEntity<>(Map.of("msg", "The password was changed successfully"), HttpStatus.ACCEPTED);
     }
