@@ -1,7 +1,11 @@
 package com.demo.demo.services;
 
+import com.demo.demo.dtos.request.UpdateUserPreferencesDto;
+import com.demo.demo.dtos.response.UserPreferencesResponseDto;
 import com.demo.demo.entities.UserEntity;
+import com.demo.demo.exceptions.NotFoundException;
 import com.demo.demo.repositories.UserRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -24,4 +28,28 @@ public class UserService implements UserDetailsService {
 
         return user;
     }
+
+    @Transactional
+    public UserPreferencesResponseDto updateUserPreferences(String username, UpdateUserPreferencesDto dto) {
+        UserEntity user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new NotFoundException("Usuario no encontrado"));
+
+        user.setMainGoal(dto.getMainGoal());
+        user.setFinancialKnowledge(dto.getFinancialKnowledge());
+        user.setRiskPreference(dto.getRiskPreference());
+
+        userRepository.save(user);
+
+        return new UserPreferencesResponseDto(
+                user.getUserId().toString(),
+                user.getUsername(),
+                user.getName(),
+                user.getLastName(),
+                user.getMainGoal(),
+                user.getFinancialKnowledge(),
+                user.getRiskPreference()
+        );
+    }
+
+
 }

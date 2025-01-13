@@ -1,5 +1,8 @@
 package com.demo.demo.entities;
 
+import com.demo.demo.enums.FinancialKnowledge;
+import com.demo.demo.enums.MainGoal;
+import com.demo.demo.enums.RiskPreference;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -32,6 +35,18 @@ public class UserEntity implements UserDetails {
 
     @Column()
     private String password;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "main_goal", nullable = true)
+    private MainGoal mainGoal;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "financial_knowledge", nullable = true)
+    private FinancialKnowledge financialKnowledge;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "risk_preference", nullable = true)
+    private RiskPreference riskPreference;
 
 
 
