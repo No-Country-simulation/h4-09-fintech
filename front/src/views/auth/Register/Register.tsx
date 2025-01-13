@@ -1,91 +1,133 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState } from 'react'
 import axios from 'axios'
 import { validateRegister } from '../../../helpers/validations'
 import styles from './register.module.css'
 import { baseUrl } from '../../../config/envs'
 import Spinner from '../../../components/spiner/Spiner'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { CredentialResponse, GoogleLogin } from '@react-oauth/google'
+import Cookies from 'js-cookie'
 
 export interface IUserData {
+	name: string
+	lastName: string
 	email: string
-	username: string
 	password: string
+	confirmPassword: string
 }
 
 export default function Register() {
+	const navigate = useNavigate()
+
 	const [errors, setErrors] = useState({
+		name: '',
+		lastName: '',
 		email: '',
-		username: '',
-		password: ''
+		password: '',
+		confirmPassword: ''
 	})
 	const [isLoading, setIsLoading] = useState(false)
 	const [userData, setUserData] = useState({
+		name: '',
+		lastName: '',
 		email: '',
-		username: '',
-		password: ''
+		password: '',
+		confirmPassword: ''
 	})
 
-	const handleChange = (e: { target: { name: string; value: string } }) => {
-		const { name, value } = e.target
-
+	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const { name, value, checked, type } = e.target
+		const fieldValue = type === 'checkbox' ? checked : value
 		setUserData((user) => ({
 			...user,
-			[name]: value
+			[name]: fieldValue
 		}))
 
-		// Validar solo el campo que se está modificando
-		const fieldErrors: { [key: string]: string } = validateRegister({ ...userData, [name]: value }, name)
-		setErrors((prevErrors) => ({
-			...prevErrors,
-			[name]: fieldErrors[name] || ''
-		}))
+		// Solo validamos campos que no son booleanos
+		if (type !== 'checkbox') {
+			const fieldErrors = validateRegister({ ...userData, [name]: fieldValue }, name)
+			setErrors((prevErrors) => ({
+				...prevErrors,
+				[name]: fieldErrors[name] || ''
+			}))
+		}
 	}
 
 	const handleSubmit = async (e: { preventDefault: () => void }) => {
 		e.preventDefault()
 		setIsLoading(true)
 		// prueba
-		console.log(`Correo electrónico: ${userData.email}\n`, `Nombre de usuario: ${userData.username}\n`, `Contraseña: ${userData.password}`)
-		// //! enviar info al backend
+
+		// Validar que las contraseñas coincidan
+		if (userData.password !== userData.confirmPassword) {
+			alert('Las contraseñas no coinciden')
+			setIsLoading(false)
+			return
+		}
+
+		const { confirmPassword, ...userDataToSend } = userData
+
 		try {
-			await axios.post(`${baseUrl}/users/register`, userData)
+			const response = await axios.post(`${baseUrl}/api/auth/register`, userDataToSend)
+			const token = response.data.token
+			console.log(token) // control
+			Cookies.set('authToken', token, { expires: 7 })
 			alert('Registro exitoso')
 			setUserData({
+				name: '',
+				lastName: '',
 				email: '',
-				username: '',
-				password: ''
+				password: '',
+				confirmPassword: ''
 			})
+			navigate('/onboarding')
 		} catch (error: unknown) {
 			if (axios.isAxiosError(error) && error.response) {
 				console.log(error.response.data)
 			} else {
 				console.error(error)
 			}
-			alert('Usuario o contraseña invalidos')
+			alert('Hubo un error al registrarte')
 		} finally {
 			setIsLoading(false)
 		}
 	}
 
+	const googleRegister = (response: CredentialResponse) => {
+		//TODO enviar esta respuesta al back
+		console.log(response)
+	}
+
 	return (
 		<div className={styles.registerview}>
-			<h1>Registro</h1>
-			<p>Todos los campos son obligatorios</p>
 			<form className={styles.registerForm} onSubmit={handleSubmit}>
+				<h1>Registro</h1>
+				<small>Todos los campos son obligatorios</small>
 				<div className={styles.labelInput}>
-					<label htmlFor='username'></label>
-					<input type='text' id='usernameLogin' name='username' required value={userData.username} onChange={handleChange} placeholder='Nombre de usuario' />
-					{errors.username && <small style={{ color: 'red' }}>{errors.username}</small>}
+					<label htmlFor='name'>Nombre</label>
+					<input type='text' id='nameLogin' name='name' required value={userData.name} onChange={handleChange} placeholder='Tu nombre' />
+					{errors.name && <small style={{ color: 'red' }}>{errors.name}</small>}
 				</div>
 				<div className={styles.labelInput}>
-					<label htmlFor='email'></label>
-					<input type='email' id='email' name='email' required value={userData.email} onChange={handleChange} placeholder='Email' />
+					<label htmlFor='lastName'>Apellido</label>
+					<input type='text' id='lastNameLogin' name='lastName' required value={userData.lastName} onChange={handleChange} placeholder='Tu apellido' />
+					{errors.lastName && <small style={{ color: 'red' }}>{errors.lastName}</small>}
+				</div>
+				<div className={styles.labelInput}>
+					<label htmlFor='email'>Email</label>
+					<input type='email' id='email' name='email' required value={userData.email} onChange={handleChange} placeholder='ejemplo@mail.com' />
 					{errors.email && <small style={{ color: 'red' }}>{errors.email}</small>}
 				</div>
 				<div className={styles.labelInput}>
-					<label htmlFor='password'></label>
-					<input type='password' id='passwordLogin' name='password' required value={userData.password} onChange={handleChange} placeholder='Contraseña' />
-					{errors.password && <small style={{ color: 'red' }}>{errors.password}</small>}
+					<label htmlFor='password'>Contraseña</label>
+					<input type='password' id='passwordLogin' name='password' required value={userData.password} onChange={handleChange} placeholder='*******' />
+					{errors.password && <small style={{ color: 'red', textWrap: 'wrap' }}>{errors.password}</small>}
+				</div>
+				<div className={styles.labelInput}>
+					<label htmlFor='confirmPassword'>Confirmar contraseña</label>
+					<input type='password' id='confirmPassword' name='confirmPassword' required value={userData.confirmPassword} onChange={handleChange} placeholder='*******' />
+					{errors.confirmPassword && <small style={{ color: 'red' }}>{errors.confirmPassword}</small>}
 				</div>
 
 				{isLoading ? (
@@ -96,24 +138,31 @@ export default function Register() {
 					<button
 						className={
 							Object.values(errors).some((error) => error) || // Verifica si hay algún error
-							Object.values(userData).some((value) => value.trim() === '') // Verifica si algún campo está vacío
+							Object.values(userData).some((value) => typeof value === 'string' && value.trim() === '') // Verifica si algún campo está vacío
 								? styles.buttonDisabled
 								: styles.buttonEnabled
 						}
 						type='submit'
 						disabled={
 							Object.values(errors).some((error) => error) || // Verifica si hay algún error
-							Object.values(userData).some((value) => value.trim() === '') // Verifica si algún campo está vacío
+							Object.values(userData).some((value) => typeof value === 'string' && value.trim() === '') // Verifica si algún campo está vacío
 						}
 					>
 						Registrarme
 					</button>
 				)}
+				<div style={{ display: 'flex', flexDirection: 'column', gap: '8px', justifyContent: 'center', alignItems: 'center' }}>
+					<span style={{ color: '#ffffff' }}> o </span>
+					<GoogleLogin onSuccess={googleRegister} onError={() => console.log('error')} />
+				</div>
+				<div className={styles.registerdiv}>
+					<span>Si ya tenes una cuenta: </span>
+					<Link to='/auth/login'>Logueate acá</Link>
+				</div>
+				<small style={{ marginTop: '48px', width: '90%' }}>
+					Al registrarte aceptas los <Link to={'#'}>terminos y condiciones</Link> de iupi
+				</small>
 			</form>
-			<div className={styles.registerdiv}>
-				<p>Si ya tenes una cuenta: </p>
-				<Link to='/auth/login'>Logueate acá</Link>
-			</div>
 		</div>
 	)
 }

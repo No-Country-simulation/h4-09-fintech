@@ -9,18 +9,21 @@ export const Dashboard = () => {
   }, []);
   return (
     <div className="dashboard">
+      <div className="dash-item">
+        <Link to="/cuenta">Configuracion de cuenta</Link>
+      </div>
+
       <div className="dash-item">Progeso hacia objetivos</div>
       <div className="dash-item">Resumen de gastos</div>
       <div className="dash-item">
-        <Link to="/gestion">
-          <button>Gestión</button>
-        </Link>
+        <Link to="/gestion">Gestión</Link>
       </div>
       <div className="dash-item">incrementar/explorar</div>
       <div className="dash-item">
-        <Link to="/objetivos">
-          <button>objetivos financieros</button>
-        </Link>{" "}
+        <Link to="/objetivos">objetivos financieros</Link>{" "}
+      </div>
+      <div className="dash-item">
+        <Link to="/inversiones">Inversiones</Link>{" "}
       </div>
     </div>
   );
