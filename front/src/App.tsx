@@ -12,6 +12,8 @@ import { Dashboard } from "./views/Dashboard/Dashboard";
 import { Objetivos } from "./views/Dashboard/(components)/objetivos/Objetivos";
 import { Objetivo } from "./views/Dashboard/(components)/objetivos/Objetivo";
 import { Gestion } from "./views/Dashboard/(components)/gestion/Gestion";
+import { Inversiones } from "./views/Dashboard/(components)/inversiones/Inversiones";
+import { Cuenta } from "./views/Profile/Cuenta";
 
 function App() {
   return (
@@ -30,6 +32,8 @@ function App() {
         <Route path="/objetivos" element={<Objetivos />} />
         <Route path="/objetivo/:nombre" element={<Objetivo />} />
         <Route path="/gestion" element={<Gestion />} />
+        <Route path="/inversiones" element={<Inversiones />} />
+        <Route path="/cuenta" element={<Cuenta />} />
         <Route path="/*" element={<Error />} />
       </Routes>
       <Footer />

@@ -22,16 +22,11 @@
 body {
   margin: 0;
   display: flex;
-  /* place-items: center; */
   flex-direction: column;
   min-width: 320px;
   min-height: 100vh;
   min-height: 100dvh;
-  background: radial-gradient(
-    circle,
-    var(--color-secundario) 0%,
-    var(--color-fondo) 40%
-  );
+  background: var(--color-fondo); /* Usa directamente el gradiente definido */
 }
 
 h1 {
