@@ -46,4 +46,10 @@ public class EnumsController {
         UserPreferencesResponseDto updatedUser = userService.updateUserPreferences(currentUser.getUsername(), dto);
         return ResponseEntity.ok(updatedUser);
     }
+
+    @GetMapping("/preferences")
+    public ResponseEntity<UserPreferencesResponseDto> getUserPreferences(@CurrentUser UserEntity currentUser) {
+        UserPreferencesResponseDto userPreferences = userService.getUserPreferences(currentUser.getUsername());
+        return ResponseEntity.ok(userPreferences);
+    }
 }

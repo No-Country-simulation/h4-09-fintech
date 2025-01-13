@@ -51,5 +51,21 @@ public class UserService implements UserDetailsService {
         );
     }
 
+    public UserPreferencesResponseDto getUserPreferences(String username) {
+        UserEntity user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new NotFoundException("Usuario no encontrado"));
+
+        return new UserPreferencesResponseDto(
+                user.getUserId().toString(),
+                user.getUsername(),
+                user.getName(),
+                user.getLastName(),
+                user.getMainGoal(),
+                user.getFinancialKnowledge(),
+                user.getRiskPreference()
+        );
+    }
+
+
 
 }
