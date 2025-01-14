@@ -8,6 +8,7 @@ import Login from './views/auth/Login/Login'
 import Register from './views/auth/Register/Register'
 import Onboarding from './views/Onboarding/Onboarding'
 import Error from "./views/Error/ErrorPage"
+import Auth from './views/auth/Auth/Auth'
 
 function App() {
 	return (
@@ -17,7 +18,7 @@ function App() {
 				<Route path='/' element={<Home />} />
 				{/* rutas anidadas dentro de "/auth"  */}
 				<Route path='/auth/'>
-					<Route index element={<Login />} />
+					<Route index element={<Auth />} />
 					<Route path='login' element={<Login />} />
 					<Route path='register' element={<Register />} />
 				</Route>

@@ -1,12 +1,39 @@
-/* .pageview {
+
+caption {
+	font-size: 16px;
+	line-height: 15px;
+	color: var(--color-neutral-600);
+}
+
+.contentContainer {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	gap: 16px;
+	width: 90%;
+}
+.link {
+	color: var(--color-neutral-600);
+	text-decoration: underline;
+	font-weight: 500;
+	font-size: 14px;
+}
+.separador {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 8px;
+}
+
+.pageview {
+	display: flex;
+	flex-direction: column;
+	/* justify-content: center; */
+	align-items: center;
 	min-height: 100vh;
 	min-height: 100dvh;
 	width: 100%;
-	translate: 0px -100px;
 }
 
 .registerForm {
@@ -86,4 +113,43 @@
 a {
 	color: var(--color-primario);
 	font-size: medium;
-} */
+}
+
+.contentContainer {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 16px;
+	width: 90%;
+}
+.link {
+	color: var(--color-neutral-600);
+	text-decoration: underline;
+	font-weight: 500;
+	font-size: 14px;
+}
+.separador {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 8px;
+}
+
+.passwordContainer {
+  position: relative;
+	width: 100%;
+}
+
+.showPasswordButton {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--color-secundario);
+  cursor: pointer;
+  font-size: 14px;
+	width: 35px;
+}
