@@ -1,4 +1,4 @@
-.loginview {
+/* .pageview {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -6,6 +6,7 @@
 	min-height: 100vh;
 	min-height: 100dvh;
 	width: 100%;
+	translate: 0px -100px;
 }
 
 .registerForm {
@@ -13,18 +14,15 @@
 	flex-wrap: wrap;
 	flex-direction: column;
 	justify-content: center;
-	align-items: center;
+	align-items: start;
 	gap: 1rem;
 	margin: 1rem;
 	text-align: center;
 	width: 90%;
 	font-size: larger;
-
-	border: 2px solid var(--color-secundario);
-	border-radius: 2rem;
 	max-width: 500px;
+	padding: 16px;
 	padding-bottom: 16px;
-	box-shadow: var(--color-secundario) 0px 0px 40px 0px;
 }
 
 .labelInput {
@@ -33,26 +31,39 @@
 	flex-wrap: wrap;
 	justify-content: center;
 	align-items: start;
-
+	width: 95%;
+	label {
+		font-size: 1.1rem;
+	}
 	input,
 	select,
 	textarea {
 		border-radius: 0.5rem;
 		size: medium;
-		padding: 0.8rem;
-		font-size: large;
+		padding: 0.6rem;
+		font-size: medium;
 		background-color: var(--color-boton-fondo);
+		width: 99%;
 	}
 }
 .buttonEnabled {
-	/* border: 3px solid green;
-	color: white;
-	background-color: green; */
+	background-color: var(--color-primario);
+	color: var(--color-fondo);
+	width: 100%;
+	max-width: 550px;
+	border-radius: 8px;
+	padding: 12px 20px;
+	text-align: center;
 }
 .buttonDisabled {
-	border: 3px solid grey;
+	width: 100%;
+	max-width: 550px;
+	border-radius: 8px;
+	padding: 12px 20px;
+	text-align: center;
+	border: 3px solid var(--color-disabled);
 	color: white;
-	background-color: grey;
+	background-color: var(--color-disabled);
 	&:hover {
 		cursor: auto;
 	}
@@ -73,4 +84,4 @@
 a {
 	color: var(--color-primario);
 	font-size: medium;
-}
+} */
