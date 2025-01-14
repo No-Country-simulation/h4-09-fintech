@@ -51,16 +51,18 @@ h2 {
   text-align: center;
 }
 h3 {
-  font-size: clamp(1.7rem, calc(7vw + 1rem), 2rem);
+  font-size: 1rem;
   line-height: 1.1;
   color: var(--color-primario);
   text-align: center;
+  margin: 0;
 }
 h4 {
-  font-size: 1.5em;
+  font-size: 0.8rem;
   line-height: 1.1;
   color: var(--color-primario);
   text-align: center;
+  margin: 0;
 }
 p {
   font-size: 1.3rem;

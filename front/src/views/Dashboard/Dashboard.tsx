@@ -57,8 +57,6 @@ export const Dashboard = () => {
         style={{
           height: "29.38vh",
           margin: "0 2vw",
-          border: "solid grey 1px",
-          borderRadius: "10px",
         }}
       >
         <BarChartComponent
