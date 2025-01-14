@@ -26,7 +26,6 @@ export const Objetivos = () => {
           </li>
         ))}
       </ol>
-      <Link to="/dashboard">dashboard</Link>
     </div>
   );
 };

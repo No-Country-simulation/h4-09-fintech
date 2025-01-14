@@ -1,5 +1,3 @@
-import { Link } from "react-router-dom";
-
 export const Inversiones = () => {
   return (
     <div>
@@ -10,7 +8,6 @@ export const Inversiones = () => {
         <li>Bonos</li>
         <li>ETFs</li>
       </ul>
-      <Link to="/dashboard">Dashboard</Link>
     </div>
   );
 };

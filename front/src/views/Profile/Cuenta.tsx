@@ -1,5 +1,3 @@
-import { Link } from "react-router-dom";
-
 export const Cuenta = () => {
   return (
     <div>
@@ -12,7 +10,6 @@ export const Cuenta = () => {
         <li>Preferencias de notificaciones</li>
         <li>Visualización</li>
       </form>
-      <Link to="/dashboard">Dashboard</Link>
     </div>
   );
 };

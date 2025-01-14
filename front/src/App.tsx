@@ -1,5 +1,5 @@
 // import { useState } from 'react'
-import { Route, Routes } from "react-router-dom";
+import { Link, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Footer from "./components/footer/Footer";
 import Navbar from "./components/navbar/Navbar";
@@ -14,6 +14,12 @@ import { Objetivo } from "./views/Dashboard/(components)/objetivos/Objetivo";
 import { Gestion } from "./views/Dashboard/(components)/gestion/Gestion";
 import { Inversiones } from "./views/Dashboard/(components)/inversiones/Inversiones";
 import { Cuenta } from "./views/Profile/Cuenta";
+import {
+  ArrowTrendingUpIcon,
+  Squares2X2Icon,
+  UserIcon,
+  UsersIcon,
+} from "@heroicons/react/24/outline";
 
 function App() {
   return (
@@ -36,6 +42,21 @@ function App() {
         <Route path="/cuenta" element={<Cuenta />} />
         <Route path="/*" element={<Error />} />
       </Routes>
+      <div className="footer-fix flex">
+        <Link to="/dashboard" className="flex">
+          <Squares2X2Icon className="iconos-hero" /> Dashboard
+        </Link>{" "}
+        <Link to="/gestion" className="flex">
+          <ArrowTrendingUpIcon className="iconos-hero" /> Gestión de <br />
+          inversiones
+        </Link>{" "}
+        <Link to="" className="flex">
+          <UsersIcon className="iconos-hero" /> Comunidad <br /> & noticias
+        </Link>{" "}
+        <Link to="/cuenta" className="flex">
+          <UserIcon className="iconos-hero" /> Mi cuenta
+        </Link>
+      </div>
       <Footer />
     </>
   );

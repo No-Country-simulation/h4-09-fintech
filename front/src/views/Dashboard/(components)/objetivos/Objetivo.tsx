@@ -8,9 +8,6 @@ export const Objetivo = () => {
       <Link to="/objetivos">
         <button>Mis objetivos</button>
       </Link>
-      <Link to="/dashboard">
-        <button>dashboard</button>
-      </Link>
     </div>
   );
 };

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import styles from "./Navbar.module.css";
+import { Link } from "react-router-dom";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -27,7 +28,10 @@ export default function Navbar() {
             className={`${styles.navMenu} ${menuOpen ? styles.openMenu : ""}`}
           >
             <li>
-              <a href="#">Inicio</a>
+              <Link to="/">Inicio</Link>
+            </li>
+            <li>
+              <Link to="/dashboard">Dashboard</Link>
             </li>
             <li>
               <a href="#">Ingresos</a>

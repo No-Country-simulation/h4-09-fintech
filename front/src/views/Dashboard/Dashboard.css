@@ -1,13 +1,62 @@
 /* ESTOS ESTILOS SON PROVISORIOS,MIENTRAS ESPERAMOS EL DISEÑO DE UX/UI */
 .dashboard {
   min-width: 100vw;
-  min-height: 88vh;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
 }
-.dash-item {
-  border: solid white 1px;
-  flex: 1;
-}
+
 /*----------------------------------------- */
+
+.flex {
+  display: flex;
+}
+.px-2 {
+  padding: 0 2vw;
+}
+#foto-perfil {
+  height: 90%;
+  width: auto;
+  border-radius: 50%;
+  border: solid rgb(0, 72, 178) 2px;
+}
+.iconos-hero {
+  height: 20px;
+  width: auto;
+}
+.dashboard h1 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 10.05vh;
+  font-size: 1.2rem;
+}
+.container-usuario {
+  min-height: 8.79vh;
+  max-height: 8.79vh;
+  height: 8.79vh;
+  align-items: center;
+}
+.container-usuario h2 {
+  font-size: 1.1rem;
+}
+.container-usuario b {
+  margin-left: auto;
+  font-size: 0.5rem;
+  box-shadow: 0 0 2px 1px rgba(128, 128, 128, 0.253);
+  border-radius: 500px;
+  padding: 6px;
+}
+.añadir-tarjeta {
+  min-height: 12.31vh;
+  margin: 3.77vh 2vw;
+  border-radius: 10px;
+  border: dashed rgb(0, 72, 178) 1px !important;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.cruz-icon {
+  height: 30px;
+  fill: rgb(209, 227, 255);
+}
