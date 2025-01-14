@@ -3,6 +3,7 @@ import "./Dashboard.css";
 import { BellAlertIcon, PlusCircleIcon } from "@heroicons/react/24/outline";
 import profile from "../../assets/foto.jpg";
 import BarChartComponent from "./(components)/graficos/barchart/BarChart";
+import Example from "./(components)/graficos/Linear/LinearChart";
 // import { Link } from "react-router-dom";
 
 export const Dashboard = () => {
@@ -69,11 +70,9 @@ export const Dashboard = () => {
         style={{
           height: "34.38vh",
           margin: "0 2vw",
-          border: "solid grey 1px",
-          borderRadius: "10px",
         }}
       >
-        Balance general (cambiar)
+        <Example />{" "}
       </section>
       <section
         style={{
