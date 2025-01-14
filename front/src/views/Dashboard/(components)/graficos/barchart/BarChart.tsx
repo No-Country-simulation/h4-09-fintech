@@ -6,12 +6,22 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  // Legend,
   ResponsiveContainer,
 } from "recharts";
 import BasicSelect from "../../../../../components/MUI/BasicSelect";
 
-const BarChartComponent = ({ data, dataKey, xAxisKey }) => {
+// Definir las interfaces para las props
+interface BarChartComponentProps {
+  data: { name: string; ventas: number }[]; // Ajustamos el tipo de `data` para que sea un array de objetos con propiedades `name` y `ventas`
+  dataKey: string; // Tipo de `dataKey` como `string`
+  xAxisKey: string; // Tipo de `xAxisKey` como `string`
+}
+
+const BarChartComponent: React.FC<BarChartComponentProps> = ({
+  data,
+  dataKey,
+  xAxisKey,
+}) => {
   return (
     <div
       style={{
@@ -30,7 +40,7 @@ const BarChartComponent = ({ data, dataKey, xAxisKey }) => {
       >
         <div>
           <h3>Objetivos financieros</h3>
-          <h4>Progeso total</h4>
+          <h4>Progreso total</h4>
         </div>
         <BasicSelect />
       </div>
@@ -44,7 +54,7 @@ const BarChartComponent = ({ data, dataKey, xAxisKey }) => {
           <BarChart data={data}>
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis
-              dataKey="name"
+              dataKey={xAxisKey} // Cambiar a `xAxisKey` para usar la prop
               tick={{ fontSize: 8, fill: "black" }} // Cambia el tamaño y color del texto en el eje X
             />
             <YAxis
@@ -53,8 +63,8 @@ const BarChartComponent = ({ data, dataKey, xAxisKey }) => {
               tick={{ fontSize: 10, fill: "#000000" }} // Personaliza las etiquetas
             />
             <Tooltip />
-            {/* <Legend /> */}
-            <Bar dataKey="ventas" fill="#0048b2" barSize={11.9} />
+            <Bar dataKey={dataKey} fill="#0048b2" barSize={11.9} />{" "}
+            {/* Usamos `dataKey` como prop */}
           </BarChart>
         </ResponsiveContainer>
       </div>

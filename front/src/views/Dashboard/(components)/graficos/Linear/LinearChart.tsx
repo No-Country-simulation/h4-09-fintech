@@ -12,43 +12,43 @@ import {
 
 const data = [
   {
-    name: "Page A",
+    name: "Enero",
     Ingresos: 4000,
     Egresos: 2400,
     amt: 2400,
   },
   {
-    name: "Page B",
+    name: "Febrero",
     Ingresos: 3000,
     Egresos: 1398,
     amt: 2210,
   },
   {
-    name: "Page C",
+    name: "Marzo",
     Ingresos: 2000,
     Egresos: 9800,
     amt: 2290,
   },
   {
-    name: "Page D",
+    name: "Abril",
     Ingresos: 2780,
     Egresos: 3908,
     amt: 2000,
   },
   {
-    name: "Page E",
+    name: "Mayo",
     Ingresos: 1890,
     Egresos: 4800,
     amt: 2181,
   },
   {
-    name: "Page F",
+    name: "Junio",
     Ingresos: 2390,
     Egresos: 3800,
     amt: 2500,
   },
   {
-    name: "Page G",
+    name: "Julio",
     Ingresos: 3490,
     Egresos: 4300,
     amt: 2100,

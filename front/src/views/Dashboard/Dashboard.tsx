@@ -4,14 +4,14 @@ import { BellAlertIcon, PlusCircleIcon } from "@heroicons/react/24/outline";
 import profile from "../../assets/foto.jpg";
 import BarChartComponent from "./(components)/graficos/barchart/BarChart";
 import Example from "./(components)/graficos/Linear/LinearChart";
-// import { Link } from "react-router-dom";
 
 export const Dashboard = () => {
   // OBJETIVO FINANCIERO
   useEffect(() => {
-    //solicitud al backend para obtener objetivo financiero
+    // solicitud al backend para obtener objetivo financiero
   }, []);
-  // GRAFICO DE BARRAS------------------
+
+  // Datos para el gráfico de barras
   const data = [
     { name: "Casa", ventas: 10 },
     { name: "Auto", ventas: 10 },
@@ -19,11 +19,6 @@ export const Dashboard = () => {
     { name: "Jubilación", ventas: 100 },
     { name: "Educación", ventas: 180 },
   ];
-  // GRAFICO DE BARRAS------------------
-  // GRAFICO DE LINEAS------------------
-  // GRAFICO DE LINEAS------------------
-  // GRAFICO DE TORTA------------------
-  // GRAFICO DE TORTA------------------
 
   return (
     <div className="dashboard">
@@ -62,8 +57,8 @@ export const Dashboard = () => {
       >
         <BarChartComponent
           data={data}
-          dataKey="Objetivos financieros"
-          xAxisKey="name"
+          dataKey="ventas" // Asegúrate de pasar el `dataKey` adecuado
+          xAxisKey="name" // Asegúrate de pasar el `xAxisKey` adecuado
         />
       </section>
       <section
@@ -72,7 +67,7 @@ export const Dashboard = () => {
           margin: "0 2vw",
         }}
       >
-        <Example />{" "}
+        <Example />
       </section>
       <section
         style={{
@@ -84,19 +79,6 @@ export const Dashboard = () => {
       >
         Incrementa tus ahorros (cambiar)
       </section>
-
-      {/*
-
-      <div className="dash-item">Progeso hacia objetivos</div>
-      <div className="dash-item">Resumen de gastos</div>
-      
-      <div className="dash-item">incrementar/explorar</div>
-      <div className="dash-item">
-        <Link to="/objetivos">objetivos financieros</Link>{" "}
-      </div>
-      <div className="dash-item">
-        <Link to="/inversiones">Inversiones</Link>{" "}
-      </div> */}
     </div>
   );
 };
