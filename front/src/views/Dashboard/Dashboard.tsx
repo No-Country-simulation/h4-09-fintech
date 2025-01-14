@@ -1,15 +1,8 @@
 import { useEffect } from "react";
 import "./Dashboard.css";
-import {
-  ArrowTrendingUpIcon,
-  BellAlertIcon,
-  PlusCircleIcon,
-  Squares2X2Icon,
-  UserIcon,
-  UsersIcon,
-} from "@heroicons/react/24/outline";
+import { BellAlertIcon, PlusCircleIcon } from "@heroicons/react/24/outline";
 import profile from "../../assets/foto.jpg";
-import { Link } from "react-router-dom";
+import BarChartComponent from "./(components)/graficos/barchart/BarChart";
 // import { Link } from "react-router-dom";
 
 export const Dashboard = () => {
@@ -17,6 +10,20 @@ export const Dashboard = () => {
   useEffect(() => {
     //solicitud al backend para obtener objetivo financiero
   }, []);
+  // GRAFICO DE BARRAS------------------
+  const data = [
+    { name: "Casa", ventas: 10 },
+    { name: "Auto", ventas: 10 },
+    { name: "Viaje", ventas: 50 },
+    { name: "Jubilación", ventas: 100 },
+    { name: "Educación", ventas: 180 },
+  ];
+  // GRAFICO DE BARRAS------------------
+  // GRAFICO DE LINEAS------------------
+  // GRAFICO DE LINEAS------------------
+  // GRAFICO DE TORTA------------------
+  // GRAFICO DE TORTA------------------
+
   return (
     <div className="dashboard">
       <h1 className="px-2">
@@ -54,7 +61,11 @@ export const Dashboard = () => {
           borderRadius: "10px",
         }}
       >
-        Objetivos financieros (cambiar)
+        <BarChartComponent
+          data={data}
+          dataKey="Objetivos financieros"
+          xAxisKey="name"
+        />
       </section>
       <section
         style={{
