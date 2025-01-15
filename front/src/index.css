@@ -1,5 +1,5 @@
 :root {
-	font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif, neuton, poppins;
+	font-family: 'Poppins', Inter, system-ui, Avenir, Helvetica, Arial, sans-serif, neuton, poppins;
 	line-height: 1.5;
 	font-weight: 400;
 
@@ -77,9 +77,12 @@ p {
 	/* color: var(--color-neutral-600); */
 }
 span {
-	font-size: 14px;
-	line-height: 12px;
-	color: var(--color-neutral-principal);
+	font-size: 13px;
+	line-height: 15px;
+	color: var(--color-neutral-600);
+	@media (max-width: 480px) {
+		text-align: start;
+	}
 }
 caption {
 	font-size: 13px;
@@ -111,7 +114,11 @@ label {
 	border-radius: 8px;
 	padding: 12px 20px;
 	text-align: center;
+		&:hover{
+		cursor: pointer;
+	}
 }
+
 .secondaryButton {
 	border: 1px solid #0048b2;
 	background-color: var(--color-boton-fondo);
@@ -121,13 +128,17 @@ label {
 	border-radius: 8px;
 	padding: 12px 20px;
 	text-align: center;
+	&:hover{
+		cursor: pointer;
+	}
 }
 
 a {
 	text-decoration: none;
 
 }
-
+.linkBasico {
+}
 /* @media (prefers-color-scheme: light) {
 	:root {
 		color: #213547;
@@ -140,4 +151,3 @@ a {
 		background-color: #f9f9f9;
 	}
 } */
-

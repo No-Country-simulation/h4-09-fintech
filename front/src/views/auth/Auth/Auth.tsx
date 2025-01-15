@@ -1,21 +1,40 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import AuthIcon from '../../../assets/icons/AuthIcon'
 import style from './auth.module.css'
 import Line from '../../../assets/Line'
 import { CredentialResponse, GoogleLogin } from '@react-oauth/google'
+import Cookies from 'js-cookie'
+import { useEffect } from 'react'
+import axios from 'axios'
+import { baseUrl } from '../../../config/envs'
 
 export default function Auth() {
+	// const navigate = useNavigate()
 	const googleLogin = (response: CredentialResponse) => {
 		//TODO enviar esta respuesta al back
 		console.log(response)
+		//TODO esta respuesta enviar al back, el back responde con token,-> guardar en cokies y navegar a dashboard
 	}
+	//validar si la cookie sigue activa
+	// useEffect(() => {
+	// 	const cokies = Cookies.get('authToken')
+	// 	const headers = cokies ? { Authorization: `Bearer ${cokies}` } : undefined
+	// 	const checkToken = async () => {
+	// 		const response = await axios.get(`${baseUrl}/api/auth/check-login`, { headers })
+	// 		console.log(response)
+	// 		if (response.status === 200) {
+	// 			navigate('/dashboard')
+	// 		}
+	// 	}
+	// 	checkToken()
+	// }, [navigate])
 
 	return (
 		<div className={style.pageview}>
 			<div className={style.contentContainer}>
 				<AuthIcon />
 				<h5>¡Sé bienvenido, empieza hoy tu camino hacia el crecimiento financiero!</h5>
-				<caption>Descubre nuevas formas de ahorrar, invertir y hacer crecer tu patrimonio, en un solo lugar.</caption>
+				<span>Descubre nuevas formas de ahorrar, invertir y hacer crecer tu patrimonio, en un solo lugar.</span>
 				<div className={style.contentContainer}>
 					<Link to={'/auth/login'} className='primaryButton'>
 						Iniciar sesión
