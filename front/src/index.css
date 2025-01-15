@@ -64,13 +64,27 @@ h4 {
   text-align: center;
   margin: 0;
 }
+h5 {
+  font-size: 0.6rem;
+  line-height: 1.1;
+  color: var(--color-primario);
+  text-align: center;
+  margin: 0;
+}
+h6 {
+  font-size: 0.4rem;
+  line-height: 1.1;
+  color: var(--color-primario);
+  text-align: center;
+  margin: 0;
+}
 p {
   font-size: 1.3rem;
   line-height: 1.5;
   color: var(--color-primario);
 }
 span {
-  font-size: 1.3rem;
+  font-size: 0.5rem;
   line-height: 1.5;
   color: var(--color-primario);
 }
@@ -85,7 +99,7 @@ label {
   color: var(--color-primario);
 }
 
-button {
+/* button {
   border-radius: 0.5rem;
   border: 1px solid transparent;
   padding: 0.6rem 1.2rem;
@@ -96,7 +110,7 @@ button {
   color: var(--color-secundario);
   cursor: pointer;
   transition: border-color 0.25s;
-}
+} */
 button:hover {
   color: var(--color-boton-fondo);
   background-color: var(--color-secundario);

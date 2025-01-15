@@ -1,0 +1,41 @@
+.h3-grafico {
+  font-size: 0.7rem;
+  float: left;
+}
+.h4-grafico {
+  font-size: 0.5rem;
+  float: left;
+}
+.container-sub-g {
+  width: 55%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.c-meta-ahorro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+.c-meta-ahorro h6 {
+  display: flex;
+  align-items: center;
+  font-size: 0.5rem;
+}
+.pelota-meta {
+  background-color: #7c9aa7;
+  height: 5px;
+  width: 5px;
+  border-radius: 50%;
+}
+.pelota-ahorrando {
+  background-color: #0048b2;
+  height: 5px;
+  width: 5px;
+  border-radius: 50%;
+}
+.container-grafico-torta {
+  border: solid black 1px;
+  width: 20%;
+}

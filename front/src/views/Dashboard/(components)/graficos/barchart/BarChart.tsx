@@ -26,7 +26,7 @@ const BarChartComponent: React.FC<BarChartComponentProps> = ({
     <div
       style={{
         width: "100%",
-        height: "29.38vh",
+        height: "19.5vh",
       }}
     >
       <div
@@ -47,7 +47,7 @@ const BarChartComponent: React.FC<BarChartComponentProps> = ({
       <div
         style={{
           width: "100%",
-          height: "21.61vh",
+          height: "80%",
         }}
       >
         <ResponsiveContainer width="100%" height="100%">

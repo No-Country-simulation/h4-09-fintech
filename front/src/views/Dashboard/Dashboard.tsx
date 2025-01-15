@@ -4,6 +4,7 @@ import { BellAlertIcon, PlusCircleIcon } from "@heroicons/react/24/outline";
 import profile from "../../assets/foto.jpg";
 import BarChartComponent from "./(components)/graficos/barchart/BarChart";
 import Example from "./(components)/graficos/Linear/LinearChart";
+import Circular from "./(components)/graficos/Pastel/PieChart";
 
 export const Dashboard = () => {
   // OBJETIVO FINANCIERO
@@ -33,7 +34,7 @@ export const Dashboard = () => {
         </div>
         <b>Free plan</b>
       </div>
-      <div
+      {/* <div
         style={{
           height: "5.28vh",
           margin: "0 2vw",
@@ -42,7 +43,7 @@ export const Dashboard = () => {
         }}
       >
         Buscador (cambiar)
-      </div>
+      </div> */}
       <div className="añadir-tarjeta flex">
         <div>
           <PlusCircleIcon className="cruz-icon" />
@@ -51,7 +52,7 @@ export const Dashboard = () => {
       </div>
       <section
         style={{
-          height: "29.38vh",
+          height: "19.5vh",
           margin: "0 2vw",
         }}
       >
@@ -63,7 +64,7 @@ export const Dashboard = () => {
       </section>
       <section
         style={{
-          height: "34.38vh",
+          height: "23.17vh",
           margin: "0 2vw",
         }}
       >
@@ -71,13 +72,12 @@ export const Dashboard = () => {
       </section>
       <section
         style={{
-          height: "27.14vh",
+          height: "18vh",
           margin: "0 2vw",
-          border: "solid grey 1px",
           borderRadius: "10px",
         }}
       >
-        Incrementa tus ahorros (cambiar)
+        <Circular />
       </section>
     </div>
   );

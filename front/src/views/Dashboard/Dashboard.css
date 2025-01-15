@@ -28,12 +28,13 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-height: 10.05vh;
+  min-height: 4.67vh;
+  height: 4.67vh;
   font-size: 1.2rem;
 }
 .container-usuario {
-  min-height: 8.79vh;
-  max-height: 8.79vh;
+  min-height: 6.83vh;
+  max-height: 6.83vh;
   height: 8.79vh;
   align-items: center;
 }
@@ -48,15 +49,16 @@
   padding: 6px;
 }
 .añadir-tarjeta {
-  min-height: 12.31vh;
-  margin: 3.77vh 2vw;
+  min-height: 8.5vh;
+  height: 8.5vh;
+  margin: 0 2vw;
   border-radius: 10px;
   border: dashed rgb(0, 72, 178) 1px !important;
   flex-direction: column;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: space-around;
 }
 .cruz-icon {
-  height: 30px;
+  height: 20px;
   fill: rgb(209, 227, 255);
 }
