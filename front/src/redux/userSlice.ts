@@ -6,15 +6,21 @@ import { createSlice } from '@reduxjs/toolkit'
 interface IUserState {
 	//! aca agregar todo lo que requiera el usuario
 	email: string
-	username: string
-	saldo: number
+	name: string
+	lastname: string
+	mainGoal: string
+	riskPreference: string
+	financialKnowledge: string
 }
 
 // Define the initial state using that type
 const initialState: IUserState = {
 	email: '',
-	username: '',
-	saldo: 0
+	name: '',
+	lastname: '',
+	mainGoal: '',
+	riskPreference: '',
+	financialKnowledge: ''
 }
 
 export const userSlice = createSlice({
@@ -25,21 +31,20 @@ export const userSlice = createSlice({
 	reducers: {
 		setUser: (state, action) => {
 			state.email = action.payload.email
-			state.username = action.payload.username
-			state.saldo = action.payload.saldo
+			state.name = action.payload.name
+			state.lastname = action.payload.lastname
+			state.mainGoal = action.payload.mainGoal
+			state.riskPreference = action.payload.riskPreference
+			state.financialKnowledge = action.payload.financialKnowledge
 		},
 		logout: (state) => {
 			state.email = ''
-			state.username = ''
-			state.saldo = 0
-		},
-		setSaldo: (state, action) => {
-			state.saldo = action.payload
+			state.name = ''
 		}
 	}
 })
 
-export const { setUser, logout, setSaldo } = userSlice.actions
+export const { setUser, logout } = userSlice.actions
 
 // Other code such as selectors can use the imported `RootState` type
 // export const selectCount = (state: RootState) => state.counter.value

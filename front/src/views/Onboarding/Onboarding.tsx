@@ -1,51 +1,136 @@
 import { useState } from 'react'
-import style from './Onboarding.module.css'
-import Step1 from './(components)/(steps)/(step1)/Step1'
-import Step0 from './(components)/(steps)/(step0)/Step0'
+import styles from './Onboarding.module.css'
 import { baseUrl } from '../../config/envs'
-import { useFetchDataWithToken } from '../../hooks/useFetchDataWithToken'
-import Step2 from './(components)/(steps)/(step2)/Step2'
-import Step3 from './(components)/(steps)/(step3)/Step3'
-import Step4 from './(components)/(steps)/(step4)/Step4'
+import { onboardingSteps } from './(components)/steps'
+import { useNavigate } from 'react-router-dom'
+import { usePostDataWithToken } from '../../hooks/usePostDataWithToken'
+import Spinner from '../../components/spiner/Spiner'
+import IupiSmallIcon from '../../assets/icons/IupiSmallIcon'
+import BigLine from '../../assets/BigLine'
+import PigIcon from '../../assets/icons/PigIcon'
+import BookIcon from '../../assets/icons/BookIcon'
+import RiskIcon from '../../assets/icons/RiskIcon'
+// import Cookies from 'js-cookie'
 
-export interface IFormdata {
+interface IFormData {
 	mainGoal: string
 	riskPreference: string
 	financialKnowledge: string
 }
-
-interface Iresponse {
-	financialKnowledge: string[]
-	mainGoal: string[]
-	riskPreference: string[]
-}
+// const token = Cookies.get('authToken') // Recupera la cookie
 
 export default function Onboarding() {
-	const [step, setStep] = useState(0)
-
-	const [formData, setFormData] = useState<IFormdata>({
+	const navigate = useNavigate()
+	const { loading, error, postData } = usePostDataWithToken(`${baseUrl}/api/`)
+	const [stepIndex, setStepIndex] = useState(0) // Controla el índice del paso actual
+	const [formData, setFormData] = useState<IFormData>({
 		mainGoal: '',
 		riskPreference: '',
 		financialKnowledge: ''
 	})
-	const nextStep = () => {
-		setStep((step) => step + 1)
+	const currentStep = onboardingSteps[stepIndex]
+
+	const handleOptionChange = (value: string) => {
+		const field = Object.keys(formData)[stepIndex] as keyof IFormData
+		setFormData({ ...formData, [field]: value })
 	}
 
-	const response  =  useFetchDataWithToken<Iresponse>(`${baseUrl}/api/enums`).data
-	// console.log(response);
-	const mainGoalOptions = response?.mainGoal
-	const financialKnowledgeOptions = response?.financialKnowledge
-	const riskPreferenceOptions = response?.riskPreference
+	const handleNextStep = () => {
+		if (stepIndex <= onboardingSteps.length - 1) {
+			setStepIndex(stepIndex + 1)
+		}
+	}
+
+	const handleBackStep = () => {
+		if (stepIndex > 0) {
+			setStepIndex(stepIndex - 1)
+		}
+	}
+
+	const handleSubmit = async () => {
+		console.log(formData)
+		//send info to backend
+		await postData(formData)
+
+		if (error) {
+			console.error(error)
+			alert(`${error}`)
+		}
+
+		alert('formulario enviado')
+		navigate('/dashboard')
+	}
+
+	const isNextButtonDisabled = !formData[Object.keys(formData)[stepIndex] as keyof IFormData]
 
 	return (
-		<div className={style.onboardingview}>
-			<h3>Creación de perfil de inversor</h3>
-			{step === 0 && <Step0 nextStep={nextStep} />}
-			{step === 1 && <Step1 nextStep={nextStep} step={step} formData={formData} setFormData={setFormData} options={mainGoalOptions} />}
-			{step === 2 && <Step2 nextStep={nextStep} step={step} formData={formData} setFormData={setFormData} options={financialKnowledgeOptions} />}
-			{step === 3 && <Step3 nextStep={nextStep} step={step} formData={formData} setFormData={setFormData} options={riskPreferenceOptions} />}
-			{step === 4 && <Step4 formData={formData}  />}
+		<div className={styles.onboardingview}>
+			{stepIndex < onboardingSteps.length ? (
+				<div className={styles.contentContainer}>
+					<div className={styles.icon}>{<currentStep.icon />}</div>
+					<h5 className={styles.title}>{currentStep.title}</h5>
+					<span className={styles.subtitle}>{currentStep.subtitle}</span>
+					<div className={styles.options}>
+						{currentStep.options.map((option) => (
+							<label key={option.value} className={styles.option}>
+								<div className={styles.input}>
+									<input
+										type='radio' // Cambiar a radio si solo se permite seleccionar una opción
+										value={option.value}
+										checked={formData[Object.keys(formData)[stepIndex] as keyof IFormData] === option.value}
+										onChange={() => handleOptionChange(option.value)}
+									/>
+									<div className={styles.text}>
+										<span className={styles.value}>{option.value}</span>
+										<small className={styles.helper}>{option.helper}</small>
+									</div>
+								</div>
+							</label>
+						))}
+					</div>
+					<div className={styles.buttons}>
+						{stepIndex > 0 && (
+							<button type='button' onClick={handleBackStep} className='secondaryButton'>
+								Atrás
+							</button>
+						)}
+						<button type='button' onClick={handleNextStep} disabled={isNextButtonDisabled} className={`${styles.buttonEnabled} ${isNextButtonDisabled ? styles.buttonDisabled : ''}`}>
+							Siguiente
+						</button>
+					</div>
+				</div>
+			) : (
+				<div className={styles.resumeContainer}>
+					<IupiSmallIcon />
+					<span className={styles.resumeSubtitle}>Este es tu perfil financiero personalizado.</span>
+					<BigLine />
+					<ul className={styles.list}>
+						<li className={styles.listitem}>
+							<span className={styles.listitemtitle}>Objetivo financiero:</span>
+							<span className={styles.listitemvalue}>
+								<PigIcon /> {formData.mainGoal}
+							</span>
+						</li>
+						<li className={styles.listitem}>
+							<span className={styles.listitemtitle}>Nivel de experiencia:</span>
+							<span className={styles.listitemvalue}>
+								{' '}
+								<BookIcon /> {formData.financialKnowledge}
+							</span>
+						</li>
+						<li className={styles.listitem}>
+							<span className={styles.listitemtitle}>Toleracia al riesgo:</span>
+							<span className={styles.listitemvalue}>
+								<RiskIcon />
+								{formData.riskPreference}
+							</span>
+						</li>
+					</ul>
+					<button type='button' onClick={handleSubmit} className='primaryButton'>
+						{loading ? <Spinner /> : '¡Comienza a invertir!'}
+					</button>
+				</div>
+			)}
 		</div>
 	)
 }

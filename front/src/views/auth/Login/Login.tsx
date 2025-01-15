@@ -1,6 +1,6 @@
-import { setUser } from '../../../redux/userSlice'
-import { useAppDispatch } from '../../../redux/storehooks'
-import { useEffect, useState } from 'react'
+// import { setUser } from '../../../redux/userSlice'
+// import { useAppDispatch } from '../../../redux/storehooks'
+import { useState } from 'react'
 import styles from '../Auth/auth.module.css'
 import axios from 'axios'
 import { Link, useNavigate } from 'react-router-dom'
@@ -15,7 +15,7 @@ import SlashEyeIcon from '../../../assets/icons/SlashEyeIcon'
 export default function Login() {
 	const navigate = useNavigate()
 	//usar esto para obtener el estado global user
-	const dispatch = useAppDispatch()
+	// const dispatch = useAppDispatch()
 	const [showPassword, setShowPassword] = useState(false)
 	const [loginData, setLoginData] = useState({
 		email: '',
@@ -31,16 +31,16 @@ export default function Login() {
 	}
 
 	//uso esto para ver si hay un usuario en el localstorage
-	useEffect(() => {
-		const user = localStorage.getItem('user')
-		if (user) {
-			console.log(user)
+	// useEffect(() => {
+	// 	const user = localStorage.getItem('user')
+	// 	if (user) {
+	// 		console.log(user)
 
-			dispatch(setUser(JSON.parse(user)))
-		} else {
-			console.log('no hay usuario en localstorage')
-		}
-	}, [dispatch])
+	// 		dispatch(setUser(JSON.parse(user)))
+	// 	} else {
+	// 		console.log('no hay usuario en localstorage')
+	// 	}
+	// }, [dispatch])
 
 	//funcion que hace login y lo guarda en estado global y localstorage
 	const handleSubmit = async (e: { preventDefault: () => void }) => {
@@ -48,11 +48,10 @@ export default function Login() {
 		setIsLoading(true)
 
 		try {
-			//! enviar info al backend
 			const response = await axios.post(`${baseUrl}/api/auth/login`, loginData)
 			const token = response.data.token
 			console.log(token) // control
-			Cookies.set('authToken', token, { expires: 7 })
+			Cookies.set('authToken', token, { expires: 1 })
 			// const user = response.data.user
 			// dispatch(setUser(user))
 			navigate('/dashboard')

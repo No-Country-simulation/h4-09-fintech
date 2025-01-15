@@ -26,7 +26,7 @@ export default function Step1({ nextStep, step, formData, setFormData, options }
 	return (
 		<div className={Styles.contentContainer}>
 			<form onSubmit={handleSubmit} className={Styles.formContainer}>
-				<p> Paso {step} de 3</p>
+				<h5> </h5>
 				<label htmlFor='mainGoal' className={Styles.formContainer}>
 					{' '}
 					¿Cúal es tu objetivo a alcanzar con tus inversiones?
