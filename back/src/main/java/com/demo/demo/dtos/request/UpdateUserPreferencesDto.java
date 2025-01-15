@@ -11,11 +11,11 @@ import lombok.Setter;
 @Setter
 public class UpdateUserPreferencesDto {
     @NotNull(message = "El objetivo principal no puede ser nulo.")
-    private MainGoal mainGoal;
+    private String mainGoal;
 
     @NotNull(message = "El conocimiento financiero no puede ser nulo.")
-    private FinancialKnowledge financialKnowledge;
+    private String financialKnowledge;
 
     @NotNull(message = "La preferencia de riesgo no puede ser nula.")
-    private RiskPreference riskPreference;
+    private String riskPreference;
 }

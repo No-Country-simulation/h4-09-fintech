@@ -36,17 +36,17 @@ public class UserEntity implements UserDetails {
     @Column()
     private String password;
 
-    @Enumerated(EnumType.STRING)
+//    @Enumerated(EnumType.STRING)
     @Column(name = "main_goal", nullable = true)
-    private MainGoal mainGoal;
+    private String mainGoal;
 
-    @Enumerated(EnumType.STRING)
+//    @Enumerated(EnumType.STRING)
     @Column(name = "financial_knowledge", nullable = true)
-    private FinancialKnowledge financialKnowledge;
+    private String financialKnowledge;
 
-    @Enumerated(EnumType.STRING)
+//    @Enumerated(EnumType.STRING)
     @Column(name = "risk_preference", nullable = true)
-    private RiskPreference riskPreference;
+    private String riskPreference;
 
 
 

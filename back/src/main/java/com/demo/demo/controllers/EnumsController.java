@@ -11,10 +11,7 @@ import com.demo.demo.services.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -22,6 +19,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
+@RequestMapping("/api/preferences")
 @RequiredArgsConstructor
 public class EnumsController {
 
@@ -39,7 +37,7 @@ public class EnumsController {
         return ResponseEntity.ok(enums);
     }*/
 
-    @PatchMapping("/preferences")
+    @PatchMapping()
     public ResponseEntity<UserPreferencesResponseDto> updatePreferences(
             @CurrentUser UserEntity currentUser,
             @RequestBody @Valid UpdateUserPreferencesDto dto) {
@@ -47,7 +45,7 @@ public class EnumsController {
         return ResponseEntity.ok(updatedUser);
     }
 
-    @GetMapping("/preferences")
+    @GetMapping()
     public ResponseEntity<UserPreferencesResponseDto> getUserPreferences(@CurrentUser UserEntity currentUser) {
         UserPreferencesResponseDto userPreferences = userService.getUserPreferences(currentUser.getUsername());
         return ResponseEntity.ok(userPreferences);
