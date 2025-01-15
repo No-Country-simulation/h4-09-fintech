@@ -2,14 +2,15 @@ package com.demo.demo.services.impl;
 
 
 import com.demo.demo.config.mappers.UserMapper;
-import com.demo.demo.dtos.recover_password.EmailResetPasswordDTO;
-import com.demo.demo.dtos.recover_password.ResetPasswordDTO;
+import com.demo.demo.dtos.recover.EmailResetPasswordDTO;
+import com.demo.demo.dtos.recover.ResetPasswordDTO;
 import com.demo.demo.dtos.request.LoginRequestDto;
 import com.demo.demo.dtos.request.RegisterRequestDto;
 import com.demo.demo.dtos.response.AuthResponseDto;
 import com.demo.demo.entities.RoleEntity;
 import com.demo.demo.entities.UserEntity;
 import com.demo.demo.exceptions.BadRequestException;
+import com.demo.demo.exceptions.ErrorResponse;
 import com.demo.demo.exceptions.NotFoundException;
 import com.demo.demo.repositories.RoleRepository;
 import com.demo.demo.repositories.UserRepository;
@@ -106,13 +107,12 @@ public class AuthServiceImpl implements AuthService {
 
         Optional<UserEntity> user = userRepository.findByUsername(userContext.getUsername());
         if (user.isEmpty())
-            throw new RuntimeException("User not found");
+            throw new NotFoundException("User not found");
         user.get().setPassword(passwordEncoder.encode(resetPasswordDTO.password()));
 
     }
 
     public UserDetails getUserContext() {
-        System.out.println(SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         return (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     }
 }

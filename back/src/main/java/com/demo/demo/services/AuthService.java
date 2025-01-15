@@ -1,7 +1,7 @@
 package com.demo.demo.services;
 
-import com.demo.demo.dtos.recover_password.EmailResetPasswordDTO;
-import com.demo.demo.dtos.recover_password.ResetPasswordDTO;
+import com.demo.demo.dtos.recover.EmailResetPasswordDTO;
+import com.demo.demo.dtos.recover.ResetPasswordDTO;
 import com.demo.demo.dtos.request.LoginRequestDto;
 import com.demo.demo.dtos.request.RegisterRequestDto;
 import com.demo.demo.dtos.response.AuthResponseDto;
