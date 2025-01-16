@@ -8,10 +8,9 @@
 	--color-fondo: #f6f8f9;
 	--color-neutral-600: #33454c;
 	--color-neutral-principal: #232f34;
-	--color-disabled: #94ADB7;
+	--color-disabled: #94adb7;
 	--color-secundario: #00378a;
 	--color-boton-fondo: #f6f8f9;
-
 
 	color-scheme: light dark;
 	color: #0048b2;
@@ -113,8 +112,9 @@ label {
 	max-width: 350px;
 	border-radius: 8px;
 	padding: 12px 20px;
+	font-family: 'Poppins';
 	text-align: center;
-		&:hover{
+	&:hover {
 		cursor: pointer;
 	}
 }
@@ -127,15 +127,15 @@ label {
 	max-width: 350px;
 	border-radius: 8px;
 	padding: 12px 20px;
+	font-family: 'Poppins';
 	text-align: center;
-	&:hover{
+	&:hover {
 		cursor: pointer;
 	}
 }
 
 a {
 	text-decoration: none;
-
 }
 .linkBasico {
 }

@@ -103,7 +103,10 @@ export default function Register() {
 	return (
 		<div className={styles.pageview}>
 			<form className={styles.registerForm} onSubmit={handleSubmit}>
-				<IupiSmallIcon />
+				<div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
+					<Link to={'/auth'}> Volver</Link>
+					<IupiSmallIcon />
+				</div>
 				<h5>Regístrate y da el primer paso hacia tu libertad financiera.</h5>
 				<small>En IUPI, convertir tus metas en logros es sencillo. crea tu cuenta y ahorrar y crece en confianza.</small>
 				<div className={styles.labelInput}>

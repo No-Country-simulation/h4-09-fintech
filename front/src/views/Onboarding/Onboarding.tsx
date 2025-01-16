@@ -3,30 +3,30 @@ import styles from './Onboarding.module.css'
 import { baseUrl } from '../../config/envs'
 import { onboardingSteps } from './(components)/steps'
 import { useNavigate } from 'react-router-dom'
-import { usePostDataWithToken } from '../../hooks/usePostDataWithToken'
 import Spinner from '../../components/spiner/Spiner'
 import IupiSmallIcon from '../../assets/icons/IupiSmallIcon'
 import BigLine from '../../assets/BigLine'
 import PigIcon from '../../assets/icons/PigIcon'
 import BookIcon from '../../assets/icons/BookIcon'
 import RiskIcon from '../../assets/icons/RiskIcon'
+import { usePatchDataWithToken } from '../../hooks/usePatchDataWithToken'
 // import Cookies from 'js-cookie'
 
 interface IFormData {
 	mainGoal: string
-	riskPreference: string
 	financialKnowledge: string
+	riskPreference: string
 }
 // const token = Cookies.get('authToken') // Recupera la cookie
 
 export default function Onboarding() {
 	const navigate = useNavigate()
-	const { loading, error, postData } = usePostDataWithToken(`${baseUrl}/api/`)
+	const { data, loading, error, patchData } = usePatchDataWithToken(`${baseUrl}/api/preferences`)
 	const [stepIndex, setStepIndex] = useState(0) // Controla el índice del paso actual
 	const [formData, setFormData] = useState<IFormData>({
 		mainGoal: '',
-		riskPreference: '',
-		financialKnowledge: ''
+		financialKnowledge: '',
+		riskPreference: ''
 	})
 	const currentStep = onboardingSteps[stepIndex]
 
@@ -50,7 +50,9 @@ export default function Onboarding() {
 	const handleSubmit = async () => {
 		console.log(formData)
 		//send info to backend
-		await postData(formData)
+		const response = await patchData(formData)
+		console.log(response)
+		console.log(data)
 
 		if (error) {
 			console.error(error)

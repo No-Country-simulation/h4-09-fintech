@@ -76,7 +76,10 @@ export default function Login() {
 	return (
 		<div className={styles.pageview}>
 			<form className={styles.registerForm} onSubmit={handleSubmit}>
-				<IupiSmallIcon />
+				<div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
+					<Link to={'/auth'}> Volver</Link>
+					<IupiSmallIcon />
+				</div>
 				<h5>Logueate y continúa el camino hacia tu libertad financiera.</h5>
 				<div className={styles.labelInput}>
 					<label htmlFor='email'>Email</label>
