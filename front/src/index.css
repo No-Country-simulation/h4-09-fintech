@@ -119,6 +119,12 @@ button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
+/* DASHBOARD GLOBALES --------------*/
+.box-section {
+  border-radius: 5px;
+  box-shadow: 0 0 2px 2px rgba(128, 128, 128, 0.61);
+}
+/* DASHBOARD GLOBALES --------------*/
 
 @media (prefers-color-scheme: light) {
   :root {

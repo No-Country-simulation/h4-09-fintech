@@ -56,32 +56,40 @@ const data = [
 
 const Example = () => {
   return (
-    <ResponsiveContainer width="100%" height="100%">
-      <LineChart
-        width={500}
-        height={300}
-        data={data}
-        margin={{
-          top: 5,
-          right: 30,
-          left: 20,
-          bottom: 5,
-        }}
-      >
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="name" />
-        <YAxis />
-        <Tooltip />
-        <Legend layout="horizontal" verticalAlign="top" />
-        <Line
-          type="monotone"
-          dataKey="Ingresos"
-          stroke="#0048B2"
-          activeDot={{ r: 8 }}
-        />
-        <Line type="monotone" dataKey="Egresos" stroke="#CC0003" />
-      </LineChart>
-    </ResponsiveContainer>
+    <section
+      style={{
+        height: "23.17vh",
+        margin: "0 3vw 1.83vh 3vw",
+      }}
+      className="box-section"
+    >
+      <ResponsiveContainer width="100%" height="100%">
+        <LineChart
+          width={500}
+          height={300}
+          data={data}
+          margin={{
+            top: 5,
+            right: 30,
+            left: 0,
+            bottom: 5,
+          }}
+        >
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="name" />
+          <YAxis />
+          <Tooltip />
+          <Legend layout="horizontal" verticalAlign="top" />
+          <Line
+            type="monotone"
+            dataKey="Ingresos"
+            stroke="#0048B2"
+            activeDot={{ r: 8 }}
+          />
+          <Line type="monotone" dataKey="Egresos" stroke="#CC0003" />
+        </LineChart>
+      </ResponsiveContainer>
+    </section>
   );
 };
 

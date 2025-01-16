@@ -25,9 +25,10 @@ const BarChartComponent: React.FC<BarChartComponentProps> = ({
   return (
     <div
       style={{
-        width: "100%",
         height: "19.5vh",
+        margin: "0 3vw 1.83vh 3vw",
       }}
+      className="box-section"
     >
       <div
         style={{
@@ -38,21 +39,30 @@ const BarChartComponent: React.FC<BarChartComponentProps> = ({
           alignItems: "center",
         }}
       >
-        <div>
-          <h3>Objetivos financieros</h3>
-          <h4>Progreso total</h4>
+        <div className="container-sub-g">
+          <h3 className="h3-grafico">Objetivos financieros</h3>
+          <h4 className="h4-grafico">Progreso total</h4>
         </div>
         <BasicSelect />
       </div>
       <div
         style={{
-          width: "100%",
-          height: "80%",
+          height: "65%",
         }}
       >
         <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={data}>
-            <CartesianGrid strokeDasharray="3 3" />
+          <BarChart
+            width={500}
+            height={300}
+            data={data}
+            margin={{
+              top: 5,
+              right: 20,
+              left: -30,
+              bottom: -10,
+            }}
+          >
+            <CartesianGrid vertical={false} />
             <XAxis
               dataKey={xAxisKey} // Cambiar a `xAxisKey` para usar la prop
               tick={{ fontSize: 8, fill: "black" }} // Cambia el tamaño y color del texto en el eje X
