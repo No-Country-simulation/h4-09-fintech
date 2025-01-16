@@ -23,27 +23,23 @@ export default function Navbar() {
 					<a href='#'>iUpi</a>
 				</div>
 				<nav className={styles.menu}>
-					<button className={`${styles.navMobile} ${menuOpen ? styles.navOpen : ''}`} onClick={toggleMenu}>
-						<span></span>
-						<span></span>
-						<span></span>
-					</button>
-					<ul className={`${styles.navMenu} ${menuOpen ? styles.openMenu : ''}`}>
+					<ul className={styles.navMenu}>
 						<li>
-							<a href='#'>Inicio</a>
-						</li>
-						<li>
-							<a href='#'>Ingresos</a>
-						</li>
-						<li>
-							<a href='#'>Gastos</a>
-						</li>
-						<li>
-							<a href='#'>Objetivos</a>
-						</li>
+              <a href="#">Dashboard</a>
+            </li>
+            <li>
+              <a href="#">Gestión de inversiones</a>
+            </li>
+            <li>
+              <a href="#">Comunidad & Noticias</a>
+            </li>
+            <li>
+              <a href="#">Mi cuenta</a>
+            </li>
 					</ul>
 				</nav>
 			</header>
 		</div>
 	)
 }
+

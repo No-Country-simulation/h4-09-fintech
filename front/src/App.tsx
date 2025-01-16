@@ -1,4 +1,3 @@
-// import { useState } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import './App.css'
 import Footer from './components/footer/Footer'
@@ -7,6 +6,7 @@ import Login from './views/auth/Login/Login'
 import Register from './views/auth/Register/Register'
 import Onboarding from './views/Onboarding/Onboarding'
 import Error from "./views/Error/ErrorPage"
+import Perfil from './views/Perfil/Perfil'
 import Auth from './views/auth/Auth/Auth'
 import Landing from './views/Landing/Landing'
 
@@ -24,6 +24,7 @@ function App() {
 				</Route>
 				<Route path='/onboarding' element={<Onboarding />} />
 				<Route path='/*' element={<Error/>} />
+				<Route path='/perfil' element={<Perfil/>} />
 			</Routes>
 			<Footer />
 		</>
