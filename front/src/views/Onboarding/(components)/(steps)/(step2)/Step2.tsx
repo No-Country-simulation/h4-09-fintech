@@ -1,19 +1,19 @@
 import React from 'react'
-import { IFormdata } from '../../../Onboarding'
+import { IFormData } from '../../../Onboarding'
 import Styles from './Step2.module.css'
 
 type Props = {
 	nextStep: () => void
 	step: number
-	formData: IFormdata
-	setFormData: React.Dispatch<React.SetStateAction<IFormdata>>
+	formData: IFormData
+	setFormData: React.Dispatch<React.SetStateAction<IFormData>>
 	options: string[] | undefined
 }
 
 export default function Step2({ nextStep, step, formData, setFormData, options }: Props) {
 	const handleChange = (e: { target: { name: string; value: string } }) => {
 		const { name, value } = e.target
-		setFormData((data) => ({
+		setFormData((data: IFormData) => ({
 			...data,
 			[name]: value
 		}))
