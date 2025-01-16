@@ -1,6 +1,7 @@
 import React, { PureComponent } from "react";
 import { PieChart, Pie, Sector, ResponsiveContainer, PieProps } from "recharts";
 import "./PieChart.css";
+import { LightBulbIcon } from "@heroicons/react/24/outline";
 
 // Tipo para los datos
 interface DataItem {
@@ -43,26 +44,20 @@ const renderActiveShape = (props: ActiveShapeProps): JSX.Element => {
     percent,
     value,
   } = props;
+
   const sin = Math.sin(-RADIAN * midAngle);
   const cos = Math.cos(-RADIAN * midAngle);
-  const sx = cx + (outerRadius + 10) * cos;
+  const sx = cx + (outerRadius + 10) * cos; // Inicio de la línea
   const sy = cy + (outerRadius + 10) * sin;
-  const mx = cx + (outerRadius + 30) * cos;
-  const my = cy + (outerRadius + 30) * sin;
-  const ex = mx + (cos >= 0 ? 1 : -1) * 22;
+  const mx = cx + (outerRadius + 20) * cos; // Punto medio más corto
+  const my = cy + (outerRadius + 20) * sin;
+  const ex = mx + (cos >= 0 ? 1 : -1) * 12; // Extensión horizontal más corta
   const ey = my;
   const textAnchor = cos >= 0 ? "start" : "end";
 
   return (
     <g>
-      <text
-        x={cx}
-        y={cy}
-        dy={8}
-        textAnchor="middle"
-        fill={fill}
-        style={{ fontSize: 12 }}
-      >
+      <text x={cx} y={cy} dy={8} textAnchor="middle" fill={fill}>
         {payload.name}
       </text>
       <Sector
@@ -90,13 +85,13 @@ const renderActiveShape = (props: ActiveShapeProps): JSX.Element => {
       />
       <circle cx={ex} cy={ey} r={2} fill={fill} stroke="none" />
       <text
-        x={ex + (cos >= 0 ? 1 : -1) * 12}
+        x={ex + (cos >= 0 ? 1 : -1) * 10}
         y={ey}
         textAnchor={textAnchor}
         fill="#333"
       >{`PV ${value}`}</text>
       <text
-        x={ex + (cos >= 0 ? 1 : -1) * 12}
+        x={ex + (cos >= 0 ? 1 : -1) * 10}
         y={ey}
         dy={18}
         textAnchor={textAnchor}
@@ -133,8 +128,7 @@ export default class Example extends PureComponent<{}, ExampleState> {
     return (
       <div
         style={{
-          border: "solid black 1px",
-          height: "18vh",
+          height: "max-content",
           width: "95%",
           margin: "auto",
         }}
@@ -145,12 +139,12 @@ export default class Example extends PureComponent<{}, ExampleState> {
             width: "100%",
             display: "flex",
             alignItems: "center",
-            justifyContent: "space-between",
+            justifyContent: "space-evenly",
           }}
         >
           <div className="container-sub-g">
             <h3 className="h3-grafico">Incrementa tus ahorros</h3>
-            <h4 className="h4-grafico">Progeso actual</h4>
+            <h4 className="h4-grafico">Progreso actual</h4>
           </div>
           <div className="c-meta-ahorro">
             <h6>
@@ -168,9 +162,9 @@ export default class Example extends PureComponent<{}, ExampleState> {
         <div
           style={{
             display: "flex",
-            height: "5.67vh",
+            flexDirection: "column",
+            height: "max-content",
             width: "100%",
-            border: "solid black 1px",
           }}
         >
           <div className="container-grafico-torta">
@@ -182,24 +176,26 @@ export default class Example extends PureComponent<{}, ExampleState> {
                   data={data}
                   cx="50%"
                   cy="50%"
-                  innerRadius={25}
-                  outerRadius={30}
-                  fill="#8884d8"
+                  innerRadius={30}
+                  outerRadius={40}
+                  fill="#0048B2"
+                  // fill="#94ADB7"
                   dataKey="value"
                   onMouseEnter={this.onPieEnter}
                 />
               </PieChart>
             </ResponsiveContainer>
           </div>
-          <div>Sugerencias</div>
+          <div className="sugerencia-personalizada">
+            <LightBulbIcon className="iconos-hero" />
+            <div>
+              <h4>Sugerencia personalizada</h4>
+              Aumenta tu ahorro mensual un 10% para alcanzar tu objetivo 2 meses
+              antes.
+            </div>
+          </div>
         </div>
-        <button
-          style={{
-            height: "3.67vh",
-            margin: "2vh auto",
-            width: "100%",
-          }}
-        >
+        <button className="btn-ahorro-auto">
           Configurar ahorro automático
         </button>
       </div>

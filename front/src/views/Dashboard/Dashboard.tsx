@@ -70,15 +70,8 @@ export const Dashboard = () => {
       >
         <Example />
       </section>
-      <section
-        style={{
-          height: "18vh",
-          margin: "0 2vw",
-          borderRadius: "10px",
-        }}
-      >
-        <Circular />
-      </section>
+
+      <Circular />
     </div>
   );
 };
