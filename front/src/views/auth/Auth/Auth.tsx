@@ -4,16 +4,28 @@ import style from './auth.module.css'
 import Line from '../../../assets/Line'
 import { CredentialResponse, GoogleLogin } from '@react-oauth/google'
 import Cookies from 'js-cookie'
-import { useEffect } from 'react'
+// import { useEffect } from 'react'
 import axios from 'axios'
 import { baseUrl } from '../../../config/envs'
 
 export default function Auth() {
-	// const navigate = useNavigate()
-	const googleLogin = (response: CredentialResponse) => {
-		//TODO enviar esta respuesta al back
+	const navigate = useNavigate()
+	const googleLogin = async (response: CredentialResponse) => {
 		console.log(response)
-		//TODO esta respuesta enviar al back, el back responde con token,-> guardar en cokies y navegar a dashboard
+		const body = {
+			idToken: response.credential
+		}
+		const respuesta = await axios.post(`${baseUrl}/api/auth/verify-token`, body)
+		// console.log(respuesta);
+		const token = respuesta.data.token
+		console.log(token) // control
+		Cookies.set('authToken', token, { expires: 1 })
+		const isFirstTime = respuesta.data.firstTime
+		if (isFirstTime) {
+			navigate('/onboarding')
+		} else {
+			navigate('/dashboard')
+		}
 	}
 	//validar si la cookie sigue activa
 	// useEffect(() => {
