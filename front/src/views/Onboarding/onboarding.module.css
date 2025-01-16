@@ -1,0 +1,154 @@
+.onboardingview {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	min-height: 100vh;
+	min-height: 100dvh;
+	width: 100%;
+}
+.contentContainer {
+	display: flex;
+	flex-direction: column;
+	margin-top: 10%;
+	align-items: center;
+	width: 90%;
+	height: 80dvh;
+	gap: 10px;
+	background-color: var(--color-fondo);
+	text-align: start;
+  max-width: 500px;
+}
+.title {
+	text-align: start;
+  margin-bottom: 0px;
+}
+.subtitle {
+	text-align: start;
+}
+
+.options {
+	display: flex;
+	flex-direction: column;
+	align-items: start;
+	gap: 10px;
+  margin-top: 14px;
+}
+
+.option {
+	display: flex;
+	flex-direction: row;
+	gap: 10px;
+}
+.input {
+  display: flex;
+  /* flex-direction: column; */
+  gap: 10px;
+}
+
+.buttons {
+	display: flex;
+	flex-direction: column;
+  	align-items: center;
+	gap: 16px;
+  width: 100%;
+}
+.buttonEnabled {
+	background-color: var(--color-primario);
+	color: var(--color-fondo);
+	width: 100%;
+	max-width: 350px;
+	border-radius: 8px;
+	padding: 12px 20px;
+	text-align: center;
+	&:hover {
+		cursor: pointer;
+	}
+}
+
+.buttonDisabled {
+	width: 100%;
+	max-width: 350px;
+	border-radius: 8px;
+	padding: 12px 20px;
+	text-align: center;
+	border: 3px solid var(--color-disabled);
+	color: white;
+	background-color: var(--color-disabled);
+	&:hover {
+		cursor: auto;
+	}
+}
+.option {
+	display: flex;
+	align-items: flex-start;
+	cursor: pointer;
+	margin-bottom: 1rem; /* Espacio entre opciones */
+}
+
+.input {
+	display: flex;
+	align-items: center;
+}
+
+.input input {
+	margin-right: 1rem; /* Espacio entre el círculo y el texto */
+}
+
+.text {
+	display: flex;
+	flex-direction: column;
+}
+.value{
+  font-size: 1.2rem;
+
+}
+
+.helper {
+	font-size: 0.875rem;
+	color: #666; /* Color para el texto secundario */
+	margin-top: 0.25rem; /* Separación del texto principal */
+}
+
+.resumeContainer {
+	display: flex;
+	flex-direction: column;
+	margin-top: 10%;
+	align-items: center;
+	width: 90%;
+	height: 80dvh;
+	gap: 10px;
+	background-color: var(--color-fondo);
+	text-align: start;
+  max-width: 350px;
+}
+
+
+.resumeSubtitle{
+	font-size: 18px;
+	margin-top: 20px;
+	margin-bottom: 10px;
+}
+.list{
+	list-style-type: none;
+	list-style: none;
+	padding: 0;
+	align-self: flex-start;
+	margin-left: 1rem;
+}
+.listitem{
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 24px;
+}
+.listitemtitle{
+	color: var(--color-primario);
+		font-size: 18px;
+		font-weight: 500;
+}
+.listitemvalue{
+font-size: 16px;
+margin-top: 12px;
+display: flex;
+align-items: center;
+gap:8px;
+}

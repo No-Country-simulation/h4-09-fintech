@@ -1,0 +1,27 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.spinner {
+  width: 1.5rem; /* equivalente a w-6 */
+  height: 1.5rem; /* equivalente a h-6 */
+  color: #e5e7eb; /* equivalente a text-gray-200 */
+  animation: spin 1s linear infinite; /* equivalente a animate-spin */
+  fill: #2563eb; /* equivalente a fill-blue-600 */
+}
+
+/* Dark mode text-gray-600 */
+.spinner.dark {
+  color: #4b5563;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
