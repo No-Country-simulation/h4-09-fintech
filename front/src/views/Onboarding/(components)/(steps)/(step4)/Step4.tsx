@@ -1,4 +1,4 @@
-import { IFormdata } from '../../../Onboarding'
+import { IFormData } from '../../../Onboarding'
 import Styles from './step4.module.css'
 import { baseUrl } from '../../../../../config/envs'
 import { usePostDataWithToken } from '../../../../../hooks/usePostDataWithToken'
@@ -6,7 +6,7 @@ import Spinner from '../../../../../components/spiner/Spiner'
 import { useNavigate } from 'react-router-dom'
 
 type Props = {
-	formData: IFormdata
+	formData: IFormData
 }
 interface ApiResponse {
 	message: string
@@ -20,8 +20,8 @@ export default function Step4({ formData }: Props) {
 		e.preventDefault()
 		//enviar informacion al back
 		const response = await postData(formData)
-    console.log(response);
-    
+		console.log(response)
+
 		navigate('/dashboard')
 	}
 

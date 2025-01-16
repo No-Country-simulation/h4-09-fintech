@@ -2,12 +2,15 @@
 import { useState } from 'react'
 import axios from 'axios'
 import { validateRegister } from '../../../helpers/validations'
-import styles from './register.module.css'
+import styles from '../Auth/auth.module.css'
 import { baseUrl } from '../../../config/envs'
 import Spinner from '../../../components/spiner/Spiner'
 import { Link, useNavigate } from 'react-router-dom'
-import { CredentialResponse, GoogleLogin } from '@react-oauth/google'
+// import { CredentialResponse, GoogleLogin } from '@react-oauth/google'
 import Cookies from 'js-cookie'
+import IupiSmallIcon from '../../../assets/icons/IupiSmallIcon'
+import Eyeicon from '../../../assets/icons/Eyeicon'
+import SlashEyeIcon from '../../../assets/icons/SlashEyeIcon'
 
 export interface IUserData {
 	name: string
@@ -19,7 +22,8 @@ export interface IUserData {
 
 export default function Register() {
 	const navigate = useNavigate()
-
+	const [showPassword, setShowPassword] = useState(false)
+	const [showConfirmPassword, setShowConfirmPassword] = useState(false)
 	const [errors, setErrors] = useState({
 		name: '',
 		lastName: '',
@@ -57,15 +61,12 @@ export default function Register() {
 	const handleSubmit = async (e: { preventDefault: () => void }) => {
 		e.preventDefault()
 		setIsLoading(true)
-		// prueba
-
 		// Validar que las contraseñas coincidan
 		if (userData.password !== userData.confirmPassword) {
 			alert('Las contraseñas no coinciden')
 			setIsLoading(false)
 			return
 		}
-
 		const { confirmPassword, ...userDataToSend } = userData
 
 		try {
@@ -94,16 +95,20 @@ export default function Register() {
 		}
 	}
 
-	const googleRegister = (response: CredentialResponse) => {
-		//TODO enviar esta respuesta al back
-		console.log(response)
-	}
+	// const googleRegister = (response: CredentialResponse) => {
+	// 	//TODO enviar esta respuesta al back
+	// 	console.log(response)
+	// }
 
 	return (
-		<div className={styles.registerview}>
+		<div className={styles.pageview}>
 			<form className={styles.registerForm} onSubmit={handleSubmit}>
-				<h1>Registro</h1>
-				<small>Todos los campos son obligatorios</small>
+				<div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
+					<Link to={'/auth'}> Volver</Link>
+					<IupiSmallIcon />
+				</div>
+				<h5>Regístrate y da el primer paso hacia tu libertad financiera.</h5>
+				<small>En IUPI, convertir tus metas en logros es sencillo. crea tu cuenta y ahorrar y crece en confianza.</small>
 				<div className={styles.labelInput}>
 					<label htmlFor='name'>Nombre</label>
 					<input type='text' id='nameLogin' name='name' required value={userData.name} onChange={handleChange} placeholder='Tu nombre' />
@@ -115,18 +120,37 @@ export default function Register() {
 					{errors.lastName && <small style={{ color: 'red' }}>{errors.lastName}</small>}
 				</div>
 				<div className={styles.labelInput}>
-					<label htmlFor='email'>Email</label>
+					<label htmlFor='email'>Correo electrónico</label>
 					<input type='email' id='email' name='email' required value={userData.email} onChange={handleChange} placeholder='ejemplo@mail.com' />
 					{errors.email && <small style={{ color: 'red' }}>{errors.email}</small>}
 				</div>
 				<div className={styles.labelInput}>
 					<label htmlFor='password'>Contraseña</label>
-					<input type='password' id='passwordLogin' name='password' required value={userData.password} onChange={handleChange} placeholder='*******' />
+					<div className={styles.passwordContainer}>
+						<input type={showPassword ? 'text' : 'password'} id='passwordLogin' name='password' required value={userData.password} onChange={handleChange} placeholder='*******' />
+						<button type='button' onClick={() => setShowPassword((prev) => !prev)} className={styles.showPasswordButton}>
+							{showPassword ? <Eyeicon /> : <SlashEyeIcon />}
+						</button>
+					</div>
 					{errors.password && <small style={{ color: 'red', textWrap: 'wrap' }}>{errors.password}</small>}
 				</div>
+
 				<div className={styles.labelInput}>
 					<label htmlFor='confirmPassword'>Confirmar contraseña</label>
-					<input type='password' id='confirmPassword' name='confirmPassword' required value={userData.confirmPassword} onChange={handleChange} placeholder='*******' />
+					<div className={styles.passwordContainer}>
+						<input
+							type={showConfirmPassword ? 'text' : 'password'}
+							id='confirmPassword'
+							name='confirmPassword'
+							required
+							value={userData.confirmPassword}
+							onChange={handleChange}
+							placeholder='*******'
+						/>
+						<button type='button' onClick={() => setShowConfirmPassword((prev) => !prev)} className={styles.showPasswordButton}>
+							{showConfirmPassword ? <Eyeicon /> : <SlashEyeIcon />}
+						</button>
+					</div>
 					{errors.confirmPassword && <small style={{ color: 'red' }}>{errors.confirmPassword}</small>}
 				</div>
 
@@ -148,19 +172,20 @@ export default function Register() {
 							Object.values(userData).some((value) => typeof value === 'string' && value.trim() === '') // Verifica si algún campo está vacío
 						}
 					>
-						Registrarme
+						Crear mi cuenta
 					</button>
 				)}
-				<div style={{ display: 'flex', flexDirection: 'column', gap: '8px', justifyContent: 'center', alignItems: 'center' }}>
+				{/* <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', justifyContent: 'center', alignItems: 'center' }}>
 					<span style={{ color: '#ffffff' }}> o </span>
 					<GoogleLogin onSuccess={googleRegister} onError={() => console.log('error')} />
-				</div>
+				</div> */}
 				<div className={styles.registerdiv}>
-					<span>Si ya tenes una cuenta: </span>
-					<Link to='/auth/login'>Logueate acá</Link>
+					<span>¿Ya tienes una cuenta? </span>
+					<Link to='/auth/login'>Iniciar sesión</Link>
 				</div>
-				<small style={{ marginTop: '48px', width: '90%' }}>
-					Al registrarte aceptas los <Link to={'#'}>terminos y condiciones</Link> de iupi
+				<small>
+					Al iniciar aceptas las <Link to={'#'}> condiciones del servicio de iupi.</Link> Nos tomamos muy en serio tu privacidad. Para mas información lee nuestra{' '}
+					<Link to={'#'}>Política de privacidad.</Link>
 				</small>
 			</form>
 		</div>
