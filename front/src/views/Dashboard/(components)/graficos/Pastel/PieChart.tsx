@@ -1,5 +1,12 @@
 import React, { PureComponent } from "react";
-import { PieChart, Pie, Sector, ResponsiveContainer, PieProps } from "recharts";
+import {
+  PieChart,
+  Pie,
+  Sector,
+  ResponsiveContainer,
+  PieProps,
+  ActiveShape,
+} from "recharts";
 import "./PieChart.css";
 import { LightBulbIcon } from "@heroicons/react/24/outline";
 
@@ -29,7 +36,10 @@ interface ActiveShapeProps {
   value: number;
 }
 
-const renderActiveShape = (props: ActiveShapeProps): JSX.Element => {
+// Declaración correcta del tipo de renderActiveShape
+const renderActiveShape: ActiveShape<DataItem> = (
+  props: ActiveShapeProps
+): JSX.Element => {
   const RADIAN = Math.PI / 180;
   const {
     cx,
@@ -129,36 +139,16 @@ export default class Example extends PureComponent<{}, ExampleState> {
       <section
         style={{
           height: "max-content",
+          width: "94vw",
           margin: "0 3vw 1.83vh 3vw",
         }}
         className="box-section"
       >
-        <div
-          style={{
-            height: "5.5vh",
-            width: "100%",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-evenly",
-          }}
-        >
-          <div className="container-sub-g">
-            <h3 className="h3-grafico">Incrementa tus ahorros</h3>
-            <h4 className="h4-grafico">Progreso actual</h4>
-          </div>
-          <div className="c-meta-ahorro">
-            <h6>
-              <div className="pelota-meta"></div>Meta
-            </h6>
-            <span>$10,000</span>
-          </div>
-          <div className="c-meta-ahorro">
-            <h6>
-              <div className="pelota-ahorrando"></div>Ahorrando
-            </h6>
-            <span>$3,200</span>
-          </div>
+        <div className="container-sub-g">
+          <h3 className="h3-grafico">Incrementa tus ahorros</h3>
+          <h4 className="h4-grafico">Progreso actual</h4>
         </div>
+
         <div
           style={{
             display: "flex",
@@ -179,7 +169,6 @@ export default class Example extends PureComponent<{}, ExampleState> {
                   innerRadius={30}
                   outerRadius={40}
                   fill="#0048B2"
-                  // fill="#94ADB7"
                   dataKey="value"
                   onMouseEnter={this.onPieEnter}
                 />
