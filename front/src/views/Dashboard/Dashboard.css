@@ -51,7 +51,7 @@
 .añadir-tarjeta {
   min-height: 8.5vh;
   height: 8.5vh;
-  margin: 0 2vw;
+  margin: 1.83vh 2vw;
   border-radius: 10px;
   border: dashed rgb(0, 72, 178) 1px !important;
   flex-direction: column;

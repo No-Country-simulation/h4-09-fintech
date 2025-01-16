@@ -14,9 +14,9 @@ export const Dashboard = () => {
 
   // Datos para el gráfico de barras
   const data = [
-    { name: "Casa", ventas: 10 },
-    { name: "Auto", ventas: 10 },
-    { name: "Viaje", ventas: 50 },
+    { name: "Casa", ventas: 50 },
+    { name: "Auto", ventas: 20 },
+    { name: "Viaje", ventas: 8 },
     { name: "Jubilación", ventas: 100 },
     { name: "Educación", ventas: 180 },
   ];
@@ -50,26 +50,14 @@ export const Dashboard = () => {
         </div>
         Añadir tarjeta de crédito
       </div>
-      <section
-        style={{
-          height: "19.5vh",
-          margin: "0 2vw",
-        }}
-      >
-        <BarChartComponent
-          data={data}
-          dataKey="ventas" // Asegúrate de pasar el `dataKey` adecuado
-          xAxisKey="name" // Asegúrate de pasar el `xAxisKey` adecuado
-        />
-      </section>
-      <section
-        style={{
-          height: "23.17vh",
-          margin: "0 2vw",
-        }}
-      >
-        <Example />
-      </section>
+
+      <BarChartComponent
+        data={data}
+        dataKey="ventas" // Asegurarse de pasar el `dataKey` adecuado
+        xAxisKey="name" // Asegurarse de pasar el `xAxisKey` adecuado
+      />
+
+      <Example />
 
       <Circular />
     </div>

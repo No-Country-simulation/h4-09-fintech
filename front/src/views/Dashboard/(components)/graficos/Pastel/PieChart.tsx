@@ -126,12 +126,12 @@ export default class Example extends PureComponent<{}, ExampleState> {
 
   render() {
     return (
-      <div
+      <section
         style={{
           height: "max-content",
-          width: "95%",
-          margin: "auto",
+          margin: "0 3vw 1.83vh 3vw",
         }}
+        className="box-section"
       >
         <div
           style={{
@@ -198,7 +198,7 @@ export default class Example extends PureComponent<{}, ExampleState> {
         <button className="btn-ahorro-auto">
           Configurar ahorro automático
         </button>
-      </div>
+      </section>
     );
   }
 }
