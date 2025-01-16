@@ -1,18 +1,18 @@
 import Styles from './Step1.module.css'
-import { IFormdata } from '../../../Onboarding'
+import { IFormData } from '../../../Onboarding'
 
 interface Step0Props {
 	nextStep: () => void
 	step: number
-	formData: IFormdata
-	setFormData: React.Dispatch<React.SetStateAction<IFormdata>>
+	formData: IFormData
+	setFormData: React.Dispatch<React.SetStateAction<IFormData>>
 	options: string[] | undefined
 }
 
-export default function Step1({ nextStep, step, formData, setFormData, options }: Step0Props) {
+export default function Step1({ nextStep, formData, setFormData, options }: Step0Props) {
 	const handleChange = (e: { target: { name: string; value: string } }) => {
 		const { name, value } = e.target
-		setFormData((data) => ({
+		setFormData((data: IFormData) => ({
 			...data,
 			[name]: value
 		}))

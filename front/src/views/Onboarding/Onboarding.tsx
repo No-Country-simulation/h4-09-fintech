@@ -12,7 +12,7 @@ import RiskIcon from '../../assets/icons/RiskIcon'
 import { usePatchDataWithToken } from '../../hooks/usePatchDataWithToken'
 // import Cookies from 'js-cookie'
 
-interface IFormData {
+export interface IFormData {
 	mainGoal: string
 	financialKnowledge: string
 	riskPreference: string
