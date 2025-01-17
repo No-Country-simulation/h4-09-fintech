@@ -32,8 +32,8 @@ const BarChartComponent: React.FC<BarChartComponentProps> = ({
       className="box-section"
     >
       <div className="container-sub-g">
-        <h3 className="h3-grafico">Objetivos financieros</h3>
-        <h4 className="h4-grafico">Progreso total</h4>
+        <h1>Objetivos financieros</h1>
+        <small>Progreso total</small>
       </div>
       <ResponsiveContainer width="100%" height="100%">
         <BarChart
@@ -41,7 +41,7 @@ const BarChartComponent: React.FC<BarChartComponentProps> = ({
           height={300}
           data={data}
           margin={{
-            top: 25,
+            top: 45,
             right: 10,
             left: -30,
             bottom: -10,

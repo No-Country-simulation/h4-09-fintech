@@ -1,28 +1,24 @@
-.h3-grafico {
-  font-size: 0.7rem;
-  float: left;
-}
-.h4-grafico {
-  font-size: 0.5rem;
-  float: left;
-}
 .container-sub-g {
-  width: 94vw;
+  width: 85%;
+  height: 20px;
   display: flex;
   position: absolute;
   flex-direction: column;
   align-items: flex-start;
   padding: 10px;
 }
-
+.container-sub-g h1 {
+  font-size: 0.7rem;
+}
+.container-sub-g small {
+  font-size: 0.5rem;
+}
 .container-grafico-torta {
   width: 100%;
-  height: 200px;
+  height: 240px;
 }
 .btn-ahorro-auto {
   margin: 2vh auto;
-  width: 300px;
-  height: 30px;
   background-color: #0048b2;
   border: none;
   border-radius: 3px;
@@ -36,9 +32,11 @@
   height: auto;
   display: flex;
 }
-.sugerencia-personalizada div {
-  font-size: 0.8rem;
-}
-.sugerencia-personalizada * {
+.sugerencia-personalizada div * {
+  width: auto;
   text-align: left;
+}
+.ampolleta-icono {
+  width: 35%;
+  margin: auto;
 }

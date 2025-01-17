@@ -66,8 +66,8 @@ const Example = () => {
       className="box-section"
     >
       <div className="container-sub-g">
-        <h3 className="h3-grafico">Balance general</h3>
-        <h4 className="h4-grafico">Total dólares</h4>
+        <h1>Balance general</h1>
+        <small>Total dólares</small>
       </div>
       <ResponsiveContainer width="100%" height="100%">
         <LineChart
@@ -75,7 +75,7 @@ const Example = () => {
           height={300}
           data={data}
           margin={{
-            top: 20,
+            top: 45,
             right: 20,
             left: -20,
             bottom: -10,

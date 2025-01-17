@@ -145,8 +145,8 @@ export default class Example extends PureComponent<{}, ExampleState> {
         className="box-section"
       >
         <div className="container-sub-g">
-          <h3 className="h3-grafico">Incrementa tus ahorros</h3>
-          <h4 className="h4-grafico">Progreso actual</h4>
+          <h1>Incrementa tus ahorros</h1>
+          <small>Progreso actual</small>
         </div>
 
         <div
@@ -154,20 +154,28 @@ export default class Example extends PureComponent<{}, ExampleState> {
             display: "flex",
             flexDirection: "column",
             height: "max-content",
-            width: "100%",
           }}
         >
           <div className="container-grafico-torta">
             <ResponsiveContainer width="100%" height="100%">
-              <PieChart width={100} height={100}>
+              <PieChart
+                width={100}
+                height={100}
+                margin={{
+                  top: 45,
+                  right: 0,
+                  left: 0,
+                  bottom: 0,
+                }}
+              >
                 <Pie
                   activeIndex={this.state.activeIndex}
                   activeShape={renderActiveShape}
                   data={data}
                   cx="50%"
                   cy="50%"
-                  innerRadius={30}
-                  outerRadius={40}
+                  innerRadius={35}
+                  outerRadius={50}
                   fill="#0048B2"
                   dataKey="value"
                   onMouseEnter={this.onPieEnter}
@@ -176,11 +184,13 @@ export default class Example extends PureComponent<{}, ExampleState> {
             </ResponsiveContainer>
           </div>
           <div className="sugerencia-personalizada">
-            <LightBulbIcon className="iconos-hero" />
+            <LightBulbIcon className="iconos-hero ampolleta-icono" />
             <div>
-              <h4>Sugerencia personalizada</h4>
-              Aumenta tu ahorro mensual un 10% para alcanzar tu objetivo 2 meses
-              antes.
+              <h3>Sugerencia personalizada</h3>
+              <p>
+                Aumenta tu ahorro mensual un 10% para alcanzar tu objetivo 2
+                meses antes.
+              </p>
             </div>
           </div>
         </div>
