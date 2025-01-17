@@ -1,6 +1,6 @@
-import OnboardingIcon1 from "../../../assets/icons/OnboardingIcon1"
-import OnboardingIcon2 from '../../../assets/icons/OnboardingIcon2'
-import OnboardingIcon3 from '../../../assets/icons/OnboardingIcon3'
+import OnboardingIcon1 from "../../../assets/icons/(onboarding)/OnboardingIcon1"
+import OnboardingIcon2 from '../../../assets/icons/(onboarding)/OnboardingIcon2'
+import OnboardingIcon3 from '../../../assets/icons/(onboarding)/OnboardingIcon3'
 
 // interface Ioptions {
 // 	value: string

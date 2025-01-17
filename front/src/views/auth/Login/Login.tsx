@@ -8,7 +8,7 @@ import { baseUrl } from '../../../config/envs'
 import Spiner from '../../../components/spiner/Spiner'
 // import { CredentialResponse, GoogleLogin } from '@react-oauth/google'
 import Cookies from 'js-cookie'
-import IupiSmallIcon from '../../../assets/icons/IupiSmallIcon'
+import IupiSmallIcon from '../../../assets/icons/(iupi)/IupiSmallIcon'
 import Eyeicon from '../../../assets/icons/Eyeicon'
 import SlashEyeIcon from '../../../assets/icons/SlashEyeIcon'
 

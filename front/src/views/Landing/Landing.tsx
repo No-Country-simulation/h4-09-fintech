@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom' // Importa useNavigate para redirecciones
-import IupiBigIcon from '../../assets/icons/IupiBigIcon'
+import IupiBigIcon from '../../assets/icons/(iupi)/IupiBigIcon'
 import styles from './landing.module.css'
-import Intro1Icon from '../../assets/icons/Intro1Icon'
-import Intro2Icon from '../../assets/icons/Intro2Icon'
-import Intro3Icon from '../../assets/icons/Intro3Icon'
+import Intro1Icon from '../../assets/icons/(intro)/Intro1Icon'
+import Intro2Icon from '../../assets/icons/(intro)/Intro2Icon'
+import Intro3Icon from '../../assets/icons/(intro)/Intro3Icon'
 
 export default function Landing() {
 	const [isLanding, setIsLanding] = useState(true)

@@ -1,5 +1,5 @@
 import { Link, useNavigate } from 'react-router-dom'
-import AuthIcon from '../../../assets/icons/AuthIcon'
+import AuthIcon from '../../../assets/icons/(intro)/AuthIcon'
 import style from './auth.module.css'
 import Line from '../../../assets/Line'
 import { CredentialResponse, GoogleLogin } from '@react-oauth/google'
