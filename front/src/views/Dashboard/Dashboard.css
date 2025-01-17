@@ -24,33 +24,39 @@
   height: 20px;
   width: auto;
 }
-.dashboard h1 {
+.dashboard .titulo-dash {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-height: 4.67vh;
-  height: 4.67vh;
+  min-height: 10.05vh;
+  height: 10.05vh;
   font-size: 1.2rem;
 }
 .container-usuario {
-  min-height: 6.83vh;
-  max-height: 6.83vh;
+  min-height: 8.79vh;
+  max-height: 8.79vh;
   height: 8.79vh;
   align-items: center;
 }
+.container-usuario div {
+  line-height: 0.7;
+  padding-left: 10px;
+}
 .container-usuario h2 {
   font-size: 1.1rem;
+  color: #0048b2;
 }
-.container-usuario b {
+.container-usuario .free-plan {
   margin-left: auto;
   font-size: 0.5rem;
+  font-weight: 500;
   box-shadow: 0 0 2px 1px rgba(128, 128, 128, 0.253);
   border-radius: 500px;
   padding: 6px;
 }
 .añadir-tarjeta {
-  min-height: 8.5vh;
-  height: 8.5vh;
+  min-height: 12.31vh;
+  height: 12.31vh;
   margin: 1.83vh 2vw;
   border-radius: 10px;
   border: dashed rgb(0, 72, 178) 1px !important;

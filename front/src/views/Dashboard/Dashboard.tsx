@@ -1,10 +1,11 @@
 import { useEffect } from "react";
 import "./Dashboard.css";
 import { BellAlertIcon, PlusCircleIcon } from "@heroicons/react/24/outline";
-import profile from "../../assets/foto.jpg";
+// import profile from "../../assets/foto.jpg";
 import BarChartComponent from "./(components)/graficos/barchart/BarChart";
 import Example from "./(components)/graficos/Linear/LinearChart";
 import Circular from "./(components)/graficos/Pastel/PieChart";
+import { UserIcon } from "@heroicons/react/16/solid";
 
 export const Dashboard = () => {
   // OBJETIVO FINANCIERO
@@ -23,16 +24,17 @@ export const Dashboard = () => {
 
   return (
     <div className="dashboard">
-      <h1 className="px-2">
+      <h1 className="px-2 titulo-dash">
         Dashboard <BellAlertIcon className="iconos-hero" />
       </h1>
       <div className="container-usuario flex px-2">
-        <img src={profile} alt="" id="foto-perfil" />
+        <UserIcon id="foto-perfil" />
+        {/* <img src={profile} alt="" id="foto-perfil" /> */}
         <div>
           <h2 className="fuente-azul">¡Hola Carlos!</h2>
           <small>correo@gmail.com</small>
         </div>
-        <b>Free plan</b>
+        <small className="free-plan">Free plan</small>
       </div>
       {/* <div
         style={{

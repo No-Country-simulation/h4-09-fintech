@@ -1,123 +1,123 @@
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+/* FUENTES---------------------------------- */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap");
+/* FUENTES---------------------------------- */
 
-  /* Definición de variables de color */
+:root {
+  --font-family: "Poppins", system-ui, Avenir, Helvetica, Arial, sans-serif;
+  --font-poppins-300: 300;
+  --font-weight-regular: 400;
+  --font-weight-semibold: 500;
+  --font-weight-bold: 600;
+  --font-weight-extra-bold: 700;
+
+  /* Colores */
   --color-primario: black;
-  --color-fondo: rgb(246, 248, 249);
   --color-secundario: #00aeff;
+  --color-fondo: rgb(246, 248, 249);
   --color-boton-fondo: #ffffffde;
 
   color-scheme: light dark;
-  color: #ffffffde;
-  background-color: var(--color-fondo); /* Este gradiente también se usa aquí */
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-html {
-  font-size: 16px;
-}
-.fuente-azul {
-  color: rgb(0, 72, 178);
-}
-a {
-  text-decoration: none;
-}
+
 body {
+  font-family: var(--font-family);
+  font-size: 16px;
+  font-weight: var(--font-weight-regular);
+  line-height: 1.5;
+  color: var(--color-primario);
+  background-color: var(--color-fondo);
   margin: 0;
   display: flex;
   flex-direction: column;
   min-width: 320px;
   min-height: 100vh;
-  min-height: 100dvh;
-  background: var(--color-fondo); /* Usa directamente el gradiente definido */
 }
 
+/* Encabezados con diferentes grosores */
 h1 {
-  font-size: 1.4rem;
-  line-height: 1.1;
+  font-weight: var(--font-weight-semibold);
   color: var(--color-primario);
   text-align: center;
   margin: 0;
 }
+
 h2 {
-  font-size: 1.2rem;
+  font-size: 1.8rem;
+  font-weight: var(--font-regular);
   color: var(--color-primario);
-  margin: 0;
   text-align: center;
+  margin: 0;
 }
+
 h3 {
   font-size: 1rem;
-  line-height: 1.1;
+  font-weight: var(--font-weight-semibold);
   color: var(--color-primario);
   text-align: center;
   margin: 0;
-}
-h4 {
-  font-size: 0.8rem;
-  line-height: 1.1;
-  color: var(--color-primario);
-  text-align: center;
-  margin: 0;
-}
-h5 {
-  font-size: 0.6rem;
-  line-height: 1.1;
-  color: var(--color-primario);
-  text-align: center;
-  margin: 0;
-}
-h6 {
-  font-size: 0.4rem;
-  line-height: 1.1;
-  color: var(--color-primario);
-  text-align: center;
-  margin: 0;
-}
-p {
-  font-size: 1.3rem;
-  line-height: 1.5;
-  color: var(--color-primario);
-}
-span {
-  font-size: 0.5rem;
-  line-height: 1.5;
-  color: var(--color-primario);
-}
-small {
-  font-size: 0.9rem;
-  line-height: 1;
-  color: var(--color-primario);
-}
-label {
-  font-size: 1.3rem;
-  line-height: 1.5;
-  color: var(--color-primario);
 }
 
-/* button {
+h4 {
+  font-size: 0.8rem;
+  font-weight: var(--font-weight-regular);
+  color: var(--color-primario);
+  text-align: center;
+  margin: 0;
+}
+
+h5 {
+  font-size: 1rem;
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-primario);
+  text-align: center;
+  margin: 0;
+}
+
+h6 {
+  font-size: 0.8rem;
+  font-weight: var(--font-weight-regular);
+  color: var(--color-primario);
+  text-align: center;
+  margin: 0;
+}
+
+/* Otros elementos */
+p,
+label,
+small,
+span {
+  font-size: 0.6rem;
+  font-weight: var(--font-poppins-300);
+  line-height: 1.5;
+  color: var(--color-primario);
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+  color: var(--color-secundario);
+}
+
+a:hover {
+  text-decoration: underline;
+  color: #408bdb;
+}
+
+button {
+  font-family: var(--font-family);
   border-radius: 0.5rem;
   border: 1px solid transparent;
   padding: 0.6rem 1.2rem;
-  font-size: 1.2rem;
-  font-weight: 500;
-  font-family: inherit;
+  font-size: 1rem;
+  font-weight: var(--font-weight-bold);
   background-color: var(--color-boton-fondo);
   color: var(--color-secundario);
   cursor: pointer;
-  transition: border-color 0.25s;
-} */
-button:hover {
-  color: var(--color-boton-fondo);
-  background-color: var(--color-secundario);
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  transition: background-color 0.3s, color 0.3s;
 }
 /* DASHBOARD GLOBALES --------------*/
 .box-section {
@@ -126,14 +126,33 @@ button:focus-visible {
 }
 /* DASHBOARD GLOBALES --------------*/
 
+button:hover {
+  background-color: var(--color-secundario);
+  color: var(--color-boton-fondo);
+}
+
+button:focus {
+  outline: 3px solid var(--color-secundario);
+}
+
+/* Globales para cajas */
+.box-section {
+  width: 94vw;
+  border-radius: 5px;
+  box-shadow: 0 0 2px 2px rgba(128, 128, 128, 0.562);
+}
+
+/* Ajustes para modo claro */
 @media (prefers-color-scheme: light) {
   :root {
-    color: #213547;
-    background-color: #ffffff;
+    --color-primario: #213547;
+    --color-fondo: #ffffff;
   }
+
   a:hover {
     color: #747bff;
   }
+
   button {
     background-color: #f9f9f9;
   }
