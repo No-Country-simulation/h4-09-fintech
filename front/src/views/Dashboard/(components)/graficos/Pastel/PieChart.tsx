@@ -136,14 +136,7 @@ export default class Example extends PureComponent<{}, ExampleState> {
 
   render() {
     return (
-      <section
-        style={{
-          height: "max-content",
-          width: "94vw",
-          margin: "0 3vw 1.83vh 3vw",
-        }}
-        className="box-section"
-      >
+      <section className="box-section">
         <div className="container-sub-g">
           <h1>Incrementa tus ahorros</h1>
           <small>Progreso actual</small>
@@ -162,7 +155,7 @@ export default class Example extends PureComponent<{}, ExampleState> {
                 width={100}
                 height={100}
                 margin={{
-                  top: 45,
+                  top: 0,
                   right: 0,
                   left: 0,
                   bottom: 0,

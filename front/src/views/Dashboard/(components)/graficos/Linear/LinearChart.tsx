@@ -56,29 +56,21 @@ const data = [
 
 const Example = () => {
   return (
-    <section
-      style={{
-        height: "35.17vh",
-        width: "94vw",
-        margin: "0 3vw 1.83vh 3vw",
-        position: "relative",
-      }}
-      className="box-section"
-    >
+    <section className="box-section">
       <div className="container-sub-g">
         <h1>Balance general</h1>
         <small>Total dólares</small>
       </div>
-      <ResponsiveContainer width="100%" height="100%">
+      <ResponsiveContainer width="100%" height="73.08%">
         <LineChart
           width={500}
           height={300}
           data={data}
           margin={{
-            top: 45,
+            top: 0,
             right: 20,
-            left: -20,
-            bottom: -10,
+            left: -18,
+            bottom: 0,
           }}
         >
           <CartesianGrid horizontal={false} />

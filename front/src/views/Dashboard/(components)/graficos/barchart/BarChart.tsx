@@ -23,28 +23,21 @@ const BarChartComponent: React.FC<BarChartComponentProps> = ({
   xAxisKey,
 }) => {
   return (
-    <div
-      style={{
-        height: "35.17vh",
-        margin: "0 3vw 1.83vh 3vw",
-        width: "94vw",
-      }}
-      className="box-section"
-    >
+    <div className="box-section">
       <div className="container-sub-g">
         <h1>Objetivos financieros</h1>
         <small>Progreso total</small>
       </div>
-      <ResponsiveContainer width="100%" height="100%">
+      <ResponsiveContainer width="100%" height="73.08%">
         <BarChart
           width={500}
           height={300}
           data={data}
           margin={{
-            top: 45,
+            top: 0,
             right: 10,
             left: -30,
-            bottom: -10,
+            bottom: 0,
           }}
         >
           <CartesianGrid vertical={false} />

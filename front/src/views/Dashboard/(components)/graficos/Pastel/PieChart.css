@@ -1,17 +1,12 @@
 .container-sub-g {
-  width: 85%;
-  height: 30px;
-  border: solid black 1px;
-
-  padding: 10px;
+  width: 100%;
+  height: 26.92%;
 }
 .container-sub-g h1 {
   font-size: 0.8rem;
-  border: solid black 1px;
 }
 .container-sub-g small {
   font-size: 0.6rem;
-  border: solid black 1px;
 }
 .container-grafico-torta {
   width: 100%;
