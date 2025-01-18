@@ -1,7 +1,7 @@
-import { log } from 'console'
-import Spinner from '../../components/spiner/Spiner'
-import { baseUrl } from '../../config/envs'
-import { useFetchDataWithToken } from '../../hooks/useFetchDataWithToken'
+// import { log } from 'console'
+// import Spinner from '../../components/spiner/Spiner'
+// import { baseUrl } from '../../config/envs'
+// import { useFetchDataWithToken } from '../../hooks/useFetchDataWithToken'
 import styles from './community.module.css'
 import { Link } from 'react-router-dom'
 
