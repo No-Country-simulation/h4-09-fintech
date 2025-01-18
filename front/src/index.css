@@ -6,7 +6,12 @@
   font-family: "Poppins", Inter, system-ui, Avenir, Helvetica, Arial, sans-serif,
     neuton, poppins;
   line-height: 1.5;
-  font-weight: 400;
+  /* Grosores de fuentes */
+  --font-poppins-300: 300;
+  --font-poppins-400: 400;
+  --font-poppins-500: 500;
+  --font-poppins-600: 600;
+  --font-poppins-700: 700;
 
   /* Definición de variables de color */
   --color-primario: #0048b2;
@@ -18,7 +23,7 @@
   --color-boton-fondo: #f6f8f9;
 
   color-scheme: light dark;
-  color: #0048b2;
+  /* color: #0048b2; */
   background-color: var(--color-fondo);
 
   font-synthesis: none;
@@ -36,56 +41,30 @@ body {
   min-height: 100vh;
   min-height: 100dvh;
 }
-
-/* Encabezados con diferentes grosores */
-h1 {
-  font-size: clamp(3rem, calc(7vw + 1rem), 3.2rem);
-  line-height: 1.1;
-  color: var(--color-primario);
-  text-align: center;
-  margin-bottom: 8px;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+  padding: 0;
   font-family: "Poppins";
 }
 
-h2 {
-  font-size: 1.8rem;
-  font-weight: var(--font-regular);
-  color: var(--color-primario);
-  text-align: center;
-  margin: 0;
-}
-
-h3 {
-  font-size: clamp(1.7rem, calc(7vw + 1rem), 2rem);
-  line-height: 1.1;
-  color: var(--color-primario);
-  text-align: center;
-}
-h4 {
-  font-size: 1.5em;
-  line-height: 1.1;
-  color: var(--color-primario);
-  text-align: center;
-}
-h5 {
-  font-size: 20px;
-  line-height: 24px;
-  color: var(--color-primario);
+/* h5 {
   text-align: center;
   font-weight: 400;
-  /* font-family: ; */
   margin: 0;
   @media (max-width: 480px) {
     text-align: start;
   }
-}
-p {
-  font-size: 1.3rem;
-  line-height: 1.5;
-  /* color: var(--color-neutral-600); */
-}
+} */
+/* p {
+  color: var(--color-neutral-600);
+} */
 span {
-  font-size: 13px;
   line-height: 15px;
   color: var(--color-neutral-600);
   @media (max-width: 480px) {
@@ -93,7 +72,6 @@ span {
   }
 }
 caption {
-  font-size: 13px;
   line-height: 15px;
   color: var(--color-neutral-600);
   @media (max-width: 480px) {
@@ -101,7 +79,6 @@ caption {
   }
 }
 small {
-  font-size: 0.8rem;
   line-height: 1;
   color: var(--color-neutral-principal);
   @media (max-width: 480px) {
@@ -146,8 +123,7 @@ a:hover {
 a {
   text-decoration: none;
 }
-.linkBasico {
-}
+
 /* @media (prefers-color-scheme: light) {
 	:root {
 		color: #213547;

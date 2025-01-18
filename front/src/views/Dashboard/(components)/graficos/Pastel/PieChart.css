@@ -1,17 +1,17 @@
 .container-sub-g {
   width: 85%;
-  height: 20px;
-  display: flex;
-  position: absolute;
-  flex-direction: column;
-  align-items: flex-start;
+  height: 30px;
+  border: solid black 1px;
+
   padding: 10px;
 }
 .container-sub-g h1 {
-  font-size: 0.7rem;
+  font-size: 0.8rem;
+  border: solid black 1px;
 }
 .container-sub-g small {
-  font-size: 0.5rem;
+  font-size: 0.6rem;
+  border: solid black 1px;
 }
 .container-grafico-torta {
   width: 100%;
