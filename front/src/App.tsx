@@ -6,7 +6,9 @@ import Login from './views/auth/Login/Login'
 import Register from './views/auth/Register/Register'
 import Onboarding from './views/Onboarding/Onboarding'
 import Error from "./views/Error/ErrorPage"
-import Perfil from './views/Perfil/Perfil'
+import Profile from './views/Profile/Profile'
+import EditProfile from './views/EditProfile/EditProfile'
+import Configurations from './views/Configurations/Configurations'
 import Auth from './views/auth/Auth/Auth'
 import Landing from './views/Landing/Landing'
 
@@ -24,7 +26,9 @@ function App() {
 				</Route>
 				<Route path='/onboarding' element={<Onboarding />} />
 				<Route path='/*' element={<Error/>} />
-				<Route path='/perfil' element={<Perfil/>} />
+				<Route path='/profile' element={<Profile/>} />
+				<Route path='/editprofile' element={<EditProfile/>} />
+				<Route path='configurations' element={<Configurations/>} />
 			</Routes>
 			<Footer />
 		</>

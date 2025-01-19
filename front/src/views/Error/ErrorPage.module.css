@@ -1,33 +1,16 @@
 .container {
-  display: flex;
+  margin: 150px 0px 0px 0px;
   justify-content: center;
   align-items: center;
   height: 100vh;
   color: white;
   text-align: center;
+  max-width: 600px;
+  margin: 120px auto 50px auto;
 }
 
-.errorBox {
-  background-color: #b91c1c; 
-  padding: 2rem;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-.errorTitle {
-  font-size: 6rem;
-  font-weight: bold;
-  margin-bottom: 1rem;
-}
-
-.errorMessage {
-  font-size: 1.25rem;
-  margin-bottom: 1rem;
-}
-
-.subMessage {
-  font-size: 1rem;
-  margin-bottom: 2rem;
+.subtitle{
+  color: black;
 }
 
 .backButton {
