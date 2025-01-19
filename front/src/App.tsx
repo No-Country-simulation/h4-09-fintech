@@ -12,15 +12,11 @@ import { Objetivo } from "./views/Dashboard/(components)/objetivos/Objetivo";
 import { Gestion } from "./views/Dashboard/(components)/gestion/Gestion";
 import { Inversiones } from "./views/Dashboard/(components)/inversiones/Inversiones";
 import { Cuenta } from "./views/Profile/Cuenta";
-import Perfil from "./views/Perfil/Perfil";
+import Profile from "./views/Profile/Profile";
+import EditProfile from "./views/EditProfile/EditProfile";
+import Configurations from "./views/Configurations/Configurations";
 import Auth from "./views/auth/Auth/Auth";
 import Landing from "./views/Landing/Landing";
-import {
-  ArrowTrendingUpIcon,
-  Squares2X2Icon,
-  UserIcon,
-  UsersIcon,
-} from "@heroicons/react/24/outline";
 
 function App() {
   return (
@@ -42,7 +38,9 @@ function App() {
         <Route path="/inversiones" element={<Inversiones />} />
         <Route path="/cuenta" element={<Cuenta />} />
         <Route path="/*" element={<Error />} />
-        <Route path="/perfil" element={<Perfil />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/editprofile" element={<EditProfile />} />
+        <Route path="/configurations" element={<Configurations />} />
       </Routes>
       <Footer />
     </>
