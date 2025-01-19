@@ -76,13 +76,21 @@ const Example = () => {
           <CartesianGrid horizontal={false} />
           <XAxis
             dataKey="name"
-            tick={{ fontSize: 8, fill: "black" }}
+            tick={{
+              fontSize: 8,
+              fill: "#000000",
+              fontWeight: "var(--font-poppins-300)",
+            }}
             axisLine={false}
           />
           <YAxis
             domain={[0, 1000]}
             ticks={[0, 100, 300, 600, 1000]}
-            tick={{ fontSize: 10, fill: "#000000" }}
+            tick={{
+              fontSize: 10,
+              fill: "#000000",
+              fontWeight: "var(--font-poppins-300)",
+            }}
             axisLine={false}
           />
           <Tooltip />

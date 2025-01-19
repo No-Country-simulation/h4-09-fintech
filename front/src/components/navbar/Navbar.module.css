@@ -2,7 +2,7 @@
   position: sticky;
   top: 0;
   left: 0;
-  width: 100%;
+  width: 100vw;
   z-index: 1000;
   background-color: #0048ba;
   display: flex;
@@ -10,6 +10,7 @@
   align-items: center;
   padding: 10px 20px;
   transition: transform 0.3s ease-in-out;
+  box-sizing: border-box;
 }
 
 .hidden {

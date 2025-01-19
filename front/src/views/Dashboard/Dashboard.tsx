@@ -24,15 +24,15 @@ export const Dashboard = () => {
 
   return (
     <div className="dashboard">
-      <h1 className="px-2 titulo-dash">
+      <h1 className="titulo-dash">
         Dashboard <BellAlertIcon className="iconos-hero" />
       </h1>
-      <div className="container-usuario flex px-2">
+      <div className="container-usuario flex ">
         <UserIcon id="foto-perfil" />
         {/* <img src={profile} alt="" id="foto-perfil" /> */}
         <div>
-          <h2 className="fuente-azul">¡Hola Carlos!</h2>
-          <small>correo@gmail.com</small>
+          <h2>¡Hola Carlos!</h2>
+          <small className="correo-usuario-dash">correo@gmail.com</small>
         </div>
         <small className="free-plan">Free plan</small>
       </div>

@@ -43,13 +43,21 @@ const BarChartComponent: React.FC<BarChartComponentProps> = ({
           <CartesianGrid vertical={false} />
           <XAxis
             dataKey={xAxisKey} // Cambiar a `xAxisKey` para usar la prop
-            tick={{ fontSize: 8, fill: "black" }} // Cambia el tamaño y color del texto en el eje X
+            tick={{
+              fontSize: 8,
+              fill: "#000000",
+              fontWeight: "var(--font-poppins-300)",
+            }} // Cambia el tamaño y color del texto en el eje X
             axisLine={false}
           />
           <YAxis
             domain={[0, 150]} // Limita el rango entre 0 y 200
             ticks={[0, 50, 100, 150]} // Especifica los valores donde deben aparecer las marcas
-            tick={{ fontSize: 10, fill: "#000000" }} // Personaliza las etiquetas
+            tick={{
+              fontSize: 10,
+              fill: "#000000",
+              fontWeight: "var(--font-poppins-300)",
+            }} // Personaliza las etiquetas
             axisLine={false}
           />
           <Tooltip />

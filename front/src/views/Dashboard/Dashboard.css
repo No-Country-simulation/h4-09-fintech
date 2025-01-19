@@ -11,9 +11,7 @@
 .flex {
   display: flex;
 }
-.px-2 {
-  padding: 0 2vw;
-}
+
 #foto-perfil {
   height: 90%;
   width: auto;
@@ -31,35 +29,48 @@
   min-height: 10.05vh;
   height: 10.05vh;
   font-size: 1.2rem;
+  font-weight: var(--font-poppins-500);
+  width: 94vw;
+  box-sizing: border-box;
+  margin: auto;
 }
 .container-usuario {
   min-height: 8.79vh;
   max-height: 8.79vh;
   height: 8.79vh;
+  width: 94vw;
+  max-width: 94vw;
+  box-sizing: border-box;
   align-items: center;
+  margin: auto;
 }
 .container-usuario div {
   line-height: 0.7;
-  padding-left: 10px;
+  padding-left: 6px;
 }
 .container-usuario h2 {
   font-size: 1.1rem;
   font-weight: var(--font-poppins-400);
   color: var(--color-principal);
 }
+.container-usuario .correo-usuario-dash {
+  font-weight: var(--font-poppins-300);
+  font-size: 0.7rem;
+}
 .container-usuario .free-plan {
   margin-left: auto;
-  font-size: 0.5rem;
+  font-size: 0.8rem;
   font-weight: 500;
-  box-shadow: 0 0 2px 1px rgba(128, 128, 128, 0.253);
+  box-shadow: 0 0 2px 1px rgba(128, 128, 128, 0.377);
   border-radius: 500px;
-  padding: 6px;
+  padding: 8px 10px;
+  font-weight: var(--font-poppins-400);
 }
 .añadir-tarjeta {
   width: 94vw;
   min-height: 12.31vh;
   height: 12.31vh;
-  margin: 1.83vh 2vw;
+  margin: 1.83vh 3vw;
   border-radius: 10px;
   border: dashed rgb(0, 72, 178) 1px !important;
   flex-direction: column;
@@ -71,7 +82,7 @@
   fill: rgb(209, 227, 255);
 }
 .box-section {
-  box-shadow: 0 0 2px 1px rgb(128, 128, 128);
+  box-shadow: 0 0 2px 1px rgba(128, 128, 128, 0.541);
   border-radius: 5px;
   height: 35.17vh;
   min-height: max-content;
