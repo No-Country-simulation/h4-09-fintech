@@ -1,6 +1,6 @@
 import styles from "./Navbar.module.css";
 import { useLocation } from "react-router-dom";
-import IupiSmallIcon from "../../assets/icons/IupiSmallIcon";
+import IupiSmallIcon from "../../assets/icons/(iupi)/IupiSmallIcon";
 import { LuLayoutDashboard } from "react-icons/lu";
 import { FaHandHoldingDollar } from "react-icons/fa6";
 import { FaPeopleGroup } from "react-icons/fa6";
@@ -55,4 +55,5 @@ export default function Navbar() {
       </header>
     </div>
   );
+         
 }
