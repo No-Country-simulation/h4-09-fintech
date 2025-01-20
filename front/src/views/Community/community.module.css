@@ -1,0 +1,45 @@
+.pageView {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	/* justify-content: center; */
+	min-height: 100vh;
+	min-height: 100dvh;
+	width: 100%;
+}
+.contentContainer {
+	display: flex;
+	flex-direction: column;
+	align-items: start;
+	/* justify-content: center; */
+	/* height: 100dvh; */
+	margin-top: 5rem;
+	width: 90%;
+	max-width: 1000px;
+	gap: 10px;
+	background-color: var(--color-fondo);
+	/* text-align: start; */
+}
+.loadingview {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	min-height: 100vh;
+	min-height: 100dvh;
+	width: 100%;
+}
+
+.title {
+	/* text-align: center; */
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 24px;
+  color: #232F34;
+}
+.subtittle {
+}
+.error {
+  text-align: center;
+	color: red;
+}
