@@ -1,5 +1,8 @@
 package com.demo.demo.dtos.request;
 
+import com.demo.demo.enums.FinancialKnowledge;
+import com.demo.demo.enums.MainGoal;
+import com.demo.demo.enums.RiskPreference;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,6 +19,8 @@ public class UpdateUserPreferencesDto {
     @NotNull(message = "La preferencia de riesgo no puede ser nula.")
     private String riskPreference;
 
-    @NotNull(message = "se completaron las preferencias del usuario")
-    boolean onboardingComplete;
+    @NotNull(message = "onbarding")
+    private boolean onbardingComplete;
+
+
 }

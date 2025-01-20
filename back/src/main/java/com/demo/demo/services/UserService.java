@@ -1,10 +1,8 @@
 package com.demo.demo.services;
 
-import com.demo.demo.dtos.goal.CreateGoalDTO;
-import com.demo.demo.dtos.goal.ResponseGoalDTO;
 import com.demo.demo.dtos.request.UpdateUserPreferencesDto;
+import com.demo.demo.dtos.request.UpdateUserRequestDto;
 import com.demo.demo.dtos.response.UserPreferencesResponseDto;
-import com.demo.demo.entities.Goal;
 import com.demo.demo.entities.UserEntity;
 import com.demo.demo.exceptions.NotFoundException;
 import com.demo.demo.repositories.UserRepository;
@@ -39,8 +37,7 @@ public class UserService implements UserDetailsService {
         user.setMainGoal(dto.getMainGoal());
         user.setFinancialKnowledge(dto.getFinancialKnowledge());
         user.setRiskPreference(dto.getRiskPreference());
-        user.setOnboardingComplete(dto.isOnboardingComplete());
-
+        user.setOnboardingComplete(dto.isOnbardingComplete()); //se agrego el booleano para verificar si es la primera vez.
         userRepository.save(user);
 
         return new UserPreferencesResponseDto(
@@ -68,6 +65,20 @@ public class UserService implements UserDetailsService {
                 user.getRiskPreference()
         );
     }
+
+    @Transactional
+    public UserEntity updateUser(String username, UpdateUserRequestDto dto) {
+        UserEntity user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new NotFoundException("Usuario no encontrado"));
+
+        user.setName(dto.getName());
+        user.setLastName(dto.getLastName());
+
+
+
+        return userRepository.save(user);
+    }
+
 
 //    public ResponseGoalDTO createGoal(CreateGoalDTO createGoalDTO, UserEntity user) {
 //        Goal goal = new Goal();

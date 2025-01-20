@@ -45,7 +45,7 @@ public class UserEntity implements UserDetails {
     @Column(name = "risk_preference", nullable = true)
     private String riskPreference;
 
-    @Column(name = "risk_preference", nullable = false)
+    @Column(name = "onboarding_complete", nullable = false)
     boolean onboardingComplete;
 
     long totalAmount = 0;
