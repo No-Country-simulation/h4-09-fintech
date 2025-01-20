@@ -11,7 +11,9 @@ caption {
 	align-items: center;
 	gap: 16px;
 	width: 90%;
+	max-width: 500px;
 }
+
 .link {
 	color: var(--color-neutral-600);
 	text-decoration: underline;
@@ -60,14 +62,22 @@ caption {
 	align-items: start;
 	width: 95%;
 	label {
-		font-size: 1.1rem;
+		/* font-size: 1.1rem; */
+		font-weight: 400;
+		font-size: 13px;
+		line-height: 15px;
+		color: var(--color-primario);
+		margin-bottom: 2px;
 	}
 	input,
 	select,
 	textarea {
 		border-radius: 0.5rem;
 		size: medium;
-		padding: 0.6rem;
+		/* padding: 0.6rem; */
+		padding-top: 12px;
+		padding-bottom: 12px;
+		padding-left: 16px;
 		font-size: medium;
 		background-color: var(--color-boton-fondo);
 		width: 99%;
@@ -115,22 +125,12 @@ caption {
 
 a {
 	color: var(--color-primario);
-	font-size: medium;
+	font-size: smaller;
 }
 
-.contentContainer {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	gap: 16px;
-	width: 90%;
-	max-width: 500px;
-	margin-top: 10%;
-}
 .link {
-	color: var(--color-neutral-600);
 	text-decoration: underline;
+	color: var(--color-neutral-600);
 	font-weight: 500;
 	font-size: 14px;
 }
@@ -157,4 +157,11 @@ a {
 	cursor: pointer;
 	font-size: 14px;
 	width: 35px;
+}
+
+.verySmall {
+	font-size: 10px;
+	line-height: 12px;
+	color: var(--color-neutral-600);
+	font-weight: 400;
 }

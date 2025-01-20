@@ -45,8 +45,8 @@ export default function Auth() {
 		<div className={style.pageview}>
 			<div className={style.contentContainer}>
 				<AuthIcon />
-				<h5>¡Sé bienvenido, empieza hoy tu camino hacia el crecimiento financiero!</h5>
-				<span>Descubre nuevas formas de ahorrar, invertir y hacer crecer tu patrimonio, en un solo lugar.</span>
+				<h5 className='body2'>¡Sé bienvenido, empieza hoy tu camino hacia el crecimiento financiero!</h5>
+				<span className='captionRegular'>Descubre nuevas formas de ahorrar, invertir y hacer crecer tu patrimonio, en un solo lugar.</span>
 				<div className={style.contentContainer}>
 					<Link to={'/auth/login'} className='primaryButton'>
 						Iniciar sesión
@@ -61,13 +61,13 @@ export default function Auth() {
 
 				<div className={style.separador}>
 					<Line />
-					<span>o registrate con cuenta social</span>
+					<span className={style.verySmall}>o registrate con cuenta social</span>
 					<Line />
 				</div>
 				<div className={style.contentContainer}>
-					<GoogleLogin onSuccess={googleLogin} onError={() => console.log('error')} text='continue_with' shape='rectangular' width={350} />
+					<GoogleLogin onSuccess={googleLogin} onError={() => console.log('error')} text='continue_with' shape='rectangular' width={300} />
 				</div>
-				<small>
+				<small className={style.verySmall}>
 					Al iniciar aceptas las <Link to={'#'}> condiciones del servicio de iupi.</Link> Nos tomamos muy en serio tu privacidad. Para mas información lee nuestra{' '}
 					<Link to={'#'}>Política de privacidad.</Link>
 				</small>

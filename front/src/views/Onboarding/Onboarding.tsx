@@ -102,7 +102,7 @@ export default function Onboarding() {
 						</p>
 					)}
 					<div className={styles.icon}>{<currentStep.icon />}</div>
-					<h5 className={styles.title}>{currentStep.title}</h5>
+					<h5 className='body2'>{currentStep.title}</h5>
 					<span className={styles.subtitle}>{currentStep.subtitle}</span>
 					<div className={styles.options}>
 						{currentStep.options.map((option) => (
@@ -132,35 +132,37 @@ export default function Onboarding() {
 					</div>
 				</div>
 			) : (
-				<div className={styles.resumeContainer}>
-					<IupiSmallIcon />
-					<span className={styles.resumeSubtitle}>Este es tu perfil financiero personalizado.</span>
-					<BigLine />
-					<ul className={styles.list}>
-						<li className={styles.listitem}>
-							<span className={styles.listitemtitle}>Objetivo financiero:</span>
-							<span className={styles.listitemvalue}>
-								<PigIcon /> {formData.mainGoal}
-							</span>
-						</li>
-						<li className={styles.listitem}>
-							<span className={styles.listitemtitle}>Nivel de experiencia:</span>
-							<span className={styles.listitemvalue}>
-								{' '}
-								<BookIcon /> {formData.financialKnowledge}
-							</span>
-						</li>
-						<li className={styles.listitem}>
-							<span className={styles.listitemtitle}>Toleracia al riesgo:</span>
-							<span className={styles.listitemvalue}>
-								<RiskIcon />
-								{formData.riskPreference}
-							</span>
-						</li>
-					</ul>
-					<button type='button' onClick={handleSubmit} className='primaryButton'>
-						{loading ? <Spinner /> : '¡Comienza a invertir!'}
-					</button>
+				<div className={styles.background}>
+					<div className={styles.resumeContainer}>
+						<IupiSmallIcon />
+						<span className={styles.resumeSubtitle}>Este es tu perfil financiero personalizado.</span>
+						<BigLine />
+						<ul className={styles.list}>
+							<li className={styles.listitem}>
+								<span className={styles.listitemtitle}>Objetivo financiero:</span>
+								<span className={styles.listitemvalue}>
+									<PigIcon /> {formData.mainGoal}
+								</span>
+							</li>
+							<li className={styles.listitem}>
+								<span className={styles.listitemtitle}>Nivel de experiencia:</span>
+								<span className={styles.listitemvalue}>
+									{' '}
+									<BookIcon /> {formData.financialKnowledge}
+								</span>
+							</li>
+							<li className={styles.listitem}>
+								<span className={styles.listitemtitle}>Toleracia al riesgo:</span>
+								<span className={styles.listitemvalue}>
+									<RiskIcon />
+									{formData.riskPreference}
+								</span>
+							</li>
+						</ul>
+						<button type='button' onClick={handleSubmit} className='primaryButton'>
+							{loading ? <Spinner /> : '¡Comienza a invertir!'}
+						</button>
+					</div>
 				</div>
 			)}
 			{/* Modal para confirmar omisión */}
