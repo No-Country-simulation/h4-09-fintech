@@ -1,45 +1,44 @@
 /* FUENTES---------------------------------- */
-@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap');
 /* FUENTES---------------------------------- */
 
 :root {
-  font-family: "Poppins", Inter, system-ui, Avenir, Helvetica, Arial, sans-serif,
-    neuton, poppins;
-  line-height: 1.5;
-  /* Grosores de fuentes */
-  --font-poppins-300: 300;
-  --font-poppins-400: 400;
-  --font-poppins-500: 500;
-  --font-poppins-600: 600;
-  --font-poppins-700: 700;
+	font-family: 'Poppins', Inter, system-ui, Avenir, Helvetica, Arial, sans-serif, neuton, poppins;
+	line-height: 1.5;
+	/* Grosores de fuentes */
+	--font-poppins-300: 300;
+	--font-poppins-400: 400;
+	--font-poppins-500: 500;
+	--font-poppins-600: 600;
+	--font-poppins-700: 700;
 
-  /* Definición de variables de color */
-  --color-primario: #0048b2;
-  --color-fondo: #f6f8f9;
-  --color-neutral-600: #33454c;
-  --color-neutral-principal: #232f34;
-  --color-disabled: #94adb7;
-  --color-secundario: #00378a;
-  --color-boton-fondo: #f6f8f9;
+	/* Definición de variables de color */
+	--color-primario: #0048b2;
+	--color-fondo: #f6f8f9;
+	--color-neutral-600: #33454c;
+	--color-neutral-principal: #232f34;
+	--color-disabled: #94adb7;
+	--color-secundario: #00378a;
+	--color-boton-fondo: #f6f8f9;
 
-  color-scheme: light dark;
-  /* color: #0048b2; */
-  background-color: var(--color-fondo);
+	color-scheme: light dark;
+	/* color: #0048b2; */
+	background-color: var(--color-fondo);
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+	font-synthesis: none;
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
 body {
-  margin: 0;
-  display: flex;
-  /* place-items: center; */
-  flex-direction: column;
-  min-width: 320px;
-  min-height: 100vh;
-  min-height: 100dvh;
+	margin: 0;
+	display: flex;
+	/* place-items: center; */
+	flex-direction: column;
+	min-width: 320px;
+	min-height: 100vh;
+	min-height: 100dvh;
 }
 h1,
 h2,
@@ -48,8 +47,8 @@ h4,
 h5,
 h6,
 p {
-  margin: 0;
-  padding: 0;
+	margin: 0;
+	padding: 0;
 }
 
 /* h5 {
@@ -64,80 +63,89 @@ p {
   color: var(--color-neutral-600);
 } */
 span {
-  line-height: 15px;
-  color: var(--color-neutral-600);
-  @media (max-width: 480px) {
-    text-align: start;
-  }
+	line-height: 15px;
+	color: var(--color-neutral-600);
+	@media (max-width: 480px) {
+		text-align: start;
+	}
 }
 caption {
-  line-height: 15px;
-  color: var(--color-neutral-600);
-  @media (max-width: 480px) {
-    text-align: start;
-  }
+	line-height: 15px;
+	color: var(--color-neutral-600);
+	@media (max-width: 480px) {
+		text-align: start;
+	}
 }
 button {
-  font-family: "Poppins";
+	font-family: 'Poppins';
 }
 small {
-  line-height: 1;
-  color: var(--color-neutral-principal);
-  @media (max-width: 480px) {
-    text-align: start;
-  }
+	line-height: 1;
+	color: var(--color-neutral-principal);
+	@media (max-width: 480px) {
+		text-align: start;
+	}
 }
 
 a:hover {
-  text-decoration: underline;
-  color: #408bdb;
+	text-decoration: underline;
+	color: #408bdb;
 }
 
 .primaryButton {
-  background-color: var(--color-primario);
-  color: var(--color-fondo);
-  width: 95%;
-  max-width: 350px;
-  border-radius: 8px;
-  padding: 12px 20px;
-  font-family: "Poppins";
-  text-align: center;
-  &:hover {
-    cursor: pointer;
-  }
+	background-color: var(--color-primario);
+	color: var(--color-fondo);
+	width: 95%;
+	max-width: 350px;
+	border-radius: 8px;
+	padding: 12px 20px;
+	font-family: 'Poppins';
+	text-align: center;
+	&:hover {
+		cursor: pointer;
+	}
 }
 
 .secondaryButton {
-  border: 1px solid #0048b2;
-  background-color: var(--color-boton-fondo);
-  color: var(--color-primario);
-  width: 95%;
-  max-width: 350px;
-  border-radius: 8px;
-  padding: 12px 20px;
-  font-family: "Poppins";
-  text-align: center;
-  &:hover {
-    cursor: pointer;
-  }
+	border: 1px solid #0048b2;
+	background-color: var(--color-boton-fondo);
+	color: var(--color-primario);
+	width: 95%;
+	max-width: 350px;
+	border-radius: 8px;
+	padding: 12px 20px;
+	font-family: 'Poppins';
+	text-align: center;
+	&:hover {
+		cursor: pointer;
+	}
 }
 
 a {
-  text-decoration: none;
+	text-decoration: none;
 }
 .link-rrdom {
-  color: black !important;
+	color: black !important;
 }
 
-/* @media (prefers-color-scheme: light) {
-	:root {
-		color: #213547;
-		background-color: #ffffff;
+.body2 {
+	text-align: center;
+	color: var(--color-primario);
+	font-weight: 400;
+	font-size: 20px;
+	line-height: 24px;
+	margin: 0;
+	@media (max-width: 480px) {
+		text-align: start;
 	}
-	a:hover {
-		color: #747bff;
-	}
-	button {
-		background-color: #f9f9f9;
-	}
-} */
+}
+
+.captionRegular {
+	font-weight: 400;
+	font-size: 13px;
+	line-height: 15px;
+	color: var(--color-neutral-600);
+}
+
+
+
