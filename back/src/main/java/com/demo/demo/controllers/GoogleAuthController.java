@@ -3,11 +3,10 @@ package com.demo.demo.controllers;
 import com.demo.demo.config.security.JwtUtil;
 import com.demo.demo.dtos.request.TokenRequestDto;
 import com.demo.demo.dtos.response.AuthGoogleResponseDto;
-import com.demo.demo.dtos.response.AuthResponseDto;
 import com.demo.demo.entities.RoleEntity;
 import com.demo.demo.entities.UserEntity;
 import com.demo.demo.exceptions.NotFoundException;
-import com.demo.demo.repositories.RoleRepository;
+import com.demo.demo.repositories.GoalRepository;
 import com.demo.demo.repositories.UserRepository;
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdTokenVerifier;
@@ -35,7 +34,7 @@ public class GoogleAuthController {
 
     private final JwtUtil jwtUtil;
     private final UserRepository userRepository;
-    private final RoleRepository roleRepository;
+    private final GoalRepository roleRepository;
 
     @PostMapping("/verify-token")
     public ResponseEntity<?> verifyGoogleToken(@RequestBody TokenRequestDto tokenRequest) {

@@ -48,7 +48,10 @@ public class UserEntity implements UserDetails {
     @Column(name = "risk_preference", nullable = false)
     boolean onboardingComplete;
 
+    long totalAmount = 0;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Goal> goals;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(

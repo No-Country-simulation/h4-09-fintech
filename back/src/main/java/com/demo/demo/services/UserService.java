@@ -1,7 +1,10 @@
 package com.demo.demo.services;
 
+import com.demo.demo.dtos.goal.CreateGoalDTO;
+import com.demo.demo.dtos.goal.ResponseGoalDTO;
 import com.demo.demo.dtos.request.UpdateUserPreferencesDto;
 import com.demo.demo.dtos.response.UserPreferencesResponseDto;
+import com.demo.demo.entities.Goal;
 import com.demo.demo.entities.UserEntity;
 import com.demo.demo.exceptions.NotFoundException;
 import com.demo.demo.repositories.UserRepository;
@@ -66,7 +69,14 @@ public class UserService implements UserDetailsService {
         );
     }
 
-
+//    public ResponseGoalDTO createGoal(CreateGoalDTO createGoalDTO, UserEntity user) {
+//        Goal goal = new Goal();
+//        goal.setName(createGoalDTO.name());
+//        goal.setTargetDate(createGoalDTO.targetDate());
+//        goal.setTargetAmount(createGoalDTO.targetAmount());
+//
+//        user.getGoals().add(goal);
+//    }
 
 }
 
