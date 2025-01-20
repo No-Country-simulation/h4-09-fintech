@@ -1,6 +1,7 @@
 package com.demo.demo.services;
 
 import com.demo.demo.dtos.request.UpdateUserPreferencesDto;
+import com.demo.demo.dtos.request.UpdateUserRequestDto;
 import com.demo.demo.dtos.response.UserPreferencesResponseDto;
 import com.demo.demo.entities.UserEntity;
 import com.demo.demo.exceptions.NotFoundException;
@@ -64,6 +65,19 @@ public class UserService implements UserDetailsService {
                 user.getFinancialKnowledge(),
                 user.getRiskPreference()
         );
+    }
+
+    @Transactional
+    public UserEntity updateUser(String username, UpdateUserRequestDto dto) {
+        UserEntity user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new NotFoundException("Usuario no encontrado"));
+
+        user.setName(dto.getName());
+        user.setLastName(dto.getLastName());
+
+
+
+        return userRepository.save(user);
     }
 
 
