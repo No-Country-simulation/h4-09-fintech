@@ -20,7 +20,7 @@ public class PostService {
     private final PostRepository postRepository;
 
 
-    public void newPost(UserEntity userEntity, PostRequestDto postRequestDto){
+    public PostEntity newPost(UserEntity userEntity, PostRequestDto postRequestDto){
 
 
         PostEntity postEntity = PostEntity.builder()
@@ -34,7 +34,7 @@ public class PostService {
                 .creationUser(LocalDateTime.parse(postRequestDto.creationUser()))  // Nuevo campo
                 .build();
 
-        postRepository.save(postEntity);
+        return postRepository.save(postEntity);
 
     }
 

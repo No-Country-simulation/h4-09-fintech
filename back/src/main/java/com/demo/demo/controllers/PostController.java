@@ -25,7 +25,6 @@ public class PostController {
     private final UserRepository userRepository;
     private final PostService postService;
     private final PostRepository postRepository;
-    private final PostEntity postEntity;
 
     @PostMapping("/new") //crear nuevo posteo
     public ResponseEntity<?> newPost(@AuthenticationPrincipal UserDetails userDetails, @RequestBody PostRequestDto dto ){
@@ -36,7 +35,7 @@ public class PostController {
                 .orElseThrow(() -> new NotFoundException("No se encontró usuario"));
 
             //grabo el posteo teniendo el usuarioo y el dto de post
-        postService.newPost(userEntity,dto);
+        PostEntity postEntity = postService.newPost(userEntity,dto);
 
             return ResponseEntity.status(200).body("Nuevo post creado con éxito. ID: " + postEntity.getId());
 
