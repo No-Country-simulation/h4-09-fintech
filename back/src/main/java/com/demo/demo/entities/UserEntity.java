@@ -1,8 +1,5 @@
 package com.demo.demo.entities;
 
-import com.demo.demo.enums.FinancialKnowledge;
-import com.demo.demo.enums.MainGoal;
-import com.demo.demo.enums.RiskPreference;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -48,6 +45,8 @@ public class UserEntity implements UserDetails {
     @Column(name = "risk_preference", nullable = true)
     private String riskPreference;
 
+    @Column(name = "risk_preference", nullable = false)
+    boolean onboardingComplete;
 
 
 

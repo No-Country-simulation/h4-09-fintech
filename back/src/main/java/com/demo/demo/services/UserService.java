@@ -36,6 +36,7 @@ public class UserService implements UserDetailsService {
         user.setMainGoal(dto.getMainGoal());
         user.setFinancialKnowledge(dto.getFinancialKnowledge());
         user.setRiskPreference(dto.getRiskPreference());
+        user.setOnboardingComplete(dto.isOnboardingComplete());
 
         userRepository.save(user);
 
