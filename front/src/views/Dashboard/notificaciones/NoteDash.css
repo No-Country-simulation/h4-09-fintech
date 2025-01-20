@@ -1,9 +1,13 @@
 .container-notificacion {
-  background-color: #e2eaf3;
+  background-color: var(--color-notificaciones);
   width: 94vw;
   height: 8.79vh;
   margin: 0 auto 5px auto;
+  animation: aparecer 0.5s ease-in forwards;
   display: flex;
+}
+.container-notificacion a {
+  color: initial;
 }
 .iupi-notificacion {
   width: 16.79%;
@@ -13,7 +17,6 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-
   width: 75%;
   height: 100%;
 }

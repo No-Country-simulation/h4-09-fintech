@@ -4,7 +4,7 @@ import { BellAlertIcon, PlusCircleIcon } from "@heroicons/react/24/outline";
 // import profile from "../../assets/foto.jpg";
 import BarChartComponent from "./(components)/graficos/barchart/BarChart";
 import Example from "./(components)/graficos/Linear/LinearChart";
-import Circular from "./(components)/graficos/Pastel/PieChart";
+// import Circular from "./(components)/graficos/Pastel/PieChart";
 import { UserIcon } from "@heroicons/react/16/solid";
 import { NoteDash } from "./notificaciones/NoteDash";
 import { Link } from "react-router-dom";
@@ -83,7 +83,7 @@ export const Dashboard = () => {
 
       <Example />
 
-      <Circular />
+      {/* <Circular /> */}
     </div>
   );
 };
