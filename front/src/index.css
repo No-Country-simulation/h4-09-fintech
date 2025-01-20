@@ -139,6 +139,17 @@ a {
 		text-align: start;
 	}
 }
+.body3 {
+	text-align: center;
+	color: var(--color-primario);
+	font-weight: 300;
+	font-size: 16px;
+	line-height: 20px;
+	margin: 0;
+	@media (max-width: 480px) {
+		text-align: start;
+	}
+}
 
 .captionRegular {
 	font-weight: 400;
