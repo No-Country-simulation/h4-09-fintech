@@ -13,6 +13,14 @@
   border: 3px solid #0048ba;
 }
 
+
+.defaultIcon{
+  width: 100%; 
+  height: 100%;
+  border-radius: 50%; 
+  border: 3px solid #0048ba; 
+}
+
 .cameraIcon {
   position: absolute;
   bottom: 0;
@@ -38,7 +46,7 @@
 }
 
 .title {
-  margin: 90px 20px;
+  margin: 10px 20px;
   text-align: start;
   color: black;
   font-size: 36px;
@@ -143,6 +151,7 @@ input:checked + .slider:before {
 .subtitle {
   color: black;
   font-size: 32px;
+  text-align: center;
 }
 
 .button {
@@ -261,5 +270,29 @@ input:checked + .slider:before {
   }
   .subtitle {
     font-size: 20px;
+  }
+
+  .profilePictureContainer {
+    position: relative; 
+    width: 100px; 
+    height: 100px; 
+    margin-right: 20px; 
+  }
+
+  .defaultIcon{
+    width: 100%; 
+    height: 100%;
+    border-radius: 50%; 
+    border: 3px solid #0048ba; 
+  }
+
+  .card{
+    width: 80%;
+  }
+
+  .radiobuttonscontainer {
+    width: 90%;
+    max-width: 600px;
+    margin: 20px auto;
   }
 }

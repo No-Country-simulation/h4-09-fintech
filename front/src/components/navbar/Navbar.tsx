@@ -5,6 +5,7 @@ import { LuLayoutDashboard } from "react-icons/lu";
 import { FaHandHoldingDollar } from "react-icons/fa6";
 import { FaPeopleGroup } from "react-icons/fa6";
 import { FaUser } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 export default function Navbar() {
   const location = useLocation();
@@ -27,28 +28,20 @@ export default function Navbar() {
         <nav className={styles.menu}>
           <ul className={styles.navMenu}>
             <li>
-              <a href="/dashboard">
-                <LuLayoutDashboard />
-                Dashboard
-              </a>
+              <Link to="/dashboard"><LuLayoutDashboard />
+              Dashboard</Link>
             </li>
             <li>
-              <a href="#">
-                <FaHandHoldingDollar />
-                Gestión de inversiones
-              </a>
+              <Link to="/#"><FaHandHoldingDollar />
+              Gestión de inversiones</Link>
             </li>
             <li>
-              <a href="#">
-                <FaPeopleGroup />
-                Comunidad & Noticias
-              </a>
+              <Link to="/#"><FaPeopleGroup />
+              Comunidad & Noticias</Link>
             </li>
             <li>
-              <a href="#">
-                <FaUser />
-                Mi cuenta
-              </a>
+              <Link to="/#"><FaUser />
+              Mi cuenta</Link>
             </li>
           </ul>
         </nav>

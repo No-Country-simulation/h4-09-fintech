@@ -25,7 +25,7 @@
   padding: 0;
 }
 
-.navMenu a svg {
+.navMenu svg {
   margin-right: 5px;
   display: none;
 }
@@ -47,22 +47,24 @@
 }
 
 @media (max-width: 767px) {
+  .logo{
+    display: none;
+  }
+
   .navbar {
-    flex-direction: column;
+    position: fixed;
+    bottom: 0;
+    top: auto;
+    left: 0;
+    right: 0;
+    justify-content: center;
     padding: 10px;
   }
 
   .navMenu {
-    display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: center;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background-color: #0048ba;
-    padding: 10px 10px;
+    width: 100%;
   }
 
   .navMenu li {
@@ -83,6 +85,7 @@
 
   .navMenu a svg {
     margin-right: 5px;
+    margin-bottom: 5px;
     display: block;
     font-size: 15px;
   }

@@ -7,7 +7,7 @@ import { GoGear } from "react-icons/go";
 import { TbWorld } from "react-icons/tb";
 import { LuMoon } from "react-icons/lu";
 import { RxExit } from "react-icons/rx";
-import { GiReceiveMoney } from "react-icons/gi";
+// import { GiReceiveMoney } from "react-icons/gi";
 
 export default function Profile() {
   const [profileImage, setProfileImage] = useState<string | null>(null);
@@ -51,13 +51,15 @@ export default function Profile() {
 
         <div className={styles.profile}>
           <div className={styles.profilePictureContainer}>
-            <img
-              src={
-                profileImage || "https://via.placeholder.com/150?text=Perfil"
-              }
-              alt="Foto de perfil"
-              className={styles.profilePicture}
-            />
+            {profileImage ? (
+              <img
+                src={profileImage}
+                alt="Foto de perfil"
+                className={styles.profilePicture}
+              />
+            ) : (
+              <FaRegUser className={styles.defaultIcon} />
+            )}
 
             <label htmlFor="imageUpload" className={styles.cameraIcon}>
               <FaCamera />

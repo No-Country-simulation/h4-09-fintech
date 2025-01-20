@@ -1,7 +1,8 @@
 import styles from "./EditProfile.module.css";
 import { useState, useEffect } from "react";
 import { FaArrowLeft } from "react-icons/fa6";
-import { FaCamera } from "react-icons/fa";
+import { FaRegUser, FaCamera } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 export default function Home() {
   const [profileImage, setProfileImage] = useState<string | null>(null);
@@ -48,21 +49,23 @@ export default function Home() {
       <div className={styles.container}>
         <h1 className={styles.title}>
           {" "}
-          <a href="profile">
+          <Link to="profile">
             <FaArrowLeft />
-          </a>
+          </Link>
           Datos financieros y personales{" "}
         </h1>
 
         <div className={styles.profile}>
           <div className={styles.profilePictureContainer}>
-            <img
-              src={
-                profileImage || "https://via.placeholder.com/150?text=Perfil"
-              }
-              alt="Foto de perfil"
-              className={styles.profilePicture}
-            />
+            {profileImage ? (
+              <img
+                src={profileImage}
+                alt="Foto de perfil"
+                className={styles.profilePicture}
+              />
+            ) : (
+              <FaRegUser className={styles.defaultIcon} />
+            )}
 
             <label htmlFor="imageUpload" className={styles.cameraIcon}>
               <FaCamera />
@@ -144,7 +147,7 @@ export default function Home() {
                 placeholder="************"
                 required
               />
-              <a href="">Cambiar</a>
+              <Link to="/">Cambiar</Link>
             </div>
           </div>
         </div>
