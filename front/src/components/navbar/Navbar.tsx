@@ -7,7 +7,7 @@ import { FaPeopleGroup } from "react-icons/fa6";
 import { FaUser } from "react-icons/fa";
 
 export default function Navbar() {
-  const location = useLocation(); 
+  const location = useLocation();
   const pathname = location.pathname;
 
   if (
@@ -27,7 +27,7 @@ export default function Navbar() {
         <nav className={styles.menu}>
           <ul className={styles.navMenu}>
             <li>
-              <a href="#">
+              <a href="/dashboard">
                 <LuLayoutDashboard />
                 Dashboard
               </a>
@@ -55,5 +55,4 @@ export default function Navbar() {
       </header>
     </div>
   );
-         
 }

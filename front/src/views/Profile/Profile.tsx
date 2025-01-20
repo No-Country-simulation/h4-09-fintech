@@ -1,6 +1,6 @@
 import styles from "./Profile.module.css";
 import Card from "../../components/card/Card";
-import IupiSmallIcon from "../../assets/icons/IupiSmallIcon";
+// import IupiSmallIcon from "../../assets/icons/IupiSmallIcon";
 import { useState, useEffect } from "react";
 import { FaRegUser, FaCamera } from "react-icons/fa";
 import { GoGear } from "react-icons/go";
@@ -15,7 +15,9 @@ export default function Profile() {
   // **Cargar imagen inicial desde el backend**
   useEffect(() => {
     const fetchProfileImage = async () => {
-      const response = await fetch("http://localhost:5000/api/user/profile-image");
+      const response = await fetch(
+        "http://localhost:5000/api/user/profile-image"
+      );
       const data = await response.json();
       setProfileImage(data.imageUrl || null); // Si no hay imagen, queda como `null`.
     };
@@ -51,8 +53,7 @@ export default function Profile() {
           <div className={styles.profilePictureContainer}>
             <img
               src={
-                profileImage ||
-                "https://via.placeholder.com/150?text=Perfil"
+                profileImage || "https://via.placeholder.com/150?text=Perfil"
               }
               alt="Foto de perfil"
               className={styles.profilePicture}
@@ -77,7 +78,8 @@ export default function Profile() {
           </div>
 
           <button className={styles.button}>
-            <IupiSmallIcon/>|<GiReceiveMoney />conservador
+            {/* <IupiSmallIcon />|<GiReceiveMoney /> */}
+            conservador
           </button>
         </div>
 
