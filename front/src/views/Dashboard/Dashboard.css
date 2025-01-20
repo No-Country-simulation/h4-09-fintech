@@ -34,6 +34,25 @@
   box-sizing: border-box;
   margin: auto;
 }
+.titulo-dash .container-bell {
+  position: relative;
+  height: 30%;
+  width: auto;
+}
+.counter-notif {
+  position: absolute;
+  right: 0;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  background-color: red;
+  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+  font-size: 0.5rem;
+}
 .container-usuario {
   min-height: 8.79vh;
   max-height: 8.79vh;
@@ -51,11 +70,11 @@
 .container-usuario h2 {
   font-size: 1.1rem;
   font-weight: var(--font-poppins-400);
-  color: var(--color-principal);
+  color: var(--color-primario);
 }
 .container-usuario .correo-usuario-dash {
   font-weight: var(--font-poppins-300);
-  font-size: 0.7rem;
+  font-size: 0.6rem;
 }
 .container-usuario .free-plan {
   margin-left: auto;
@@ -74,6 +93,8 @@
   border-radius: 10px;
   border: dashed rgb(0, 72, 178) 1px !important;
   flex-direction: column;
+  font-size: 0.8rem;
+  font-weight: var(--font-poppins-500);
   align-items: center;
   justify-content: space-around;
 }

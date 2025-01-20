@@ -17,6 +17,12 @@ import EditProfile from "./views/EditProfile/EditProfile";
 import Configurations from "./views/Configurations/Configurations";
 import Auth from "./views/auth/Auth/Auth";
 import Landing from "./views/Landing/Landing";
+import { Notificaciones } from "./views/Dashboard/notificaciones/Notificaciones";
+import {
+  ObjetivosNotif,
+  Recordatorios,
+  Todo,
+} from "./views/Dashboard/notificaciones/pages/PagesNotif";
 
 function App() {
   return (
@@ -24,14 +30,24 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Landing />} />
+
         {/* rutas anidadas dentro de "/auth"  */}
-        <Route path="/auth/">
+        <Route path="/auth">
           <Route index element={<Auth />} />
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
         </Route>
+
         <Route path="/onboarding" element={<Onboarding />} />
         <Route path="/dashboard" element={<Dashboard />} />
+
+        {/* Ruta Notificaciones con subrutas */}
+        <Route path="/notificaciones" element={<Notificaciones />}>
+          <Route path="todo" element={<Todo />} />
+          <Route path="objetivos-notif" element={<ObjetivosNotif />} />
+          <Route path="recordatorios" element={<Recordatorios />} />
+        </Route>
+
         <Route path="/objetivos" element={<Objetivos />} />
         <Route path="/objetivo/:nombre" element={<Objetivo />} />
         <Route path="/gestion" element={<Gestion />} />
@@ -46,4 +62,5 @@ function App() {
     </>
   );
 }
+
 export default App;

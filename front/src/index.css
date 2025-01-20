@@ -50,7 +50,6 @@ h6,
 p {
   margin: 0;
   padding: 0;
-  font-family: "Poppins";
 }
 
 /* h5 {
@@ -77,6 +76,9 @@ caption {
   @media (max-width: 480px) {
     text-align: start;
   }
+}
+button {
+  font-family: "Poppins";
 }
 small {
   line-height: 1;
@@ -122,6 +124,9 @@ a:hover {
 
 a {
   text-decoration: none;
+}
+.link-rrdom {
+  color: black !important;
 }
 
 /* @media (prefers-color-scheme: light) {
