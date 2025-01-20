@@ -7,6 +7,7 @@ import Example from "./(components)/graficos/Linear/LinearChart";
 import Circular from "./(components)/graficos/Pastel/PieChart";
 import { UserIcon } from "@heroicons/react/16/solid";
 import { NoteDash } from "./notificaciones/NoteDash";
+import { Link } from "react-router-dom";
 
 export const Dashboard = () => {
   // OBJETIVO FINANCIERO
@@ -37,7 +38,11 @@ export const Dashboard = () => {
   return (
     <div className="dashboard">
       <h1 className="titulo-dash">
-        Dashboard <BellAlertIcon className="iconos-hero" />
+        Dashboard{" "}
+        <Link to="/notificaciones" className="container-bell">
+          <div className="counter-notif">2</div>
+          <BellAlertIcon className="iconos-hero" />
+        </Link>
       </h1>
       {/* 
        condicional para cargar las notificaciones

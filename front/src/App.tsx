@@ -15,12 +15,7 @@ import { Cuenta } from "./views/Profile/Cuenta";
 import Perfil from "./views/Perfil/Perfil";
 import Auth from "./views/auth/Auth/Auth";
 import Landing from "./views/Landing/Landing";
-import {
-  ArrowTrendingUpIcon,
-  Squares2X2Icon,
-  UserIcon,
-  UsersIcon,
-} from "@heroicons/react/24/outline";
+import { Notificaciones } from "./views/Dashboard/notificaciones/Notificaciones";
 
 function App() {
   return (
@@ -36,6 +31,7 @@ function App() {
         </Route>
         <Route path="/onboarding" element={<Onboarding />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/notificaciones" element={<Notificaciones />} />
         <Route path="/objetivos" element={<Objetivos />} />
         <Route path="/objetivo/:nombre" element={<Objetivo />} />
         <Route path="/gestion" element={<Gestion />} />
