@@ -51,15 +51,13 @@ export default function Profile() {
 
         <div className={styles.profile}>
           <div className={styles.profilePictureContainer}>
-            {profileImage ? (
-              <img
-                src={profileImage}
-                alt="Foto de perfil"
-                className={styles.profilePicture}
-              />
-            ) : (
-              <FaRegUser className={styles.defaultIcon} />
-            )}
+            <img
+              src={
+                profileImage || "https://via.placeholder.com/150?text=Perfil"
+              }
+              alt="Foto de perfil"
+              className={styles.profilePicture}
+            />
 
             <label htmlFor="imageUpload" className={styles.cameraIcon}>
               <FaCamera />
