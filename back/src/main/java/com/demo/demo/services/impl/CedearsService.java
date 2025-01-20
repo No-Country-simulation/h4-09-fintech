@@ -38,15 +38,13 @@ public class CedearsService {
         Instant now = Instant.now();
         long unixToday = now.getEpochSecond();
 
-        // Exactamente un año atrás
         Instant oneYearAgo = now.minus(Duration.ofDays(365));
         long unixOneYearAgo = oneYearAgo.getEpochSecond();
 
-        // Primer día del mes actual a las 00:00
         LocalDate firstDayOfMonth = LocalDate.now(argentinaZone).withDayOfMonth(1);
         long unixFirstDayOfMonth = firstDayOfMonth.atStartOfDay(argentinaZone).toEpochSecond();
 
-        // Hoy a las 11:00 AM hora Argentina
+
         LocalDateTime todayAt11AM = LocalDateTime.now(argentinaZone).withHour(11).withMinute(0).withSecond(0).withNano(0);
         long unixToday11AM = todayAt11AM.atZone(argentinaZone).toEpochSecond();
 
