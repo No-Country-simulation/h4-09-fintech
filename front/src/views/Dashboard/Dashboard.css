@@ -1,0 +1,113 @@
+/* ESTOS ESTILOS SON PROVISORIOS,MIENTRAS ESPERAMOS EL DISEÑO DE UX/UI */
+.dashboard {
+  min-width: 100vw;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+/*----------------------------------------- */
+
+.flex {
+  display: flex;
+}
+
+#foto-perfil {
+  height: 90%;
+  width: auto;
+  border-radius: 50%;
+  border: solid rgb(0, 72, 178) 2px;
+}
+.iconos-hero {
+  height: 20px;
+  width: auto;
+}
+.dashboard .titulo-dash {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 10.05vh;
+  height: 10.05vh;
+  font-size: 1.2rem;
+  font-weight: var(--font-poppins-500);
+  width: 94vw;
+  box-sizing: border-box;
+  margin: auto;
+}
+.titulo-dash .container-bell {
+  position: relative;
+  height: 30%;
+  width: auto;
+}
+.counter-notif {
+  position: absolute;
+  right: 0;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  background-color: red;
+  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+  font-size: 0.5rem;
+}
+.container-usuario {
+  min-height: 8.79vh;
+  max-height: 8.79vh;
+  height: 8.79vh;
+  width: 94vw;
+  max-width: 94vw;
+  box-sizing: border-box;
+  align-items: center;
+  margin: auto;
+}
+.container-usuario div {
+  line-height: 0.7;
+  padding-left: 6px;
+}
+.container-usuario h2 {
+  font-size: 1.1rem;
+  font-weight: var(--font-poppins-400);
+  color: var(--color-primario);
+}
+.container-usuario .correo-usuario-dash {
+  font-weight: var(--font-poppins-300);
+  font-size: 0.6rem;
+}
+.container-usuario .free-plan {
+  margin-left: auto;
+  font-size: 0.8rem;
+  font-weight: 500;
+  box-shadow: 0 0 2px 1px rgba(128, 128, 128, 0.377);
+  border-radius: 500px;
+  padding: 8px 10px;
+  font-weight: var(--font-poppins-400);
+}
+.añadir-tarjeta {
+  width: 94vw;
+  min-height: 12.31vh;
+  height: 12.31vh;
+  margin: 1.83vh 3vw;
+  border-radius: 10px;
+  border: dashed rgb(0, 72, 178) 1px !important;
+  flex-direction: column;
+  font-size: 0.8rem;
+  font-weight: var(--font-poppins-500);
+  align-items: center;
+  justify-content: space-around;
+}
+.cruz-icon {
+  height: 20px;
+  fill: rgb(209, 227, 255);
+}
+.box-section {
+  box-shadow: 0 0 2px 1px rgba(128, 128, 128, 0.541);
+  border-radius: 5px;
+  height: 35.17vh;
+  min-height: max-content;
+  margin: 0 3vw 1.83vh 3vw;
+  width: 94vw;
+  position: relative;
+}

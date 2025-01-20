@@ -1,15 +1,17 @@
 .navbar {
-  position: fixed;
+  position: sticky;
   top: 0;
   left: 0;
-  width: 100%;
+  width: 100vw;
   z-index: 1000;
   background-color: #0048ba;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
+  box-sizing: border-box;
   transition: transform 0.3s ease-in-out;
+  box-sizing: border-box;
 }
 
 .hidden {
@@ -21,6 +23,11 @@
   list-style: none;
   margin: 0;
   padding: 0;
+}
+
+.navMenu a svg {
+  margin-right: 5px;
+  display: none;
 }
 
 .navMenu li {
@@ -48,26 +55,36 @@
   .navMenu {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
     background-color: #0048ba;
-    padding: 10px 0;
+    padding: 10px 10px;
   }
 
   .navMenu li {
-    flex-grow: 1;
+    flex-grow: 1; 
     margin: 0;
-    padding: 0 5px;
+    padding: 5px 0;
     text-align: center;
   }
 
   .navMenu a {
-    font-size: 0.9rem;
-    display: block;
-    width: 100%;
+    font-size: 0.8rem;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
   }
+
+  .navMenu a svg {
+    margin-right: 5px;
+    display: block;
+    font-size: 15px;
+  }
+
 }

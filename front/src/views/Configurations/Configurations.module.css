@@ -1,0 +1,29 @@
+.title {
+  text-align: start;
+  margin: 90px 20px;
+  color: black;
+  font-size: 36px;
+}
+
+.title a {
+  font-size: 28px;
+  color: black;
+  margin-right: 8px;
+}
+
+.subtitle {
+  color: black;
+  font-size: 32px;
+}
+
+@media (max-width: 767px) {
+  .container {
+    margin: 10px;
+  }
+  .title {
+    font-size: 30px;
+  }
+  .subtitle {
+    font-size: 20px;
+  }
+}

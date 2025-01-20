@@ -11,6 +11,7 @@ import Cookies from 'js-cookie'
 import IupiSmallIcon from '../../../assets/icons/(iupi)/IupiSmallIcon'
 import Eyeicon from '../../../assets/icons/Eyeicon'
 import SlashEyeIcon from '../../../assets/icons/SlashEyeIcon'
+import GoBackIcon from '../../../assets/icons/GoBackIcon'
 
 export default function Login() {
 	const navigate = useNavigate()
@@ -77,16 +78,23 @@ export default function Login() {
 		<div className={styles.pageview}>
 			<form className={styles.registerForm} onSubmit={handleSubmit}>
 				<div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
-					<Link to={'/auth'}> Volver</Link>
+					<Link to={'/auth'}>
+						{' '}
+						<GoBackIcon />
+					</Link>
 					<IupiSmallIcon />
 				</div>
-				<h5>Logueate y continúa el camino hacia tu libertad financiera.</h5>
+				<h5 className='body2'>Logueate y continúa el camino hacia tu libertad financiera.</h5>
 				<div className={styles.labelInput}>
-					<label htmlFor='email'>Email</label>
+					<label htmlFor='email' className='inputLabel'>
+						Email
+					</label>
 					<input type='email' id='email' name='email' required value={loginData.email} onChange={handleChange} placeholder='ejemplo@mail.com' />
 				</div>
 				<div className={styles.labelInput}>
-					<label htmlFor='password'>Contraseña</label>
+					<label htmlFor='password' className='inputLabel'>
+						Contraseña
+					</label>
 					<div className={styles.passwordContainer}>
 						<input type={showPassword ? 'text' : 'password'} id='passwordLogin' name='password' required value={loginData.password} onChange={handleChange} placeholder='*******' />
 						<button type='button' onClick={() => setShowPassword((prev) => !prev)} className={styles.showPasswordButton}>
