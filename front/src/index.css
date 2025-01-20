@@ -130,15 +130,32 @@ a {
   color: black !important;
 }
 
-/* @media (prefers-color-scheme: light) {
-	:root {
-		color: #213547;
-		background-color: #ffffff;
-	}
-	a:hover {
-		color: #747bff;
-	}
-	button {
-		background-color: #f9f9f9;
-	}
-} */
+.body2 {
+  text-align: center;
+  color: var(--color-primario);
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+  margin: 0;
+  @media (max-width: 480px) {
+    text-align: start;
+  }
+}
+.body3 {
+  text-align: center;
+  color: var(--color-primario);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 20px;
+  margin: 0;
+  @media (max-width: 480px) {
+    text-align: start;
+  }
+}
+
+.captionRegular {
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 15px;
+  color: var(--color-neutral-600);
+}

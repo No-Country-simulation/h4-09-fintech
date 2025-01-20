@@ -1,0 +1,66 @@
+.card {
+	display: flex;
+	flex-direction: column;
+	border-radius: 1rem;
+	height: 150px;
+	padding: 1rem;
+	overflow: hidden;
+	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+	transition: all 0.3s ease-in-out;
+	text-decoration: none;
+	color: black;
+	flex: 1;
+	&:hover {
+		cursor: pointer;
+		box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+		text-decoration: none; /* Asegura que no aparezca subrayado */
+	}
+
+	h3 {
+		text-align: start;
+		font-size: medium;
+		font-weight: 500;
+		line-height: 20px;
+		margin-bottom: 12px;
+	}
+
+	h5 {
+		text-align: start;
+		font-size: medium;
+		font-weight: 400;
+		margin-bottom: 8px;
+	}
+
+	p {
+		text-align: start;
+		font-size: small;
+	}
+}
+
+/* Asegurarse de que el enlace no tenga subrayado */
+a {
+	text-decoration: none;
+	color: var(--color-primario);
+
+	&:hover {
+		text-decoration: none;
+		color: inherit;
+	}
+}
+
+/* Truncar texto */
+.card p {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	margin-bottom: 8px;
+}
+
+.card span {
+	margin-top: 8px;
+	white-space: normal;
+	overflow: visible;
+	margin-top: auto;
+	text-align: end;
+	font-size: small;
+}

@@ -11,6 +11,7 @@ import Cookies from 'js-cookie'
 import IupiSmallIcon from '../../../assets/icons/(iupi)/IupiSmallIcon'
 import Eyeicon from '../../../assets/icons/Eyeicon'
 import SlashEyeIcon from '../../../assets/icons/SlashEyeIcon'
+import GoBackIcon from '../../../assets/icons/GoBackIcon'
 
 export interface IUserData {
 	name: string
@@ -104,11 +105,14 @@ export default function Register() {
 		<div className={styles.pageview}>
 			<form className={styles.registerForm} onSubmit={handleSubmit}>
 				<div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
-					<Link to={'/auth'}> Volver</Link>
+					<Link to={'/auth'}>
+						{' '}
+						<GoBackIcon />
+					</Link>
 					<IupiSmallIcon />
 				</div>
-				<h5>Regístrate y da el primer paso hacia tu libertad financiera.</h5>
-				<small>En IUPI, convertir tus metas en logros es sencillo. crea tu cuenta y ahorrar y crece en confianza.</small>
+				<h5 className='body2'>Regístrate y da el primer paso hacia tu libertad financiera.</h5>
+				<small className='captionRegular'>En IUPI, convertir tus metas en logros es sencillo. crea tu cuenta y ahorrar y crece en confianza.</small>
 				<div className={styles.labelInput}>
 					<label htmlFor='name'>Nombre</label>
 					<input type='text' id='nameLogin' name='name' required value={userData.name} onChange={handleChange} placeholder='Tu nombre' />
@@ -183,7 +187,7 @@ export default function Register() {
 					<span>¿Ya tienes una cuenta? </span>
 					<Link to='/auth/login'>Iniciar sesión</Link>
 				</div>
-				<small>
+				<small className={styles.verySmall}>
 					Al iniciar aceptas las <Link to={'#'}> condiciones del servicio de iupi.</Link> Nos tomamos muy en serio tu privacidad. Para mas información lee nuestra{' '}
 					<Link to={'#'}>Política de privacidad.</Link>
 				</small>

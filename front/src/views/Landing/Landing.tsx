@@ -73,7 +73,7 @@ const StepContent = ({ step, onNext }: StepContentProps) => {
 		<div className={styles.stepsview}>
 			<div className={styles.contentcontainer}>
 				<div>{step.icon}</div>
-				<h5>{step.title}</h5>
+				<h5 className="body2">{step.title}</h5>
 				<span>{step.text}</span>
 			</div>
 			<button type='button' onClick={onNext} className='primaryButton'>
