@@ -25,6 +25,7 @@ public class PostController {
     private final UserRepository userRepository;
     private final PostService postService;
     private final PostRepository postRepository;
+    private final PostEntity postEntity;
 
     @PostMapping("/new") //crear nuevo posteo
     public ResponseEntity<?> newPost(@AuthenticationPrincipal UserDetails userDetails, @RequestBody PostRequestDto dto ){
@@ -37,7 +38,8 @@ public class PostController {
             //grabo el posteo teniendo el usuarioo y el dto de post
         postService.newPost(userEntity,dto);
 
-        return ResponseEntity.status(200).body("New post"+ dto);
+            return ResponseEntity.status(200).body("Nuevo post creado con éxito. ID: " + postEntity.getId());
+
         }
         catch (Exception e){
             return ResponseEntity.status(400).body("Error in value " + e.getMessage()) ;

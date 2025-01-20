@@ -7,6 +7,9 @@ import lombok.Setter;
 @Setter
 public class PostUpdateDto {
     private String title;
+    private String subtitle;
+    private String text;
+    private String creationUser;
     private String content;
     private String category;
 }

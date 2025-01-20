@@ -27,12 +27,18 @@ public class PostEntity {
     private String title;
 
     @Column(nullable = false, columnDefinition = "TEXT")
-    private String content;
+    private String subtitle;
+
+    @Column(nullable = false, columnDefinition = "TEXT")
+    private String text;
+
+    @Column(name = "creation_date", nullable = false)
+    private LocalDateTime creationUser;
 
     @Column(name = "creation_date", nullable = false)
     private LocalDateTime creationDate;
 
-    private String category; //puede ser enums
+    private String category;
 
 
 }

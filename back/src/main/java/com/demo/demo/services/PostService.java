@@ -8,19 +8,17 @@ import com.demo.demo.exceptions.NotFoundException;
 import com.demo.demo.repositories.PostRepository;
 import com.demo.demo.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
+
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
+
+
+import java.time.LocalDateTime;
 
 @Service
 @RequiredArgsConstructor
 public class PostService {
     private final PostRepository postRepository;
-    private final UserRepository userRepository;
+
 
     public void newPost(UserEntity userEntity, PostRequestDto postRequestDto){
 
@@ -28,9 +26,12 @@ public class PostService {
         PostEntity postEntity = PostEntity.builder()
                 .userEntity(userEntity)
                 .title(postRequestDto.title())
-                .content(postRequestDto.Content())
+
                 .creationDate(postRequestDto.creationDate())
                 .category(postRequestDto.category())
+                .subtitle(postRequestDto.subtitle())  // Nuevo campo
+                .text(postRequestDto.text())          // Nuevo campo
+                .creationUser(LocalDateTime.parse(postRequestDto.creationUser()))  // Nuevo campo
                 .build();
 
         postRepository.save(postEntity);
@@ -57,13 +58,21 @@ public class PostService {
             throw new IllegalArgumentException("No tienes permiso para actualizar este post.");
         }
 
+
         // Actualizar solo los campos no nulos
         if (updateDto.getTitle() != null) {
             post.setTitle(updateDto.getTitle());
         }
-        if (updateDto.getContent() != null) {
-            post.setContent(updateDto.getContent());
+        if (updateDto.getSubtitle() != null) {  // Nuevo campo
+            post.setSubtitle(updateDto.getSubtitle());
         }
+        if (updateDto.getText() != null) {  // Nuevo campo
+            post.setText(updateDto.getText());
+        }
+        if (updateDto.getCreationUser() != null) {  // Nuevo campo
+            post.setCreationUser(LocalDateTime.parse(updateDto.getCreationUser()));
+        }
+
         if (updateDto.getCategory() != null) {
             post.setCategory(updateDto.getCategory());
         }
