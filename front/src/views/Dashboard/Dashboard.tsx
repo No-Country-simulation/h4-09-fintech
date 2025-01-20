@@ -39,7 +39,7 @@ export const Dashboard = () => {
     <div className="dashboard">
       <h1 className="titulo-dash">
         Dashboard{" "}
-        <Link to="/notificaciones" className="container-bell">
+        <Link to="/notificaciones" className="container-bell link-rrdom">
           <div className="counter-notif">2</div>
           <BellAlertIcon className="iconos-hero" />
         </Link>

@@ -77,6 +77,9 @@ caption {
     text-align: start;
   }
 }
+button {
+  font-family: "Poppins";
+}
 small {
   line-height: 1;
   color: var(--color-neutral-principal);
@@ -121,6 +124,9 @@ a:hover {
 
 a {
   text-decoration: none;
+}
+.link-rrdom {
+  color: black !important;
 }
 
 /* @media (prefers-color-scheme: light) {
