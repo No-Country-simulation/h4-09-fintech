@@ -37,7 +37,7 @@ public class UserService implements UserDetailsService {
         user.setMainGoal(dto.getMainGoal());
         user.setFinancialKnowledge(dto.getFinancialKnowledge());
         user.setRiskPreference(dto.getRiskPreference());
-
+        user.setOnboardingComplete(dto.isOnbardingComplete()); //se agrego el booleano para verificar si es la primera vez.
         userRepository.save(user);
 
         return new UserPreferencesResponseDto(

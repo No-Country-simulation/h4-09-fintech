@@ -18,4 +18,9 @@ public class UpdateUserPreferencesDto {
 
     @NotNull(message = "La preferencia de riesgo no puede ser nula.")
     private String riskPreference;
+
+    @NotNull(message = "onbarding")
+    private boolean onbardingComplete;
+
+
 }

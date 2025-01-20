@@ -36,6 +36,9 @@ public class UserEntity implements UserDetails {
     @Column()
     private String password;
 
+    @Column()
+    private boolean onboardingComplete; //false por defecto
+
 //    @Enumerated(EnumType.STRING)
     @Column(name = "main_goal", nullable = true)
     private String mainGoal;
