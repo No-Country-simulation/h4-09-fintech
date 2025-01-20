@@ -2,6 +2,7 @@ package com.demo.demo.controllers;
 
 import com.demo.demo.config.security.JwtUtil;
 import com.demo.demo.dtos.request.TokenRequestDto;
+import com.demo.demo.dtos.response.AuthGoogleResponseDto;
 import com.demo.demo.dtos.response.AuthResponseDto;
 import com.demo.demo.entities.RoleEntity;
 import com.demo.demo.entities.UserEntity;
@@ -53,7 +54,8 @@ public class GoogleAuthController {
 
             if (idToken != null) {
                 GoogleIdToken.Payload payload = idToken.getPayload();
-
+                AuthGoogleResponseDto response = new AuthGoogleResponseDto();
+                response.setFirstTime(false);
                 // Obtener el email del usuario y name
                 String email = payload.getEmail();
                 String name = (String) payload.get("given_name");
@@ -69,15 +71,14 @@ public class GoogleAuthController {
 
                     RoleEntity role = roleRepository.findRoleByName("ROLE_USER").orElseThrow(() -> new NotFoundException(String.format("Role not found with name %s","ROLE_USER")));
                     newUser.getRoles().add(role);
-
+                    response.setFirstTime(true);
                     return userRepository.save(newUser);
                 });
-
                 // Generar el JWT para tu backend
-                String accessToken = jwtUtil.generateToken( user);
+                response.setToken(jwtUtil.generateToken(user));
 
                 // Respuesta con el access token y el ID del usuario
-                return ResponseEntity.ok(new AuthResponseDto(accessToken) );
+                return ResponseEntity.ok(response);
             } else {
                 return ResponseEntity.status(400).body("Invalid ID token.");
             }

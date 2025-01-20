@@ -30,13 +30,19 @@ public class SecurityConfig {
 
     private final AuthenticationProvider authenticationProvider;
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
+
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .authorizeHttpRequests(auth -> {
-                    auth.requestMatchers( "/api/auth/**").permitAll();
-                    auth.requestMatchers(HttpMethod.GET,"/api/auth/check-login").hasRole("USER");
+                    auth.requestMatchers("/api/auth/**",
+                                    "/v3/api-docs",
+                                    "/v3/api-docs/**",
+                                    "/api/v1/public/**",
+                                    "/swagger-ui/**",
+                                    "/swagger-ui.html").permitAll();
+                    auth.requestMatchers(HttpMethod.GET, "/api/auth/check-login").hasRole("USER");
                     auth.anyRequest().authenticated();
                 })
                 .csrf(AbstractHttpConfigurer::disable)
@@ -54,7 +60,7 @@ public class SecurityConfig {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowCredentials(false);
         configuration.setAllowedOrigins(List.of("*"));
-        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE"));
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE","PATCH"));
         configuration.setAllowedHeaders(List.of("*"));
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);

@@ -4,6 +4,8 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
+import io.jsonwebtoken.security.SignatureException;
+import org.mapstruct.ap.shaded.freemarker.core.ReturnInstruction;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -23,9 +25,11 @@ public class JwtUtil {
 
     @Value("${jwt.secret}")
     private  String JWT_SECRET ;
+
     public Date expiration() {
         return new Date(System.currentTimeMillis() + 1000 * 60 * 60);
     }
+
     private SecretKey getKey() {
         return Keys.hmacShaKeyFor(JWT_SECRET.getBytes());
     }
@@ -76,6 +80,7 @@ public class JwtUtil {
     private Claims getAllClaims(String token) {
 
         try {
+
             return Jwts.parserBuilder()
                     .setSigningKey(getKey())
                     .build()

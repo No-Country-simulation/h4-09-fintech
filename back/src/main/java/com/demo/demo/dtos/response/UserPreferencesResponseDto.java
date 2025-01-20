@@ -15,7 +15,7 @@ public class UserPreferencesResponseDto {
     private String username;
     private String name;
     private String lastName;
-    private MainGoal mainGoal;
-    private FinancialKnowledge financialKnowledge;
-    private RiskPreference riskPreference;
+    private String mainGoal;
+    private String financialKnowledge;
+    private String riskPreference;
 }
