@@ -5,6 +5,10 @@
   justify-content: space-evenly;
   align-items: flex-start;
 }
+.link-alertas-inversion {
+  margin: 5px auto;
+  color: initial;
+}
 
 .notificacion {
   background-color: var(--color-notificaciones);
@@ -13,7 +17,6 @@
   max-width: 94vw;
   height: auto; /* Ajustamos la altura para permitir que el contenido fluya */
   min-height: max-content;
-  margin: 5px auto;
   box-sizing: border-box;
   word-wrap: break-word; /* Permite que las palabras largas se partan */
   word-break: break-word; /* Asegura que palabras largas se dividan */

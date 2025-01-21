@@ -1,0 +1,36 @@
+.container-alertas-inversion {
+  min-width: 100vw;
+  min-height: 100vh;
+  padding: 0 3vw;
+  box-sizing: border-box;
+}
+
+.container-alertas-inversion h1 {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  height: 15.48vh;
+  font-size: 1rem;
+  font-weight: var(--font-poppins-500);
+  margin-top: 10px;
+}
+.container-alertas-inversion h1 p {
+  font-size: 0.6rem;
+  font-weight: var(--font-poppins-300);
+}
+
+/* Estilo para FormGroup */
+.MuiFormGroup-root {
+  display: flex;
+  flex-direction: column; /* Mantiene cada label en una fila */
+  gap: 8px; /* Espacio entre las filas */
+}
+
+/* Estilo para FormControlLabel */
+.MuiFormControlLabel-root {
+  display: flex;
+  justify-content: space-between; /* Coloca texto y switch en los extremos */
+  align-items: center; /* Alinea verticalmente */
+  width: 100%;
+  margin-left: 0 !important; /* Elimina márgenes predeterminados */
+}

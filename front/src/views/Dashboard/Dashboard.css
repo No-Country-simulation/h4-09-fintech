@@ -111,3 +111,17 @@
   width: 94vw;
   position: relative;
 }
+.container-sub-g {
+  width: 100%;
+  height: 26.92%;
+  padding: 2%;
+  box-sizing: border-box;
+}
+.container-sub-g h1 {
+  font-size: 0.8rem;
+  font-weight: var(--font-poppins-500);
+}
+.container-sub-g small {
+  font-size: 0.6rem;
+  font-weight: var(--font-poppins-300);
+}
