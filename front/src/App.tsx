@@ -53,7 +53,8 @@ function App() {
 				<Route path='/profile' element={<Profile />} />
 				<Route path='/editprofile' element={<EditProfile />} />
 				<Route path='/configurations' element={<Configurations />} />
-
+				
+				{/* rutas anidadas para community */}
 				<Route path='/community/'>
 					<Route index element={<Community />} />
 					<Route path='create' element={<Create />} />
@@ -61,6 +62,7 @@ function App() {
 					<Route path='forum' element={<Forum />} />
 					<Route path='forum/:id' element={<PostView />} />
 				</Route>
+
 				<Route path='/*' element={<Error />} />
 			</Routes>
 			<Footer />
