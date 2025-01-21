@@ -21,7 +21,7 @@ target/
 *.iml
 *.ipr
 *.java~
-*.~
+*~
 
 ### NetBeans ###
 /nbproject/private/
@@ -35,5 +35,4 @@ build/
 
 ### VS Code ###
 .vscode/
-.env
 structure.json
