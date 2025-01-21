@@ -1,24 +1,35 @@
 package com.demo.demo.services;
 
+import com.demo.demo.config.mappers.GoalMapper;
+import com.demo.demo.dtos.goal.CreateGoalDTO;
+import com.demo.demo.dtos.goal.ResponseGoalDTO;
+import com.demo.demo.dtos.goal.UpdateAmountDTO;
+import com.demo.demo.dtos.goal.UpdateGoalDTO;
 import com.demo.demo.dtos.request.UpdateUserPreferencesDto;
+import com.demo.demo.dtos.request.UpdateUserRequestDto;
 import com.demo.demo.dtos.response.UserPreferencesResponseDto;
+import com.demo.demo.entities.Goal;
 import com.demo.demo.entities.UserEntity;
 import com.demo.demo.exceptions.NotFoundException;
 import com.demo.demo.repositories.UserRepository;
 import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+
+@RequiredArgsConstructor
 @Service
 public class UserService implements UserDetailsService {
 
+    private final GoalMapper goalMapper;
     private final UserRepository userRepository;
 
-    public UserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -36,7 +47,7 @@ public class UserService implements UserDetailsService {
         user.setMainGoal(dto.getMainGoal());
         user.setFinancialKnowledge(dto.getFinancialKnowledge());
         user.setRiskPreference(dto.getRiskPreference());
-
+        user.setOnboardingComplete(dto.isOnbardingComplete()); //se agrego el booleano para verificar si es la primera vez.
         userRepository.save(user);
 
         return new UserPreferencesResponseDto(
@@ -65,7 +76,71 @@ public class UserService implements UserDetailsService {
         );
     }
 
+    @Transactional
+    public UserEntity updateUser(String username, UpdateUserRequestDto dto) {
+        UserEntity user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new NotFoundException("Usuario no encontrado"));
+
+        user.setName(dto.getName());
+        user.setLastName(dto.getLastName());
 
 
+
+        return userRepository.save(user);
+    }
+
+    private UserEntity getUserByUsername(String username) {
+        return userRepository.findByUsername(username)
+                .orElseThrow(() -> new NotFoundException("User not found"));
+    }
+
+    public ResponseGoalDTO createGoal(CreateGoalDTO createGoalDTO, UserEntity user) {
+        Goal goal = new Goal();
+        goal.setName(createGoalDTO.name());
+        goal.setTargetDate(createGoalDTO.targetDate());
+        goal.setTargetAmount(createGoalDTO.targetAmount());
+
+        UserEntity userEntity = getUserByUsername(user.getUsername());
+        goal.setUser(userEntity);
+        userEntity.getGoals().add(goal);
+
+        userRepository.save(userEntity);
+
+        return goalMapper.toResponseGoalDTO(userEntity.getGoals().get(0), userEntity);
+    }
+
+    public List<ResponseGoalDTO> getGoals(String username) {
+        UserEntity user = getUserByUsername(username);
+        return user.getGoals().stream().map(goal -> goalMapper.toResponseGoalDTO(goal, user)).toList();
+    }
+
+    public ResponseGoalDTO getGoal(UUID goalId, String username) {
+        UserEntity user = getUserByUsername(username);
+        Goal goal = user.getGoals().stream()
+                .filter(g -> g.getGoalId().equals(goalId))
+                .findFirst()
+                .orElseThrow(() -> new NotFoundException("Goal not found"));
+        return goalMapper.toResponseGoalDTO(goal, user);
+    }
+
+    public ResponseGoalDTO uptateGoal(String username, UpdateGoalDTO dto) {
+        UserEntity user = getUserByUsername(username);
+        Goal goal = user.getGoals().stream()
+                .filter(g -> g.getGoalId().equals(dto.goalId()))
+                .findFirst()
+                .orElseThrow(() -> new NotFoundException("Goal not found"));
+
+        goal.setName(dto.name());
+        goal.setTargetDate(dto.targetDate());
+        goal.setTargetAmount(dto.targetAmount());
+
+        return goalMapper.toResponseGoalDTO(goal, user);
+    }
+
+    public Map<String, Float> updateAmount(String username, UpdateAmountDTO dto) {
+        UserEntity user = getUserByUsername(username);
+        user.setCurrentAmount(dto.amount());
+        return Map.of("currentAmount", user.getCurrentAmount());
+    }
 }
 

@@ -2,11 +2,11 @@ package com.demo.demo.controllers;
 
 import com.demo.demo.config.security.JwtUtil;
 import com.demo.demo.dtos.request.TokenRequestDto;
-import com.demo.demo.dtos.response.AuthResponseDto;
+import com.demo.demo.dtos.response.AuthGoogleResponseDto;
 import com.demo.demo.entities.RoleEntity;
 import com.demo.demo.entities.UserEntity;
 import com.demo.demo.exceptions.NotFoundException;
-import com.demo.demo.repositories.RoleRepository;
+import com.demo.demo.repositories.GoalRepository;
 import com.demo.demo.repositories.UserRepository;
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdTokenVerifier;
@@ -15,7 +15,6 @@ import com.google.api.client.json.jackson2.JacksonFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,7 +34,7 @@ public class GoogleAuthController {
 
     private final JwtUtil jwtUtil;
     private final UserRepository userRepository;
-    private final RoleRepository roleRepository;
+    private final GoalRepository roleRepository;
 
     @PostMapping("/verify-token")
     public ResponseEntity<?> verifyGoogleToken(@RequestBody TokenRequestDto tokenRequest) {
@@ -53,7 +52,8 @@ public class GoogleAuthController {
 
             if (idToken != null) {
                 GoogleIdToken.Payload payload = idToken.getPayload();
-
+                AuthGoogleResponseDto response = new AuthGoogleResponseDto();
+                response.setFirstTime(false);
                 // Obtener el email del usuario y name
                 String email = payload.getEmail();
                 String name = (String) payload.get("given_name");
@@ -69,15 +69,14 @@ public class GoogleAuthController {
 
                     RoleEntity role = roleRepository.findRoleByName("ROLE_USER").orElseThrow(() -> new NotFoundException(String.format("Role not found with name %s","ROLE_USER")));
                     newUser.getRoles().add(role);
-
+                    response.setFirstTime(true);
                     return userRepository.save(newUser);
                 });
-
                 // Generar el JWT para tu backend
-                String accessToken = jwtUtil.generateToken( user);
+                response.setToken(jwtUtil.generateToken(user));
 
                 // Respuesta con el access token y el ID del usuario
-                return ResponseEntity.ok(new AuthResponseDto(accessToken) );
+                return ResponseEntity.ok(response);
             } else {
                 return ResponseEntity.status(400).body("Invalid ID token.");
             }

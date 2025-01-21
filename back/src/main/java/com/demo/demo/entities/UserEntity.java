@@ -1,8 +1,5 @@
 package com.demo.demo.entities;
 
-import com.demo.demo.enums.FinancialKnowledge;
-import com.demo.demo.enums.MainGoal;
-import com.demo.demo.enums.RiskPreference;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -36,20 +33,25 @@ public class UserEntity implements UserDetails {
     @Column()
     private String password;
 
-    @Enumerated(EnumType.STRING)
+//    @Enumerated(EnumType.STRING)
     @Column(name = "main_goal", nullable = true)
-    private MainGoal mainGoal;
+    private String mainGoal;
 
-    @Enumerated(EnumType.STRING)
+//    @Enumerated(EnumType.STRING)
     @Column(name = "financial_knowledge", nullable = true)
-    private FinancialKnowledge financialKnowledge;
+    private String financialKnowledge;
 
-    @Enumerated(EnumType.STRING)
+//    @Enumerated(EnumType.STRING)
     @Column(name = "risk_preference", nullable = true)
-    private RiskPreference riskPreference;
+    private String riskPreference;
 
+    @Column(name = "onboarding_complete", nullable = false)
+    boolean onboardingComplete;
 
+    private float currentAmount=0;//prefieren llamarlo fondos o wallet...?
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Goal> goals;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(

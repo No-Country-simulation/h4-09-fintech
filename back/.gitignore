@@ -4,8 +4,6 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
-.env
-.env/
 ### STS ###
 .apt_generated
 .classpath
@@ -20,6 +18,7 @@ target/
 *.iws
 *.iml
 *.ipr
+*.java~
 
 ### NetBeans ###
 /nbproject/private/
@@ -33,5 +32,4 @@ build/
 
 ### VS Code ###
 .vscode/
-.env
 structure.json
