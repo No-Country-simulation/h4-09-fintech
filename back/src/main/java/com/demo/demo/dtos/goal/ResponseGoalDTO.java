@@ -6,9 +6,11 @@ import java.util.UUID;
 public record ResponseGoalDTO(
     UUID goalId,
     String name,
+
+    Date startDate,
     Date targetDate,
 
-    int targetAmount,
-    int currentAmount
+    long targetAmount,
+    long currentAmount
 ) {
 }

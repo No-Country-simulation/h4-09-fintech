@@ -1,9 +1,12 @@
 package com.demo.demo.controllers;
 
 import com.demo.demo.config.security.CurrentUser;
+import com.demo.demo.dtos.goal.CreateGoalDTO;
+import com.demo.demo.dtos.goal.ResponseGoalDTO;
 import com.demo.demo.dtos.request.UpdateUserRequestDto;
 import com.demo.demo.entities.UserEntity;
 import com.demo.demo.services.UserService;
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -24,12 +27,12 @@ public class UserController {
         UserEntity updatedUser = userService.updateUser(currentUser.getUsername(), dto);
         return ResponseEntity.ok(updatedUser);
     }
-//    @Transactional
-//    @PostMapping("/create_goal")
-//    public ResponseEntity<ResponseGoalDTO> createGoal(
-//            @RequestBody CreateGoalDTO createGoalDTO,
-//            @CurrentUser UserEntity user
-//            ) {
-//        return ResponseEntity.ok(userService.createGoal(createGoalDTO, user));
-//    }
+    @Transactional
+    @PostMapping("/create_goal")
+    public ResponseEntity<ResponseGoalDTO> createGoal(
+            @RequestBody CreateGoalDTO createGoalDTO,
+            @CurrentUser UserEntity user
+            ) {
+        return ResponseEntity.ok(userService.createGoal(createGoalDTO, user));
+    }
 }

@@ -27,7 +27,7 @@ public class Goal {
     private Date targetDate;
 
     private long targetAmount;
-    private long currentAmount;
+//    private long currentAmount; lo tiene el usuario
 
     @ManyToOne
     private UserEntity user;
