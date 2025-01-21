@@ -167,10 +167,10 @@ export default function Onboarding() {
 			)}
 			{/* Modal para confirmar omisión */}
 			{showModal && (
-				<div className={styles.modalOverlay}>
+				<div className={styles.modalOverlay} onClick={handleCancelSkip}>
 					<div className={styles.modal}>
 						<CompleteQuestions />
-						<h5>¡Completa las preguntas!</h5>
+						<h5 className='body2'>¡Completa las preguntas!</h5>
 						<span>Necesitamos que respondas las preguntas restantes para crear tu perfil financiero personalizado y aprovechar al máximo tu experiencia con IUPI.</span>
 						<div className={styles.modalButtons}>
 							<button type='button' onClick={handleConfirmSkip} className='secondaryButton'>
