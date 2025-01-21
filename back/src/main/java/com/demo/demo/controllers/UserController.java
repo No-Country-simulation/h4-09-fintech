@@ -28,7 +28,7 @@ import java.util.UUID;
 @RequestMapping("/api/user")
 public class UserController {
     final UserService userService;
-    @PatchMapping("/api/users/update")
+    @PatchMapping("/update")
     public ResponseEntity<UserEntity> updateUser(
             @CurrentUser UserEntity currentUser,
             @RequestBody @Valid UpdateUserRequestDto dto) {

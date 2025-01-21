@@ -3,7 +3,6 @@ package com.demo.demo.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.context.annotation.Bean;
 
 import java.time.LocalDateTime;
 

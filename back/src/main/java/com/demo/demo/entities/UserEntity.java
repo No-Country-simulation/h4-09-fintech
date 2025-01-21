@@ -1,5 +1,6 @@
 package com.demo.demo.entities;
 
+
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -33,6 +34,9 @@ public class UserEntity implements UserDetails {
     @Column()
     private String password;
 
+    @Column()
+    private boolean onboardingComplete; //false por defecto
+
 //    @Enumerated(EnumType.STRING)
     @Column(name = "main_goal", nullable = true)
     private String mainGoal;
@@ -45,8 +49,6 @@ public class UserEntity implements UserDetails {
     @Column(name = "risk_preference", nullable = true)
     private String riskPreference;
 
-    @Column(name = "onboarding_complete", nullable = false)
-    boolean onboardingComplete;
 
     private float currentAmount=0;//prefieren llamarlo fondos o wallet...?
 
