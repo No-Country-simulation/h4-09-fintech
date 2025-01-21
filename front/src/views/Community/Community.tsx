@@ -7,8 +7,6 @@ import { Link } from 'react-router-dom'
 import ContainerPostCards from './components/ContainerPostCards'
 import { posts } from './mocks/posts'
 
-
-
 export default function Community() {
 	// const { data, loading, error } = useFetchDataWithToken(`${baseUrl}/api/posts`)
 	// if (loading) {
@@ -34,13 +32,17 @@ export default function Community() {
 				<h1 className={styles.title}>Comunidad & Noticias</h1>
 				<h2 className='body3'>Estos son los últimos posteos de la comunidad</h2>
 				<ContainerPostCards posts={ultimosPosteos} />
-				<Link to='/community/forum'>ver mas</Link>
+				<Link to='/community/forum' className={styles.createButton}>
+					ver mas
+				</Link>
 				<h2 className='body3'>Estas son las últimas noticias del mercado financiero </h2>
 				<div>Noticia</div>
 				<div>Noticia</div>
 				<div>Noticia</div>
 				<div>Noticia</div>
-				<Link to='/community//news' >ver mas</Link>
+				<Link to='/community//news' className={styles.createButton}>
+					ver mas
+				</Link>
 			</div>
 		</div>
 	)
