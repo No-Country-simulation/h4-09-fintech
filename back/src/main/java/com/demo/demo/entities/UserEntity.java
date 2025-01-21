@@ -1,8 +1,6 @@
 package com.demo.demo.entities;
 
-import com.demo.demo.enums.FinancialKnowledge;
-import com.demo.demo.enums.MainGoal;
-import com.demo.demo.enums.RiskPreference;
+
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -52,7 +50,10 @@ public class UserEntity implements UserDetails {
     private String riskPreference;
 
 
+    private float currentAmount=0;//prefieren llamarlo fondos o wallet...?
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Goal> goals;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
