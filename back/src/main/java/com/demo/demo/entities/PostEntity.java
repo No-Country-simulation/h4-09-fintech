@@ -33,7 +33,7 @@ public class PostEntity {
     @Column(nullable = false, columnDefinition = "TEXT")
     private String text;
 
-    @Column(name = "creation_user", nullable = false)
+    @Column(name = "creation_user_date", nullable = false)
     private LocalDateTime creationUser;
 
     @Column(name = "creation_date", nullable = false)

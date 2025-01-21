@@ -48,7 +48,7 @@ public class UserEntity implements UserDetails {
     @Column(name = "onboarding_complete", nullable = false)
     boolean onboardingComplete;
 
-    private long currentAmount=0;
+    private float currentAmount=0;//prefieren llamarlo fondos o wallet...?
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Goal> goals;

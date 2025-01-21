@@ -26,10 +26,11 @@ public class Goal {
     private Date startDate;
     private Date targetDate;
 
-    private long targetAmount;
+    private float targetAmount;
 //    private long currentAmount; lo tiene el usuario
 
     @ManyToOne
+    @JoinColumn(name = "user_id")
     private UserEntity user;
 
 }

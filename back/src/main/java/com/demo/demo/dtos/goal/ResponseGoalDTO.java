@@ -10,7 +10,10 @@ public record ResponseGoalDTO(
     Date startDate,
     Date targetDate,
 
-    long targetAmount,
-    long currentAmount
+    float targetAmount,
+    float currentAmount,
+    float progress,
+
+    boolean isCompleted
 ) {
 }
