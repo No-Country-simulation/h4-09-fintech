@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.UUID;
 
@@ -23,8 +24,8 @@ public class Goal {
     private String name;
 
     @UpdateTimestamp
-    private Date startDate;
-    private Date targetDate;
+    private LocalDateTime startDate;
+    private LocalDateTime targetDate;
 
     private float targetAmount;
 //    private long currentAmount; lo tiene el usuario
