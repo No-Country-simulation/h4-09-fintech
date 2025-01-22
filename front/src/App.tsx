@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Footer from "./components/footer/Footer";
 import Navbar from "./components/navbar/Navbar";
@@ -65,9 +65,12 @@ function App() {
         {/* GESTION DE  INVERSIONES */}
 
         <Route path="filtros-inversion" element={<FiltrosInversion />}>
+          <Route index element={<Navigate to="categorias" />} />{" "}
+          {/* Redirige al path de "categorias" */}
           <Route path="todos" element={<Todos />} />
           <Route path="nivel-riesgo" element={<NivelRiesgo />} />
-          <Route path="categorias" element={<Categorias />} />
+          <Route path="categorias" element={<Categorias />} />{" "}
+          {/* Ruta explícita para "categorias" */}
           <Route path="horizonte-temporal" element={<HorizonteTemporal />} />
           <Route
             path="rendimiento-historico"

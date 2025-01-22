@@ -1,6 +1,8 @@
 import { ArrowLeftIcon } from "@heroicons/react/24/outline";
-import "./FiltrosInversion.css";
 import { Link, NavLink, Outlet } from "react-router-dom";
+
+import "./FiltrosInversion.css";
+
 export const FiltrosInversion = () => {
   return (
     <div className="container-filtros-inversion">

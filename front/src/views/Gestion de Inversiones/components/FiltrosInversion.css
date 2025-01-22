@@ -21,6 +21,9 @@
   min-width: 94vw;
   max-width: 94vw;
 }
+.container-filtros-inversion h1 a {
+  color: inherit;
+}
 .container-btns div {
   height: 50%;
   width: 100%;
