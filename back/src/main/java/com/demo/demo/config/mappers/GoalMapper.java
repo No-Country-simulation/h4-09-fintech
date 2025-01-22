@@ -8,15 +8,20 @@ import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
 import org.mapstruct.ReportingPolicy;
 
+import java.time.LocalDateTime;
+
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE,componentModel = MappingConstants.ComponentModel.SPRING)
 public interface GoalMapper {
 
     @Mapping(target = "name", source = "goal.name")
     @Mapping(target = "currentAmount", source = "user.currentAmount")
+    @Mapping(target = "startDate", source = "goal.startDate", defaultExpression = "java(getDefaultStartDate(startDate))")
     @Mapping(target = "progress", expression =
             "java((goal.getTargetAmount() > 0) ? " +
                     "((user.getCurrentAmount() / goal.getTargetAmount()) * 100) : 0)")
     ResponseGoalDTO toResponseGoalDTO(Goal goal, UserEntity user);
 
-
+    default LocalDateTime getDefaultStartDate(LocalDateTime startDate) {
+        return startDate != null ? startDate : LocalDateTime.now();
+    }
 }

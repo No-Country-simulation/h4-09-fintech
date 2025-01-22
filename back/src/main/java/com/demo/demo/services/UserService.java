@@ -106,7 +106,7 @@ public class UserService implements UserDetailsService {
 
         userRepository.save(userEntity);
 
-        return goalMapper.toResponseGoalDTO(userEntity.getGoals().get(0), userEntity);
+        return goalMapper.toResponseGoalDTO(userEntity.getGoals().getLast(), userEntity);
     }
 
     public List<ResponseGoalDTO> getGoals(String username) {
