@@ -22,6 +22,7 @@ import News from './views/Community/News/News'
 import Forum from './views/Community/Forum/Forum'
 import { Notificaciones } from './views/Dashboard/notificaciones/Notificaciones'
 import { ObjetivosNotif, Recordatorios, Todo } from './views/Dashboard/notificaciones/pages/PagesNotif'
+import ForumView from './views/Community/Forum/[category]/ForumView'
 import PostView from './views/Community/Forum/[id]/PostView'
 
 function App() {
@@ -53,14 +54,15 @@ function App() {
 				<Route path='/profile' element={<Profile />} />
 				<Route path='/editprofile' element={<EditProfile />} />
 				<Route path='/configurations' element={<Configurations />} />
-				
+
 				{/* rutas anidadas para community */}
 				<Route path='/community/'>
 					<Route index element={<Community />} />
 					<Route path='create' element={<Create />} />
 					<Route path='news' element={<News />} />
 					<Route path='forum' element={<Forum />} />
-					<Route path='forum/:id' element={<PostView />} />
+					<Route path='forum/:category' element={<ForumView />} />
+					<Route path='post/:id' element={<PostView />} />
 				</Route>
 
 				<Route path='/*' element={<Error />} />

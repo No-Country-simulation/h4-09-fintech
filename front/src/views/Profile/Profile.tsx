@@ -7,7 +7,7 @@ import { GoGear } from "react-icons/go";
 import { TbWorld } from "react-icons/tb";
 import { LuMoon } from "react-icons/lu";
 import { RxExit } from "react-icons/rx";
-import { GiReceiveMoney } from "react-icons/gi";
+// import { GiReceiveMoney } from "react-icons/gi";
 
 export default function Profile() {
   const [profileImage, setProfileImage] = useState<string | null>(null);

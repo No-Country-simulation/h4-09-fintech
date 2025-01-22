@@ -1,9 +1,10 @@
 import styles from './ForoCard.module.css'
-import { IForo } from '../mocks/foros.mock'
+import { IForo } from '../../mocks/foros.mock'
 // import ShareIcon from '../../../assets/icons/(community)/ShareIcon'
-import BookmarkIcon from '../../../assets/icons/(community)/BookmarkIcon'
-import BookmarkFullIcon from '../../../assets/icons/(community)/BookmarkFullIcon'
+import BookmarkIcon from '../../../../assets/icons/(community)/BookmarkIcon'
+import BookmarkFullIcon from '../../../../assets/icons/(community)/BookmarkFullIcon'
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 
 type Props = {
 	foro: IForo
@@ -34,9 +35,9 @@ export default function ForoCard({ foro }: Props) {
 			</div>
 			<img src={foro.img} alt='imagen' className={styles.img} />
 			<p>{foro.description}</p>
-			<button type='button' className={styles.createButton}>
+			<Link to={`/community/forum/${foro.category}`} className={styles.createButton}>
 				¡Únete ahora!
-			</button>
+			</Link>
 		</div>
 	)
 }
