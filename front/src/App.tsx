@@ -25,6 +25,12 @@ import {
 import PostView from "./views/Community/Forum/[id]/PostView";
 import { AlertasInversion } from "./views/Dashboard/notificaciones/pages/AlertasInversion";
 import { GestionInversiones } from "./views/Gestion de Inversiones/GestionInversiones";
+import { FiltrosInversion } from "./views/Gestion de Inversiones/components/FiltrosInversion";
+import { Todos } from "./views/Gestion de Inversiones/components/pages filtros/Todos";
+import { NivelRiesgo } from "./views/Gestion de Inversiones/components/pages filtros/NivelRiesgo";
+import { Categorias } from "./views/Gestion de Inversiones/components/pages filtros/Categorias";
+import { HorizonteTemporal } from "./views/Gestion de Inversiones/components/pages filtros/HorizonteTemporal";
+import { RendimientoHistorico } from "./views/Gestion de Inversiones/components/pages filtros/RendimientoHistorico";
 
 function App() {
   return (
@@ -54,6 +60,19 @@ function App() {
           <Route path="todo" element={<Todo />} />
           <Route path="objetivos-notif" element={<ObjetivosNotif />} />
           <Route path="recordatorios" element={<Recordatorios />} />
+        </Route>
+
+        {/* GESTION DE  INVERSIONES */}
+
+        <Route path="filtros-inversion" element={<FiltrosInversion />}>
+          <Route path="todos" element={<Todos />} />
+          <Route path="nivel-riesgo" element={<NivelRiesgo />} />
+          <Route path="categorias" element={<Categorias />} />
+          <Route path="horizonte-temporal" element={<HorizonteTemporal />} />
+          <Route
+            path="rendimiento-historico"
+            element={<RendimientoHistorico />}
+          />
         </Route>
         <Route path="/alertas-inversion" element={<AlertasInversion />} />
 

@@ -35,7 +35,7 @@ export const GestionInversiones = () => {
       </div>
       <h4>
         ¿En que desea invertir?{" "}
-        <Link to="">
+        <Link to="/filtros-inversion">
           <AdjustmentsHorizontalIcon className="iconos-hero" />
         </Link>
       </h4>
