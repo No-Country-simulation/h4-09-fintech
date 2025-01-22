@@ -1,3 +1,4 @@
+
 import { Route, Routes } from 'react-router-dom'
 import './App.css'
 import Footer from './components/footer/Footer'
@@ -24,36 +25,39 @@ import { Notificaciones } from './views/Dashboard/notificaciones/Notificaciones'
 import { ObjetivosNotif, Recordatorios, Todo } from './views/Dashboard/notificaciones/pages/PagesNotif'
 import ForumView from './views/Community/Forum/[category]/ForumView'
 import PostView from './views/Community/Forum/[id]/PostView'
+import { AlertasInversion } from "./views/Dashboard/notificaciones/pages/AlertasInversion";
+
 
 function App() {
-	return (
-		<>
-			<Navbar />
-			<Routes>
-				<Route path='/' element={<Landing />} />
-				{/* rutas anidadas dentro de "/auth"  */}
-				<Route path='/auth/'>
-					<Route index element={<Auth />} />
-					<Route path='login' element={<Login />} />
-					<Route path='register' element={<Register />} />
-				</Route>
+  return (
+    <>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Landing />} />
+        {/* rutas anidadas dentro de "/auth"  */}
+        <Route path="/auth/">
+          <Route index element={<Auth />} />
+          <Route path="login" element={<Login />} />
+          <Route path="register" element={<Register />} />
+        </Route>
 
-				<Route path='/onboarding' element={<Onboarding />} />
-				<Route path='/dashboard' element={<Dashboard />} />
+        <Route path="/onboarding" element={<Onboarding />} />
+        <Route path="/dashboard" element={<Dashboard />} />
 
-				{/* Ruta Notificaciones con subrutas */}
-				<Route path='/notificaciones' element={<Notificaciones />}>
-					<Route path='todo' element={<Todo />} />
-					<Route path='objetivos-notif' element={<ObjetivosNotif />} />
-					<Route path='recordatorios' element={<Recordatorios />} />
-				</Route>
-				<Route path='/objetivos' element={<Objetivos />} />
-				<Route path='/objetivo/:nombre' element={<Objetivo />} />
-				<Route path='/gestion' element={<Gestion />} />
-				<Route path='/inversiones' element={<Inversiones />} />
-				<Route path='/profile' element={<Profile />} />
-				<Route path='/editprofile' element={<EditProfile />} />
-				<Route path='/configurations' element={<Configurations />} />
+        {/* Ruta Notificaciones con subrutas */}
+        <Route path="/notificaciones" element={<Notificaciones />}>
+          <Route path="todo" element={<Todo />} />
+          <Route path="objetivos-notif" element={<ObjetivosNotif />} />
+          <Route path="recordatorios" element={<Recordatorios />} />
+        </Route>
+        <Route path="/alertas-inversion" element={<AlertasInversion />} />
+        <Route path="/objetivos" element={<Objetivos />} />
+        <Route path="/objetivo/:nombre" element={<Objetivo />} />
+        <Route path="/gestion" element={<Gestion />} />
+        <Route path="/inversiones" element={<Inversiones />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/editprofile" element={<EditProfile />} />
+        <Route path="/configurations" element={<Configurations />} />
 
 				{/* rutas anidadas para community */}
 				<Route path='/community/'>
@@ -65,11 +69,11 @@ function App() {
 					<Route path='post/:id' element={<PostView />} />
 				</Route>
 
-				<Route path='/*' element={<Error />} />
-			</Routes>
-			<Footer />
-		</>
-	)
+        <Route path="/*" element={<Error />} />
+      </Routes>
+      <Footer />
+    </>
+  );
 }
 
-export default App
+export default App;

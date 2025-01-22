@@ -1,6 +1,6 @@
 .title {
   text-align: start;
-  margin: 90px 20px;
+  margin: 10px 20px;
   color: black;
   font-size: 36px;
 }
@@ -14,6 +14,7 @@
 .subtitle {
   color: black;
   font-size: 32px;
+  text-align: center;
 }
 
 @media (max-width: 767px) {

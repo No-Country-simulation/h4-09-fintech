@@ -6,6 +6,7 @@ import { FaRegCreditCard } from "react-icons/fa6";
 import { FaBalanceScaleRight } from "react-icons/fa";
 import { TbBrandCashapp } from "react-icons/tb";
 import { BsGraphUpArrow } from "react-icons/bs";
+import { Link } from "react-router-dom";
 
 
 
@@ -16,9 +17,9 @@ export default function Configurations() {
       <div className={styles.container}>
       <h1 className={styles.title}>
           {" "}
-          <a href="profile">
+          <Link to="/profile">
             <FaArrowLeft />
-          </a>
+          </Link>
           Configuración{" "}
         </h1>
           
