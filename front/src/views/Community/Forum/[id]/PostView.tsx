@@ -1,5 +1,5 @@
 import { Link, useParams } from 'react-router-dom'
-import { posts } from '../../mocks/posts'
+import { posts } from '../../mocks/posts.mock'
 import styles from './PostView.module.css'
 import GoBackIcon from '../../../../assets/icons/GoBackIcon'
 export default function PostView() {
