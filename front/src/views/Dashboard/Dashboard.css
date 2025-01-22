@@ -111,6 +111,10 @@
   width: 94vw;
   position: relative;
 }
+.box-section-standart {
+  box-shadow: 0 0 2px 1px rgba(128, 128, 128, 0.541);
+  border-radius: 5px;
+}
 .container-sub-g {
   width: 100%;
   height: 26.92%;

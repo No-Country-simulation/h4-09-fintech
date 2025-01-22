@@ -1,0 +1,125 @@
+.container-gestion-inversiones {
+  min-height: 100vh;
+  min-width: 100vw;
+  box-sizing: border-box;
+  padding: 0 3vw;
+}
+.container-gestion-inversiones h1 {
+  display: flex;
+  align-items: center;
+  height: 7.28vh;
+  width: 94vw;
+  font-size: 1.2rem;
+  font-weight: var(--font-poppins-500);
+}
+.container-gestion-inversiones h4 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--color-primario);
+}
+.container-gestion-inversiones h5 {
+  color: var(--color-primario);
+}
+
+.grid-container-gestion {
+  min-height: 24.03vh;
+  height: auto;
+  width: 94vw;
+  max-width: 94vw;
+  display: grid;
+  grid-template-columns: 46.69% 1fr 1fr;
+  grid-template-rows: 30.77% 69.23%;
+  grid-template-areas:
+    "ojo ojo ojo"
+    "saldo tarjeta agregar";
+}
+
+.grid-container-gestion .ojo {
+  grid-area: ojo;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 2%;
+  color: var(--color-primario);
+}
+.grid-container-gestion .saldo {
+  grid-area: saldo;
+  display: flex;
+  flex-direction: column;
+  height: 87.65%;
+  width: 90%;
+  margin: 0 auto auto auto;
+}
+.grid-container-gestion .tarjeta {
+  grid-area: tarjeta;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 87.65%;
+  width: 90%;
+  margin: 0 auto auto 0;
+}
+.grid-container-gestion .agregar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  grid-area: agregar;
+  height: 87.65%;
+  width: 90%;
+  border: dashed rgb(0, 72, 178) 1px !important;
+  border-radius: 6px;
+  margin: 0 auto auto 0;
+}
+.martercard {
+  height: 70%;
+  width: auto;
+}
+.saldo span {
+  height: 20%;
+  display: flex;
+  align-items: center;
+}
+.saldo small {
+  height: 20%;
+  font-size: 0.5rem;
+  display: flex;
+  align-items: center;
+}
+.saldo div {
+  height: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  font-size: 0.5rem;
+}
+.saldo div b {
+  background-color: var(--color-notificaciones);
+  color: var(--color-primario);
+  padding: 0 5px;
+  border-radius: 10px;
+}
+.inversiones-btn-group {
+  border: solid black 1px;
+  height: 7vh;
+  max-width: 94vw;
+  min-width: 94vw;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  overflow-x: scroll;
+}
+.inversiones-btn-group a {
+  max-height: 40px;
+  min-height: 40px;
+  max-height: 80px;
+  padding: 0 20px;
+  margin: 2%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: solid var(--color-primario) 1px;
+  color: var(--color-primario);
+  border-radius: 5px;
+  font-size: 0.6rem;
+}
