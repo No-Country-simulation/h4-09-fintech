@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 public record CreateGoalDTO(
         @NotBlank(message = "Goal name is required")
         String name,
-        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
+//        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-ddTHH:mm:ss.SSS")
         LocalDateTime targetDate,
         @NotNull(message = "Target amount is required")
         float targetAmount

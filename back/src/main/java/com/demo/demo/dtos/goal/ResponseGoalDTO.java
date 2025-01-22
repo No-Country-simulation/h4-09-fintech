@@ -13,8 +13,6 @@ public record ResponseGoalDTO(
 
     float targetAmount,
     float currentAmount,
-    float progress,
-
-    boolean isCompleted
+    float progress
 ) {
 }
