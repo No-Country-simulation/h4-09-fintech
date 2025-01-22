@@ -6,6 +6,7 @@ export interface IForo {
 	avatar?: string
 	ubication?: 'local' | 'global'
 	type: 'open' | 'privated'
+	category: string
 }
 
 export const foros: IForo[] = [
@@ -16,7 +17,8 @@ export const foros: IForo[] = [
 		avatar: '/comunity-imgs/avatar1.jpeg',
 		img: '/comunity-imgs/oro.jpeg',
 		ubication: 'local',
-		type: 'open'
+		type: 'open',
+		category: "Inversores"
 	},
 	{
 		id: 2,
@@ -25,6 +27,8 @@ export const foros: IForo[] = [
 		avatar: '/comunity-imgs/avatar3.jpeg',
 		img: '/comunity-imgs/bitcoins.jpeg',
 		ubication: 'global',
-		type: 'privated'
+		type: 'privated',
+		category: "Cripto"
 	}
 ]
+
