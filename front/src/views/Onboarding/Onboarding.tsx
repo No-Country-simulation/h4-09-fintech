@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import styles from './Onboarding.module.css'
+import styles from './onboarding.module.css'
 import { baseUrl } from '../../config/envs'
 import { onboardingSteps } from './(components)/steps'
 import { useNavigate } from 'react-router-dom'
