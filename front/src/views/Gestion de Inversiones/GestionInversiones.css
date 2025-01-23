@@ -129,6 +129,10 @@
   font-size: 0.6rem;
   font-weight: 500;
 }
+.inversiones-btn-group a.active {
+  background-color: var(--color-primario);
+  color: var(--color-fondo);
+}
 .container-gestion-inversiones h4,
 .container-gestion-inversiones h5,
 .container-gestion-inversiones p {

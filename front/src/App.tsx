@@ -31,6 +31,11 @@ import { NivelRiesgo } from "./views/Gestion de Inversiones/components/pages fil
 import { Categorias } from "./views/Gestion de Inversiones/components/pages filtros/Categorias";
 import { HorizonteTemporal } from "./views/Gestion de Inversiones/components/pages filtros/HorizonteTemporal";
 import { RendimientoHistorico } from "./views/Gestion de Inversiones/components/pages filtros/RendimientoHistorico";
+import { Acciones } from "./views/Gestion de Inversiones/pages/Acciones";
+import { MetalesPreciosos } from "./views/Gestion de Inversiones/pages/MetalesPreciosos";
+import { Fondos } from "./views/Gestion de Inversiones/pages/Fondos";
+import { ETFS } from "./views/Gestion de Inversiones/pages/ETFS";
+import { Bonos } from "./views/Gestion de Inversiones/pages/Bonos";
 
 function App() {
   return (
@@ -52,11 +57,19 @@ function App() {
         {/* Ruta del Navbar */}
 
         <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/gestion" element={<GestionInversiones />} />
+        <Route path="/gestion" element={<GestionInversiones />}>
+          <Route path="acciones" element={<Acciones />} />
+          <Route path="bonos" element={<Bonos />} />
+          <Route path="etfs" element={<ETFS />} />
+          <Route path="fondos" element={<Fondos />} />
+          <Route path="metales-preciosos" element={<MetalesPreciosos />} />
+        </Route>
 
         {/* NOTIFICACIONES */}
 
         <Route path="/notificaciones" element={<Notificaciones />}>
+          <Route index element={<Navigate to="todo" />} />{" "}
+          {/* Redirige a "/notificaciones/todo" */}
           <Route path="todo" element={<Todo />} />
           <Route path="objetivos-notif" element={<ObjetivosNotif />} />
           <Route path="recordatorios" element={<Recordatorios />} />

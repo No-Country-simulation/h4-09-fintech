@@ -6,9 +6,17 @@ import {
 } from "@heroicons/react/24/outline";
 import mastercard from "../../assets/svg/MASTERCARD.svg";
 import "./GestionInversiones.css";
-import { Link } from "react-router-dom";
+import { Link, NavLink, Outlet } from "react-router-dom";
 
 export const GestionInversiones = () => {
+  const dataBotones = [
+    { nombre: "Acciones", link: "acciones" },
+    { nombre: "Bonos", link: "bonos" },
+    { nombre: "ETFs", link: "etfs" },
+    { nombre: "Fondos", link: "fondos" },
+    { nombre: "Metales preciosos", link: "metales-preciosos" },
+  ];
+
   return (
     <div className="container-gestion-inversiones">
       <h1>Gestión de inversiones</h1>
@@ -41,15 +49,16 @@ export const GestionInversiones = () => {
       </h4>
       <p>Invertí de manera fácil y rápida en el mercado.</p>
       <div className="inversiones-btn-group">
-        <Link to="">Acciones</Link>
-        <Link to="">Bonos</Link>
-        <Link to="">ETFs</Link>
-        <Link to="">Fondos</Link>
-        <Link to="">Metales preciosos</Link>
+        {dataBotones.map((boton, index) => (
+          <NavLink to={boton.link} key={index}>
+            {boton.nombre}
+          </NavLink>
+        ))}
       </div>
       <h5>Añadidos recientemente</h5>
       <section className="container-mercado">
         {/* desde aqui generar map de empresas */}
+        <Outlet />
         <div className="empresa box-section-standart">
           <img src="" alt="Mercado Libre" />
           <div className="nombre">
