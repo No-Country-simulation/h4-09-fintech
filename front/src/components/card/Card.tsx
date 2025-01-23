@@ -1,17 +1,16 @@
 import styles from "./Card.module.css";
 import { ReactNode } from "react";
 import { FaArrowRightLong } from "react-icons/fa6";
-
+import { Link } from "react-router-dom";
 
 interface CardProps {
     icon?: ReactNode;
     title?: string; 
     description?: string; 
-    arrow?: ReactNode; 
+    link?:string;
   }
 
-
-export default function Card({ icon, title, description}: CardProps) {
+export default function Card({ icon, title, description, link}: CardProps) {
   return (
     <div className={styles.card}>
       <div className={styles.icon}>
@@ -25,7 +24,13 @@ export default function Card({ icon, title, description}: CardProps) {
         </p>
       </div>
       <div>
-      <FaArrowRightLong />
+      {link ? (
+          <Link to={link} className={styles.arrowLink}>
+            <FaArrowRightLong className={styles.iconArrow}/>
+          </Link>
+        ) : (
+          <FaArrowRightLong className={styles.iconArrow}/>
+        )}
       </div>
     </div>
   );

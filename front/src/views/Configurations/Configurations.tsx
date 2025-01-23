@@ -9,7 +9,6 @@ import { BsGraphUpArrow } from "react-icons/bs";
 import { Link } from "react-router-dom";
 
 
-
 export default function Configurations() {
 
   return (
@@ -30,32 +29,32 @@ export default function Configurations() {
           icon={<IoMdNotificationsOutline /> }
           title="Preferencias de notificaciones"
           description="Mensajes, alertas, objetivos y sugerencias"
-          arrow=""
+          link=""
         />
         <Card
           icon={<FaRegCreditCard /> }
           title="Tarjeta de crédito"
           description="Ingresa tu tarjeta de crédito y debito preferida"
-          arrow=""
+          link=""
         />
         <h2 className={styles.subtitle}>Visualizaciones financieras</h2>
         <Card
           icon={<FaBalanceScaleRight />}
           title="Balance general"
           description="CRevision de activos, pasivos y patrimonio neto"
-          arrow=""
+          link=""
         />
         <Card
           icon={<TbBrandCashapp />}
           title="Objetivos financieros"
           description="Revision de progreso, plazos y prioridades definidas"
-          arrow=""
+          link=""
         />
         <Card
           icon={<BsGraphUpArrow /> }
           title="Ahorros"
           description="Automatiza, adecua tus metas y optimiza"
-          arrow=""
+          link=""
         />
         </div>
       </div>
