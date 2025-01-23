@@ -60,6 +60,21 @@ public class PostController {
             return ResponseEntity.status(400).body("Error al obtener el post: " + e.getMessage());
         }
     }
+    @GetMapping("/postcategory/{category}") // Importante: agregar {category} al PathVariable
+    public ResponseEntity<?> getPostByCategory(@PathVariable String category) {
+        try {
+            List<PostEntity> posts = postRepository.findPostsByCategory(category);
+
+            if (posts.isEmpty()) {
+                return ResponseEntity.status(404).body("No hay posts disponibles para la categoría: " + category);
+            }
+
+            return ResponseEntity.status(200).body(posts); // Devuelve la lista de posts
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("Error al obtener los posts: " + e.getMessage());
+        }
+    }
+
 
     @GetMapping("/all")
     public ResponseEntity<?> getAllPosts() {
