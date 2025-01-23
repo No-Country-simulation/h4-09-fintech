@@ -22,6 +22,7 @@ import {
   Recordatorios,
   Todo,
 } from "./views/Dashboard/notificaciones/pages/PagesNotif";
+import ForumView from "./views/Community/Forum/[category]/ForumView";
 import PostView from "./views/Community/Forum/[id]/PostView";
 import { AlertasInversion } from "./views/Dashboard/notificaciones/pages/AlertasInversion";
 import { GestionInversiones } from "./views/Gestion de Inversiones/GestionInversiones";
@@ -103,7 +104,8 @@ function App() {
           <Route path="create" element={<Create />} />
           <Route path="news" element={<News />} />
           <Route path="forum" element={<Forum />} />
-          <Route path="forum/:id" element={<PostView />} />
+          <Route path="forum/:category" element={<ForumView />} />
+          <Route path="post/:id" element={<PostView />} />
         </Route>
 
         {/* Ruta de error */}

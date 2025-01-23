@@ -1,13 +1,11 @@
 import { Link } from 'react-router-dom'
 import styles from '../community.module.css'
 import GoBackIcon from '../../../assets/icons/GoBackIcon'
-import ContainerPostCards from '../components/ContainerPostCards'
-import { posts } from '../mocks/posts'
 
 
 export default function Forum() {
 	//TODO traerme todos los posteos del back
-	const allPosts = posts
+
 
 	return (
 		<div className={styles.pageView}>
@@ -23,7 +21,6 @@ export default function Forum() {
 					</Link>
 				</div>
 				<h2 className='body3'>Clickea en los posteos para verlos completos</h2>
-				<ContainerPostCards posts={allPosts} />
 			</div>
 		</div>
 	)

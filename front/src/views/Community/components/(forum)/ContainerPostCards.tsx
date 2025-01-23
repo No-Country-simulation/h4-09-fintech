@@ -1,5 +1,5 @@
-import styles from './ContainerPostCards.module.css'
-import { IPost } from '../mocks/posts'
+import styles from './ContainerForoCards.module.css'
+import { IPost } from '../../mocks/posts.mock'
 import PostCard from './PostCard'
 
 type Props = {
@@ -7,8 +7,6 @@ type Props = {
 }
 
 export default function ContainerPostCards({ posts }: Props) {
-	// console.log(posts)
-
 	return (
 		<div className={styles.grid}>
 			{posts.map((post) => (
