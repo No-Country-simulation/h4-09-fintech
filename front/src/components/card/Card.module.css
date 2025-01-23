@@ -19,6 +19,10 @@
     font-size: 30px;
     color: #007BFF;
   }
+
+  .iconArrow{
+    font-size: 20px;
+  }
   
   .textContainer {
     flex: 1;

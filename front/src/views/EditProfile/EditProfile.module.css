@@ -9,7 +9,6 @@
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  object-fit: cover;
   border: 3px solid #0048ba;
 }
 
@@ -18,6 +17,7 @@
   width: 100%; 
   height: 100%;
   border-radius: 50%; 
+  object-fit: cover;
   border: 3px solid #0048ba; 
 }
 
@@ -55,6 +55,17 @@
   font-size: 28px;
   color: black;
   margin-right: 8px;
+}
+
+.buttonArrow{
+  border: none;
+  background-color: transparent;
+  height: 50px;
+}
+
+.icon{
+  font-size: 25px;
+  cursor: pointer;
 }
 
 .names {
@@ -139,6 +150,8 @@
   transition: 0.4s;
 }
 
+
+
 input:checked + .slider {
   background-color: #5654dd;
   border: 1px solid transparent;
@@ -158,26 +171,6 @@ input:checked + .slider:before {
   border-radius: 20px;
 }
 
-/* .formContainer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.form {
-  display: flex;
-  flex-direction: column;
-  width: 40%;
-  max-width: 600px;
-  margin: 20px auto;
-}
-
-.form input {
-  height: 40px;
-  border-radius: 10px;
-  padding: 0px 20px;
-} */
-
 .formContainer {
   padding: 20px;
   max-width: 600px;
@@ -195,6 +188,14 @@ input:checked + .slider:before {
   margin-bottom: 5px;
 }
 
+.editButton{
+  border: none;
+  background-color: transparent;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
 .inputWithButton {
   position: relative;
   display: flex;
@@ -203,10 +204,10 @@ input:checked + .slider:before {
 
 .inputWithButton input {
   width: 100%;
-  padding-right: 90px; /* Espacio para el botón */
+  padding-right: 90px;
   padding: 10px;
   height: 40px;
-  border: 1px solid #ccc;
+  border: 1px solid grey;
   border-radius: 5px;
   font-size: 14px;
 }
@@ -217,11 +218,16 @@ input:checked + .slider:before {
   height: 30px;
   padding: 0 15px;
   border: none;
-  color: black;
+  color: blue;
   background-color: transparent;
   border-radius: 5px;
   font-size: 14px;
   cursor: pointer;
+}
+
+.inputWithButton input:focus {
+  border-color: blue;
+  outline: none;
 }
 
 

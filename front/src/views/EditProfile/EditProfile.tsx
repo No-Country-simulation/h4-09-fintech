@@ -2,15 +2,22 @@ import styles from "./EditProfile.module.css";
 import { useState, useEffect } from "react";
 import { FaArrowLeft } from "react-icons/fa6";
 import { FaRegUser, FaCamera } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function Home() {
   const [profileImage, setProfileImage] = useState<string | null>(null);
-
   const [selectedOption, setSelectedOption] = useState("");
+  const [isPro, setIsPro] = useState(false);
+  const [isNameDisabled, setIsNameDisabled] = useState(true);
+  const [isPasswordDisabled, setIsPasswordDisabled] = useState(true);
+  const navigate = useNavigate();
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedOption(event.target.value);
+  };
+
+  const handleToggle = () => {
+    setIsPro(!isPro); // Alternar entre true y false
   };
 
   useEffect(() => {
@@ -49,9 +56,9 @@ export default function Home() {
       <div className={styles.container}>
         <h1 className={styles.title}>
           {" "}
-          <Link to="profile">
-            <FaArrowLeft />
-          </Link>
+          <button className={styles.buttonArrow} onClick={() => navigate(-1)}>
+            <FaArrowLeft className={styles.icon} />
+          </button>
           Datos financieros y personales{" "}
         </h1>
 
@@ -88,30 +95,15 @@ export default function Home() {
 
         <div className={styles.cardcontainer}>
           <div className={styles.card}>
-            <h3>Free Plan</h3>
+            <h3>{isPro ? "Pro Plan" : "Free Plan"}</h3>
             <label className={styles.switch}>
-              <input type="checkbox" />
+              <input type="checkbox" checked={isPro} onChange={handleToggle} />
               <span className={styles.slider}></span>
             </label>
           </div>
         </div>
 
         <h2 className={styles.subtitle}>Datos personales</h2>
-
-        {/* <div className={styles.formContainer}>
-          <div className={styles.form}>
-            <label htmlFor="">Nombre completo *</label>
-            <input type="text" placeholder="nombre" required />
-            <button type="submit">Editar</button>
-
-            <label htmlFor="">Correo Electronico *</label>
-            <input type="email" placeholder="correo" required />
-
-            <label htmlFor="">Contraseña * </label>
-            <input type="password" placeholder="password" required />
-            <button type="submit">Cambiar</button>
-          </div>
-        </div> */}
 
         <div className={styles.formContainer}>
           <div className={styles.form}>
@@ -122,9 +114,16 @@ export default function Home() {
                 type="text"
                 id="name"
                 placeholder="Carlos Narocki Vera"
+                disabled={isNameDisabled}
                 required
               />
-              <a href="">Editar</a>
+              <button
+                type="button"
+                onClick={() => setIsNameDisabled(!isNameDisabled)}
+                className={styles.editButton}
+              >
+                {isNameDisabled ? "Editar" : "Guardar"}
+              </button>
             </div>
 
             {/* Correo electrónico */}
@@ -135,6 +134,7 @@ export default function Home() {
                 id="email"
                 placeholder="carlosnarocki7@hotmail.com"
                 required
+                disabled
               />
             </div>
 
@@ -146,8 +146,15 @@ export default function Home() {
                 id="password"
                 placeholder="************"
                 required
+                disabled={isPasswordDisabled}
               />
-              <Link to="/">Cambiar</Link>
+              <button
+                type="button"
+                onClick={() => setIsPasswordDisabled(!isPasswordDisabled)}
+                className={styles.editButton}
+              >
+                {isPasswordDisabled ? "Cambiar" : "Guardar"}
+              </button>
             </div>
           </div>
         </div>

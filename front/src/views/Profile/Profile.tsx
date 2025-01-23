@@ -51,13 +51,15 @@ export default function Profile() {
 
         <div className={styles.profile}>
           <div className={styles.profilePictureContainer}>
-            <img
-              src={
-                profileImage || "https://via.placeholder.com/150?text=Perfil"
-              }
-              alt="Foto de perfil"
-              className={styles.profilePicture}
-            />
+            {profileImage ? (
+              <img
+                src={profileImage}
+                alt="Foto de perfil"
+                className={styles.profilePicture}
+              />
+            ) : (
+              <FaRegUser className={styles.defaultIcon} />
+            )}
 
             <label htmlFor="imageUpload" className={styles.cameraIcon}>
               <FaCamera />
@@ -87,32 +89,32 @@ export default function Profile() {
           icon={<FaRegUser />}
           title="Datos financieros y personales"
           description="Modifique o complete sus datos"
-          arrow=""
+          link="/editprofile"
         />
         <Card
           icon={<GoGear />}
           title="Configuracion"
           description="Añade o pruebe funciones para evitar vulnerabilidades"
-          arrow=""
+          link="/configurations"
         />
         <h2 className={styles.subtitle}>Pantalla y acciones</h2>
         <Card
           icon={<TbWorld />}
           title="Idioma"
           description="Cambia toda la interfaz a tu idioma"
-          arrow=""
+          link=""
         />
         <Card
           icon={<LuMoon />}
           title="Modo oscuro"
           description="Para facilitar la visualizacion de la pantalla"
-          arrow=""
+          link=""
         />
         <Card
           icon={<RxExit />}
           title="Cerrar sesion"
           description="O permanecer conectado y cambiar de usuario"
-          arrow=""
+          link="/"
         />
       </div>
     </>

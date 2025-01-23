@@ -32,15 +32,15 @@ export default function Navbar() {
               Dashboard</Link>
             </li>
             <li>
-              <Link to="/#"><FaHandHoldingDollar />
+              <Link to="/inversiones"><FaHandHoldingDollar />
               Gestión de inversiones</Link>
             </li>
             <li>
-              <Link to="/#"><FaPeopleGroup />
+              <Link to="/community/forum"><FaPeopleGroup />
               Comunidad & Noticias</Link>
             </li>
             <li>
-              <Link to="/#"><FaUser />
+              <Link to="/profile"><FaUser />
               Mi cuenta</Link>
             </li>
           </ul>
