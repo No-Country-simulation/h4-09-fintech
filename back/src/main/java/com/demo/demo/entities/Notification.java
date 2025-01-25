@@ -18,7 +18,7 @@ public class Notification {
     private Long id;
 
     private String title;
-    @Column(length = 400)
+    @Column(length = 5000)
     private String message;
     private Boolean isRead;
     @UpdateTimestamp

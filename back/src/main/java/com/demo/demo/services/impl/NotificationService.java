@@ -30,7 +30,8 @@ public class NotificationService {
             && !(goal.getLastNotificationProgress() > 100)) {
                 notification.setTitle("Avance en tu objetivo: " + goal.getName());
                 ChatResponse response = openAiApi.getChatModelNotification().call(new Prompt(createPrompt(user)));
-                notification.setMessage(response.getResults().getFirst().getOutput().getContent());
+//                System.out.println(response.getResults().getFirst().getOutput().getText());
+                notification.setMessage(response.getResults().getFirst().getOutput().getText());
                 notification.setType("goal");
                 notification.setIsRead(false);
                 goal.setLastNotificationProgress(goal.getLastNotificationProgress() + 20);
