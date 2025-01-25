@@ -5,6 +5,7 @@ import com.demo.demo.dtos.recover.ResetPasswordDTO;
 import com.demo.demo.dtos.request.LoginRequestDto;
 import com.demo.demo.dtos.request.RegisterRequestDto;
 import com.demo.demo.dtos.response.AuthResponseDto;
+import com.demo.demo.dtos.response.UserResponseDTO;
 import com.demo.demo.entities.UserEntity;
 import com.demo.demo.services.AuthService;
 import com.demo.demo.config.security.CurrentUser;
@@ -42,8 +43,19 @@ public class AuthController {
 
 
     @GetMapping("/check-login")
-    public ResponseEntity<UserEntity> checkLogin(@CurrentUser UserEntity user) {
-        return ResponseEntity.status(200).body(user);
+    public ResponseEntity<UserResponseDTO> checkLogin(@CurrentUser UserEntity user) {
+        UserResponseDTO userResponse = new UserResponseDTO();
+        userResponse.setUserId(user.getUserId());
+        userResponse.setUsername(user.getUsername());
+        userResponse.setName(user.getName());
+        userResponse.setLastName(user.getLastName());
+        userResponse.setOnboardingComplete(user.isOnboardingComplete());
+        userResponse.setMainGoal(user.getMainGoal());
+        userResponse.setFinancialKnowledge(user.getFinancialKnowledge());
+        userResponse.setRiskPreference(user.getRiskPreference());
+        userResponse.setCurrentAmount(user.getCurrentAmount());
+
+        return ResponseEntity.status(200).body(userResponse);
     }
 
     @GetMapping

@@ -21,22 +21,18 @@ public class PostService {
     private final PostRepository postRepository;
 
 
-    public PostEntity newPost(UserEntity userEntity, PostRequestDto postRequestDto){
-
-
+    public PostEntity newPost(UserEntity userEntity, PostRequestDto postRequestDto) {
         PostEntity postEntity = PostEntity.builder()
-                .userEntity(userEntity)
+                .userEntity(userEntity) // Usuario autenticado
                 .title(postRequestDto.title())
-
-                .creationDate(postRequestDto.creationDate())
+                .subtitle(postRequestDto.subtitle())
+                .text(postRequestDto.text())
+                .creationDate(LocalDateTime.now()) // Fecha y hora actuales
+                .creationUser(LocalDateTime.now())
                 .category(postRequestDto.category())
-                .subtitle(postRequestDto.subtitle())  // Nuevo campo
-                .text(postRequestDto.text())          // Nuevo campo
-                .creationUser(LocalDateTime.parse(postRequestDto.creationUser()))  // Nuevo campo
                 .build();
 
         return postRepository.save(postEntity);
-
     }
 
 
