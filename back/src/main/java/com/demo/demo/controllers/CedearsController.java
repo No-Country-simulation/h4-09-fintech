@@ -34,4 +34,9 @@ public class CedearsController {
     public ResponseEntity<CedearResponseDto> getCedearName(@PathVariable String cedear) throws ExecutionException, InterruptedException {
         return ResponseEntity.ok(cedearsService.getCedear(cedear));
     }
+
+//    @GetMapping("/all")
+//    public ResponseEntity<List<CedearResponseDto>> getAllCedears() {
+//        return ResponseEntity.ok(cedearsService.getAllCedears());
+//    }
 }

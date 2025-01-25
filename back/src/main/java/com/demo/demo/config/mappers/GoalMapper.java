@@ -14,11 +14,11 @@ import java.time.LocalDateTime;
 public interface GoalMapper {
 
     @Mapping(target = "name", source = "goal.name")
-    @Mapping(target = "currentAmount", source = "user.currentAmount")
+    @Mapping(target = "currentAmount", source = "user.funds")
     @Mapping(target = "startDate", source = "goal.startDate", defaultExpression = "java(getDefaultStartDate(startDate))")
     @Mapping(target = "progress", expression =
             "java((goal.getTargetAmount() > 0) ? " +
-                    "((user.getCurrentAmount() / goal.getTargetAmount()) * 100) : 0)")
+                    "((user.getFunds() / goal.getTargetAmount()) * 100) : 0)")
     ResponseGoalDTO toResponseGoalDTO(Goal goal, UserEntity user);
 
     default LocalDateTime getDefaultStartDate(LocalDateTime startDate) {

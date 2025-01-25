@@ -9,6 +9,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -23,12 +24,13 @@ public class Goal {
 
     private String name;
 
+    private int lastNotificationProgress = 0;
+    private float targetAmount;
+    //    private long currentAmount; lo tiene el usuario
+
     @UpdateTimestamp
     private LocalDateTime startDate;
     private LocalDateTime targetDate;
-
-    private float targetAmount;
-//    private long currentAmount; lo tiene el usuario
 
     @ManyToOne
     @JoinColumn(name = "user_id")
