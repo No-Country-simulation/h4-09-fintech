@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import "./Dashboard.css";
 import { BellAlertIcon, PlusCircleIcon } from "@heroicons/react/24/outline";
 import BarChartComponent from "./(components)/graficos/barchart/BarChart";
@@ -7,29 +7,67 @@ import Circular from "./(components)/graficos/Pastel/PieChart";
 import { UserIcon } from "@heroicons/react/16/solid";
 import { NoteDash } from "./notificaciones/NoteDash";
 import { Link } from "react-router-dom";
-import { useUser } from "../../contexts/UserContext";
 
-export const Dashboard = () => {
-  const { user, loading } = useUser();
+// Definimos los tipos para los datos del usuario
+interface UserData {
+  nombre: string;
+  correo: string;
+}
+
+export const Dashboard: React.FC = () => {
+  const [userdata, setUserData] = useState<UserData>({
+    nombre: "",
+    correo: "",
+  });
+  const [loadingUserData, setLoadingUserData] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    if (!loading) {
-      console.log("Usuario cargado:", user);
+    // Función para obtener una cookie específica
+    const getCookie = (name: string): string | null => {
+      const cookies = document.cookie.split("; ");
+      const cookie = cookies.find((row) => row.startsWith(`${name}=`));
+      return cookie ? decodeURIComponent(cookie.split("=")[1]) : null;
+    };
+
+    const token = getCookie("authToken");
+    if (!token) {
+      console.error("El token de autorización no está presente.");
+      setError("No se encontró el token de autorización.");
+      setLoadingUserData(false);
+      return;
     }
-  }, [loading, user]);
-  useEffect(() => {
-    fetch(`https://h4-09-fintech-production.up.railway.app/api/cedears`, {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6WyJST0xFX1VTRVIiXSwic3ViIjoiYm1AbWFpbC5jb20iLCJpYXQiOjE3Mzc3NjUxNDMsImV4cCI6MTczNzc2ODc0M30.tpMTDzzH5vE1jtr87q2yF0XZ76OGRy_X3BW0BLy5zIo`,
-        "Content-Type": "application/json",
-      },
-    })
-      .then((res) => res.json())
+
+    fetch(
+      `https://h4-09-fintech-production.up.railway.app/api/auth/check-login`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      }
+    )
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("Error al obtener los datos del usuario");
+        }
+        return res.json();
+      })
       .then((data) => {
-        console.log(data);
-      });
+        setUserData({
+          nombre: data.name || "Usuario",
+          correo: data.username || "Correo no disponible",
+        });
+        setError(null);
+      })
+      .catch((err: Error) => {
+        console.error(err);
+        setError("No se pudieron obtener los datos del usuario.");
+      })
+      .finally(() => setLoadingUserData(false));
   }, []);
+
   const data = [
     { name: "Casa", ventas: 50 },
     { name: "Auto", ventas: 20 },
@@ -38,8 +76,12 @@ export const Dashboard = () => {
     { name: "Educación", ventas: 100 },
   ];
 
-  if (loading) {
+  if (loadingUserData) {
     return <div>Cargando datos del usuario...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
   }
 
   return (
@@ -55,8 +97,8 @@ export const Dashboard = () => {
       <div className="container-usuario flex">
         <UserIcon id="foto-perfil" />
         <div>
-          <h2>¡Hola {user?.name || "Usuario"}!</h2>
-          <small className="correo-usuario-dash">{user?.email}</small>
+          <h2>¡Hola {userdata.nombre}!</h2>
+          <small className="correo-usuario-dash">{userdata.correo}</small>
         </div>
         <small className="free-plan">Free plan</small>
       </div>
