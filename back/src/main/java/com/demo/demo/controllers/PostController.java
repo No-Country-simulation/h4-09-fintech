@@ -26,24 +26,20 @@ public class PostController {
     private final PostService postService;
     private final PostRepository postRepository;
 
-    @PostMapping("/new") //crear nuevo posteo
-    public ResponseEntity<?> newPost(@AuthenticationPrincipal UserDetails userDetails, @RequestBody PostRequestDto dto ){
-        try{
-            //recupero el usuario a travez del username en el jwt "userDetails
+    @PostMapping("/new")
+    public ResponseEntity<?> newPost(
+            @AuthenticationPrincipal UserDetails userDetails,
+            @RequestBody PostRequestDto dto
+    ) {
+        try {
+            UserEntity userEntity = userRepository.findByUsername(userDetails.getUsername())
+                    .orElseThrow(() -> new NotFoundException("No se encontró usuario"));
 
-        UserEntity userEntity = userRepository.findByUsername(userDetails.getUsername())
-                .orElseThrow(() -> new NotFoundException("No se encontró usuario"));
-
-            //grabo el posteo teniendo el usuarioo y el dto de post
-        PostEntity postEntity = postService.newPost(userEntity,dto);
-
+            PostEntity postEntity = postService.newPost(userEntity, dto);
             return ResponseEntity.status(200).body("Nuevo post creado con éxito. ID: " + postEntity.getId());
-
+        } catch (Exception e) {
+            return ResponseEntity.status(400).body("Error in value: " + e.getMessage());
         }
-        catch (Exception e){
-            return ResponseEntity.status(400).body("Error in value " + e.getMessage()) ;
-        }
-
     }
 
     @GetMapping("/{postId}")
@@ -60,6 +56,21 @@ public class PostController {
             return ResponseEntity.status(400).body("Error al obtener el post: " + e.getMessage());
         }
     }
+    @GetMapping("/postcategory/{category}") // Importante: agregar {category} al PathVariable
+    public ResponseEntity<?> getPostByCategory(@PathVariable String category) {
+        try {
+            List<PostEntity> posts = postRepository.findPostsByCategory(category);
+
+            if (posts.isEmpty()) {
+                return ResponseEntity.status(404).body("No hay posts disponibles para la categoría: " + category);
+            }
+
+            return ResponseEntity.status(200).body(posts); // Devuelve la lista de posts
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("Error al obtener los posts: " + e.getMessage());
+        }
+    }
+
 
     @GetMapping("/all")
     public ResponseEntity<?> getAllPosts() {
