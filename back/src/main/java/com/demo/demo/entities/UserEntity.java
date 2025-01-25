@@ -50,10 +50,13 @@ public class UserEntity implements UserDetails {
     private String riskPreference;
 
 
-    private float currentAmount=0;//prefieren llamarlo fondos o wallet...?
+    private float funds =0;//prefieren llamarlo fondos o wallet...?
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Goal> goals;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Notification> notifications;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(

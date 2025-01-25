@@ -5,9 +5,8 @@ import com.demo.demo.dtos.goal.CreateGoalDTO;
 import com.demo.demo.dtos.goal.ResponseGoalDTO;
 import com.demo.demo.dtos.goal.UpdateAmountDTO;
 import com.demo.demo.dtos.goal.UpdateGoalDTO;
-import com.demo.demo.dtos.request.UpdateUserPreferencesDto;
 import com.demo.demo.dtos.request.UpdateUserRequestDto;
-import com.demo.demo.dtos.response.UserPreferencesResponseDto;
+import com.demo.demo.dtos.response.AddFundsResponse;
 import com.demo.demo.entities.UserEntity;
 import com.demo.demo.services.UserService;
 import jakarta.transaction.Transactional;
@@ -52,7 +51,7 @@ public class UserController {
     public ResponseEntity<ResponseGoalDTO> getGoal(@PathVariable UUID goalId, @CurrentUser UserEntity user) {
         return ResponseEntity.ok(userService.getGoal(goalId, user.getUsername()));
     }
-    @PatchMapping("/update_preferences")
+    @PatchMapping("/update_goal")
     public ResponseEntity<ResponseGoalDTO> updatePreferences(
             @CurrentUser UserEntity user,
             @RequestBody @Valid UpdateGoalDTO dto) {
@@ -60,10 +59,10 @@ public class UserController {
     }
 
     @Transactional
-    @PatchMapping("/update_amount")
-    public ResponseEntity<Map<String, Float>> updateAmount(
+    @PatchMapping("/add_funds")
+    public ResponseEntity<AddFundsResponse> addFounts(
             @CurrentUser UserEntity user,
             @RequestBody @Valid UpdateAmountDTO dto) {
-        return ResponseEntity.ok(userService.updateAmount(user.getUsername(), dto));
+        return ResponseEntity.ok(userService.addFounts(user.getUsername(), dto));
     }
 }

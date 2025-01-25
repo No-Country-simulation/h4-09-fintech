@@ -53,7 +53,7 @@ public class AuthController {
         userResponse.setMainGoal(user.getMainGoal());
         userResponse.setFinancialKnowledge(user.getFinancialKnowledge());
         userResponse.setRiskPreference(user.getRiskPreference());
-        userResponse.setCurrentAmount(user.getCurrentAmount());
+        userResponse.setCurrentAmount(user.getFunds());
 
         return ResponseEntity.status(200).body(userResponse);
     }

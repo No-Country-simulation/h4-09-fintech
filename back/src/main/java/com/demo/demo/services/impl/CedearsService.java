@@ -15,8 +15,11 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.*;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
+import java.util.stream.Collectors;
 
 @Service
 //@RequiredArgsConstructor
@@ -79,6 +82,15 @@ public class CedearsService {
         }
 
     }
+
+//    public List<CedearResponseDto> getAllCedears() {
+//        List Cedears = Arrays.stream(Cedear.values())
+////                .collect(Collectors.toMap(Enum::name, Cedear::getName));
+//
+//        List<CedearResponseDto> cedears = Cedears.entrySet().stream().map(entry -> {
+//            String cedear = entry.getKey();
+//        return null;
+//    }
 }
 
 

@@ -1,17 +1,21 @@
 package com.demo.demo.services;
 
 import com.demo.demo.config.mappers.GoalMapper;
+import com.demo.demo.config.mappers.NotificationMapper;
 import com.demo.demo.dtos.goal.CreateGoalDTO;
 import com.demo.demo.dtos.goal.ResponseGoalDTO;
 import com.demo.demo.dtos.goal.UpdateAmountDTO;
 import com.demo.demo.dtos.goal.UpdateGoalDTO;
 import com.demo.demo.dtos.request.UpdateUserPreferencesDto;
 import com.demo.demo.dtos.request.UpdateUserRequestDto;
+import com.demo.demo.dtos.response.AddFundsResponse;
 import com.demo.demo.dtos.response.UserPreferencesResponseDto;
 import com.demo.demo.entities.Goal;
+import com.demo.demo.entities.Notification;
 import com.demo.demo.entities.UserEntity;
 import com.demo.demo.exceptions.NotFoundException;
 import com.demo.demo.repositories.UserRepository;
+import com.demo.demo.services.impl.NotificationService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -29,6 +33,8 @@ public class UserService implements UserDetailsService {
 
     private final GoalMapper goalMapper;
     private final UserRepository userRepository;
+    private final NotificationService notificationService;
+    private final NotificationMapper notificationMapper;
 
 
     @Override
@@ -89,7 +95,7 @@ public class UserService implements UserDetailsService {
         return userRepository.save(user);
     }
 
-    private UserEntity getUserByUsername(String username) {
+    public UserEntity getUserByUsername(String username) {
         return userRepository.findByUsername(username)
                 .orElseThrow(() -> new NotFoundException("User not found"));
     }
@@ -137,10 +143,19 @@ public class UserService implements UserDetailsService {
         return goalMapper.toResponseGoalDTO(goal, user);
     }
 
-    public Map<String, Float> updateAmount(String username, UpdateAmountDTO dto) {
+    @Transactional
+    public AddFundsResponse addFounts(String username, UpdateAmountDTO dto) {
         UserEntity user = getUserByUsername(username);
-        user.setCurrentAmount(dto.amount());
-        return Map.of("currentAmount", user.getCurrentAmount());
+        user.setFunds(user.getFunds()+dto.amount());
+
+        List<Goal> goals = user.getGoals();
+        List<Notification> notifications =notificationService.accordingToProgress(goals, user);
+
+        userRepository.save(user);
+
+        return new AddFundsResponse(user.getFunds(), notificationMapper.toNotificationResponseDTOList(notifications));
     }
+
+
 }
 
