@@ -50,7 +50,7 @@ export function UserProvider({ children }: UserProviderProps) {
     try {
       const response = await fetch(`${baseUrl}/api/auth/check-login`, {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6WyJST0xFX1VTRVIiXSwic3ViIjoiYm1AbWFpbC5jb20iLCJpYXQiOjE3Mzc3NjUxNDMsImV4cCI6MTczNzc2ODc0M30.tpMTDzzH5vE1jtr87q2yF0XZ76OGRy_X3BW0BLy5zIo`,
         },
       });
 
@@ -59,10 +59,10 @@ export function UserProvider({ children }: UserProviderProps) {
         setUser(userData);
         console.log("Datos del usuario:", userData); // Esto mostrará los datos que recibes de la API.
       } else {
-        console.error(
-          "Error al obtener los datos del usuario:",
-          response.status
-        );
+        // console.error(
+        //   "Error al obtener los datos del usuario:",
+        //   response.status
+        // );
       }
     } catch (error) {
       console.error("Error en la solicitud:", error);

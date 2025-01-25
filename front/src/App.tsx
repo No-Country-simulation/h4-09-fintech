@@ -37,6 +37,7 @@ import { MetalesPreciosos } from "./views/Gestion de Inversiones/pages/MetalesPr
 import { Fondos } from "./views/Gestion de Inversiones/pages/Fondos";
 import { ETFS } from "./views/Gestion de Inversiones/pages/ETFS";
 import { Bonos } from "./views/Gestion de Inversiones/pages/Bonos";
+import { DetalleEconomico } from "./views/Gestion de Inversiones/components/DetalleEconomico";
 
 function App() {
   return (
@@ -91,6 +92,8 @@ function App() {
             element={<RendimientoHistorico />}
           />
         </Route>
+        <Route path="/detalle-economico" element={<DetalleEconomico />} />
+
         <Route path="/alertas-inversion" element={<AlertasInversion />} />
 
         {/* MI CUENTA */}

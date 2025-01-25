@@ -17,13 +17,25 @@ export const Dashboard = () => {
       console.log("Usuario cargado:", user);
     }
   }, [loading, user]);
-
+  useEffect(() => {
+    fetch(`https://h4-09-fintech-production.up.railway.app/api/cedears`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6WyJST0xFX1VTRVIiXSwic3ViIjoiYm1AbWFpbC5jb20iLCJpYXQiOjE3Mzc3NjUxNDMsImV4cCI6MTczNzc2ODc0M30.tpMTDzzH5vE1jtr87q2yF0XZ76OGRy_X3BW0BLy5zIo`,
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+      });
+  }, []);
   const data = [
     { name: "Casa", ventas: 50 },
     { name: "Auto", ventas: 20 },
-    { name: "Viaje", ventas: 8 },
-    { name: "Jubilación", ventas: 100 },
-    { name: "Educación", ventas: 180 },
+    { name: "Viaje", ventas: 3 },
+    { name: "Jubilación", ventas: 75 },
+    { name: "Educación", ventas: 100 },
   ];
 
   if (loading) {

@@ -32,7 +32,7 @@
   color: var(--color-primario);
   height: 35%;
   width: auto;
-  margin: 2% auto auto auto;
+  margin: auto;
 }
 
 @media (max-width: 337px) {

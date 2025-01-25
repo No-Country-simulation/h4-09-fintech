@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
 import "./NoteDash.css";
 import { XMarkIcon } from "@heroicons/react/16/solid";
+import logo from "../../../assets/icons/(iupi)/Logo iupi 14px.svg";
 
 export const NoteDash = () => {
   return (
     <div className="container-notificacion">
-      <div className="iupi-notes">iupi</div>
+      <img src={logo} className="logo-notificaciones" />
       <Link to="/notificaciones" className="info-notes">
         <h5>Progreso en tus alertas de inversión</h5>
         <p>
