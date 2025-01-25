@@ -9,7 +9,7 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch, { SwitchProps } from "@mui/material/Switch";
 
 // Estilo personalizado para el switch
-const MaterialUISwitch = styled(Switch)(({ theme, checked }) => ({
+const MaterialUISwitch = styled(Switch)(({ checked }) => ({
   width: 62,
   height: 34,
   padding: 7,
@@ -59,7 +59,7 @@ const MaterialUISwitch = styled(Switch)(({ theme, checked }) => ({
 }));
 
 // Estilo personalizado para el FormControlLabel
-const CustomFormControlLabel = styled(FormControlLabel)(({ theme }) => ({
+const CustomFormControlLabel = styled(FormControlLabel)(({}) => ({
   "& .MuiFormControlLabel-label": {
     fontFamily: "Poppins", // Cambia aquí la fuente
     fontWeight: 400, // Ajusta el grosor si lo necesitas
@@ -74,21 +74,17 @@ export const AlertasInversion = () => {
   const [checked4, setChecked4] = React.useState(true);
   const [checked5, setChecked5] = React.useState(true);
 
-  const handleChange1 = (event) => {
+  // Manejadores de cambio
+  const handleChange1 = (event: React.ChangeEvent<HTMLInputElement>) =>
     setChecked1(event.target.checked);
-  };
-  const handleChange2 = (event) => {
+  const handleChange2 = (event: React.ChangeEvent<HTMLInputElement>) =>
     setChecked2(event.target.checked);
-  };
-  const handleChange3 = (event) => {
+  const handleChange3 = (event: React.ChangeEvent<HTMLInputElement>) =>
     setChecked3(event.target.checked);
-  };
-  const handleChange4 = (event) => {
+  const handleChange4 = (event: React.ChangeEvent<HTMLInputElement>) =>
     setChecked4(event.target.checked);
-  };
-  const handleChange5 = (event) => {
+  const handleChange5 = (event: React.ChangeEvent<HTMLInputElement>) =>
     setChecked5(event.target.checked);
-  };
 
   return (
     <div className="container-alertas-inversion">

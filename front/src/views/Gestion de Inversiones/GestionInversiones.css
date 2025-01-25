@@ -1,0 +1,215 @@
+.container-gestion-inversiones {
+  min-height: 100vh;
+  min-width: 100vw;
+  box-sizing: border-box;
+  padding: 0 3vw;
+}
+.container-gestion-inversiones h1 {
+  display: flex;
+  align-items: center;
+  height: 7.28vh;
+  width: 94vw;
+  font-size: 1.2rem;
+  font-weight: var(--font-poppins-500);
+}
+.container-gestion-inversiones h4 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--color-primario);
+}
+.container-gestion-inversiones h5 {
+  color: var(--color-primario);
+}
+
+.grid-container-gestion {
+  min-height: 24.03vh;
+  height: auto;
+  width: 94vw;
+  max-width: 94vw;
+  display: grid;
+  grid-template-columns: 46.69% 1fr 1fr;
+  grid-template-rows: 30.77% 69.23%;
+  grid-template-areas:
+    "ojo ojo ojo"
+    "saldo tarjeta agregar";
+}
+
+.grid-container-gestion .ojo {
+  grid-area: ojo;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 2%;
+  font-weight: 500;
+  color: var(--color-primario);
+}
+.grid-container-gestion .saldo {
+  grid-area: saldo;
+  display: flex;
+  flex-direction: column;
+  height: 87.65%;
+  width: 90%;
+  margin: 0 auto auto auto;
+}
+.grid-container-gestion .tarjeta {
+  grid-area: tarjeta;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 87.65%;
+  width: 90%;
+  margin: 0 auto auto 0;
+}
+.grid-container-gestion .agregar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  grid-area: agregar;
+  height: 87.65%;
+  width: 90%;
+  border: dashed rgb(0, 72, 178) 1px !important;
+  border-radius: 6px;
+  margin: 0 auto auto 0;
+}
+.martercard {
+  height: 70%;
+  width: auto;
+}
+.saldo span {
+  height: 20%;
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+}
+.saldo small {
+  height: 20%;
+  font-size: 0.5rem;
+  display: flex;
+  align-items: center;
+}
+.saldo div {
+  height: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  font-size: 0.5rem;
+}
+.saldo div b {
+  background-color: var(--color-notificaciones);
+  color: var(--color-primario);
+  padding: 0 5px;
+  border-radius: 10px;
+}
+.inversiones-btn-group {
+  height: 7vh;
+  max-width: 94vw;
+  min-width: 94vw;
+  overflow: hidden;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  overflow-x: scroll;
+}
+.inversiones-btn-group::-webkit-scrollbar {
+  display: none;
+}
+.inversiones-btn-group a {
+  max-height: 40px;
+  min-height: 30px;
+  max-height: 80px;
+  padding: 0 20px;
+  margin: 2%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: solid var(--color-primario) 1px;
+  color: var(--color-primario);
+  border-radius: 5px;
+  font-size: 0.6rem;
+  font-weight: 500;
+}
+.inversiones-btn-group a.active {
+  background-color: var(--color-primario);
+  color: var(--color-fondo);
+}
+.container-gestion-inversiones h4,
+.container-gestion-inversiones h5,
+.container-gestion-inversiones p {
+  font-weight: 400;
+}
+.container-gestion-inversiones h4 {
+  font-size: 0.7rem;
+}
+.container-gestion-inversiones h5 {
+  font-size: 0.6rem;
+}
+.container-gestion-inversiones {
+  font-size: 0.6rem;
+}
+.container-mercado {
+  box-sizing: border-box;
+  min-width: 94vw;
+  height: auto;
+  min-height: max-content;
+}
+.empresa {
+  height: 10vh;
+  width: 94vw;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+  display: flex;
+  padding-right: 10px;
+}
+.empresa .clave {
+  width: 20%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.empresa :nth-child(2) {
+  width: 47%;
+}
+.empresa :nth-child(3) {
+  width: 33%;
+}
+.empresa .nombre {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+.empresa .nombre .accion {
+  display: flex;
+  width: 60%;
+  justify-content: space-evenly;
+}
+.empresa .mercado {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.empresa .mercado :nth-child(1) {
+  border-radius: 50px;
+  padding: 2px 4px;
+  color: #7a0002;
+  background-color: #ffebeb;
+}
+.empresa .mercado .porcentajes {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100%;
+}
+.porcentajes .flecha-trending {
+  stroke: var(--color-primario);
+}
+.porcentajes .subida {
+  color: var(--color-primario);
+  font-weight: 600;
+}
+.porcentajes .bajada {
+  color: red;
+  font-weight: 600;
+}

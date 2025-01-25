@@ -51,8 +51,8 @@ const BarChartComponent: React.FC<BarChartComponentProps> = ({
             axisLine={false}
           />
           <YAxis
-            domain={[0, 150]} // Limita el rango entre 0 y 200
-            ticks={[0, 50, 100, 150]} // Especifica los valores donde deben aparecer las marcas
+            domain={[0, 100]} // Limita el rango entre 0 y 200
+            ticks={[0, 25, 50, 75, 100]} // Especifica los valores donde deben aparecer las marcas
             tick={{
               fontSize: 10,
               fill: "#000000",

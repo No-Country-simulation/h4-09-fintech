@@ -28,20 +28,28 @@ export default function Navbar() {
         <nav className={styles.menu}>
           <ul className={styles.navMenu}>
             <li>
-              <Link to="/dashboard"><LuLayoutDashboard />
-              Dashboard</Link>
+              <Link to="/dashboard">
+                <LuLayoutDashboard />
+                Dashboard
+              </Link>
             </li>
             <li>
-              <Link to="/inversiones"><FaHandHoldingDollar />
-              Gestión de inversiones</Link>
+              <Link to="/gestion">
+                <FaHandHoldingDollar />
+                Gestión de inversiones
+              </Link>
             </li>
             <li>
-              <Link to="/community/forum"><FaPeopleGroup />
-              Comunidad & Noticias</Link>
+              <Link to="/community/forum">
+                <FaPeopleGroup />
+                Comunidad & Noticias
+              </Link>
             </li>
             <li>
-              <Link to="/profile"><FaUser />
-              Mi cuenta</Link>
+              <Link to="/profile">
+                <FaUser />
+                Mi cuenta
+              </Link>
             </li>
           </ul>
         </nav>
