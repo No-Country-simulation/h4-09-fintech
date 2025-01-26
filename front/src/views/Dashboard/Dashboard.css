@@ -129,3 +129,17 @@
   font-size: 0.6rem;
   font-weight: var(--font-poppins-300);
 }
+.spinner-dash {
+  background-color: var(--color-primario);
+  height: 100vh;
+  width: 100vw;
+  color: var(--color-fondo);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.spinner-dash img {
+  height: 20vh;
+  width: auto;
+}

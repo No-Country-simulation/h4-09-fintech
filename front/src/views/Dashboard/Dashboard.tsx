@@ -7,6 +7,8 @@ import Circular from "./(components)/graficos/Pastel/PieChart";
 import { UserIcon } from "@heroicons/react/16/solid";
 import { NoteDash } from "./notificaciones/NoteDash";
 import { Link } from "react-router-dom";
+import logocarga from "../../assets/icons/(iupi)/Logo iupi 14px.svg";
+import CircularProgress from "@mui/material/CircularProgress";
 
 // Tipados para typescript
 interface UserData {
@@ -93,7 +95,16 @@ export const Dashboard: React.FC = () => {
 
   // pantallas de carga
   if (loadingUserData) {
-    return <div>Cargando datos del usuario...</div>;
+    return (
+      <div className="spinner-dash">
+        <img src={logocarga} />
+        <CircularProgress
+          style={{
+            color: "var(--color-fondo)",
+          }}
+        />
+      </div>
+    );
   }
 
   if (error) {
