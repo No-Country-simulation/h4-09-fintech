@@ -38,6 +38,7 @@ import { Fondos } from "./views/Gestion de Inversiones/pages/Fondos";
 import { ETFS } from "./views/Gestion de Inversiones/pages/ETFS";
 import { Bonos } from "./views/Gestion de Inversiones/pages/Bonos";
 import { DetalleEconomico } from "./views/Gestion de Inversiones/components/DetalleEconomico";
+import { ObjetivosFinancieros } from "./views/Dashboard/objetivos financieros/ObjetivosFinancieros";
 
 function App() {
   return (
@@ -66,6 +67,10 @@ function App() {
           <Route path="fondos" element={<Fondos />} />
           <Route path="metales-preciosos" element={<MetalesPreciosos />} />
         </Route>
+        <Route
+          path="/objetivos-financieros"
+          element={<ObjetivosFinancieros />}
+        />
 
         {/* NOTIFICACIONES */}
 

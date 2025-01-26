@@ -21,6 +21,7 @@ export const Dashboard: React.FC = () => {
   });
   const [loadingUserData, setLoadingUserData] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const [btnObjetivo, setBtnObjetivo] = useState("objetivos");
 
   // SOLICITUD PARA "DATOS DE USUARIO"
   useEffect(() => {
@@ -64,21 +65,32 @@ export const Dashboard: React.FC = () => {
       })
       .catch((err: Error) => {
         console.error(err);
-        setError("No se pudieron obtener los datos del usuario.");
+        setError(
+          "Por motivos de seguridad tu sesión a expirado.Vuelve a iniciar sesión"
+        );
       })
       .finally(() => setLoadingUserData(false));
   }, []);
   // --------------------------------
   // SOLICITUD PARA "OBJETIVOS FINANCIEROS Y PROGESO"
-
+  useEffect(() => {}, []);
   // DATA PARA GRAFICO DE BARRAS
-  const data = [
+  const dataBarras = [
     { name: "Casa", ventas: 50 },
-    { name: "Auto", ventas: 20 },
-    { name: "Viaje", ventas: 3 },
-    { name: "Jubilación", ventas: 75 },
-    { name: "Educación", ventas: 100 },
+    // { name: "Auto", ventas: 20 },
+    // { name: "Viaje", ventas: 3 },
+    // { name: "Jubilación", ventas: 75 },
+    // { name: "Educación", ventas: 100 },
   ];
+  // condicional para boton de objetivos
+  useEffect(() => {
+    if (dataBarras.length > 0) {
+      setBtnObjetivo("objetivos");
+    } else {
+      setBtnObjetivo("aun no tienes objetivos");
+    }
+  }, [dataBarras]);
+
   // pantallas de carga
   if (loadingUserData) {
     return <div>Cargando datos del usuario...</div>;
@@ -114,7 +126,12 @@ export const Dashboard: React.FC = () => {
         Añadir tarjeta de crédito
       </div>
 
-      <BarChartComponent data={data} dataKey="ventas" xAxisKey="name" />
+      <BarChartComponent
+        data={dataBarras}
+        dataKey="ventas"
+        xAxisKey="name"
+        boton={btnObjetivo || "Cargando..."}
+      />
       <Example />
       <Circular />
     </div>

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import {
   BarChart,
   Bar,
@@ -15,12 +16,14 @@ interface BarChartComponentProps {
   data: { name: string; ventas: number }[]; // Ajustamos el tipo de `data` para que sea un array de objetos con propiedades `name` y `ventas`
   dataKey: string; // Tipo de `dataKey` como `string`
   xAxisKey: string; // Tipo de `xAxisKey` como `string`
+  boton: string; // Tipo de `boton` como `string`
 }
 
 const BarChartComponent: React.FC<BarChartComponentProps> = ({
   data,
   dataKey,
   xAxisKey,
+  boton,
 }) => {
   return (
     <div className="box-section">
@@ -28,6 +31,21 @@ const BarChartComponent: React.FC<BarChartComponentProps> = ({
         <h1>Objetivos financieros</h1>
         <small>Progreso total</small>
       </div>
+      <Link
+        to="/objetivos-financieros"
+        style={{
+          position: "absolute",
+          border: "solid black 1px",
+          padding: "1% 2%",
+          right: "2%",
+          top: "13.48%",
+          transform: "translateY(-50%)",
+          minWidth: "max-content",
+          fontSize: "0.65rem",
+        }}
+      >
+        {boton || "Sin objetivos"}
+      </Link>
       <ResponsiveContainer width="100%" height="73.08%">
         <BarChart
           width={500}
