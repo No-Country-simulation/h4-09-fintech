@@ -89,7 +89,7 @@ export const Dashboard: React.FC = () => {
     if (dataBarras.length > 0) {
       setBtnObjetivo("objetivos");
     } else {
-      setBtnObjetivo("aun no tienes objetivos");
+      setBtnObjetivo("Sin objetivos aún");
     }
   }, [dataBarras]);
 

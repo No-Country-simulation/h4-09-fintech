@@ -35,13 +35,15 @@ const BarChartComponent: React.FC<BarChartComponentProps> = ({
         to="/objetivos-financieros"
         style={{
           position: "absolute",
-          border: "solid black 1px",
-          padding: "1% 2%",
+          padding: "2% 3%",
           right: "2%",
           top: "13.48%",
           transform: "translateY(-50%)",
           minWidth: "max-content",
           fontSize: "0.65rem",
+          backgroundColor: "var(--color-primario)",
+          color: "var(--color-fondo)",
+          borderRadius: "100px",
         }}
       >
         {boton || "Sin objetivos"}
