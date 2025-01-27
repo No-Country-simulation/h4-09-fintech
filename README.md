@@ -50,7 +50,7 @@ Ante la falta de opciones de crédito accesible, IUPI ofrece a las familias la p
 
 ## 💽 Deployment
 - **Frontend:** [IUPI Frontend](https://iupi-sample.vercel.app/)
-- **Backend:** [IUPI Backend](https://h4-09-fintech-production.up.railway.app/swagger-ui/index.html)
+- **Backend:** [IUPI Backend](https://h4-09-fintech-production.up.railway.app)
 
 ---
 
@@ -60,7 +60,7 @@ Ante la falta de opciones de crédito accesible, IUPI ofrece a las familias la p
 ---
 
 ## 💻 Documentación UX/UI
-- [Diseño en Figma](#)
+- [Diseño en Figma](https://www.figma.com/design/1uk1gWP09hM54AQpTIgxi9/App-mobile---Design-IUPI-(Wireframes)?node-id=3-57&p=f&t=xogqHTZcbGPKMBOC-0)
 
 ## 💻 Documentación QA
 - [Historias de Usuario](#)
@@ -69,7 +69,7 @@ Ante la falta de opciones de crédito accesible, IUPI ofrece a las familias la p
 
 ## 🔌 Recursos Adicionales
 - [Google Drive del proyecto](#)
-- [Swagger](#)
+- [Swagger](https://h4-09-fintech-production.up.railway.app/swagger-ui/index.html)
 
 ---
 
