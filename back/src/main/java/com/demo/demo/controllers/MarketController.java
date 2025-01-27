@@ -5,9 +5,7 @@ import com.demo.demo.dtos.response.CedearResponseDto;
 import com.demo.demo.enums.Cedear;
 import com.demo.demo.models.ActionResponse;
 import com.demo.demo.models.FundProduct;
-import com.demo.demo.services.impl.ActionsService;
-import com.demo.demo.services.impl.CedearsService;
-import com.demo.demo.services.impl.InvestmentFundService;
+import com.demo.demo.services.impl.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
@@ -25,23 +23,19 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class MarketController {
 
-    private final CedearsService cedearsService;
     private final InvestmentFundService investmentFundService;
-    private final ActionsService actionsService;
-
+    private final MarketService marketService;
     @GetMapping("/cedears")
     public ResponseEntity<List<ActionResponse>> getAllCedearNames() {
-//        return ResponseEntity.ok(Arrays.stream(Cedear.values())
-//                .collect(Collectors.toMap(Enum::name, Cedear::getName)));
-        return ResponseEntity.ok(cedearsService.getAllCedears());
+        return ResponseEntity.ok(marketService.getAll("cedears"));
     }
 
-    @GetMapping("/{cedear}")
+    @GetMapping("/cedears/{cedear}")
     public ResponseEntity<CedearResponseDto> getCedearName(
             @PathVariable
             @NotNull(message = "Cedear is required")
             String cedear) throws ExecutionException, InterruptedException {
-        return ResponseEntity.ok(cedearsService.getCedear(cedear));
+        return ResponseEntity.ok(marketService.getData(cedear));
     }
 
     @GetMapping("/investment-funds")
@@ -53,7 +47,7 @@ public class MarketController {
 
     @GetMapping("/actions")
     public ResponseEntity<List<ActionResponse>> getAllActions() {
-        return ResponseEntity.ok(actionsService.getAllActions());
+        return ResponseEntity.ok(marketService.getAll("stock"));
     }
 
     @GetMapping("/actions/{action}")
@@ -61,6 +55,20 @@ public class MarketController {
             @PathVariable
             @NotNull(message = "Action is required")
             String action) {
-        return ResponseEntity.ok(actionsService.getActionData(action));
+        return ResponseEntity.ok(marketService.getData(action));
+    }
+
+
+    @GetMapping("/bonds")
+    public ResponseEntity<List<ActionResponse>> getAllBonds() {
+        return ResponseEntity.ok(marketService.getAll("bond"));
+    }
+
+    @GetMapping("/bonds/{bond}")
+    public ResponseEntity<CedearResponseDto> getBondData(
+            @PathVariable
+            @NotNull(message = "Bond is required")
+            String bond) {
+        return ResponseEntity.ok(marketService.getData(bond));
     }
 }
