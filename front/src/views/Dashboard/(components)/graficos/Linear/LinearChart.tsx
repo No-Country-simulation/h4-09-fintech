@@ -1,4 +1,8 @@
 import {
+  ArrowDownTrayIcon,
+  EllipsisVerticalIcon,
+} from "@heroicons/react/24/outline";
+import {
   LineChart,
   Line,
   XAxis,
@@ -61,6 +65,10 @@ const Example = () => {
         <h1>Balance general</h1>
         <small>Total dólares</small>
       </div>
+      <div className="container-descarga">
+        <ArrowDownTrayIcon className="iconos-hero" />
+        <EllipsisVerticalIcon className="iconos-hero" />
+      </div>
       <ResponsiveContainer width="100%" height="73.08%">
         <LineChart
           width={500}
@@ -99,6 +107,15 @@ const Example = () => {
             verticalAlign="top"
             iconType="circle"
             align="center"
+            wrapperStyle={{
+              fontSize: "0.5rem",
+              position: "absolute", // Esto permite mover la leyenda libremente
+              top: "-23%", // Ajusta la posición vertical
+              left: "60%", // Ajusta la posición horizontal
+              transform: "translateX(-50%)",
+              width: "37%",
+            }}
+            iconSize={8}
           />
           <Line
             type="monotone"
