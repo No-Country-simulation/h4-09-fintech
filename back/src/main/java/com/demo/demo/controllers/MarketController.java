@@ -34,8 +34,11 @@ public class MarketController {
     public ResponseEntity<CedearResponseDto> getCedearName(
             @PathVariable
             @NotNull(message = "Cedear is required")
-            String cedear) throws ExecutionException, InterruptedException {
-        return ResponseEntity.ok(marketService.getData(cedear));
+            String cedear,
+            @RequestParam
+            String name
+    ) throws ExecutionException, InterruptedException {
+        return ResponseEntity.ok(marketService.getData(cedear,name));
     }
 
     @GetMapping("/investment-funds")
@@ -54,8 +57,11 @@ public class MarketController {
     public ResponseEntity<CedearResponseDto> getActionData(
             @PathVariable
             @NotNull(message = "Action is required")
-            String action) {
-        return ResponseEntity.ok(marketService.getData(action));
+            String action,
+            @RequestParam
+            String name
+    ) {
+        return ResponseEntity.ok(marketService.getData(action,name));
     }
 
 
@@ -68,7 +74,10 @@ public class MarketController {
     public ResponseEntity<CedearResponseDto> getBondData(
             @PathVariable
             @NotNull(message = "Bond is required")
-            String bond) {
-        return ResponseEntity.ok(marketService.getData(bond));
+            String bond,
+            @RequestParam
+            String name
+    ) {
+        return ResponseEntity.ok(marketService.getData(bond,name));
     }
 }

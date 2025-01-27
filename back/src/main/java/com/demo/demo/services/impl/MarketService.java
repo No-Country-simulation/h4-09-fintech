@@ -40,7 +40,7 @@ public class MarketService {
         return null;
     }
 
-    public CedearResponseDto getData(String symbol) {
+    public CedearResponseDto getData(String symbol,String name) {
         ZoneId argentinaZone = ZoneId.of("America/Argentina/Buenos_Aires");
         Instant now = Instant.now();
         long unixToday = now.getEpochSecond();
@@ -78,7 +78,7 @@ public class MarketService {
                     .divide(firstMonth, 2, RoundingMode.HALF_UP)
                     .multiply(BigDecimal.valueOf(100));
 
-            return new CedearResponseDto(lastMonth, symbol, null, percentMonth, percentYear);
+            return new CedearResponseDto(lastMonth, symbol, name, percentMonth, percentYear);
         } catch (Exception e) {
             return null;
         }
