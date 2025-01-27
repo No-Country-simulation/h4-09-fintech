@@ -24,7 +24,6 @@ import Forum from './views/Community/Forum/Forum'
 import { Notificaciones } from './views/Dashboard/notificaciones/Notificaciones'
 import { ObjetivosNotif, Recordatorios, Todo } from './views/Dashboard/notificaciones/pages/PagesNotif'
 import ForumView from './views/Community/Forum/[category]/ForumView'
-import PostView from './views/Community/Forum/[id]/PostView'
 import { AlertasInversion } from "./views/Dashboard/notificaciones/pages/AlertasInversion";
 
 
@@ -62,11 +61,10 @@ function App() {
 				{/* rutas anidadas para community */}
 				<Route path='/community/'>
 					<Route index element={<Community />} />
-					<Route path='create' element={<Create />} />
+					<Route path='create/:category' element={<Create />} />
 					<Route path='news' element={<News />} />
 					<Route path='forum' element={<Forum />} />
 					<Route path='forum/:category' element={<ForumView />} />
-					<Route path='post/:id' element={<PostView />} />
 				</Route>
 
         <Route path="/*" element={<Error />} />

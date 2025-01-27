@@ -30,6 +30,7 @@ export const useFetchDataWithToken = <T>(url: string): Params<T> => {
 				// Realizar la solicitud con los headers
 				const response = await axios.get(url, { headers })
 				const jsonData: T = response.data
+				console.log(jsonData)
 
 				setData(jsonData)
 				setError(null)
