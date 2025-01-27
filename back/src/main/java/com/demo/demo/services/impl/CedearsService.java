@@ -3,6 +3,7 @@ package com.demo.demo.services.impl;
 import com.demo.demo.dtos.response.CedearResponseDto;
 
 import com.demo.demo.enums.Cedear;
+import com.demo.demo.models.ActionResponse;
 import com.demo.demo.models.CedearApiResponse;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -33,10 +34,27 @@ public class CedearsService {
         this.restTemplate = new RestTemplate();
         this.objectMapper = objectMapper;
     }
+
+
+    public List<ActionResponse> getAllCedears() {
+
+        String url = "https://analisistecnico.com.ar/services/datafeed/search?limit=30&query=&type=CEDEARS&exchange=BCBA";
+        String response = restTemplate.getForObject(url, String.class);
+        if (response != null) {
+            try{
+                List<ActionResponse> actions = objectMapper.readValue(response, objectMapper.getTypeFactory().constructCollectionType(List.class, ActionResponse.class));
+                return actions;
+            } catch (Exception e) {
+                return null;
+            }
+        }
+        return null;
+    }
+
     public CedearResponseDto getCedear(String cedear) {
         String cedearMod = cedear+":CEDEAR";
         ZoneId argentinaZone = ZoneId.of("America/Argentina/Buenos_Aires");
-
+        String urlBase = "https://analisistecnico.com.ar/services/datafeed/history?symbol=%s&resolution=D&from=%d&to=%d";
         // Hoy
         Instant now = Instant.now();
         long unixToday = now.getEpochSecond();
@@ -51,10 +69,8 @@ public class CedearsService {
         LocalDateTime todayAt11AM = LocalDateTime.now(argentinaZone).withHour(11).withMinute(0).withSecond(0).withNano(0);
         long unixToday11AM = todayAt11AM.atZone(argentinaZone).toEpochSecond();
 
-        String urlOneYearAgo = String.format("https://analisistecnico.com.ar/services/datafeed/history?symbol=%s&resolution=D&from=%d&to=%d", cedearMod, unixOneYearAgo, unixToday);
-        String urlUnixFirstDayOfMonth = String.format("https://analisistecnico.com.ar/services/datafeed/history?symbol=%s&resolution=D&from=%d&to=%d", cedearMod, unixFirstDayOfMonth, unixToday);
-
-        String url = String.format("https://analisistecnico.com.ar/services/datafeed/history?symbol=%s&resolution=D&from=%d&to=%d", cedearMod, unixToday11AM, unixToday);
+        String urlOneYearAgo = String.format(urlBase, cedearMod, unixOneYearAgo, unixToday);
+        String urlUnixFirstDayOfMonth = String.format(urlBase, cedearMod, unixFirstDayOfMonth, unixToday);
 
         try {
         String responseMonth = restTemplate.getForObject(urlUnixFirstDayOfMonth, String.class);

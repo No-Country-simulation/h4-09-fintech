@@ -4,6 +4,7 @@ package com.demo.demo.controllers;
 import com.demo.demo.dtos.response.CedearResponseDto;
 import com.demo.demo.enums.Cedear;
 import com.demo.demo.services.impl.CedearsService;
+import com.demo.demo.services.impl.InvestmentFundService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +24,8 @@ import java.util.stream.Collectors;
 public class CedearsController {
 
     private final CedearsService cedearsService;
+    private final InvestmentFundService investmentFundService;
+
 
     @GetMapping
     public ResponseEntity<Map<String, String>> getAllCedearNames() {

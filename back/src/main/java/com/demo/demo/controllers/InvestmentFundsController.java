@@ -18,7 +18,7 @@ public class InvestmentFundsController {
     private final InvestmentFundService investmentFundService;
 
     @GetMapping
-    public ResponseEntity<List<FundProduct>> getAllFunds(@RequestParam(defaultValue = "1") int page) throws JsonProcessingException {
+    public ResponseEntity<List<CedearResponseDto>> getAllFunds(@RequestParam(defaultValue = "1") int page) throws JsonProcessingException {
         ;
         return ResponseEntity.ok(investmentFundService.getAllFunds(page));
     }
