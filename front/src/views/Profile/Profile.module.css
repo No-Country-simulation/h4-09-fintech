@@ -67,7 +67,10 @@
 }
 
 .button{
+  margin-top: 10px;
   border-radius: 20px;
+  width: 200px;
+  height: 40px;
 }
 
 
