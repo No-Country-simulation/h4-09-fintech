@@ -23,7 +23,6 @@ import {
   Todo,
 } from "./views/Dashboard/notificaciones/pages/PagesNotif";
 import ForumView from "./views/Community/Forum/[category]/ForumView";
-import PostView from "./views/Community/Forum/[id]/PostView";
 import { AlertasInversion } from "./views/Dashboard/notificaciones/pages/AlertasInversion";
 import { GestionInversiones } from "./views/Gestion de Inversiones/GestionInversiones";
 import { FiltrosInversion } from "./views/Gestion de Inversiones/components/FiltrosInversion";
@@ -101,15 +100,16 @@ function App() {
         <Route path="/editprofile" element={<EditProfile />} />
         <Route path="/configurations" element={<Configurations />} />
 
-        {/* COMMUNITY */}
-        <Route path="/community">
-          <Route index element={<Community />} />
-          <Route path="create" element={<Create />} />
-          <Route path="news" element={<News />} />
-          <Route path="forum" element={<Forum />} />
-          <Route path="forum/:category" element={<ForumView />} />
-          <Route path="post/:id" element={<PostView />} />
-        </Route>
+
+				{/* rutas anidadas para community */}
+				<Route path='/community/'>
+					<Route index element={<Community />} />
+					<Route path='create/:category' element={<Create />} />
+					<Route path='news' element={<News />} />
+					<Route path='forum' element={<Forum />} />
+					<Route path='forum/:category' element={<ForumView />} />
+				</Route>
+
 
         {/* Ruta de error */}
         <Route path="/*" element={<Error />} />

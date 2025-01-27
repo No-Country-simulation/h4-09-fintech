@@ -81,14 +81,14 @@ export default function Onboarding() {
 		setShowModal(true)
 	}
 
+	const handleCancelSkip = () => {
+		setShowModal(false)
+	}
 	const handleConfirmSkip = async () => {
 		await patchData(formData)
 		navigate('/dashboard')
 	}
 
-	const handleCancelSkip = () => {
-		setShowModal(false)
-	}
 
 	const isNextButtonDisabled = !formData[Object.keys(formData)[stepIndex] as keyof IFormData]
 

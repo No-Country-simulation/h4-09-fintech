@@ -101,3 +101,45 @@ export const posts: IPost[] = [
 		category: 'Inversores'
 	}
 ]
+
+export interface Role {
+	roleId: string
+	roleName: string
+}
+
+export interface Authority {
+	authority: string
+}
+
+export interface UserEntity {
+	userId: string
+	username: string
+	name: string
+	lastName: string
+	password: string | null
+	onboardingComplete: boolean
+	mainGoal: string | null
+	financialKnowledge: string | null
+	riskPreference: string | null
+	funds: number
+	goals: string[] // Cambiar "any" si tienes un tipo específico para las metas
+	notifications: string[] // Cambiar "any" si tienes un tipo específico para las notificaciones
+	roles: Role[]
+	authorities: Authority[]
+	enabled: boolean
+	accountNonExpired: boolean
+	accountNonLocked: boolean
+	credentialsNonExpired: boolean
+}
+
+export interface ExampleObject {
+	id: number
+	userEntity: UserEntity
+	title: string
+	subtitle: string
+	text: string
+	creationUser: string // ISO 8601 Date string
+	creationDate: string // ISO 8601 Date string
+	category: string
+}
+
