@@ -11,6 +11,26 @@ export default function Home() {
   const [isNameDisabled, setIsNameDisabled] = useState(true);
   const [isPasswordDisabled, setIsPasswordDisabled] = useState(true);
   const navigate = useNavigate();
+  const [userName, setUserName] = useState<string | null>(null);
+  
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await fetch("http://localhost:5000/api/auth/check-login");
+        if (response.ok) {
+          const data = await response.json();
+          setUserName(`${data.name} ${data.lastName}`);
+        } else {
+          console.error("Error al obtener los datos del usuario");
+        }
+      } catch (error) {
+        console.error("Error de red:", error);
+      }
+    };
+
+    fetchUserData();
+  }, []);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedOption(event.target.value);
@@ -88,8 +108,8 @@ export default function Home() {
           </div>
 
           <div className={styles.info}>
-            <h3 className={styles.names}>Nombre</h3>
-            <p className={styles.email}>Correo</p>
+            <h3 className={styles.names}>{userName || "Cargando nombre..."}</h3>
+            {/* <p className={styles.email}>Correo</p> */}
           </div>
         </div>
 
