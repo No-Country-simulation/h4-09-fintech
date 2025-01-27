@@ -49,8 +49,8 @@ Ante la falta de opciones de crédito accesible, IUPI ofrece a las familias la p
 ---
 
 ## 💽 Deployment
-- **Frontend:** [IUPI Frontend](url)
-- **Backend:** [IUPI Backend](url)
+- **Frontend:** [IUPI Frontend](https://iupi-sample.vercel.app/)
+- **Backend:** [IUPI Backend](https://h4-09-fintech-production.up.railway.app/swagger-ui/index.html)
 
 ---
 
