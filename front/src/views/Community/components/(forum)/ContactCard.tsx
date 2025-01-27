@@ -1,4 +1,3 @@
-import React from 'react'
 import { IContact } from '../../mocks/contacts.mock'
 import Styles from './PostCard.module.css'
 

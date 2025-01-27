@@ -20,7 +20,6 @@ export default function NewsCard({ article }: Props) {
 		const [showModal, setShowModal] = useState(false)
 		const [isClosing, setIsClosing] = useState(false)
 	const [isBookmarked, setIsBookmarked] = useState(false)
-	// console.log(article)
 
 	const date = new Date(article.published_utc)
 	const formattedDate = new Intl.DateTimeFormat('es-AR', {
@@ -87,7 +86,7 @@ export default function NewsCard({ article }: Props) {
 			{/* Modal para confirmar omisión */}
 			{showModal && (
 				<div className={styles.modalOverlay} onClick={handleCancelShare}>
-					<div className={styles.modal} onClick={(e) => e.stopPropagation()}>
+					<div className={`${styles.modal} ${isClosing ? styles.modalClosing : styles.modalVisible}`}>
 						<small>Los enlaces que compartes están asociados a ti y se pueden usar para mejorar las sugerencias y anuncios que ves. Más Información</small>
 						<input type='text' name='contact' id='contact' placeholder='Buscar Contatos' />
 						<p>Compartir con </p>

@@ -18,6 +18,8 @@ export default function PostCard({ post }: Props) {
 	const [showModal, setShowModal] = useState(false)
 	const [isClosing, setIsClosing] = useState(false)
 
+
+	
 	console.log(post)
 	const date = new Date(post.creationDate)
 	const formattedDate = new Intl.DateTimeFormat('es-AR', {
@@ -67,7 +69,7 @@ export default function PostCard({ post }: Props) {
 			{/* Modal para confirmar omisión */}
 			{showModal && (
 				<div className={styles.modalOverlay} onClick={handleCancelShare}>
-					<div className={styles.modal} onClick={(e) => e.stopPropagation()}>
+					<div className={`${styles.modal} ${isClosing ? styles.modalClosing : styles.modalVisible}`}>
 						<small>Los enlaces que compartes están asociados a ti y se pueden usar para mejorar las sugerencias y anuncios que ves. Más Información</small>
 						<input type='text' name='contact' id='contact' placeholder='Buscar Contatos' />
 						<p>Compartir con </p>
