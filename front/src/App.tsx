@@ -37,6 +37,8 @@ import { Fondos } from "./views/Gestion de Inversiones/pages/Fondos";
 import { ETFS } from "./views/Gestion de Inversiones/pages/ETFS";
 import { Bonos } from "./views/Gestion de Inversiones/pages/Bonos";
 import { DetalleEconomico } from "./views/Gestion de Inversiones/components/DetalleEconomico";
+import { ObjetivosFinancieros } from "./views/Dashboard/objetivos financieros/ObjetivosFinancieros";
+import CrearObjetivo from "./views/Dashboard/objetivos financieros/CrearObjetivo";
 
 function App() {
   return (
@@ -58,6 +60,8 @@ function App() {
         {/* Ruta del Navbar */}
 
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/crear-objetivo" element={<CrearObjetivo />} />
+
         <Route path="/gestion" element={<GestionInversiones />}>
           <Route path="acciones" element={<Acciones />} />
           <Route path="bonos" element={<Bonos />} />
@@ -65,6 +69,10 @@ function App() {
           <Route path="fondos" element={<Fondos />} />
           <Route path="metales-preciosos" element={<MetalesPreciosos />} />
         </Route>
+        <Route
+          path="/objetivos-financieros"
+          element={<ObjetivosFinancieros />}
+        />
 
         {/* NOTIFICACIONES */}
 
