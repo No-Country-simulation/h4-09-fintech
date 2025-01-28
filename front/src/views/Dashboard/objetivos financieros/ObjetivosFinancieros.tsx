@@ -5,6 +5,8 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
+import "./ObjetivosFinancieros.css";
+import { ArrowLeftIcon, PencilIcon } from "@heroicons/react/24/outline";
 
 // estilos del modal
 const style = {
@@ -25,6 +27,7 @@ interface FinancialGoal {
   targetDate: string;
   targetAmount: string;
   goalId: string;
+  progress: number;
 }
 
 // Componente principal
@@ -82,37 +85,49 @@ export const ObjetivosFinancieros = () => {
   }, []);
 
   return (
-    <div>
-      <h1>Mis objetivos</h1>
-      {isLoading ? (
-        <p>Cargando objetivos...</p>
-      ) : error ? (
-        <p style={{ color: "red" }}>{error}</p>
-      ) : (
-        <ul>
-          {objetivosList.map((objetivo) => (
-            <li
-              key={objetivo.goalId}
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                border: "solid black 1px",
-              }}
-            >
-              <div>
-                <h5>{objetivo.name}</h5>
-                <h6>{objetivo.targetAmount}</h6>
+    <div className="container-obj-financieros">
+      <h1>
+        <Link to="/dashboard" className="link-rrdom">
+          <ArrowLeftIcon className="iconos-hero flecha-izquierda" />
+        </Link>
+        Objetivos financieros
+      </h1>
+      <section>
+        <Link to="/crear-objetivo" className="add-goal-btn">
+          + Crear objetivo
+        </Link>
+
+        {isLoading ? (
+          <p>Cargando objetivos...</p>
+        ) : error ? (
+          <p style={{ color: "red" }}>{error}</p>
+        ) : (
+          <article id="goal-list">
+            {objetivosList.map((objetivo) => (
+              <div key={objetivo.goalId} className="goal-in-list">
+                <div className="container-goal-info">
+                  <h5>{objetivo.name}</h5>
+                  <div className="data-goal">
+                    <div>
+                      {" "}
+                      <p>Completado:</p>
+                      <h6>{objetivo.progress}%</h6>
+                    </div>
+                    <div>
+                      <p>Costo:</p>
+                      <h6>${objetivo.targetAmount}</h6>
+                    </div>
+                  </div>
+                </div>
+                <PencilIcon
+                  className="iconos-hero"
+                  onClick={() => cargarModal(objetivo.goalId, objetivo.name)}
+                />
               </div>
-              <Button
-                onClick={() => cargarModal(objetivo.goalId, objetivo.name)}
-              >
-                Editar
-              </Button>
-            </li>
-          ))}
-        </ul>
-      )}
-      <Link to="/crear-objetivo">+ Crear objetivo</Link>
+            ))}
+          </article>
+        )}
+      </section>
       <Modal
         open={open}
         onClose={handleClose}

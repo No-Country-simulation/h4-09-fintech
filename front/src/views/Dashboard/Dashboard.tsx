@@ -238,8 +238,7 @@ export const Dashboard: React.FC = () => {
 
       <div onClick={handleOpen} className="fondos-dash">
         <div>
-          <h6>Fondo disponible</h6>
-          {userdata.currentAmount}
+          <h6>Fondo disponible</h6>${userdata.currentAmount}
         </div>
         <small>cargar</small>
       </div>
