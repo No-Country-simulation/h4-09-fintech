@@ -68,7 +68,6 @@ function CrearObjetivo() {
       name: goalName,
       targetAmount: parseFloat(goalTargetAmount),
     };
-    console.log("Nuevo Objetivo Financiero:", financialGoal);
     setGoal(financialGoal); // Esto activa el useEffect para enviar los datos al backend
     alert("Has creado un nuevo objetivo");
 
@@ -77,6 +76,7 @@ function CrearObjetivo() {
     setGoalTargetAmount("");
     setErrors({});
     navigate("/dashboard");
+    window.location.reload();
   };
 
   return (

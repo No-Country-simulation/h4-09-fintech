@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import * as React from "react";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import "./ObjetivosFinancieros.css";
@@ -35,19 +34,26 @@ export const ObjetivosFinancieros = () => {
   const [objetivosList, setObjetivosList] = useState<FinancialGoal[]>([]);
   const [open, setOpen] = React.useState(false);
   const [infoModal, setInfoModal] = useState({
-    nombre: "",
+    name: "",
     id: "",
+    targetAmount: "",
   });
   const [isLoading, setIsLoading] = useState(true); // Estado de carga
   const [error, setError] = useState<string | null>(null); // Estado de error
+  const [formError, setFormError] = useState<string | null>(null); // Error del formulario
 
-  const cargarModal = (id: string, nombre: string): void => {
+  const cargarModal = (
+    id: string,
+    name: string,
+    targetAmount: string
+  ): void => {
+    setInfoModal({ name, id, targetAmount });
     setOpen(true);
-    setInfoModal({ nombre, id });
   };
 
   const handleClose = () => setOpen(false);
 
+  // OBTENER GOALS
   useEffect(() => {
     const getCookie = (name: string): string | null => {
       const cookies = document.cookie.split("; ");
@@ -84,6 +90,76 @@ export const ObjetivosFinancieros = () => {
       .finally(() => setIsLoading(false));
   }, []);
 
+  // submit form in modal edit goal
+  const handleGoalUpdate = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setFormError(null); // Reiniciar errores de formulario
+
+    const formData = new FormData(e.currentTarget);
+    const name = formData.get("name") as string;
+    const targetAmount = formData.get("targetAmount") as string;
+
+    // Validación de los campos
+    if (!name || name.trim().length === 0) {
+      setFormError("El nombre no puede estar vacío.");
+      return;
+    }
+    if (
+      !targetAmount ||
+      isNaN(Number(targetAmount)) ||
+      Number(targetAmount) <= 0
+    ) {
+      setFormError("El costo debe ser un número mayor a 0.");
+      return;
+    }
+
+    const updatedGoal = {
+      name,
+      targetAmount,
+    };
+
+    const getCookie = (name: string): string | null => {
+      const cookies = document.cookie.split("; ");
+      const cookie = cookies.find((row) => row.startsWith(`${name}=`));
+      return cookie ? decodeURIComponent(cookie.split("=")[1]) : null;
+    };
+
+    const token = getCookie("authToken");
+    if (!token) {
+      setError("No se encontró un token de autenticación.");
+      return;
+    }
+
+    fetch(
+      `https://h4-09-fintech-production.up.railway.app/api/user/update_goal`,
+      {
+        method: "PATCH",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedGoal),
+      }
+    )
+      .then((res) => {
+        if (!res.ok) throw new Error("Error al actualizar el objetivo.");
+        return res.json();
+      })
+      .then(() => {
+        setObjetivosList((prevList) =>
+          prevList.map((goal) =>
+            goal.goalId === infoModal.id ? { ...goal, ...updatedGoal } : goal
+          )
+        );
+        setError(null); // Reiniciar errores
+        handleClose(); // Cerrar el modal después de la actualización
+      })
+      .catch((err) => {
+        console.error(err);
+        setError("No se pudo actualizar el objetivo.");
+      });
+  };
+
   return (
     <div className="container-obj-financieros">
       <h1>
@@ -109,19 +185,24 @@ export const ObjetivosFinancieros = () => {
                   <h5>{objetivo.name}</h5>
                   <div className="data-goal">
                     <div>
-                      {" "}
-                      <p>Completado:</p>
+                      <p>progeso:</p>
                       <h6>{objetivo.progress}%</h6>
                     </div>
                     <div>
-                      <p>Costo:</p>
+                      <p>monto:</p>
                       <h6>${objetivo.targetAmount}</h6>
                     </div>
                   </div>
                 </div>
                 <PencilIcon
                   className="iconos-hero"
-                  onClick={() => cargarModal(objetivo.goalId, objetivo.name)}
+                  onClick={() =>
+                    cargarModal(
+                      objetivo.goalId,
+                      objetivo.name,
+                      objetivo.targetAmount
+                    )
+                  }
                 />
               </div>
             ))}
@@ -136,10 +217,32 @@ export const ObjetivosFinancieros = () => {
       >
         <Box sx={style}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            {infoModal.nombre}
+            {infoModal.name}
+            <p> Estas apunto de cambiar los datos hacia este objetivo</p>
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+            <form onSubmit={handleGoalUpdate}>
+              <label htmlFor="name">
+                Nombre:
+                <input
+                  type="text"
+                  name="name"
+                  id="name"
+                  defaultValue={infoModal.name}
+                />
+              </label>
+              <label htmlFor="targetAmount">
+                Nuevo costo:
+                <input
+                  type="number"
+                  name="targetAmount"
+                  id="targetAmount"
+                  placeholder={`Costo actual:${infoModal.targetAmount}`}
+                />
+              </label>
+              {formError && <p style={{ color: "red" }}>{formError}</p>}
+              <button type="submit">Actualizar</button>
+            </form>
           </Typography>
         </Box>
       </Modal>

@@ -1,10 +1,6 @@
 import { useEffect, useState } from "react";
 import "./Dashboard.css";
-import {
-  BellAlertIcon,
-  PlusCircleIcon,
-  XMarkIcon,
-} from "@heroicons/react/24/outline";
+import { BellAlertIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import BarChartComponent from "./(components)/graficos/barchart/BarChart";
 import Example from "./(components)/graficos/Linear/LinearChart";
 import Circular from "./(components)/graficos/Pastel/PieChart";
@@ -118,6 +114,7 @@ export const Dashboard: React.FC = () => {
         return res.json();
       })
       .then((data) => {
+        console.log("data objetivos", data);
         setObjetivos(data.length > 0 ? data : []); // Asegurarse de manejar un array vacío
         setError(null);
       })
@@ -170,6 +167,7 @@ export const Dashboard: React.FC = () => {
       setOpen(false);
 
       alert(`Monto de recarga: ${monto}`);
+      window.location.reload();
     }
   };
 

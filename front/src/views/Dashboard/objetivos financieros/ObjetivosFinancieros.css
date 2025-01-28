@@ -62,3 +62,6 @@
 .data-goal :nth-child(2) h6 {
   color: rgb(185, 32, 5);
 }
+.container-goal-info h5 {
+  text-transform: capitalize;
+}
