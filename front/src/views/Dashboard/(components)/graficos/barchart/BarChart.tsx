@@ -41,7 +41,7 @@ const BarChartComponent: React.FC<BarChartComponentProps> = ({
           transform: "translateY(-50%)",
           minWidth: "max-content",
           fontSize: "0.65rem",
-          backgroundColor: "var(--color-primario)",
+          backgroundColor: "#01255c",
           color: "var(--color-fondo)",
           borderRadius: "100px",
         }}

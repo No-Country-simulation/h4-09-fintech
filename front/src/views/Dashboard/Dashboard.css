@@ -78,6 +78,7 @@
 }
 .container-usuario .free-plan {
   margin-left: auto;
+  min-width: max-content;
   font-size: 0.8rem;
   font-weight: 500;
   box-shadow: 0 0 2px 1px rgba(128, 128, 128, 0.377);
@@ -96,7 +97,7 @@
   font-size: 0.8rem;
   font-weight: var(--font-poppins-500);
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
 }
 .cruz-icon {
   height: 20px;
@@ -152,4 +153,21 @@
   right: 0;
   width: 20%;
   height: 26.92%;
+}
+.fondos-dash {
+  border: dashed rgba(0, 128, 0, 0.288) 1px;
+  padding: 5%;
+  box-sizing: border-box;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 94vw;
+  min-height: 12.31vh;
+  height: 12.31vh;
+  margin: 1.83vh 3vw;
+}
+.fondos-dash h6 {
+  color: #01255c;
+  font-weight: 200;
 }

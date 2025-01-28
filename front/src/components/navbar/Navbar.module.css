@@ -2,13 +2,13 @@
   position: sticky;
   top: 0;
   left: 0;
+  height: 13vh;
   width: 100vw;
   z-index: 1000;
   background-color: #0048ba;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 20px;
   box-sizing: border-box;
   transition: transform 0.3s ease-in-out;
   box-sizing: border-box;
@@ -39,6 +39,10 @@
   color: white;
   font-size: 1rem;
 }
+.navMenu a.active {
+  text-decoration: none;
+  font-size: 1rem;
+}
 
 .logo {
   color: white;
@@ -47,7 +51,7 @@
 }
 
 @media (max-width: 767px) {
-  .logo{
+  .logo {
     display: none;
   }
 
@@ -68,7 +72,7 @@
   }
 
   .navMenu li {
-    flex-grow: 1; 
+    flex-grow: 1;
     margin: 0;
     padding: 5px 0;
     text-align: center;
@@ -89,5 +93,4 @@
     display: block;
     font-size: 15px;
   }
-
 }

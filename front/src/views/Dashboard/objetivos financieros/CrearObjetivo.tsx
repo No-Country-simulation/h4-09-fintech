@@ -7,11 +7,7 @@ interface FinancialGoal {
 }
 
 function CrearObjetivo() {
-  const [goal, setGoal] = useState<FinancialGoal>({
-    name: "",
-    targetAmount: 0,
-    targetDate: "",
-  });
+  const [goal, setGoal] = useState<FinancialGoal | null>(null); // Cambiado a null como valor inicial
   const [goalName, setGoalName] = useState<string>("");
   const [goalTargetAmount, setGoalTargetAmount] = useState<string>(""); // Guardamos como string para facilitar el input controlado
   const [targetDate, setTargetDate] = useState<string>("");
@@ -20,8 +16,10 @@ function CrearObjetivo() {
     targetAmount?: string;
   }>({});
 
-  //POST del goal
+  // POST del goal
   useEffect(() => {
+    if (!goal) return; // Evitamos enviar si el goal es null
+
     // Función para obtener una cookie específica
     const getCookie = (name: string): string | null => {
       const cookies = document.cookie.split("; ");
@@ -41,7 +39,7 @@ function CrearObjetivo() {
         },
         body: JSON.stringify(goal),
       }
-    );
+    ).then(() => console.log("Objetivo enviado:", goal));
   }, [goal]);
 
   const validateForm = (): boolean => {
@@ -70,7 +68,7 @@ function CrearObjetivo() {
       targetDate: targetDate || undefined, // Fecha no obligatoria
     };
     console.log("Nuevo Objetivo Financiero:", financialGoal);
-    setGoal(financialGoal);
+    setGoal(financialGoal); // Esto activará el useEffect para enviar los datos al backend
 
     // Limpia el formulario
     setGoalName("");
