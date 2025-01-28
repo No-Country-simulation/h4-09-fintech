@@ -1,13 +1,16 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline'
-// import mastercard from '../../assets/svg/MASTERCARD.svg'
 import './GestionInversiones.css'
-import { NavLink, Outlet } from 'react-router-dom'
+import { Outlet } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { baseUrl } from '../../config/envs'
 import { useFetchDataWithToken } from '../../hooks/useFetchDataWithToken'
 import Cookies from 'js-cookie'
+import InvestmentCard from './components/InvestmentCard'
+import Spinner from '../../components/spiner/Spiner'
+import UserInvestmentCard from './components/UserInvestmentCard'
 
-interface IUser {
+export interface IUser {
 	currentAmount: number
 	financialKnowledge: null | string
 	lastName: string
@@ -34,7 +37,7 @@ const investmentsTypes: InvestmentType[] = [
 	{ name: 'Fondos', link: 'investment-funds' },
 	{ name: 'Acciones', link: 'actions' }
 ]
-interface INotFunds {
+export interface INotFunds {
 	// clave: string
 	data: {
 		cedear: string
@@ -44,12 +47,31 @@ interface INotFunds {
 		price: number
 	}
 }
-interface IFundsData {
+export interface IFundsData {
 	cedear: string
 	name: string
 	percentageLastMonth: number
 	percentageLastYear: number
 	price: number
+}
+export interface IUserInvestment {
+	quantity: number
+	stockSymbol: string
+	stockName: string
+	pricePerUnit: number
+	totalCost: number
+	transactionDate: string
+}
+
+const getInvestmentRecommendation = (riskPreference: string | undefined | null) => {
+	switch (riskPreference) {
+		case 'Arriesgado':
+			return 'Acciones'
+		case 'Moderado':
+			return 'Cedears y Bonos'
+		default:
+			return 'Fondos'
+	}
 }
 
 export const GestionInversiones = (): JSX.Element => {
@@ -61,16 +83,35 @@ export const GestionInversiones = (): JSX.Element => {
 	const [fundsDetails, setFundsDetails] = useState<IFundsData[]>([])
 	const [loadingDetails, setLoadingDetails] = useState(false)
 
+	const { data: userInvestments } = useFetchDataWithToken<IUserInvestment[] | []>(`${baseUrl}/api/stocks/transactions`)
 	const { data: user, loading: loadingUser, error: errorUser } = useFetchDataWithToken<IUser>(`${baseUrl}/api/auth/check-login`)
 	const { data: cedearsData } = useFetchDataWithToken<IpreData[]>(`${baseUrl}/api/market/cedears`)
 	const { data: bondsData } = useFetchDataWithToken<IpreData[]>(`${baseUrl}/api/market/bonds`)
 	const { data: actionsData } = useFetchDataWithToken<IpreData[]>(`${baseUrl}/api/market/actions`)
 	const { data: fundsData } = useFetchDataWithToken<IFundsData[]>(`${baseUrl}/api/market/investment-funds`)
+	// console.log('user', user)
+	// console.log('userInvestments', userInvestments)
 
+	const userFounds = user?.currentAmount?.toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+	const investmentRecommendation = getInvestmentRecommendation(user?.riskPreference)
+	useEffect(() => {
+		if (user?.riskPreference) {
+			switch (user.riskPreference) {
+				case 'Arriesgado':
+					setSelectedInvestmentType(investmentsTypes.find((type) => type.name === 'Acciones') || investmentsTypes[0])
+					break
+				case 'Moderado':
+					setSelectedInvestmentType(investmentsTypes.find((type) => type.name === 'Cedears') || investmentsTypes[0])
+					break
+				default:
+					setSelectedInvestmentType(investmentsTypes.find((type) => type.name === 'Fondos') || investmentsTypes[0])
+			}
+		}
+	}, [user?.riskPreference, investmentsTypes])
 	const yourToken = Cookies.get('authToken')
 
 	const fetchInvestmentDetails = async (data: IpreData[], type: string) => {
-    	setLoadingDetails(true)
+		setLoadingDetails(true)
 		if (!data) return []
 		const promises = data.map(async (item) => {
 			try {
@@ -125,8 +166,39 @@ export const GestionInversiones = (): JSX.Element => {
 				return []
 		}
 	}
-
 	const displayedData = getDisplayedData()
+	const getSimilarStocks = () => {
+		const similarNotFunds: INotFunds[] = []
+		const similarFunds: IFundsData[] = []
+
+		userInvestments?.forEach((investment) => {
+			// console.log('actionsDetails', actionsDetails)
+
+			const matchedCedear = cedearsDetails?.find((option) => (option as any)?.cedear === investment.stockSymbol)
+			const matchedBond = bondsDetails?.find((option) => (option as any)?.cedear === investment.stockSymbol)
+			const matchedAction = actionsDetails.find((option) => (option as any)?.cedear === investment.stockSymbol)
+			const matchedFund = fundsDetails?.find((option) => option?.cedear === investment.stockSymbol)
+			// console.log('matchedCedear', matchedCedear, 'matchedBond', matchedBond, 'matchedAction', matchedAction, 'matchedFund', matchedFund)
+
+			if (matchedCedear) similarNotFunds.push(matchedCedear)
+			if (matchedBond) similarNotFunds.push(matchedBond)
+			if (matchedAction) similarNotFunds.push(matchedAction)
+			if (matchedFund) similarFunds.push(matchedFund)
+		})
+		// console.log('similarNotFunds', similarNotFunds)
+		// console.log('similarFunds', similarFunds)
+
+		return { similarNotFunds, similarFunds }
+	}
+	const [similarNotFunds, setSimilarNotFunds] = useState<INotFunds[]>([])
+	const [similarFunds, setSimilarFunds] = useState<IFundsData[]>([])
+
+	useEffect(() => {
+		const { similarNotFunds, similarFunds } = getSimilarStocks()
+		setSimilarNotFunds(similarNotFunds)
+		setSimilarFunds(similarFunds)
+	}, [userInvestments, cedearsDetails, bondsDetails, actionsDetails, fundsDetails])
+
 	return (
 		<div className='pageView'>
 			<div className='contentContainer'>
@@ -140,11 +212,32 @@ export const GestionInversiones = (): JSX.Element => {
 						{showSaldo ? <EyeIcon className='iconos-hero' /> : <EyeSlashIcon className='iconos-hero' />}
 					</div>
 				</div>
-				{loadingUser ? <p>Cargando...</p> : <div className='saldoContainer'>{showSaldo ? <span className='saldo'>$ {user?.currentAmount}</span> : <span className='saldo'>$ ********</span>}</div>}
+				{loadingUser ? <p>Cargando...</p> : <div className='saldoContainer'>{showSaldo ? <span className='saldo'>$ {userFounds}</span> : <span className='saldo'>$ ********</span>}</div>}
+
+				<div className='headerContainer'>
+					<h3 className='subtitle'>Tu cartera:</h3>
+				</div>
+				<div className='cardsContainer'>
+					{userInvestments?.map((investment, index) => {
+						// Encuentra el "similarStock" en `similarNotFunds` o `similarFunds`
+						const similarStock = similarNotFunds?.find((stock) => (stock as any).cedear === investment.stockSymbol) || similarFunds?.find((fund) => fund.cedear === investment.stockSymbol)
+
+						return (
+							<UserInvestmentCard
+								key={index}
+								userInvestment={investment}
+								similarStock={similarStock} // Pasa el similarStock como prop
+							/>
+						)
+					})}
+					{!userInvestments && <p>No tenés inversiones</p>}
+				</div>
 				<div className='headerContainer'>
 					<h3 className='subtitle'>¿En qué desea invertir?</h3>
 				</div>
 				<p>Invertí de manera fácil y rápida en el mercado.</p>
+				<h5>En base a tu perfil, te recomendamos esta cartera de inversiones: {investmentRecommendation}</h5>
+
 				<div className='inversiones-btn-group'>
 					{investmentsTypes.map((boton, index) => (
 						<button type='button' className={selectedInvestmentType.name === boton.name ? 'activeButton' : 'button'} onClick={() => setSelectedInvestmentType(boton)} key={index}>
@@ -156,52 +249,13 @@ export const GestionInversiones = (): JSX.Element => {
 				<section className='cardsContainer'>
 					<Outlet />
 					{loadingDetails ? (
-						<p>Cargando ...</p>
+						// <p>Cargando ...</p>
+						<Spinner />
 					) : (
 						displayedData.map((item, index) => {
-							if (selectedInvestmentType.name === 'Fondos') {
-								const fundItem = item as IFundsData
-								return (
-									<NavLink to={`/fondos/${fundItem.cedear}`} className='card' key={index}>
-										<div className='cardHeader'>
-											<p className='cardTitle'>{fundItem.name}</p>
-											<p className='clave'>{fundItem.cedear}</p>
-										</div>
-										<div className='cardHeader'>
-											<p>Precio: ${fundItem.price}</p>
-											<div className='porcentajes'>
-												<p>
-													Variación último mes <span className={fundItem.percentageLastMonth > 0 ? 'subida' : 'bajada'}>{fundItem.percentageLastMonth}%</span>
-												</p>
-												<p>
-													Variación último año <span className={fundItem.percentageLastYear > 0 ? 'subida' : 'bajada'}>{fundItem.percentageLastYear}%</span>
-												</p>
-											</div>
-										</div>
-									</NavLink>
-								)
-							} else {
-								const notFundItem = item as INotFunds['data']
-								return (
-									<NavLink to={`/acciones/${notFundItem.cedear}`} className='card' key={index}>
-										<div className='cardHeader'>
-											<p className='cardTitle'>{notFundItem.name}</p>
-											<p className='clave'>{notFundItem.cedear}</p>
-										</div>
-										<div className='cardHeader'>
-											<p>Precio: ${notFundItem.price}</p>
-											<div className='porcentajes'>
-												<p>
-													Variación último mes <span className={notFundItem.percentageLastMonth > 0 ? 'subida' : 'bajada'}>{notFundItem.percentageLastMonth}%</span>
-												</p>
-												<p>
-													Variación último año <span className={notFundItem.percentageLastYear > 0 ? 'subida' : 'bajada'}>{notFundItem.percentageLastYear}%</span>
-												</p>
-											</div>
-										</div>
-									</NavLink>
-								)
-							}
+							const { name, cedear, price, percentageLastMonth, percentageLastYear } = selectedInvestmentType.name === 'Fondos' ? (item as IFundsData) : (item as INotFunds['data'])
+
+							return <InvestmentCard key={index} name={name} cedear={cedear} price={price} percentageLastMonth={percentageLastMonth} percentageLastYear={percentageLastYear} user={user} />
 						})
 					)}
 					{!loadingDetails && displayedData.length === 0 && <p>No hay datos para mostrar. Reintente en unos segundos.</p>}

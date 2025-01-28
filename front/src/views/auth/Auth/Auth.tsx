@@ -11,14 +11,14 @@ import { baseUrl } from '../../../config/envs'
 export default function Auth() {
 	const navigate = useNavigate()
 	const googleLogin = async (response: CredentialResponse) => {
-		console.log(response)
+		// console.log(response)
 		const body = {
 			idToken: response.credential
 		}
 		const respuesta = await axios.post(`${baseUrl}/api/auth/verify-token`, body)
 		// console.log(respuesta);
 		const token = respuesta.data.token
-		console.log(token) // control
+		// console.log(token) // control
 		Cookies.set('authToken', token, { expires: 1 })
 		const isFirstTime = respuesta.data.firstTime
 		if (isFirstTime) {
