@@ -11,6 +11,28 @@ import { RxExit } from "react-icons/rx";
 
 export default function Profile() {
   const [profileImage, setProfileImage] = useState<string | null>(null);
+  const [userName, setUserName] = useState<string | null>(null);
+  const [riskPreference, setRiskPreference] = useState<string | null>(null);
+  
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await fetch("http://localhost:5000/api/auth/check-login");
+        if (response.ok) {
+          const data = await response.json();
+          setUserName(`${data.name} ${data.lastName}`);
+          setRiskPreference(data.riskPreference);
+        } else {
+          console.error("Error al obtener los datos del usuario");
+        }
+      } catch (error) {
+        console.error("Error de red:", error);
+      }
+    };
+
+    fetchUserData();
+  }, []);
 
   // **Cargar imagen inicial desde el backend**
   useEffect(() => {
@@ -75,13 +97,13 @@ export default function Profile() {
           </div>
 
           <div className={styles.info}>
-            <h3 className={styles.names}>Nombre</h3>
-            <p className={styles.email}>Correo</p>
+            <h3 className={styles.names}>{userName || "Cargando nombre..."}</h3>
+            {/* <p className={styles.email}>Correo</p> */}
           </div>
 
           <button className={styles.button}>
             {/* <IupiSmallIcon />|<GiReceiveMoney /> */}
-            conservador
+            {riskPreference || "Cargando..."}
           </button>
         </div>
 

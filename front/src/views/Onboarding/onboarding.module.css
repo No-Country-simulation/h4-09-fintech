@@ -191,6 +191,7 @@
 	align-items: center;
 	gap: 8px;
 }
+
 .modalOverlay {
 	position: fixed;
 	top: 0;
@@ -240,6 +241,19 @@
 
 .confirmButton {
 	background-color: var(--color-primario);
+	color: var(--color-fondo);
+	width: 100%;
+	max-width: 350px;
+	border-radius: 8px;
+	padding: 12px 20px;
+	font-family: 'Poppins';
+	text-align: center;
+	&:hover {
+		cursor: pointer;
+	}
+}
+.disabledButton {
+	background-color: var(--color-disabled);
 	color: var(--color-fondo);
 	width: 100%;
 	max-width: 350px;

@@ -3,39 +3,47 @@ import { baseUrl } from '../../../config/envs'
 import { usePostDataWithToken } from '../../../hooks/usePostDataWithToken'
 import styles from '../community.module.css'
 import Spinner from '../../../components/spiner/Spiner'
-import Cookies from 'js-cookie'
-import { jwtDecode } from 'jwt-decode'
+import { Link, useParams } from 'react-router-dom'
+import GoBackIcon from '../../../assets/icons/GoBackIcon'
 
 export default function Create() {
-	const token = Cookies.get('authToken')
-	let user = null
-	if (token) {
-		try {
-			const decodedToken = jwtDecode(token)
-			user = decodedToken.sub
-		} catch (error) {
-			console.error('Error decoding token:', error)
-		}
-	}
+	const params = useParams()
+
 	const { loading, error, postData } = usePostDataWithToken(`${baseUrl}/api/post/new`)
+
 	const [formData, setFormData] = useState({
 		title: '',
 		subtitle: '',
 		text: '',
-		creationDate: new Date().toISOString(),
-		creationUser: user || 'Usuario desconocido'
+		category: params.category
 	})
+
 	const handleSubmit = async (e: React.FormEvent) => {
-		e.preventDefault() // Prevenir comportamiento predeterminado del formulario
+		e.preventDefault()
 		console.log('Datos enviados:', formData)
 		await postData(formData)
+		setFormData({
+			title: '',
+			subtitle: '',
+			text: '',
+			category: params.category
+		})
+		alert('Posteo enviado')
 	}
 
 	return (
 		<div className={styles.pageView}>
 			<div className={styles.contentContainer}>
 				{error && <p className={styles.error}> ¡Ups! Se produjo un error al enviar tu posteo. Intentalo mas tarde nuevamente</p>}
-				<h1 className='body2'>Crea una publicación para los usuarios</h1>
+				<div style={{ display: 'flex', alignSelf: 'flex-start' }}>
+					<Link to={`/community/forum/${params.category}`}>
+						{' '}
+						<GoBackIcon />{' '}
+					</Link>
+				</div>
+				<h1 className='body2'>
+					Crea una publicación para <span>{params.category}</span>
+				</h1>
 				<form onSubmit={handleSubmit} className={styles.registerForm}>
 					<label htmlFor='title' className={styles.labelInput}>
 						Título
