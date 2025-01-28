@@ -8,6 +8,7 @@ import com.demo.demo.dtos.goal.UpdateGoalDTO;
 import com.demo.demo.dtos.request.UpdateUserRequestDto;
 import com.demo.demo.dtos.response.AddFundsResponse;
 import com.demo.demo.entities.UserEntity;
+import com.demo.demo.repositories.UserRepository;
 import com.demo.demo.services.UserService;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
@@ -27,6 +28,7 @@ import java.util.UUID;
 @RequestMapping("/api/user")
 public class UserController {
     final UserService userService;
+    final UserRepository   userRepository;
     @PatchMapping("/update")
     public ResponseEntity<UserEntity> updateUser(
             @CurrentUser UserEntity currentUser,
@@ -64,5 +66,14 @@ public class UserController {
             @CurrentUser UserEntity user,
             @RequestBody @Valid UpdateAmountDTO dto) {
         return ResponseEntity.ok(userService.addFounts(user.getUsername(), dto));
+    }
+
+    @PatchMapping("/update-profile-image")
+    public ResponseEntity<UserEntity> updateProfileImage(
+            @CurrentUser UserEntity currentUser,
+            @RequestParam String profileImageUrl) {
+        currentUser.setProfileImageUrl(profileImageUrl);
+        UserEntity updatedUser = userRepository.save(currentUser);
+        return ResponseEntity.ok(updatedUser);
     }
 }

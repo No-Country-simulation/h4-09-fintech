@@ -60,6 +60,7 @@ public class GoogleAuthController {
                 String email = payload.getEmail();
                 String name = (String) payload.get("given_name");
                 String lastName = (String) payload.get("family_name");
+                String profileImageUrl = (String) payload.get("picture");
 
                 // Verificar si el usuario existe en la base de datos
                 UserEntity user = userRepository.findByUsername(email).orElseGet(() -> {
@@ -68,6 +69,7 @@ public class GoogleAuthController {
                     newUser.setUsername(email);
                     newUser.setName(name);
                     newUser.setLastName(lastName);
+                    newUser.setProfileImageUrl(profileImageUrl);
 
                     RoleEntity role = roleRepository.findRoleByName("ROLE_USER").orElseThrow(() -> new NotFoundException(String.format("Role not found with name %s","ROLE_USER")));
                     newUser.getRoles().add(role);

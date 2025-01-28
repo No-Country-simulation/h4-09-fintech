@@ -30,6 +30,8 @@ public class RegisterRequestDto {
     )
     private String password;
 
+    private String profileImageUrl;
+
 
     private Set<RoleEntity> roles = new HashSet<>();
 }

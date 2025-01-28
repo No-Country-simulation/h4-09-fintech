@@ -63,7 +63,8 @@ public class UserService implements UserDetailsService {
                 user.getLastName(),
                 user.getMainGoal(),
                 user.getFinancialKnowledge(),
-                user.getRiskPreference()
+                user.getRiskPreference(),
+                user.getProfileImageUrl()
         );
     }
 
@@ -78,7 +79,8 @@ public class UserService implements UserDetailsService {
                 user.getLastName(),
                 user.getMainGoal(),
                 user.getFinancialKnowledge(),
-                user.getRiskPreference()
+                user.getRiskPreference(),
+                user.getProfileImageUrl()
         );
     }
 
