@@ -3,10 +3,11 @@ import { Link } from "react-router-dom";
 import "./AlertasInversion.css";
 import { ArrowLeftIcon } from "@heroicons/react/24/outline";
 import { styled } from "@mui/material/styles";
-import check from "../../../../assets/svg/CHECK.svg";
+// import check from "../../../../assets/svg/CHECK.svg";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
-import Switch, { SwitchProps } from "@mui/material/Switch";
+// import Switch, { SwitchProps } from "@mui/material/Switch";
+import Switch from "@mui/material/Switch";
 
 // Estilo personalizado para el switch
 const MaterialUISwitch = styled(Switch)(({ checked }) => ({

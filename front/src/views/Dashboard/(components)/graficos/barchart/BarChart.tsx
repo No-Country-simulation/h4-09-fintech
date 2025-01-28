@@ -85,7 +85,7 @@ const BarChartComponent: React.FC<BarChartComponentProps> = ({
             dataKey={dataKey}
             fill="#0048b2"
             barSize={11.9}
-            label={({ value }) => `${value}%`}
+            label={({ value }) => value}
           />
           {/* Usamos `dataKey` como prop */}
         </BarChart>
