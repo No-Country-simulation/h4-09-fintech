@@ -18,14 +18,13 @@ export default function PostCard({ post }: Props) {
 	const [showModal, setShowModal] = useState(false)
 	const [isClosing, setIsClosing] = useState(false)
 
-
-	
 	console.log(post)
 	const date = new Date(post.creationDate)
 	const formattedDate = new Intl.DateTimeFormat('es-AR', {
 		dateStyle: 'long' // Cambiar a 'long' para un formato más detallado
 		// timeStyle: 'short'
 	}).format(date)
+	
 	const [isBookmarked, setIsBookmarked] = useState(false)
 
 	const handleShowShare = () => {
