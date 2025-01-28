@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
 import "./Dashboard.css";
-import { BellAlertIcon, PlusCircleIcon } from "@heroicons/react/24/outline";
+import {
+  BellAlertIcon,
+  PlusCircleIcon,
+  XMarkIcon,
+} from "@heroicons/react/24/outline";
 import BarChartComponent from "./(components)/graficos/barchart/BarChart";
 import Example from "./(components)/graficos/Linear/LinearChart";
 import Circular from "./(components)/graficos/Pastel/PieChart";
@@ -40,7 +44,6 @@ export const Dashboard: React.FC = () => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const [boxFondos, setBoxFondos] = useState(false);
   const [monto, setMonto] = useState<number>(0);
   const [errorMonto, setErrorMonto] = useState<string>("");
 
@@ -122,53 +125,6 @@ export const Dashboard: React.FC = () => {
         console.error(err);
         setError("No se pudieron cargar los objetivos.");
       });
-  }, []);
-
-  // SOLICITUD PARA ACTUALIZAR FONDO
-  // useEffect(() => {
-  //   const token = getCookie("authToken");
-  //   if (!token) {
-  //     console.error("El token de autorización no está presente.");
-  //     setError("No se encontró el token de autorización.");
-  //     setLoadingUserData(false);
-  //     return;
-  //   }
-
-  //   fetch(
-  //     `https://h4-09-fintech-production.up.railway.app/api/user/add_funds`,
-  //     {
-  //       method: "PATCH",
-  //       headers: {
-  //         Authorization: `Bearer ${token}`,
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify({
-  //         amount: monto,
-  //       }),
-  //     }
-  //   )
-  //     .then((res) => {
-  //       if (!res.ok) {
-  //         throw new Error("Error al obtener el fondo");
-  //       }
-  //       return res.json();
-  //     })
-  //     .then((data) => {
-  //       console.log(data);
-  //       setOpen(false);
-  //     })
-  //     .catch((err: Error) => {
-  //       console.error(err);
-  //     })
-  //     .finally(() => setLoadingUserData(false));
-  // }, [montoRecarga]);
-
-  useEffect(() => {
-    if (userdata.currentAmount === 0) {
-      setBoxFondos(false);
-    } else {
-      setBoxFondos(true);
-    }
   }, []);
 
   // Función para manejar el envío del formulario
@@ -253,7 +209,11 @@ export const Dashboard: React.FC = () => {
     width: "70vw",
     height: "80vh",
     bgcolor: "background.paper",
+    borderRadius: "10px",
     boxShadow: 24,
+    display: "flex",
+    textAlign: "center",
+    flexDirection: "column",
     p: 4,
   };
 
@@ -276,30 +236,20 @@ export const Dashboard: React.FC = () => {
         <small className="free-plan">Free plan</small>
       </div>
 
-      {boxFondos === false ? (
-        <div className="añadir-tarjeta flex" onClick={handleOpen}>
-          <div>
-            <PlusCircleIcon className="cruz-icon" />
-          </div>
-          <h4>Añadir fondos</h4>
-          <h6>No tienes fondos actualmente</h6>
+      <div onClick={handleOpen} className="fondos-dash">
+        <div>
+          <h6>Fondo disponible</h6>
+          {userdata.currentAmount}
         </div>
-      ) : (
-        <div onClick={handleOpen} className="fondos-dash">
-          <div>
-            <h6>Fondo disponible</h6>
-            {userdata.currentAmount}
-          </div>
-          <small>cargar</small>
-        </div>
-      )}
+        <small>cargar</small>
+      </div>
 
       <BarChartComponent
         data={objetivos.map((goal) => ({
           name: goal.name,
-          ventas: goal.progress,
+          Progreso: goal.progress,
         }))}
-        dataKey="ventas"
+        dataKey="Progreso"
         xAxisKey="name"
         boton={btnObjetivo}
       />
@@ -314,15 +264,18 @@ export const Dashboard: React.FC = () => {
         >
           <Box sx={style}>
             <Typography id="modal-modal-title" variant="h6" component="h2">
-              <h3>Recargar fondos</h3>
+              <div className="empty-nav">
+                <XMarkIcon className="iconos-hero" onClick={handleClose} />
+              </div>
+              <h3>Añadir fondos</h3>
               <p>
                 Ingresa el monto que deseas recargar para agregarlo a tu cuenta.
               </p>
             </Typography>
             <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-              <h4>Tu monto actual es de :</h4>
               <div className="monto-recarga">
-                <p>{userdata.currentAmount}</p>
+                <h5>Tu monto actual es de :</h5>
+                <span>{userdata.currentAmount}</span>
               </div>
               <form onSubmit={handleSubmitModal}>
                 <input
@@ -333,7 +286,7 @@ export const Dashboard: React.FC = () => {
                 />
                 {errorMonto && <span>{errorMonto}</span>}
                 <div className="boton-modal">
-                  <button type="submit">Recargar</button>
+                  <button type="submit">Añadir</button>
                 </div>
               </form>
             </Typography>

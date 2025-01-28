@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 interface FinancialGoal {
   name: string;
@@ -10,11 +11,12 @@ function CrearObjetivo() {
   const [goal, setGoal] = useState<FinancialGoal | null>(null); // Cambiado a null como valor inicial
   const [goalName, setGoalName] = useState<string>("");
   const [goalTargetAmount, setGoalTargetAmount] = useState<string>(""); // Guardamos como string para facilitar el input controlado
-  const [targetDate, setTargetDate] = useState<string>("");
   const [errors, setErrors] = useState<{
     name?: string;
     targetAmount?: string;
   }>({});
+
+  const navigate = useNavigate();
 
   // POST del goal
   useEffect(() => {
@@ -65,16 +67,16 @@ function CrearObjetivo() {
     const financialGoal: FinancialGoal = {
       name: goalName,
       targetAmount: parseFloat(goalTargetAmount),
-      targetDate: targetDate || undefined, // Fecha no obligatoria
     };
     console.log("Nuevo Objetivo Financiero:", financialGoal);
-    setGoal(financialGoal); // Esto activará el useEffect para enviar los datos al backend
+    setGoal(financialGoal); // Esto activa el useEffect para enviar los datos al backend
+    alert("Has creado un nuevo objetivo");
 
     // Limpia el formulario
     setGoalName("");
     setGoalTargetAmount("");
-    setTargetDate("");
     setErrors({});
+    navigate("/dashboard");
   };
 
   return (
@@ -124,19 +126,6 @@ function CrearObjetivo() {
         {errors.targetAmount && (
           <p className="text-red-500 text-sm mt-1">{errors.targetAmount}</p>
         )}
-      </div>
-
-      <div>
-        <label htmlFor="targetDate" className="block font-medium mb-1">
-          Fecha Objetivo
-        </label>
-        <input
-          type="date"
-          id="targetDate"
-          value={targetDate}
-          onChange={(e) => setTargetDate(e.target.value)}
-          className="w-full border rounded p-2 border-gray-300"
-        />
       </div>
 
       <button

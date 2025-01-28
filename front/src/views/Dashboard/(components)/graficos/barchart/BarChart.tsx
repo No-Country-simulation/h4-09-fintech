@@ -13,7 +13,7 @@ import {
 
 // Definir las interfaces para las props
 interface BarChartComponentProps {
-  data: { name: string; ventas: number }[]; // Ajustamos el tipo de `data` para que sea un array de objetos con propiedades `name` y `ventas`
+  data: { name: string; Progreso: number }[]; // Ajustamos el tipo de `data` para que sea un array de objetos con propiedades `name` y `ventas`
   dataKey: string; // Tipo de `dataKey` como `string`
   xAxisKey: string; // Tipo de `xAxisKey` como `string`
   boton: string; // Tipo de `boton` como `string`
@@ -35,7 +35,7 @@ const BarChartComponent: React.FC<BarChartComponentProps> = ({
         to="/objetivos-financieros"
         style={{
           position: "absolute",
-          padding: "2% 3%",
+          padding: "8px 3%",
           right: "2%",
           top: "13.48%",
           transform: "translateY(-50%)",
@@ -81,7 +81,12 @@ const BarChartComponent: React.FC<BarChartComponentProps> = ({
             axisLine={false}
           />
           <Tooltip />
-          <Bar dataKey={dataKey} fill="#0048b2" barSize={11.9} />{" "}
+          <Bar
+            dataKey={dataKey}
+            fill="#0048b2"
+            barSize={11.9}
+            label={({ value }) => `${value}%`}
+          />
           {/* Usamos `dataKey` como prop */}
         </BarChart>
       </ResponsiveContainer>

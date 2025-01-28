@@ -86,19 +86,7 @@
   padding: 8px 10px;
   font-weight: var(--font-poppins-400);
 }
-.añadir-tarjeta {
-  width: 94vw;
-  min-height: 12.31vh;
-  height: 12.31vh;
-  margin: 1.83vh 3vw;
-  border-radius: 10px;
-  border: dashed rgb(0, 72, 178) 1px !important;
-  flex-direction: column;
-  font-size: 0.8rem;
-  font-weight: var(--font-poppins-500);
-  align-items: center;
-  justify-content: center;
-}
+
 .cruz-icon {
   height: 20px;
   fill: rgb(209, 227, 255);
@@ -170,4 +158,51 @@
 .fondos-dash h6 {
   color: #01255c;
   font-weight: 200;
+}
+#modal-modal-title {
+  color: #01255c;
+}
+#modal-modal-title p {
+  color: grey;
+}
+#modal-modal-description {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+#modal-modal-description .monto-recarga {
+  text-align: center;
+}
+#modal-modal-description .monto-recarga span {
+  font-size: 2rem;
+}
+#modal-modal-description form {
+  text-align: center;
+  height: 20vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.empty-nav {
+  position: absolute;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  left: 0;
+  bottom: 0;
+  height: 10%;
+  width: 100%;
+  background-color: var(--color-primario);
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+.empty-nav .iconos-hero {
+  color: white;
+  margin: 10px;
+}
+#modal-modal-description form input {
+  height: 30px;
 }
