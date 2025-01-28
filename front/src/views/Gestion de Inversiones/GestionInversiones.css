@@ -193,8 +193,7 @@
 	color: #7a0002;
 	background-color: #ffebeb;
 }
-.empresa .mercado 
-.porcentajes .flecha-trending {
+.empresa .mercado .porcentajes .flecha-trending {
 	stroke: var(--color-primario);
 }
 .porcentajes .subida {
@@ -207,7 +206,6 @@
 }
 
 /* MIS ESTILOS */
-
 
 .pageView {
 	display: flex;
@@ -245,28 +243,27 @@
 	padding: 8px 16px;
 	font-family: 'Poppins';
 	text-align: center;
-  /* box-shadow: 0 0 4px var(--color-primario); */
+	/* box-shadow: 0 0 4px var(--color-primario); */
 	&:hover {
 		cursor: pointer;
-    box-shadow: 0 0 4px var(--color-primario);
+		box-shadow: 0 0 4px var(--color-primario);
 	}
 }
 
 .activeButton {
-  	border: 1px solid #0048b2;
-  background-color: var(--color-fondo);
-  color: var(--color-primario);
+	border: 1px solid #0048b2;
+	background-color: var(--color-fondo);
+	color: var(--color-primario);
 	max-width: 350px;
 	border-radius: 8px;
 	padding: 8px 16px;
 	font-family: 'Poppins';
 	text-align: center;
-  /* box-shadow: 0 0 4px var(--color-primario); */
+	/* box-shadow: 0 0 4px var(--color-primario); */
 	&:hover {
 		cursor: pointer;
-    box-shadow: 0 0 4px var(--color-primario);
+		box-shadow: 0 0 4px var(--color-primario);
 	}
-
 }
 
 .title {
@@ -296,7 +293,7 @@
 	align-items: center;
 	justify-content: space-between;
 	gap: 18px;
-  /* padding-right: 24px; */
+	/* padding-right: 24px; */
 }
 
 .saldoContainer {
@@ -329,7 +326,7 @@
 .addFoundContainer {
 	display: flex;
 	flex-direction: row;
-  flex-wrap: wrap;
+	flex-wrap: wrap;
 	margin-top: 14px;
 	margin-bottom: 14px;
 	gap: 10px;
@@ -346,7 +343,7 @@
 	gap: 24px;
 	width: 300px;
 
-  box-shadow: 0 0 4px var(--color-primario);
+	box-shadow: 0 0 4px var(--color-primario);
 	span {
 		font-size: 12px;
 	}
@@ -356,44 +353,167 @@
 	height: 50px;
 	width: 50px;
 }
-.cardsContainer{
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap:12px;
+.cardsContainer {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	gap: 12px;
 }
 
-.card{
-  display: flex;
-  flex-direction: column;
-  /* align-items: center; */
-  justify-content: center;
-  width: 100%;
-  min-width: 300px;
-  gap: 8px;
-  padding: 12px;
-  border-radius: 8px;
-  box-shadow: 0 0 4px var(--color-primario);
+.card {
+	display: flex;
+	flex-direction: column;
+	/* justify-content: center; */
+	width: 100%;
+	min-width: 300px;
+	gap: 8px;
+	padding: 12px;
+	border-radius: 8px;
+	box-shadow: 0 0 4px var(--color-primario);
+	height: 95px;
+	transition: all 0.3s ease-in-out;
+	&:hover {
+		cursor: pointer;
+	}
 }
 
 .cardHeader {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  gap: 18px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	gap: 18px;
 }
 
-.cardTitle{
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 24px;
-  color: var(--color-primario);
+.cardTitle {
+	font-size: 16px;
+	font-weight: 500;
+	line-height: 24px;
+	color: var(--color-primario);
 }
 .porcentajes {
 	display: flex;
-  flex-direction: column;
+	flex-direction: column;
 	align-items: center;
 	justify-content: space-evenly;
 	width: 60%;
+}
+
+.modalOverlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.5);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.modal {
+	background: var(--color-fondo);
+	padding: 20px;
+	border-radius: 10px;
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+	text-align: center;
+	height: auto;
+	width: 80%;
+	max-width: 500px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.modal h5 {
+	margin-bottom: 10px;
+	font-size: 18px;
+}
+
+.modal span {
+	margin-bottom: 20px;
+	display: block;
+	font-size: 14px;
+	color: #555;
+}
+
+.modal input {
+	border-radius: 8px;
+	padding: 4px 8px;
+	margin: 4px;
+}
+.modalButtons {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	/* justify-content: center; */
+	gap: 10px;
+	width: 100%;
+	margin-bottom: 16px;
+	margin-top: 8px;
+}
+
+.confirmButton {
+	background-color: var(--color-primario);
+	color: var(--color-fondo);
+	width: 100%;
+	max-width: 350px;
+	border-radius: 8px;
+	padding: 12px 20px;
+	font-family: 'Poppins';
+	text-align: center;
+	&:hover {
+		cursor: pointer;
+	}
+}
+.disabledButton {
+	background-color: var(--color-disabled);
+	color: var(--color-fondo);
+	width: 100%;
+	max-width: 350px;
+	border-radius: 8px;
+	padding: 12px 20px;
+	font-family: 'Poppins';
+	text-align: center;
+	&:hover {
+		cursor: not-allowed;
+	}
+}
+
+.cancelButton {
+	background: #dc3545;
+	color: white;
+	border: none;
+	padding: 10px 20px;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+.userInvestmentCard {
+	display: flex;
+	flex-direction: column;
+	/* justify-content: center; */
+	width: 100%;
+	min-width: 300px;
+	gap: 8px;
+	padding: 12px;
+	border-radius: 8px;
+	box-shadow: 0 0 4px var(--color-primario);
+	/* height: 95px; */
+	transition: all 0.3s ease-in-out;
+
+	button {
+		background-color: var(--color-fondo);
+		color: var(--color-primario);
+		/* width: 100%; */
+		/* max-width: 350px; */
+		border-radius: 8px;
+		padding: 4px 10px;
+		font-family: 'Poppins';
+		text-align: center;
+		border: 1px solid var(--color-primario);
+		&:hover {
+			cursor: pointer;
+		}
+	}
 }
