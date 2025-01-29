@@ -38,4 +38,13 @@ public class StockController {
         List<StockTransactionResponseDto> transactions = stockService.getUserTransactions(currentUser.getUsername());
         return ResponseEntity.ok(transactions);
     }
+
+    @DeleteMapping("/transactions/{transactionId}")
+    public ResponseEntity<String> deleteTransaction(
+            @CurrentUser UserEntity currentUser,
+            @PathVariable Long transactionId) {
+        stockService.deleteTransaction(currentUser.getUsername(), transactionId);
+        return ResponseEntity.ok("Stock transaction sold successfully");
+    }
+
 }

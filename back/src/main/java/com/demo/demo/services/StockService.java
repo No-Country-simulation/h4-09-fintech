@@ -40,6 +40,7 @@ public class StockService {
         transaction.setPricePerUnit(pricePerUnit);
         transaction.setTotalCost(totalCost);
         transaction.setTransactionDate(LocalDateTime.now());
+        transaction.setId(transaction.getId());
 
         stockTransactionRepository.save(transaction);
         userRepository.save(user);
@@ -58,8 +59,24 @@ public class StockService {
                         transaction.getQuantity(),
                         transaction.getPricePerUnit(),
                         transaction.getTotalCost(),
-                        transaction.getTransactionDate()
+                        transaction.getTransactionDate(),
+                        transaction.getId()
                 ))
                 .toList();
+    }
+
+    public void deleteTransaction(String username, Long transactionId) {
+        UserEntity user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new NotFoundException("User not found"));
+
+        StockTransaction transaction = stockTransactionRepository.findById(transactionId)
+                .orElseThrow(() -> new NotFoundException("Transaction not found"));
+
+
+        if (!transaction.getUser().getUserId().equals(user.getUserId())) {
+            throw new IllegalArgumentException("You do not have permission to delete this transaction.");
+        }
+
+        stockTransactionRepository.delete(transaction);
     }
 }
