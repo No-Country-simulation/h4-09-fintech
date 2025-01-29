@@ -4,6 +4,7 @@
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
+  margin-bottom: 15vh;
 }
 
 /*----------------------------------------- */
@@ -95,6 +96,7 @@
   box-shadow: 0 0 2px 1px rgba(128, 128, 128, 0.541);
   border-radius: 5px;
   height: 35.17vh;
+  max-height: 35.17vh;
   min-height: max-content;
   margin: 0 3vw 1.83vh 3vw;
   width: 94vw;
@@ -159,24 +161,28 @@
   color: #01255c;
   font-weight: 200;
 }
-#modal-modal-title {
+#modal-modal-title h3 {
   color: #01255c;
+  font-weight: 300;
 }
 #modal-modal-title p {
   color: grey;
+  font-weight: 400;
 }
 #modal-modal-description {
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
+  margin: 0;
 }
 #modal-modal-description .monto-recarga {
   text-align: center;
 }
 #modal-modal-description .monto-recarga span {
-  font-size: 2rem;
+  font-size: 1.5rem;
+  color: rgb(0, 128, 64);
 }
 #modal-modal-description form {
   text-align: center;
@@ -202,7 +208,20 @@
 .empty-nav .iconos-hero {
   color: white;
   margin: 10px;
+  height: 70%;
+  width: auto;
 }
 #modal-modal-description form input {
-  height: 30px;
+  height: 5vh;
+}
+#modal-modal-title,
+#modal-modal-description {
+  font-family: var(--fuente-principal);
+}
+#modal-modal-description form button {
+  background-color: var(--color-primario);
+  color: var(--color-fondo);
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
 }
