@@ -1,5 +1,7 @@
 package com.demo.demo.controllers;
 
+import com.demo.demo.config.mappers.PostMapper;
+import com.demo.demo.dtos.post.PostResposeDTO;
 import com.demo.demo.dtos.request.PostRequestDto;
 import com.demo.demo.dtos.request.PostUpdateDto;
 import com.demo.demo.entities.PostEntity;
@@ -25,6 +27,7 @@ public class PostController {
     private final UserRepository userRepository;
     private final PostService postService;
     private final PostRepository postRepository;
+    private final PostMapper postMapper;
 
     @PostMapping("/new")
     public ResponseEntity<?> newPost(
@@ -76,8 +79,8 @@ public class PostController {
     public ResponseEntity<?> getAllPosts() {
         try {
             // Recuperar todos los posts
-            List<PostEntity> posts = postRepository.findAll();
-
+            List<PostEntity> postsEntity = postRepository.findAll();
+            List<PostResposeDTO> posts = postMapper.toPostResposeDTOList(postsEntity);
             if (posts.isEmpty()) {
                 return ResponseEntity.status(404).body("No hay posts disponibles.");
             }
