@@ -84,14 +84,14 @@ export const GestionInversiones = (): JSX.Element => {
 	const [fundsDetails, setFundsDetails] = useState<IFundsData[]>([])
 	const [loadingDetails, setLoadingDetails] = useState(false)
 
-	const { data: userInvestments } = useFetchDataWithToken<IUserInvestment[] | []>(`${baseUrl}/api/stocks/transactions`)
+	const { data: userInvestments , loading: loadingUserInvestments} = useFetchDataWithToken<IUserInvestment[] | []>(`${baseUrl}/api/stocks/transactions`)
 	const { data: user, loading: loadingUser, error: errorUser } = useFetchDataWithToken<IUser>(`${baseUrl}/api/auth/check-login`)
-	const { data: cedearsData } = useFetchDataWithToken<IpreData[]>(`${baseUrl}/api/market/cedears`)
+	const { data: cedearsData , loading: loadingCedears} = useFetchDataWithToken<IpreData[]>(`${baseUrl}/api/market/cedears`)
 	const { data: bondsData } = useFetchDataWithToken<IpreData[]>(`${baseUrl}/api/market/bonds`)
 	const { data: actionsData } = useFetchDataWithToken<IpreData[]>(`${baseUrl}/api/market/actions`)
 	const { data: fundsData } = useFetchDataWithToken<IFundsData[]>(`${baseUrl}/api/market/investment-funds`)
 	// console.log('user', user)
-	// console.log('userInvestments', userInvestments)
+	console.log('userInvestments', userInvestments)
 
 	const userFounds = user?.currentAmount?.toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
 	const investmentRecommendation = getInvestmentRecommendation(user?.riskPreference)
@@ -219,6 +219,7 @@ export const GestionInversiones = (): JSX.Element => {
 					<h3 className='subtitle'>Tu cartera:</h3>
 				</div>
 				<div className='cardsContainer'>
+					{loadingUserInvestments && <Spinner />}
 					{userInvestments?.map((investment, index) => {
 						// Encuentra el "similarStock" en `similarNotFunds` o `similarFunds`
 						const similarStock = similarNotFunds?.find((stock) => (stock as any).cedear === investment.stockSymbol) || similarFunds?.find((fund) => fund.cedear === investment.stockSymbol)
@@ -231,7 +232,7 @@ export const GestionInversiones = (): JSX.Element => {
 							/>
 						)
 					})}
-					{!userInvestments && <p>No tenés inversiones</p>}
+					{!userInvestments || (userInvestments.length === 0 && <p>No tenés inversiones</p>)}
 				</div>
 				<div className='headerContainer'>
 					<h3 className='subtitle'>¿En qué desea invertir?</h3>
@@ -249,8 +250,8 @@ export const GestionInversiones = (): JSX.Element => {
 				<h5>Añadidos recientemente</h5>
 				<section className='cardsContainer'>
 					<Outlet />
-					{loadingDetails ? (
-						// <p>Cargando ...</p>
+					{loadingDetails || loadingCedears ? (
+
 						<Spinner />
 					) : (
 						displayedData.map((item, index) => {
@@ -259,7 +260,7 @@ export const GestionInversiones = (): JSX.Element => {
 							return <InvestmentCard key={index} name={name} cedear={cedear} price={price} percentageLastMonth={percentageLastMonth} percentageLastYear={percentageLastYear} user={user} />
 						})
 					)}
-					{!loadingDetails && displayedData.length === 0 && <p>No hay datos para mostrar. Reintente en unos segundos.</p>}
+					{ displayedData.length === 0 && <p>No hay datos para mostrar. Reintente en unos segundos.</p>}
 				</section>
 			</div>
 		</div>
