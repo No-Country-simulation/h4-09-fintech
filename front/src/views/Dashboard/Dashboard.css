@@ -4,6 +4,7 @@
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
+  margin-bottom: 15vh;
 }
 
 /*----------------------------------------- */
@@ -95,6 +96,7 @@
   box-shadow: 0 0 2px 1px rgba(128, 128, 128, 0.541);
   border-radius: 5px;
   height: 35.17vh;
+  max-height: 35.17vh;
   min-height: max-content;
   margin: 0 3vw 1.83vh 3vw;
   width: 94vw;
