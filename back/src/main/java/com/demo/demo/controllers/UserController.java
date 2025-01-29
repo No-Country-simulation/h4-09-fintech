@@ -59,7 +59,11 @@ public class UserController {
             @RequestBody @Valid UpdateGoalDTO dto) {
         return ResponseEntity.ok(userService.uptateGoal(user.getUsername(), dto));
     }
-
+    @Transactional
+    @DeleteMapping("/delete_goal/{goalId}")
+    public ResponseEntity<ResponseGoalDTO> deleteGoal(@PathVariable UUID goalId, @CurrentUser UserEntity user) {
+        return ResponseEntity.ok(userService.deleteGoal(goalId, user.getUsername()));
+    }
     @Transactional
     @PatchMapping("/add_funds")
     public ResponseEntity<AddFundsResponse> addFounts(

@@ -159,5 +159,16 @@ public class UserService implements UserDetailsService {
     }
 
 
+    public ResponseGoalDTO deleteGoal(UUID goalId, String username) {
+        UserEntity user = getUserByUsername(username);
+        Goal goal = user.getGoals().stream()
+                .filter(g -> g.getGoalId().equals(goalId))
+                .findFirst()
+                .orElseThrow(() -> new NotFoundException("Goal not found"));
+
+        user.getGoals().remove(goal);
+
+        return goalMapper.toResponseGoalDTO(goal, user);
+    }
 }
 
