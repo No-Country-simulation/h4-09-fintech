@@ -18,7 +18,7 @@ export default function UserInvestmentCard({ userInvestment, similarStock }: Pro
 	const variationColor = variationPercentage !== undefined ? (variationPercentage > 0 ? 'green' : variationPercentage < 0 ? 'red' : 'blue') : 'gray'
 	// console.log('userInvestment', userInvestment)
 	// console.log('similarStock', similarStock)
-	const { data, loading, error, patchData } = usePatchDataWithToken(`${baseUrl}/api/stocks/transactions/${userInvestment.id}`)
+	const { loading, error, patchData } = usePatchDataWithToken(`${baseUrl}/api/stocks/transactions/${userInvestment.id}`)
 	const { data: dataFunds, loading: loadingFunds, error: errorFunds, patchData: patchDataFunds } = usePatchDataWithToken(`${baseUrl}/api/user/add_funds`)
 	const [showModal, setShowModal] = useState(false)
 	const handleShowModal = () => {
@@ -37,20 +37,16 @@ export default function UserInvestmentCard({ userInvestment, similarStock }: Pro
 			return
 		}
 
-		await patchData(quantityToSell)
-		console.log(data)
-		console.error(error)
+		await patchData({ quantity: quantityToSell })
+		// console.log(data)
+		// console.error(error)
 		if (error) {
 			console.error(error)
 			alert('Hubo un error al realizar la operación')
 		}
-		if (data === null) {
-			return
-		}
 		if (currentPrice === undefined) {
 			return
 		}
-
 		await patchDataFunds({ amount: quantityToSell * currentPrice })
 		console.log(dataFunds)
 
