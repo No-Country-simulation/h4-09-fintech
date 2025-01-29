@@ -185,11 +185,11 @@ export const ObjetivosFinancieros = () => {
                   <h5>{objetivo.name}</h5>
                   <div className="data-goal">
                     <div>
-                      <p>progeso:</p>
+                      <p>progeso:&nbsp;</p>
                       <h6>{objetivo.progress}%</h6>
                     </div>
                     <div>
-                      <p>monto:</p>
+                      <p>monto:&nbsp;</p>
                       <h6>${objetivo.targetAmount}</h6>
                     </div>
                   </div>

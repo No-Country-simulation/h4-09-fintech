@@ -77,7 +77,6 @@ export const Dashboard: React.FC = () => {
         return res.json();
       })
       .then((data) => {
-        console.log(data);
         setUserData({
           nombre: data.name || "Usuario",
           correo: data.username || "Correo no disponible",

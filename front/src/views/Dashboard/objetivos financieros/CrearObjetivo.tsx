@@ -1,5 +1,5 @@
 import { ArrowLeftIcon } from "@heroicons/react/24/outline";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./CrearObjetivo.css";
 
@@ -10,9 +10,8 @@ interface FinancialGoal {
 }
 
 function CrearObjetivo() {
-  const [goal, setGoal] = useState<FinancialGoal | null>(null); // Cambiado a null como valor inicial
   const [goalName, setGoalName] = useState<string>("");
-  const [goalTargetAmount, setGoalTargetAmount] = useState<string>(""); // Guardamos como string para facilitar el input controlado
+  const [goalTargetAmount, setGoalTargetAmount] = useState<string>("");
   const [errors, setErrors] = useState<{
     name?: string;
     targetAmount?: string;
@@ -20,31 +19,12 @@ function CrearObjetivo() {
 
   const navigate = useNavigate();
 
-  // POST del goal
-  useEffect(() => {
-    if (!goal) return; // Evitamos enviar si el goal es null
-
-    // Función para obtener una cookie específica
-    const getCookie = (name: string): string | null => {
-      const cookies = document.cookie.split("; ");
-      const cookie = cookies.find((row) => row.startsWith(`${name}=`));
-      return cookie ? decodeURIComponent(cookie.split("=")[1]) : null;
-    };
-
-    const token = getCookie("authToken");
-
-    fetch(
-      `https://h4-09-fintech-production.up.railway.app/api/user/create_goal`,
-      {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(goal),
-      }
-    ).then(() => console.log("Objetivo enviado:", goal));
-  }, [goal]);
+  // Función para obtener una cookie específica
+  const getCookie = (name: string): string | null => {
+    const cookies = document.cookie.split("; ");
+    const cookie = cookies.find((row) => row.startsWith(`${name}=`));
+    return cookie ? decodeURIComponent(cookie.split("=")[1]) : null;
+  };
 
   const validateForm = (): boolean => {
     const newErrors: { name?: string; targetAmount?: string } = {};
@@ -61,7 +41,7 @@ function CrearObjetivo() {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (!validateForm()) return;
@@ -70,21 +50,39 @@ function CrearObjetivo() {
       name: goalName,
       targetAmount: parseFloat(goalTargetAmount),
     };
-    setGoal(financialGoal); // Esto activa el useEffect para enviar los datos al backend
-    alert("Has creado un nuevo objetivo");
 
-    // Limpia el formulario
-    setGoalName("");
-    setGoalTargetAmount("");
-    setErrors({});
-    navigate("/dashboard");
-    window.location.reload();
+    try {
+      const token = getCookie("authToken");
+      const response = await fetch(
+        `https://h4-09-fintech-production.up.railway.app/api/user/create_goal`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(financialGoal),
+        }
+      );
+
+      if (!response.ok) throw new Error("Error al crear el objetivo");
+
+      alert("Has creado un nuevo objetivo");
+      setGoalName("");
+      setGoalTargetAmount("");
+      setErrors({});
+      navigate("/objetivos-financieros");
+      // window.location.reload();
+    } catch (error) {
+      console.error("Error:", error);
+      alert("Hubo un problema al guardar el objetivo.");
+    }
   };
 
   return (
     <div className="container-crear-objetivo">
       <h1>
-        <Link to="/dashboard" className="link-rrdom">
+        <Link to="/objetivos-financieros" className="link-rrdom">
           <ArrowLeftIcon className="iconos-hero flecha-izquierda" />
         </Link>
         Nuevo objetivo
