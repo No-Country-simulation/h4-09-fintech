@@ -55,6 +55,7 @@ export interface IFundsData {
 	price: number
 }
 export interface IUserInvestment {
+	id?: number
 	quantity: number
 	stockSymbol: string
 	stockName: string
