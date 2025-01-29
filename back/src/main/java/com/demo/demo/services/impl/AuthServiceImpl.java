@@ -67,6 +67,14 @@ public class AuthServiceImpl implements AuthService {
         UserEntity newUser = userMapper.toUserEntity(dto);
         newUser.setPassword(passwordEncoder.encode(dto.getPassword()));
         newUser.getRoles().add(role);
+
+        if (dto.getProfileImageUrl() == null || dto.getProfileImageUrl().isEmpty()) {
+            newUser.setProfileImageUrl("https://i.pinimg.com/236x/af/de/72/afde727d75f5aa585c407cd89910cb80.jpg");
+        } else {
+            newUser.setProfileImageUrl(dto.getProfileImageUrl());
+        }
+
+
         userRepository.save(newUser);
         String token = jwtUtil.generateToken(newUser);
         return new AuthResponseDto(token);

@@ -19,6 +19,7 @@ public class UserResponseDTO {
     private String financialKnowledge;
     private String riskPreference;
     private float currentAmount;
+    private String profileImageUrl;
 
     public UserResponseDTO() {}
 }

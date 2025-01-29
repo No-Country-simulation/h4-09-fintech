@@ -18,4 +18,5 @@ public class UserPreferencesResponseDto {
     private String mainGoal;
     private String financialKnowledge;
     private String riskPreference;
+    private String profileImageUrl;
 }
