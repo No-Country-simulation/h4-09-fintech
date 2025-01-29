@@ -44,12 +44,13 @@ Ante la falta de opciones de crédito accesible, IUPI ofrece a las familias la p
 | Leon Asturizaga    | linkedin | github  | rol       |
 | Gabriel Gotlib    | [Gabriel-Gotlib](https://www.linkedin.com/in/gabriel-gotlib-5855197b/) | [Gabriel Gtlib](https://github.com/Gagotlib)  | Frontend       |
 | Jorge Hernriquez       | [jorge-henriquez-novoa](https://linkedin.com/in/jorge-henriquez-novoa/) | jorgea-hn       | Frontend        |
+| Alejandro Verduguez       | [Alejandro Verduguez Vidal](https://www.linkedin.com/in/alejandro-verduguez/) | [alelex10](https://github.com/alelex10)       | Backend        |
 
 ---
 
 ## 💽 Deployment
-- **Frontend:** [IUPI Frontend](url)
-- **Backend:** [IUPI Backend](url)
+- **Frontend:** [IUPI Frontend](https://iupi-sample.vercel.app/)
+- **Backend:** [IUPI Backend](https://h4-09-fintech-production.up.railway.app)
 
 ---
 
@@ -59,7 +60,7 @@ Ante la falta de opciones de crédito accesible, IUPI ofrece a las familias la p
 ---
 
 ## 💻 Documentación UX/UI
-- [Diseño en Figma](#)
+- [Diseño en Figma](https://www.figma.com/design/1uk1gWP09hM54AQpTIgxi9/App-mobile---Design-IUPI-(Wireframes)?node-id=3-57&p=f&t=xogqHTZcbGPKMBOC-0)
 
 ## 💻 Documentación QA
 - [Historias de Usuario](#)
@@ -68,7 +69,7 @@ Ante la falta de opciones de crédito accesible, IUPI ofrece a las familias la p
 
 ## 🔌 Recursos Adicionales
 - [Google Drive del proyecto](#)
-- [Swagger](#)
+- [Swagger](https://h4-09-fintech-production.up.railway.app/swagger-ui/index.html)
 
 ---
 

@@ -2,42 +2,71 @@ package com.demo.demo.entities;
 
 import jakarta.persistence.*;
 
+import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.*;
+import java.util.stream.Collectors;
+
 @Entity
-@Table(name = "users") // Define el nombre de la tabla en la base de datos
-public class UserEntity {
-
+@Table(name = "users")
+@Setter
+@Getter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class UserEntity implements UserDetails {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "user_id")
+    private UUID userId;
 
-    @Column(unique = true, nullable = false) // El nombre de usuario debe ser único y no nulo
-    private String username;
+    @Column(unique = true, nullable = false)
+    private String username; //es el mail
 
-    @Column(nullable = false) // La contraseña no debe ser nula
+    @Column()
+    private String name;
+    @Column()
+    private String lastName;
+
+    @Column()
     private String password;
 
-    // Getters y setters
-    public Long getId() {
-        return id;
-    }
+//    @Enumerated(EnumType.STRING)
+    @Column(name = "main_goal", nullable = true)
+    private String mainGoal;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+//    @Enumerated(EnumType.STRING)
+    @Column(name = "financial_knowledge", nullable = true)
+    private String financialKnowledge;
 
-    public String getUsername() {
-        return username;
-    }
+//    @Enumerated(EnumType.STRING)
+    @Column(name = "risk_preference", nullable = true)
+    private String riskPreference;
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
+    @Column(name = "onboarding_complete", nullable = false)
+    boolean onboardingComplete;
 
-    public String getPassword() {
-        return password;
-    }
+    private float currentAmount=0;//prefieren llamarlo fondos o wallet...?
 
-    public void setPassword(String password) {
-        this.password = password;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Goal> goals;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "user_role",
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "role_id")
+    )
+    private Set<RoleEntity> roles = new HashSet<>();
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return roles.stream()
+                .map(role -> new SimpleGrantedAuthority(role.getRoleName()))
+                .collect(Collectors.toList());
+
     }
 }
