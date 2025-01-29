@@ -1,5 +1,7 @@
+import { ArrowLeftIcon } from "@heroicons/react/24/outline";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import "./CrearObjetivo.css";
 
 interface FinancialGoal {
   name: string;
@@ -80,61 +82,65 @@ function CrearObjetivo() {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="p-4 max-w-md mx-auto border rounded shadow-sm space-y-4"
-    >
-      <h2 className="text-xl font-bold text-center">
-        Crear Objetivo Financiero
-      </h2>
-
-      <div>
-        <label htmlFor="goalName" className="block font-medium mb-1">
-          Nombre del Objetivo
-        </label>
-        <input
-          type="text"
-          id="goalName"
-          value={goalName}
-          onChange={(e) => setGoalName(e.target.value)}
-          placeholder="Ej: Comprar casa"
-          className={`w-full border rounded p-2 ${
-            errors.name ? "border-red-500" : "border-gray-300"
-          }`}
-          required
-        />
-        {errors.name && (
-          <p className="text-red-500 text-sm mt-1">{errors.name}</p>
-        )}
-      </div>
-
-      <div>
-        <label htmlFor="goalTargetAmount" className="block font-medium mb-1">
-          Monto Objetivo
-        </label>
-        <input
-          type="number"
-          id="goalTargetAmount"
-          value={goalTargetAmount}
-          onChange={(e) => setGoalTargetAmount(e.target.value)}
-          placeholder="Ej: 1000"
-          className={`w-full border rounded p-2 ${
-            errors.targetAmount ? "border-red-500" : "border-gray-300"
-          }`}
-          required
-        />
-        {errors.targetAmount && (
-          <p className="text-red-500 text-sm mt-1">{errors.targetAmount}</p>
-        )}
-      </div>
-
-      <button
-        type="submit"
-        className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600"
+    <div className="container-crear-objetivo">
+      <h1>
+        <Link to="/dashboard" className="link-rrdom">
+          <ArrowLeftIcon className="iconos-hero flecha-izquierda" />
+        </Link>
+        Nuevo objetivo
+      </h1>
+      <form
+        onSubmit={handleSubmit}
+        className="p-4 max-w-md mx-auto border rounded shadow-sm space-y-4"
       >
-        Guardar Objetivo
-      </button>
-    </form>
+        <div>
+          <label htmlFor="goalName" className="block font-medium mb-1">
+            Nombre del Objetivo:
+          </label>
+          <input
+            type="text"
+            id="goalName"
+            value={goalName}
+            onChange={(e) => setGoalName(e.target.value)}
+            placeholder="Ej: Comprar casa"
+            className={`w-full border rounded p-2 ${
+              errors.name ? "border-red-500" : "border-gray-300"
+            }`}
+            required
+          />
+          {errors.name && (
+            <p className="text-red-500 text-sm mt-1">{errors.name}</p>
+          )}
+        </div>
+
+        <div>
+          <label htmlFor="goalTargetAmount" className="block font-medium mb-1">
+            Valor del Objetivo:
+          </label>
+          <input
+            type="number"
+            id="goalTargetAmount"
+            value={goalTargetAmount}
+            onChange={(e) => setGoalTargetAmount(e.target.value)}
+            placeholder="Ej: 1000"
+            className={`w-full border rounded p-2 ${
+              errors.targetAmount ? "border-red-500" : "border-gray-300"
+            }`}
+            required
+          />
+          {errors.targetAmount && (
+            <p className="text-red-500 text-sm mt-1">{errors.targetAmount}</p>
+          )}
+        </div>
+
+        <button
+          type="submit"
+          className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600"
+        >
+          Guardar Objetivo
+        </button>
+      </form>
+    </div>
   );
 }
 
