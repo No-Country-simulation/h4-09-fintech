@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/stocks")
@@ -39,12 +40,20 @@ public class StockController {
         return ResponseEntity.ok(transactions);
     }
 
-    @DeleteMapping("/transactions/{transactionId}")
-    public ResponseEntity<String> deleteTransaction(
+    @PatchMapping("/transactions/{transactionId}")
+    public ResponseEntity<String> sellStock(
             @CurrentUser UserEntity currentUser,
-            @PathVariable Long transactionId) {
-        stockService.deleteTransaction(currentUser.getUsername(), transactionId);
-        return ResponseEntity.ok("Stock transaction sold successfully");
+            @PathVariable Long transactionId,
+            @RequestBody Map<String, Integer> request) {
+
+        if (!request.containsKey("quantity")) {
+            return ResponseEntity.badRequest().body("Missing 'quantity' field");
+        }
+
+        int sellQuantity = request.get("quantity");
+        stockService.sellStock(currentUser.getUsername(), transactionId, sellQuantity);
+
+        return ResponseEntity.ok("Stock transaction updated successfully");
     }
 
 }
