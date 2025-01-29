@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom' // Importa useNavigate para redirecciones
-import IupiBigIcon from '../../assets/icons/IupiBigIcon'
+import IupiBigIcon from '../../assets/icons/(iupi)/IupiBigIcon'
 import styles from './landing.module.css'
-import Intro1Icon from '../../assets/icons/Intro1Icon'
-import Intro2Icon from '../../assets/icons/Intro2Icon'
-import Intro3Icon from '../../assets/icons/Intro3Icon'
+import Intro1Icon from '../../assets/icons/(intro)/Intro1Icon'
+import Intro2Icon from '../../assets/icons/(intro)/Intro2Icon'
+import Intro3Icon from '../../assets/icons/(intro)/Intro3Icon'
 
 export default function Landing() {
 	const [isLanding, setIsLanding] = useState(true)
@@ -73,7 +73,7 @@ const StepContent = ({ step, onNext }: StepContentProps) => {
 		<div className={styles.stepsview}>
 			<div className={styles.contentcontainer}>
 				<div>{step.icon}</div>
-				<h5>{step.title}</h5>
+				<h5 className="body2">{step.title}</h5>
 				<span>{step.text}</span>
 			</div>
 			<button type='button' onClick={onNext} className='primaryButton'>

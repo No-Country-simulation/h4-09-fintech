@@ -1,0 +1,100 @@
+.card {
+	display: flex;
+	flex-direction: column;
+	border-radius: 0.5rem;
+	/* height: 305px; */
+	padding: 1rem;
+	overflow: hidden;
+	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+	transition: all 0.3s ease-in-out;
+	text-decoration: none;
+	color: black;
+	flex: 1;
+	gap:14px;
+}
+	.header {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+	}
+	.headerSection {
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+		gap: 8px;
+	}
+
+	.avatar {
+		width: 32px;
+		height: 32px;
+		border-radius: 100%;
+	}
+	.img {
+		width: 100%;
+		height: 120px;
+		object-fit: cover;
+		border-radius: 8px;
+	}
+	.title {
+		text-align: start;
+		font-size: medium;
+		font-weight: 500;
+		line-height: 20px;
+		color: var(--color-primario);
+	}
+
+	h5 {
+		text-align: start;
+		font-size: medium;
+		font-weight: 400;
+		margin-bottom: 8px;
+	}
+
+	p {
+		text-align: start;
+		font-size: small;
+	}
+
+
+/* Asegurarse de que el enlace no tenga subrayado */
+a {
+	text-decoration: none;
+	color: var(--color-primario);
+
+	&:hover {
+		text-decoration: none;
+		color: inherit;
+	}
+}
+
+/* Truncar texto */
+.card p {
+	/* white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis; */
+	margin-bottom: 8px;
+}
+
+.card span {
+	margin-top: 8px;
+	white-space: normal;
+	overflow: visible;
+	margin-top: auto;
+	text-align: end;
+	font-size: small;
+}
+
+.createButton {
+	border: 1px solid #0048b2;
+	background-color: var(--color-primario);
+	color: var(--color-fondo);
+	border-radius: 8px;
+	padding: 8px 16px;
+	font-family: 'Poppins';
+	text-align: center;
+	&:hover {
+		cursor: pointer;
+	}
+}

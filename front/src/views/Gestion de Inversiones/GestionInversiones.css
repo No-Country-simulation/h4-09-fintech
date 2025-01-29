@@ -1,0 +1,519 @@
+.container-gestion-inversiones {
+	min-height: 100vh;
+	min-width: 100vw;
+	box-sizing: border-box;
+	padding: 0 3vw;
+}
+.container-gestion-inversiones h1 {
+	display: flex;
+	align-items: center;
+	height: 7.28vh;
+	width: 94vw;
+	font-size: 1.2rem;
+	font-weight: var(--font-poppins-500);
+}
+.container-gestion-inversiones h4 {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	color: var(--color-primario);
+}
+.container-gestion-inversiones h5 {
+	color: var(--color-primario);
+}
+
+.grid-container-gestion {
+	min-height: 24.03vh;
+	height: auto;
+	width: 94vw;
+	max-width: 94vw;
+	display: grid;
+	grid-template-columns: 46.69% 1fr 1fr;
+	grid-template-rows: 30.77% 69.23%;
+	grid-template-areas:
+		'ojo ojo ojo'
+		'saldo tarjeta agregar';
+}
+
+.grid-container-gestion .ojo {
+	grid-area: ojo;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin: 0 2%;
+	font-weight: 500;
+	color: var(--color-primario);
+}
+.grid-container-gestion .saldo {
+	grid-area: saldo;
+	display: flex;
+	flex-direction: column;
+	height: 87.65%;
+	width: 90%;
+	margin: 0 auto auto auto;
+}
+.grid-container-gestion .tarjeta {
+	grid-area: tarjeta;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	height: 87.65%;
+	width: 90%;
+	margin: 0 auto auto 0;
+}
+.grid-container-gestion .agregar {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	grid-area: agregar;
+	height: 87.65%;
+	width: 90%;
+	border: dashed rgb(0, 72, 178) 1px !important;
+	border-radius: 6px;
+	margin: 0 auto auto 0;
+}
+
+.saldo span {
+	height: 20%;
+	display: flex;
+	align-items: center;
+	font-weight: 500;
+}
+.saldo small {
+	height: 20%;
+	font-size: 0.5rem;
+	display: flex;
+	align-items: center;
+}
+.saldo div {
+	height: 20%;
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+	font-size: 0.5rem;
+}
+.saldo div b {
+	background-color: var(--color-notificaciones);
+	color: var(--color-primario);
+	padding: 0 5px;
+	border-radius: 10px;
+}
+.inversiones-btn-group {
+	height: 7vh;
+	/* max-width: 94vw;
+	min-width: 94vw; */
+	overflow: hidden;
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+	overflow-x: scroll;
+}
+.inversiones-btn-group::-webkit-scrollbar {
+	display: none;
+}
+.inversiones-btn-group a {
+	max-height: 40px;
+	min-height: 30px;
+	max-height: 80px;
+	padding: 0 20px;
+	margin: 2%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border: solid var(--color-primario) 1px;
+	color: var(--color-primario);
+	border-radius: 5px;
+	font-size: 0.6rem;
+	font-weight: 500;
+}
+.inversiones-btn-group a.active {
+	background-color: var(--color-primario);
+	color: var(--color-fondo);
+}
+.container-gestion-inversiones h4,
+.container-gestion-inversiones h5,
+.container-gestion-inversiones p {
+	font-weight: 400;
+}
+.container-gestion-inversiones h4 {
+	font-size: 0.7rem;
+}
+.container-gestion-inversiones h5 {
+	font-size: 0.6rem;
+}
+.container-gestion-inversiones {
+	font-size: 0.6rem;
+}
+.container-mercado {
+	box-sizing: border-box;
+	min-width: 94vw;
+	height: auto;
+	min-height: max-content;
+}
+.empresa {
+	height: 10vh;
+	width: 94vw;
+	margin-bottom: 10px;
+	box-sizing: border-box;
+	display: flex;
+	padding-right: 10px;
+}
+.empresa .clave {
+	width: 20%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.empresa :nth-child(2) {
+	width: 47%;
+}
+.empresa :nth-child(3) {
+	width: 33%;
+}
+.empresa .nombre {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+}
+.empresa .nombre .accion {
+	display: flex;
+	width: 60%;
+	justify-content: space-evenly;
+}
+.empresa .mercado {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	align-items: center;
+}
+.empresa .mercado :nth-child(1) {
+	border-radius: 50px;
+	padding: 2px 4px;
+	color: #7a0002;
+	background-color: #ffebeb;
+}
+.empresa .mercado .porcentajes .flecha-trending {
+	stroke: var(--color-primario);
+}
+.porcentajes .subida {
+	color: green;
+	font-weight: 600;
+}
+.porcentajes .bajada {
+	color: red;
+	font-weight: 600;
+}
+
+/* MIS ESTILOS */
+
+.pageView {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	min-height: 100vh;
+	min-height: 100dvh;
+	width: 100%;
+	/* @media (min-width: 480px) {
+		justify-content: center;
+		translate: 0px -200px;
+	} */
+}
+.contentContainer {
+	display: flex;
+	flex-direction: column;
+	/* align-items: center; */
+	/* justify-content: center; */
+	/* height: 100%; */
+	margin-top: 1rem;
+	width: 90%;
+	max-width: 1000px;
+	gap: 10px;
+	background-color: var(--color-fondo);
+	/* text-align: start; */
+	margin-bottom: 144px;
+}
+
+.button {
+	border: 1px solid #0048b2;
+	background-color: var(--color-primario);
+	color: var(--color-fondo);
+	max-width: 350px;
+	border-radius: 8px;
+	padding: 8px 16px;
+	font-family: 'Poppins';
+	text-align: center;
+	/* box-shadow: 0 0 4px var(--color-primario); */
+	&:hover {
+		cursor: pointer;
+		box-shadow: 0 0 4px var(--color-primario);
+	}
+}
+
+.activeButton {
+	border: 1px solid #0048b2;
+	background-color: var(--color-fondo);
+	color: var(--color-primario);
+	max-width: 350px;
+	border-radius: 8px;
+	padding: 8px 16px;
+	font-family: 'Poppins';
+	text-align: center;
+	/* box-shadow: 0 0 4px var(--color-primario); */
+	&:hover {
+		cursor: pointer;
+		box-shadow: 0 0 4px var(--color-primario);
+	}
+}
+
+.title {
+	/* text-align: center; */
+	font-size: 20px;
+	font-weight: 500;
+	line-height: 24px;
+	color: #232f34;
+	translate: 0px -4px;
+	width: 90%;
+}
+
+.subtitle {
+	/* text-align: center; */
+	font-size: 16px;
+	font-weight: 500;
+	/* line-height: 24px; */
+	color: var(--color-primario);
+	/* translate: 0px -4px; */
+	/* width: 90%; */
+}
+
+.headerContainer {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	gap: 18px;
+	/* padding-right: 24px; */
+}
+
+.saldoContainer {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	/* width: 40%; */
+	gap: 18px;
+	flex-wrap: nowrap;
+	/* padding-right: 24px; */
+}
+.saldoContainer {
+	margin-bottom: 24px;
+}
+.saldo {
+	font-size: 22px;
+	font-weight: 500;
+	line-height: 24px;
+	/* color: var(--color-primario); */
+}
+.eye-icon {
+	margin-right: 24px;
+	color: var(--color-primario);
+	&:hover {
+		cursor: pointer;
+	}
+}
+
+.addFoundContainer {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	margin-top: 14px;
+	margin-bottom: 14px;
+	gap: 10px;
+}
+.addFound {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	border: 2px solid var(--color-primario);
+	padding-inline: 16px;
+	border-radius: 8px;
+	height: 40px;
+	gap: 24px;
+	width: 300px;
+
+	box-shadow: 0 0 4px var(--color-primario);
+	span {
+		font-size: 12px;
+	}
+}
+
+.mastercard {
+	height: 50px;
+	width: 50px;
+}
+.cardsContainer {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	gap: 12px;
+}
+
+.card {
+	display: flex;
+	flex-direction: column;
+	/* justify-content: center; */
+	width: 100%;
+	min-width: 300px;
+	gap: 8px;
+	padding: 12px;
+	border-radius: 8px;
+	box-shadow: 0 0 4px var(--color-primario);
+	height: 95px;
+	transition: all 0.3s ease-in-out;
+	&:hover {
+		cursor: pointer;
+	}
+}
+
+.cardHeader {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	gap: 18px;
+}
+
+.cardTitle {
+	font-size: 16px;
+	font-weight: 500;
+	line-height: 24px;
+	color: var(--color-primario);
+}
+.porcentajes {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-evenly;
+	width: 60%;
+}
+
+.modalOverlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.5);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.modal {
+	background: var(--color-fondo);
+	padding: 20px;
+	border-radius: 10px;
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+	text-align: center;
+	height: auto;
+	width: 80%;
+	max-width: 500px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.modal h5 {
+	margin-bottom: 10px;
+	font-size: 18px;
+}
+
+.modal span {
+	margin-bottom: 20px;
+	display: block;
+	font-size: 14px;
+	color: #555;
+}
+
+.modal input {
+	border-radius: 8px;
+	padding: 4px 8px;
+	margin: 4px;
+}
+.modalButtons {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	/* justify-content: center; */
+	gap: 10px;
+	width: 100%;
+	margin-bottom: 16px;
+	margin-top: 8px;
+}
+
+.confirmButton {
+	background-color: var(--color-primario);
+	color: var(--color-fondo);
+	width: 100%;
+	max-width: 350px;
+	border-radius: 8px;
+	padding: 12px 20px;
+	font-family: 'Poppins';
+	text-align: center;
+	&:hover {
+		cursor: pointer;
+	}
+}
+.disabledButton {
+	background-color: var(--color-disabled);
+	color: var(--color-fondo);
+	width: 100%;
+	max-width: 350px;
+	border-radius: 8px;
+	padding: 12px 20px;
+	font-family: 'Poppins';
+	text-align: center;
+	&:hover {
+		cursor: not-allowed;
+	}
+}
+
+.cancelButton {
+	background: #dc3545;
+	color: white;
+	border: none;
+	padding: 10px 20px;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+.userInvestmentCard {
+	display: flex;
+	flex-direction: column;
+	/* justify-content: center; */
+	width: 100%;
+	min-width: 300px;
+	gap: 8px;
+	padding: 12px;
+	border-radius: 8px;
+	box-shadow: 0 0 4px var(--color-primario);
+	/* height: 95px; */
+	transition: all 0.3s ease-in-out;
+
+	button {
+		background-color: var(--color-fondo);
+		color: var(--color-primario);
+		/* width: 100%; */
+		/* max-width: 350px; */
+		border-radius: 8px;
+		padding: 4px 10px;
+		font-family: 'Poppins';
+		text-align: center;
+		border: 1px solid var(--color-primario);
+		&:hover {
+			cursor: pointer;
+		}
+	}
+}

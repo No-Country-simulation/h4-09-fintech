@@ -1,0 +1,208 @@
+/* ESTOS ESTILOS SON PROVISORIOS,MIENTRAS ESPERAMOS EL DISEÑO DE UX/UI */
+.dashboard {
+  min-width: 100vw;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+/*----------------------------------------- */
+
+.flex {
+  display: flex;
+}
+
+#foto-perfil {
+  height: 90%;
+  width: auto;
+  border-radius: 50%;
+  border: solid rgb(0, 72, 178) 2px;
+}
+.iconos-hero {
+  height: 20px;
+  width: auto;
+}
+.dashboard .titulo-dash {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 10.05vh;
+  height: 10.05vh;
+  font-size: 1.2rem;
+  font-weight: var(--font-poppins-500);
+  width: 94vw;
+  box-sizing: border-box;
+  margin: auto;
+}
+.titulo-dash .container-bell {
+  position: relative;
+  height: 30%;
+  width: auto;
+}
+.counter-notif {
+  position: absolute;
+  right: 0;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  background-color: red;
+  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+  font-size: 0.5rem;
+}
+.container-usuario {
+  min-height: 8.79vh;
+  max-height: 8.79vh;
+  height: 8.79vh;
+  width: 94vw;
+  max-width: 94vw;
+  box-sizing: border-box;
+  align-items: center;
+  margin: auto;
+}
+.container-usuario div {
+  line-height: 0.7;
+  padding-left: 6px;
+}
+.container-usuario h2 {
+  font-size: 1.1rem;
+  font-weight: var(--font-poppins-400);
+  color: var(--color-primario);
+}
+.container-usuario .correo-usuario-dash {
+  font-weight: var(--font-poppins-300);
+  font-size: 0.6rem;
+}
+.container-usuario .free-plan {
+  margin-left: auto;
+  min-width: max-content;
+  font-size: 0.8rem;
+  font-weight: 500;
+  box-shadow: 0 0 2px 1px rgba(128, 128, 128, 0.377);
+  border-radius: 500px;
+  padding: 8px 10px;
+  font-weight: var(--font-poppins-400);
+}
+
+.cruz-icon {
+  height: 20px;
+  fill: rgb(209, 227, 255);
+}
+.box-section {
+  box-shadow: 0 0 2px 1px rgba(128, 128, 128, 0.541);
+  border-radius: 5px;
+  height: 35.17vh;
+  min-height: max-content;
+  margin: 0 3vw 1.83vh 3vw;
+  width: 94vw;
+  position: relative;
+}
+.box-section-standart {
+  box-shadow: 0 0 2px 1px rgba(128, 128, 128, 0.541);
+  border-radius: 5px;
+}
+.container-sub-g {
+  width: 100%;
+  height: 26.92%;
+  padding: 2%;
+  box-sizing: border-box;
+}
+.container-sub-g h1 {
+  font-size: 0.8rem;
+  font-weight: var(--font-poppins-500);
+}
+.container-sub-g small {
+  font-size: 0.6rem;
+  font-weight: var(--font-poppins-300);
+}
+.spinner-dash {
+  background-color: var(--color-primario);
+  height: 100vh;
+  width: 100vw;
+  color: var(--color-fondo);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.spinner-dash img {
+  height: 20vh;
+  width: auto;
+}
+.container-descarga {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  top: 0;
+  right: 0;
+  width: 20%;
+  height: 26.92%;
+}
+.fondos-dash {
+  border: dashed rgba(0, 128, 0, 0.288) 1px;
+  padding: 5%;
+  box-sizing: border-box;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 94vw;
+  min-height: 12.31vh;
+  height: 12.31vh;
+  margin: 1.83vh 3vw;
+}
+.fondos-dash h6 {
+  color: #01255c;
+  font-weight: 200;
+}
+#modal-modal-title {
+  color: #01255c;
+}
+#modal-modal-title p {
+  color: grey;
+}
+#modal-modal-description {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+#modal-modal-description .monto-recarga {
+  text-align: center;
+}
+#modal-modal-description .monto-recarga span {
+  font-size: 2rem;
+}
+#modal-modal-description form {
+  text-align: center;
+  height: 20vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.empty-nav {
+  position: absolute;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  left: 0;
+  bottom: 0;
+  height: 10%;
+  width: 100%;
+  background-color: var(--color-primario);
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+.empty-nav .iconos-hero {
+  color: white;
+  margin: 10px;
+}
+#modal-modal-description form input {
+  height: 30px;
+}

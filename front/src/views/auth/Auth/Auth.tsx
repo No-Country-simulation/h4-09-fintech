@@ -1,5 +1,5 @@
 import { Link, useNavigate } from 'react-router-dom'
-import AuthIcon from '../../../assets/icons/AuthIcon'
+import AuthIcon from '../../../assets/icons/(intro)/AuthIcon'
 import style from './auth.module.css'
 import Line from '../../../assets/Line'
 import { CredentialResponse, GoogleLogin } from '@react-oauth/google'
@@ -11,14 +11,14 @@ import { baseUrl } from '../../../config/envs'
 export default function Auth() {
 	const navigate = useNavigate()
 	const googleLogin = async (response: CredentialResponse) => {
-		console.log(response)
+		// console.log(response)
 		const body = {
 			idToken: response.credential
 		}
 		const respuesta = await axios.post(`${baseUrl}/api/auth/verify-token`, body)
 		// console.log(respuesta);
 		const token = respuesta.data.token
-		console.log(token) // control
+		// console.log(token) // control
 		Cookies.set('authToken', token, { expires: 1 })
 		const isFirstTime = respuesta.data.firstTime
 		if (isFirstTime) {
@@ -45,8 +45,8 @@ export default function Auth() {
 		<div className={style.pageview}>
 			<div className={style.contentContainer}>
 				<AuthIcon />
-				<h5>¡Sé bienvenido, empieza hoy tu camino hacia el crecimiento financiero!</h5>
-				<span>Descubre nuevas formas de ahorrar, invertir y hacer crecer tu patrimonio, en un solo lugar.</span>
+				<h5 className='body2'>¡Sé bienvenido, empieza hoy tu camino hacia el crecimiento financiero!</h5>
+				<span className='captionRegular'>Descubre nuevas formas de ahorrar, invertir y hacer crecer tu patrimonio, en un solo lugar.</span>
 				<div className={style.contentContainer}>
 					<Link to={'/auth/login'} className='primaryButton'>
 						Iniciar sesión
@@ -61,13 +61,13 @@ export default function Auth() {
 
 				<div className={style.separador}>
 					<Line />
-					<span>o registrate con cuenta social</span>
+					<span className={style.verySmall}>o registrate con cuenta social</span>
 					<Line />
 				</div>
 				<div className={style.contentContainer}>
-					<GoogleLogin onSuccess={googleLogin} onError={() => console.log('error')} text='continue_with' shape='rectangular' width={350} />
+					<GoogleLogin onSuccess={googleLogin} onError={() => console.log('error')} text='continue_with' shape='rectangular' width={300} />
 				</div>
-				<small>
+				<small className={style.verySmall}>
 					Al iniciar aceptas las <Link to={'#'}> condiciones del servicio de iupi.</Link> Nos tomamos muy en serio tu privacidad. Para mas información lee nuestra{' '}
 					<Link to={'#'}>Política de privacidad.</Link>
 				</small>

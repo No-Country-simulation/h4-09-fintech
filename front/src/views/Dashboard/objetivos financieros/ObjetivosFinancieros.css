@@ -1,0 +1,67 @@
+.container-obj-financieros {
+  min-height: 100vh;
+  min-width: 100vw;
+  box-sizing: border-box;
+}
+.container-obj-financieros .iconos-hero {
+  margin: 0 5px;
+}
+.container-obj-financieros h1 {
+  display: flex;
+  align-items: center;
+  height: 7.28vh;
+  width: 94vw;
+  margin: auto;
+  font-size: 1.2rem;
+  font-weight: var(--font-poppins-500);
+}
+.container-obj-financieros section {
+  height: max-content;
+  width: 94vw;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+}
+.container-obj-financieros .add-goal-btn {
+  align-self: flex-end;
+  height: 5vh;
+  background-color: var(--color-primario);
+  color: white;
+  margin: 10px;
+  padding: 5px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#goal-list .goal-in-list {
+  border-top: solid rgba(128, 128, 128, 0.5) 1px;
+  display: flex;
+  justify-content: space-between;
+}
+.goal-in-list .data-goal {
+  display: flex;
+}
+.goal-in-list .data-goal div {
+  display: flex;
+  align-items: center;
+  padding: 0 5px;
+  box-sizing: border-box;
+}
+.goal-in-list .iconos-hero {
+  margin: auto 0;
+  color: var(--color-primario);
+}
+
+.data-goal div p {
+  color: grey;
+}
+.data-goal :nth-child(1) h6 {
+  color: rgb(9, 9, 63);
+}
+.data-goal :nth-child(2) h6 {
+  color: rgb(185, 32, 5);
+}
+.container-goal-info h5 {
+  text-transform: capitalize;
+}

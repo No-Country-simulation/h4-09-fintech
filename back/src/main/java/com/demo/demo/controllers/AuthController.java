@@ -1,5 +1,6 @@
 package com.demo.demo.controllers;
 
+
 import com.demo.demo.dtos.recover.EmailResetPasswordDTO;
 import com.demo.demo.dtos.recover.ResetPasswordDTO;
 import com.demo.demo.dtos.request.LoginRequestDto;
@@ -28,10 +29,12 @@ public class AuthController {
     @PostMapping("/register")
     public ResponseEntity<AuthResponseDto> register(@RequestBody RegisterRequestDto dto) {
        return ResponseEntity.status(201).body(authService.register(dto));
+
     }
 
 
     @PostMapping("/login")
+
     public ResponseEntity<AuthResponseDto> login(@RequestBody LoginRequestDto dto) {
         return ResponseEntity.status(200).body(authService.login(dto));
     }
@@ -61,5 +64,6 @@ public class AuthController {
     public ResponseEntity<String> resetPassword(@RequestBody ResetPasswordDTO resetPasswordDTO) {
         authService.applyNewPassword(resetPasswordDTO);
         return ResponseEntity.status(200).body("Password changed successfully");
+
     }
 }

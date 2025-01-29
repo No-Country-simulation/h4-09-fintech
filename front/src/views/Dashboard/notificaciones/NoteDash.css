@@ -1,0 +1,45 @@
+.container-notificacion {
+  background-color: var(--color-notificaciones);
+  width: 94vw;
+  height: 8.79vh;
+  margin: 0 auto 5px auto;
+  animation: aparecer 0.5s ease-in forwards;
+  display: flex;
+}
+.container-notificacion a {
+  color: initial;
+}
+.iupi-notificacion {
+  width: 16.79%;
+  height: 100%;
+}
+.info-notes {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 75%;
+  height: 100%;
+}
+.info-notes h5 {
+  font-size: 0.8rem;
+  font-weight: var(--font-poppins-500);
+}
+.info-notes p {
+  font-size: 0.6rem;
+  font-weight: var(--font-poppins-300);
+}
+.cerrar-not-btn {
+  color: var(--color-primario);
+  height: 35%;
+  width: auto;
+  margin: auto;
+}
+
+@media (max-width: 337px) {
+  .info-notes h5 {
+    font-size: 0.7rem;
+  }
+  .info-notes p {
+    font-size: 0.5rem;
+  }
+}

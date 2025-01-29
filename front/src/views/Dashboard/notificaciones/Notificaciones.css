@@ -1,0 +1,38 @@
+.container-notificaciones {
+  min-width: 100vw;
+  min-height: 100vh;
+}
+.container-notificaciones h1 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 7.28vh;
+  width: 94vw;
+  margin: auto;
+  font-size: 1.2rem;
+  font-weight: var(--font-poppins-500);
+}
+.container-notificaciones .puntitos {
+  margin-left: auto;
+}
+.container-notificaciones .flecha-izquierda {
+  margin-right: 8px;
+}
+.notif-navbar {
+  height: 8.77vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.notif-navbar a {
+  border: solid blue 1px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: var(--font-poppins-500);
+  padding: 10px 5%;
+  text-decoration: none;
+}
+.notif-navbar a.active {
+  color: var(--color-fondo);
+  background-color: var(--color-primario);
+}

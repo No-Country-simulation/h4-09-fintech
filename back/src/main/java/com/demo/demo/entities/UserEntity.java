@@ -1,6 +1,7 @@
 package com.demo.demo.entities;
 
 import jakarta.persistence.*;
+
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -66,5 +67,6 @@ public class UserEntity implements UserDetails {
         return roles.stream()
                 .map(role -> new SimpleGrantedAuthority(role.getRoleName()))
                 .collect(Collectors.toList());
+
     }
 }

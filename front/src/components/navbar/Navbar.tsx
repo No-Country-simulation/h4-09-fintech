@@ -1,49 +1,58 @@
-import { useState } from 'react'
-import styles from './Navbar.module.css'
-import { useLocation } from 'react-router-dom'
+import styles from "./Navbar.module.css";
+import { NavLink, useLocation } from "react-router-dom";
+import IupiSmallIcon from "../../assets/icons/(iupi)/IupiSmallIcon";
+import { LuLayoutDashboard } from "react-icons/lu";
+import { FaHandHoldingDollar } from "react-icons/fa6";
+import { FaPeopleGroup } from "react-icons/fa6";
+import { FaUser } from "react-icons/fa";
 
 export default function Navbar() {
-	const [menuOpen, setMenuOpen] = useState(false)
+  const location = useLocation();
+  const pathname = location.pathname;
 
-	const toggleMenu = () => {
-		setMenuOpen(!menuOpen)
-	}
+  if (
+    pathname === "/" ||
+    pathname === "/onboarding" ||
+    pathname.includes("/auth")
+  ) {
+    return null;
+  }
 
-	const location = useLocation() // Obtiene la ubicación actual
-	const pathname = location.pathname // Obtiene el pathname
-
-	if (pathname === '/' || pathname === '/onboarding' || pathname.includes('/auth')) {
-		return null
-	}
-
-	return (
-		<div className={styles.root}>
-			<header className={styles.navbar}>
-				<div className={styles.logo}>
-					<a href='#'>iUpi</a>
-				</div>
-				<nav className={styles.menu}>
-					<button className={`${styles.navMobile} ${menuOpen ? styles.navOpen : ''}`} onClick={toggleMenu}>
-						<span></span>
-						<span></span>
-						<span></span>
-					</button>
-					<ul className={`${styles.navMenu} ${menuOpen ? styles.openMenu : ''}`}>
-						<li>
-							<a href='#'>Inicio</a>
-						</li>
-						<li>
-							<a href='#'>Ingresos</a>
-						</li>
-						<li>
-							<a href='#'>Gastos</a>
-						</li>
-						<li>
-							<a href='#'>Objetivos</a>
-						</li>
-					</ul>
-				</nav>
-			</header>
-		</div>
-	)
+  return (
+    <div className={styles.root}>
+      <header className={styles.navbar}>
+        <div className={styles.logo}>
+          <IupiSmallIcon />
+        </div>
+        <nav className={styles.menu}>
+          <ul className={styles.navMenu}>
+            <li>
+              <NavLink to="/dashboard">
+                <LuLayoutDashboard />
+                Dashboard
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/gestion">
+                <FaHandHoldingDollar />
+                Gestión de inversiones
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/community/forum">
+                <FaPeopleGroup />
+                Comunidad & Noticias
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/profile">
+                <FaUser />
+                Mi cuenta
+              </NavLink>
+            </li>
+          </ul>
+        </nav>
+      </header>
+    </div>
+  );
 }

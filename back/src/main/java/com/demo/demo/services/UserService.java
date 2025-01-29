@@ -1,5 +1,6 @@
 package com.demo.demo.services;
 
+
 import com.demo.demo.config.mappers.GoalMapper;
 import com.demo.demo.dtos.goal.CreateGoalDTO;
 import com.demo.demo.dtos.goal.ResponseGoalDTO;
@@ -19,6 +20,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -31,10 +33,12 @@ public class UserService implements UserDetailsService {
     private final UserRepository userRepository;
 
 
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         UserEntity user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+
 
         return user;
     }
@@ -143,4 +147,5 @@ public class UserService implements UserDetailsService {
         return Map.of("currentAmount", user.getCurrentAmount());
     }
 }
+
 

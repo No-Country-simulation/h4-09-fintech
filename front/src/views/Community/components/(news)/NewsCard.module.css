@@ -1,0 +1,213 @@
+.card {
+	display: flex;
+	flex-direction: column;
+	border-radius: 0.5rem;
+	/* height: 305px; */
+	padding: 1rem;
+	overflow: hidden;
+	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+	transition: all 0.3s ease-in-out;
+	text-decoration: none;
+	color: black;
+	flex: 1;
+	gap: 14px;
+}
+.header {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+.headerSection {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	gap: 8px;
+}
+
+.avatar {
+	width: 32px;
+	height: 32px;
+	border-radius: 100%;
+}
+.img {
+	width: 100%;
+	height: 120px;
+	object-fit: cover;
+	border-radius: 8px;
+}
+.title {
+	text-align: start;
+	font-size: medium;
+	font-weight: 500;
+	line-height: 20px;
+	color: var(--color-primario);
+}
+.source {
+	text-align: start;
+	font-size: medium;
+	font-weight: 500;
+	line-height: 20px;
+}
+
+.subtitle {
+	text-align: start;
+	font-size: small;
+	font-weight: 500;
+}
+h5 {
+	text-align: start;
+	font-size: medium;
+	font-weight: 400;
+	margin-bottom: 8px;
+}
+
+p {
+	text-align: start;
+	font-size: small;
+}
+
+/* Asegurarse de que el enlace no tenga subrayado */
+a {
+	text-decoration: none;
+	color: var(--color-primario);
+
+	&:hover {
+		text-decoration: none;
+		color: inherit;
+	}
+}
+
+/* Truncar texto */
+.card p {
+	/* white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis; */
+	margin-bottom: 8px;
+}
+
+.card span {
+	margin-top: 8px;
+	white-space: normal;
+	overflow: visible;
+	margin-top: auto;
+	text-align: end;
+	font-size: small;
+}
+
+.createButton {
+	border: 1px solid #0048b2;
+	background-color: var(--color-primario);
+	color: var(--color-fondo);
+	border-radius: 8px;
+	padding: 8px 16px;
+	font-family: 'Poppins';
+	text-align: center;
+	&:hover {
+		cursor: pointer;
+	}
+}
+
+.footer {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	height: 24px;
+}
+.categorypill {
+	color: var(--color-primario);
+	background-color: #0048b21a;
+	border-radius: 8px;
+	padding: 5px 10px;
+	font-size: small;
+	font-weight: 500;
+}
+
+.modalOverlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.5);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 0;
+}
+
+.modal {
+	background: var(--color-fondo);
+	padding: 20px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+	border-radius: 16px;
+	text-align: center;
+	height: auto;
+	width: 91%;
+	position: fixed;
+	bottom: 0;
+	gap: 16px;
+	z-index: 20;
+	padding-bottom: 120px;
+	transform: translateY(100%); /* Inicialmente fuera de pantalla */
+	animation: slideUp 0.4s ease-out forwards; /* Aparece desde abajo */
+}
+
+.modal input {
+	width: 90%;
+	padding: 12px 24px;
+	border-radius: 8px;
+}
+
+.contactsContainer {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
+	gap: 16px;
+}
+
+.contactCard {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	align-items: center;
+}
+
+.contactCard img {
+	width: 40px;
+	height: 40px;
+	border-radius: 100%;
+}
+
+@keyframes slideUp {
+	from {
+		transform: translateY(100%);
+	}
+	to {
+		transform: translateY(0);
+	}
+}
+
+.modalVisible {
+	animation: slideUp 0.4s ease-out forwards;
+}
+
+@keyframes slideDown {
+	from {
+		transform: translateY(0);
+	}
+	to {
+		transform: translateY(100%);
+	}
+}
+
+.modalClosing {
+	animation: slideDown 0.4s ease-out forwards;
+}

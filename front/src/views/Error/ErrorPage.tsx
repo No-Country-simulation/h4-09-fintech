@@ -1,16 +1,16 @@
 import React from 'react';
 import styles from './ErrorPage.module.css';
+import ErrorIcon from "../../assets/icons/ErrorIcon"
+import { Link } from 'react-router-dom';
 
 const ErrorPage: React.FC = () => {
   return (
     <div className={styles.container}>
-      <div className={styles.errorBox}>
-        <h1 className={styles.errorTitle}>404</h1>
-        <p className={styles.errorMessage}>Oops! La página que buscas no existe.</p>
-        <p className={styles.subMessage}>Parece que algo salió mal. Pero no te preocupes, ¡podemos solucionarlo!</p>
-        <a href="/" className={styles.backButton}>Regresar al inicio</a>
+        <ErrorIcon/>
+        <h1 className={styles.title}>¡Faltan datos importantes!</h1>
+        <p className={styles.subtitle}>Necesitamos que la informacion sea ingresada en tu cuenta en la seccion datos personales para mejorar tu experiencia</p>
+        <Link to="/" className={styles.backButton}>Ir a datos financieros y personales</Link>
       </div>
-    </div>
   );
 };
 
