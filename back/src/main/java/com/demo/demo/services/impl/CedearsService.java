@@ -82,15 +82,6 @@ public class CedearsService {
         }
 
     }
-
-//    public List<CedearResponseDto> getAllCedears() {
-//        List Cedears = Arrays.stream(Cedear.values())
-////                .collect(Collectors.toMap(Enum::name, Cedear::getName));
-//
-//        List<CedearResponseDto> cedears = Cedears.entrySet().stream().map(entry -> {
-//            String cedear = entry.getKey();
-//        return null;
-//    }
 }
 
 
