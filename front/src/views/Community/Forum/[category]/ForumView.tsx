@@ -15,7 +15,8 @@ export default function ForumView() {
 	const foro = foros.find((foro) => foro.category === params.category)
 
 	const { data: posts, loading, error } = useFetchDataWithToken<ExampleObject[]>(`${baseUrl}/api/post/postcategory/${params.category}`)
-
+	console.log(posts);
+	
 	return (
 		<div className={styles.pageView}>
 			<div className={styles.contentContainer}>
