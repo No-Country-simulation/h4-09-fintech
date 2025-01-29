@@ -5,6 +5,10 @@
 :root {
   font-family: "Poppins", Inter, system-ui, Avenir, Helvetica, Arial, sans-serif,
     neuton, poppins;
+  /* Fuentes */
+
+  --fuente-principal: "Poppins", Inter, system-ui, Avenir, Helvetica, Arial,
+    sans-serif, neuton, poppins;
   line-height: 1.5;
   /* Grosores de fuentes */
   --font-poppins-300: 300;

@@ -272,14 +272,14 @@ export const Dashboard: React.FC = () => {
             <Typography id="modal-modal-description" sx={{ mt: 2 }}>
               <div className="monto-recarga">
                 <h5>Tu monto actual es de :</h5>
-                <span>{userdata.currentAmount}</span>
+                <span>${userdata.currentAmount}</span>
               </div>
               <form onSubmit={handleSubmitModal}>
                 <input
                   type="number"
                   // value={monto}
                   onChange={(e) => setMonto(Number(e.target.value))}
-                  placeholder="Monto"
+                  placeholder="Nuevo monto"
                 />
                 {errorMonto && <span>{errorMonto}</span>}
                 <div className="boton-modal">
