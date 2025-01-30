@@ -46,14 +46,22 @@
 }
 
 .title {
-  margin: 10px 20px;
+  /* margin: 10px 20px;
   text-align: start;
   color: black;
-  font-size: 36px;
+  font-size: 36px; */
+  	font-size: 20px;
+	font-weight: 500;
+	line-height: 24px;
+	color: #232f34;
+	translate: 0px -4px;
+	width: 90%;
 }
 
 .names{
   margin: 10px 0px 0px 0px;
+  color:var(--color-primario);
+  font-weight: 500;
 }
 .email{
   margin: 5px 0px 0px 0px;
@@ -61,9 +69,13 @@
 }
 
 .subtitle{
-  color: black;
-  font-size: 32px;
-  text-align: center;
+	/* text-align: center; */
+	font-size: 16px;
+	font-weight: 500;
+	/* line-height: 24px; */
+	color: var(--color-primario);
+	/* translate: 0px -4px; */
+	/* width: 90%; */
 }
 
 .button{
@@ -78,13 +90,13 @@
   .container{
     margin: 10px;
   }
-  .title{
+  /* .title{
     font-size: 30px;
     margin-bottom: 20px;
-  }
-  .subtitle{
+  } */
+  /* .subtitle{
     font-size: 20px;
-  }
+  } */
 
   .profilePictureContainer {
     position: relative; 
@@ -100,3 +112,31 @@
     border: 3px solid #0048ba; 
   }
 }
+
+.pageView {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	min-height: 100vh;
+	min-height: 100dvh;
+	width: 100%;
+	/* @media (min-width: 480px) {
+		justify-content: center;
+		translate: 0px -200px;
+	} */
+}
+.contentContainer {
+	display: flex;
+	flex-direction: column;
+	/* align-items: center; */
+	/* justify-content: center; */
+	/* height: 100%; */
+	margin-top: 1rem;
+	width: 90%;
+	max-width: 1000px;
+	gap: 10px;
+	background-color: var(--color-fondo);
+	/* text-align: start; */
+	margin-bottom: 244px;
+}
+

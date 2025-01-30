@@ -22,16 +22,16 @@ export interface IUser {
 	username: string
 }
 
-interface IpreData {
+export interface IpreData {
 	symbol: string
 	description: string
 }
 
-interface InvestmentType {
+export interface InvestmentType {
 	name: string
 	link: string
 }
-const investmentsTypes: InvestmentType[] = [
+export const investmentsTypes: InvestmentType[] = [
 	{ name: 'Cedears', link: 'cedears' },
 	{ name: 'Bonos', link: 'bonds' },
 	{ name: 'Fondos', link: 'investment-funds' },
@@ -64,7 +64,7 @@ export interface IUserInvestment {
 	transactionDate: string
 }
 
-const getInvestmentRecommendation = (riskPreference: string | undefined | null) => {
+export const getInvestmentRecommendation = (riskPreference: string | undefined | null) => {
 	switch (riskPreference) {
 		case 'Arriesgado':
 			return 'Acciones'
@@ -84,14 +84,14 @@ export const GestionInversiones = (): JSX.Element => {
 	const [fundsDetails, setFundsDetails] = useState<IFundsData[]>([])
 	const [loadingDetails, setLoadingDetails] = useState(false)
 
-	const { data: userInvestments , loading: loadingUserInvestments} = useFetchDataWithToken<IUserInvestment[] | []>(`${baseUrl}/api/stocks/transactions`)
+	const { data: userInvestments, loading: loadingUserInvestments } = useFetchDataWithToken<IUserInvestment[] | []>(`${baseUrl}/api/stocks/transactions`)
 	const { data: user, loading: loadingUser, error: errorUser } = useFetchDataWithToken<IUser>(`${baseUrl}/api/auth/check-login`)
-	const { data: cedearsData , loading: loadingCedears} = useFetchDataWithToken<IpreData[]>(`${baseUrl}/api/market/cedears`)
+	const { data: cedearsData, loading: loadingCedears } = useFetchDataWithToken<IpreData[]>(`${baseUrl}/api/market/cedears`)
 	const { data: bondsData } = useFetchDataWithToken<IpreData[]>(`${baseUrl}/api/market/bonds`)
 	const { data: actionsData } = useFetchDataWithToken<IpreData[]>(`${baseUrl}/api/market/actions`)
 	const { data: fundsData } = useFetchDataWithToken<IFundsData[]>(`${baseUrl}/api/market/investment-funds`)
 	// console.log('user', user)
-	console.log('userInvestments', userInvestments)
+	// console.log('userInvestments', userInvestments)
 
 	const userFounds = user?.currentAmount?.toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
 	const investmentRecommendation = getInvestmentRecommendation(user?.riskPreference)
@@ -200,6 +200,36 @@ export const GestionInversiones = (): JSX.Element => {
 		setSimilarFunds(similarFunds)
 	}, [userInvestments, cedearsDetails, bondsDetails, actionsDetails, fundsDetails])
 
+	const getCurrentTotalValue = () => {
+		let totalValue = user?.currentAmount || 0 // Saldo disponible
+
+		userInvestments?.forEach((investment) => {
+			const { stockSymbol, quantity } = investment
+
+			// Buscar el precio actual en cada tipo de inversión
+			const matchedCedear = cedearsDetails.find((item) => (item as any).cedear === stockSymbol)
+			const matchedBond = bondsDetails.find((item) => (item as any).cedear === stockSymbol)
+			const matchedAction = actionsDetails.find((item) => (item as any).cedear === stockSymbol)
+			const matchedFund = fundsDetails.find((item) => item.cedear === stockSymbol)
+
+			// Obtener el precio actual (suponiendo que `price` es la propiedad con el precio actual)
+			const currentPrice = (matchedCedear as any)?.price || (matchedBond as any)?.price || (matchedAction as any)?.price || (matchedFund as any)?.price || 0
+			// console.log('currentPrice', currentPrice)
+
+			// Sumar al total
+			totalValue += quantity * currentPrice
+		})
+
+		return totalValue
+	}
+
+	const currentTotalValue = getCurrentTotalValue().toLocaleString('es-AR', {
+		minimumFractionDigits: 2,
+		maximumFractionDigits: 2
+	})
+
+	console.log('Valor total actual de los activos:', currentTotalValue)
+
 	return (
 		<div className='pageView'>
 			<div className='contentContainer'>
@@ -234,6 +264,12 @@ export const GestionInversiones = (): JSX.Element => {
 					})}
 					{!userInvestments || (userInvestments.length === 0 && <p>No tenés inversiones</p>)}
 				</div>
+				<br />
+				<h3 className='subtitle'>
+					Valor total actual de tus ahorros *: <span>${currentTotalValue}</span>{' '}
+				</h3>
+				<small>*tu saldo disponible mas el valor actual de tus inversiones</small>
+				<br />
 				<div className='headerContainer'>
 					<h3 className='subtitle'>¿En qué desea invertir?</h3>
 				</div>
@@ -251,7 +287,6 @@ export const GestionInversiones = (): JSX.Element => {
 				<section className='cardsContainer'>
 					<Outlet />
 					{loadingDetails || loadingCedears ? (
-
 						<Spinner />
 					) : (
 						displayedData.map((item, index) => {
@@ -260,7 +295,7 @@ export const GestionInversiones = (): JSX.Element => {
 							return <InvestmentCard key={index} name={name} cedear={cedear} price={price} percentageLastMonth={percentageLastMonth} percentageLastYear={percentageLastYear} user={user} />
 						})
 					)}
-					{ displayedData.length === 0 && <p>No hay datos para mostrar. Reintente en unos segundos.</p>}
+					{displayedData.length === 0 && <p>No hay datos para mostrar. Reintente en unos segundos.</p>}
 				</section>
 			</div>
 		</div>

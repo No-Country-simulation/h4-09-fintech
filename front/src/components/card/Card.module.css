@@ -7,7 +7,7 @@
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     max-width: 600px;
-    margin: 20px auto;
+    margin: 0px auto;
     transition: all 0.3s ease;
   }
   
@@ -36,6 +36,15 @@
     color: #333;
     text-align: start;
   }
+  .subtitle{
+	/* text-align: center; */
+	font-size: 16px;
+	font-weight: 500;
+	/* line-height: 24px; */
+	color: var(--color-primario);
+	/* translate: 0px -4px; */
+	/* width: 90%; */
+}
   
   .description {
     font-size: 14px;
