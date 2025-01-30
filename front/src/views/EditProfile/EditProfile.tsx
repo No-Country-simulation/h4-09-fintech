@@ -1,10 +1,36 @@
-import styles from "./EditProfile.module.css";
 import { useState, useEffect } from "react";
 import { FaArrowLeft } from "react-icons/fa6";
 import { FaRegUser, FaCamera } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import styles from "./EditProfile.module.css";
 
-export default function Home() {
+const getCookie = (name: string): string | null => {
+  const cookies = document.cookie.split("; ");
+  const cookie = cookies.find((row) => row.startsWith(`${name}=`));
+  return cookie ? decodeURIComponent(cookie.split("=")[1]) : null;
+};
+
+const fetchGoogleProfileImage = async (googleToken: string) => {
+  try {
+    const response = await fetch("https://www.googleapis.com/oauth2/v3/userinfo", {
+      headers: {
+        Authorization: `Bearer ${googleToken}`,
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error("Error al obtener la imagen de Google");
+    }
+
+    const data = await response.json();
+    return data.picture || null;
+  } catch (error) {
+    console.error("Error al obtener la imagen de Google:", error);
+    return null;
+  }
+};
+
+export default function EditProfile() {
   const [profileImage, setProfileImage] = useState<string | null>(null);
   const [selectedOption, setSelectedOption] = useState("");
   const [isPro, setIsPro] = useState(false);
@@ -12,225 +38,267 @@ export default function Home() {
   const [isPasswordDisabled, setIsPasswordDisabled] = useState(true);
   const navigate = useNavigate();
   const [userName, setUserName] = useState<string | null>(null);
-  
+  const [email, setEmail] = useState<string | null>(null);
+  const [password, setPassword] = useState<string | null>(null);
+  const [isGoogleUser] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        const response = await fetch("http://localhost:5000/api/auth/check-login");
-        if (response.ok) {
+      const token = getCookie("authToken");
+      const googleToken = getCookie("googleAuthToken");
+  
+      if (!token && !googleToken) {
+        console.error("No se encontró el token de autorización.");
+        return;
+      }
+  
+      const fetchProfileImage = async () => {
+        try {
+          if (googleToken) {
+            const googleProfileImage = await fetchGoogleProfileImage(googleToken);
+            if (googleProfileImage) {
+              setProfileImage(googleProfileImage);
+            } else {
+              setProfileImage(null);
+            }
+          } else {
+            const response = await fetch(
+              "https://h4-09-fintech-production.up.railway.app/api/user/profile-image",
+              {
+                method: "GET",
+                headers: {
+                  Authorization: `Bearer ${token}`,
+                  "Content-Type": "application/json",
+                },
+              }
+            );
+  
+            if (!response.ok) throw new Error("Error al obtener la imagen de perfil");
+  
+            const data = await response.json();
+            setProfileImage(data.imageUrl || null);
+          }
+        } catch (error) {
+          console.error("Error al obtener la imagen de perfil:", error);
+        }
+      };
+  
+      fetchProfileImage();
+    }, []);
+  
+    useEffect(() => {
+      const token = getCookie("authToken");
+  
+      if (!token) {
+        console.error("El token de autorización no está presente.");
+        setError("No se encontró el token de autorización.");
+        return;
+      }
+  
+      const fetchUserData = async () => {
+        try {
+          const response = await fetch(
+            "https://h4-09-fintech-production.up.railway.app/api/auth/check-login",
+            {
+              method: "GET",
+              headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
+              },
+            }
+          );
+  
+          if (!response.ok) {
+            throw new Error("Error al obtener los datos del usuario");
+          }
+  
           const data = await response.json();
           setUserName(`${data.name} ${data.lastName}`);
-        } else {
-          console.error("Error al obtener los datos del usuario");
+        } catch (error) {
+          console.error("Error de red:", error);
+          setError("Error al obtener los datos del usuario.");
         }
-      } catch (error) {
-        console.error("Error de red:", error);
-      }
-    };
-
-    fetchUserData();
-  }, []);
+      };
+  
+      fetchUserData();
+    }, []);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedOption(event.target.value);
   };
 
   const handleToggle = () => {
-    setIsPro(!isPro); // Alternar entre true y false
+    setIsPro(!isPro);
   };
 
-  useEffect(() => {
-    const fetchProfileImage = async () => {
-      const response = await fetch(
-        "http://localhost:5000/api/user/profile-image"
-      );
-      const data = await response.json();
-      setProfileImage(data.imageUrl || null);
-    };
-    fetchProfileImage();
-  }, []);
+  const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setUserName(e.target.value);
+  };
 
-  const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const selectedFile = e.target.files?.[0];
-    if (selectedFile) {
-      const formData = new FormData();
-      formData.append("image", selectedFile);
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(e.target.value);
+  };
 
-      const response = await fetch("url", {
-        method: "POST",
-        body: formData,
-      });
-      const data = await response.json();
-
-      if (data.success) {
-        setProfileImage(data.imageUrl);
-      } else {
-        console.error("Error al subir la imagen:", data.message);
-      }
-    }
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword(e.target.value);
   };
 
   return (
-    <>
-      <div className={styles.container}>
-        <h1 className={styles.title}>
-          {" "}
-          <button className={styles.buttonArrow} onClick={() => navigate(-1)}>
-            <FaArrowLeft className={styles.icon} />
-          </button>
-          Datos financieros y personales{" "}
-        </h1>
+    <div className={styles.pageView}>
+      <div className={styles.contentContainer}>
+      <h1 className={styles.title}>
+        <button className={styles.buttonArrow} onClick={() => navigate(-1)}>
+          <FaArrowLeft className={styles.icon} />
+        </button>
+        Datos financieros y personales
+      </h1>
 
-        <div className={styles.profile}>
-          <div className={styles.profilePictureContainer}>
-            {profileImage ? (
-              <img
-                src={profileImage}
-                alt="Foto de perfil"
-                className={styles.profilePicture}
-              />
-            ) : (
-              <FaRegUser className={styles.defaultIcon} />
-            )}
+      {error && <div className={styles.error}>{error}</div>}
 
+      <div className={styles.profile}>
+        <div className={styles.profilePictureContainer}>
+          {profileImage ? (
+            <img
+              src={profileImage}
+              alt="Foto de perfil"
+              className={styles.profilePicture}
+            />
+          ) : (
+            <FaRegUser className={styles.defaultIcon} />
+          )}
+
+          {!isGoogleUser && (
             <label htmlFor="imageUpload" className={styles.cameraIcon}>
               <FaCamera />
             </label>
+          )}
 
+          <input
+            id="imageUpload"
+            type="file"
+            accept="image/*"
+            onChange={handleChange}
+            style={{ display: "none" }}
+          />
+        </div>
+
+        <div className={styles.info}>
+          <h3 className={styles.names}>{userName || "Cargando nombre..."}</h3>
+        </div>
+      </div>
+
+      <div className={styles.cardcontainer}>
+        <div className={styles.card}>
+          <h3>{isPro ? "Pro Plan" : "Free Plan"}</h3>
+          <label className={styles.switch}>
+            <input type="checkbox" checked={isPro} onChange={handleToggle} />
+            <span className={styles.slider}></span>
+          </label>
+        </div>
+      </div>
+
+      <h2 className={styles.subtitle}>Datos personales</h2>
+
+      <div className={styles.formContainer}>
+        <div className={styles.form}>
+          <label htmlFor="name">Nombre completo *</label>
+          <div className={styles.inputWithButton}>
             <input
-              id="imageUpload"
-              type="file"
-              accept="image/*"
-              onChange={handleImageChange}
-              style={{ display: "none" }}
+              type="text"
+              id="name"
+              placeholder={userName || "Nombre completo"}
+              value={userName || ""}
+              onChange={handleNameChange}
+              disabled={isNameDisabled}
+              required
+            />
+            <button
+              type="button"
+              onClick={() => setIsNameDisabled(!isNameDisabled)}
+              className={styles.editButton}
+            >
+              {isNameDisabled ? "Editar" : "Guardar"}
+            </button>
+          </div>
+
+          <label htmlFor="email">Correo electrónico *</label>
+          <div className={styles.inputWithButton}>
+            <input
+              type="email"
+              id="email"
+              placeholder={email || "Correo electrónico"}
+              value={email || ""}
+              onChange={handleEmailChange}
+              required
+              disabled
             />
           </div>
 
-          <div className={styles.info}>
-            <h3 className={styles.names}>{userName || "Cargando nombre..."}</h3>
-            {/* <p className={styles.email}>Correo</p> */}
+          <label htmlFor="password">Contraseña *</label>
+          <div className={styles.inputWithButton}>
+            <input
+              type="password"
+              id="password"
+              placeholder="************"
+              value={password || ""}
+              onChange={handlePasswordChange}
+              required
+              disabled={isPasswordDisabled}
+            />
+            <button
+              type="button"
+              onClick={() => setIsPasswordDisabled(!isPasswordDisabled)}
+              className={styles.editButton}
+            >
+              {isPasswordDisabled ? "Cambiar" : "Guardar"}
+            </button>
           </div>
         </div>
+      </div>
 
-        <div className={styles.cardcontainer}>
-          <div className={styles.card}>
-            <h3>{isPro ? "Pro Plan" : "Free Plan"}</h3>
-            <label className={styles.switch}>
-              <input type="checkbox" checked={isPro} onChange={handleToggle} />
-              <span className={styles.slider}></span>
-            </label>
-          </div>
-        </div>
+      <h2 className={styles.subtitle}>Tolerancia al riesgo</h2>
 
-        <h2 className={styles.subtitle}>Datos personales</h2>
-
-        <div className={styles.formContainer}>
-          <div className={styles.form}>
-            {/* Nombre completo */}
-            <label htmlFor="name">Nombre completo *</label>
-            <div className={styles.inputWithButton}>
+      <div className={styles.radiocontainer}>
+        <div className={styles.radiobuttonscontainer}>
+          <div className={styles.radiobuttons}>
+            <div className={styles.radiobutton}>
+              <h3>Conservador:</h3>
               <input
-                type="text"
-                id="name"
-                placeholder="Carlos Narocki Vera"
-                disabled={isNameDisabled}
-                required
-              />
-              <button
-                type="button"
-                onClick={() => setIsNameDisabled(!isNameDisabled)}
-                className={styles.editButton}
-              >
-                {isNameDisabled ? "Editar" : "Guardar"}
-              </button>
-            </div>
-
-            {/* Correo electrónico */}
-            <label htmlFor="email">Correo electrónico *</label>
-            <div className={styles.inputWithButton}>
-              <input
-                type="email"
-                id="email"
-                placeholder="carlosnarocki7@hotmail.com"
-                required
-                disabled
+                type="radio"
+                id="conservador"
+                name="tolerancia"
+                value="conservador"
+                checked={selectedOption === "conservador"}
+                onChange={handleChange}
               />
             </div>
-
-            {/* Contraseña */}
-            <label htmlFor="password">Contraseña *</label>
-            <div className={styles.inputWithButton}>
+            <div className={styles.radiobutton}>
+              <h3>Equilibrado:</h3>
               <input
-                type="password"
-                id="password"
-                placeholder="************"
-                required
-                disabled={isPasswordDisabled}
+                type="radio"
+                id="equilibrado"
+                name="tolerancia"
+                value="equilibrado"
+                checked={selectedOption === "equilibrado"}
+                onChange={handleChange}
               />
-              <button
-                type="button"
-                onClick={() => setIsPasswordDisabled(!isPasswordDisabled)}
-                className={styles.editButton}
-              >
-                {isPasswordDisabled ? "Cambiar" : "Guardar"}
-              </button>
             </div>
-          </div>
-        </div>
-
-        <h2 className={styles.subtitle}>Tolerancia al riesgo</h2>
-
-        <div className={styles.radiocontainer}>
-          <div className={styles.radiobuttonscontainer}>
-            <div className={styles.radiobuttons}>
-              <div>
-                <h3>Conservador:</h3>
-                <p>Prefiero opciones seguras y confiables</p>
-              </div>
-              <div>
-                <input
-                  type="radio"
-                  name="riskPreference"
-                  value="conservador"
-                  onChange={handleChange}
-                  checked={selectedOption === "conservador"}
-                />
-              </div>
-            </div>
-            <div className={styles.radiobuttons}>
-              <div>
-                <h3>Moderado:</h3>
-                <p>Acepto la aventura para tener mejor utilidad</p>
-              </div>
-              <div>
-                <input
-                  type="radio"
-                  name="riskPreference"
-                  value="moderado"
-                  onChange={handleChange}
-                  checked={selectedOption === "moderado"}
-                />
-              </div>
-            </div>
-            <div className={styles.radiobuttons}>
-              <div>
-                <h3>Arriesgado:</h3>
-                <p>Asumir riesgos elevados para mayores ganacias</p>
-              </div>
-              <div>
-                <input
-                  type="radio"
-                  name="riskPreference"
-                  value="arriesgado"
-                  onChange={handleChange}
-                  checked={selectedOption === "arriesgado"}
-                />
-              </div>
+            <div className={styles.radiobutton}>
+              <h3>Agresivo:</h3>
+              <input
+                type="radio"
+                id="agresivo"
+                name="tolerancia"
+                value="agresivo"
+                checked={selectedOption === "agresivo"}
+                onChange={handleChange}
+              />
             </div>
           </div>
         </div>
       </div>
-    </>
+    </div>
+    </div>
   );
 }
+
