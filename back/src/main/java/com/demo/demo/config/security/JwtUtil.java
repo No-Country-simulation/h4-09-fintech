@@ -1,5 +1,6 @@
 package com.demo.demo.config.security;
 
+import com.demo.demo.entities.UserEntity;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
@@ -44,12 +45,20 @@ public class JwtUtil {
                 .compact();
     }
 
-    public String generateToken(UserDetails userDetails) {
+    public String generateToken(UserEntity userDetails) {
         Map<String, Object> claims = new HashMap<>();
         claims.put("roles", userDetails.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.toList()));
-
+        claims.put ("url_photo",userDetails.getProfileImageUrl());
+        claims.put("name",userDetails.getName());
+        claims.put("lastname",userDetails.getLastName());
+        claims.put("funds",userDetails.getFunds());
+        claims.put("goals",userDetails.getGoals());
+        claims.put("notifications",userDetails.getNotifications());
+        claims.put("mainGoal",userDetails.getMainGoal());
+        claims.put("financialKnowledge",userDetails.getFinancialKnowledge());
+        claims.put("riskPreference",userDetails.getRiskPreference());
         return createToken(userDetails.getUsername(), claims);
     }
 
