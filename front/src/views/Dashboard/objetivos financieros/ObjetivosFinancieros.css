@@ -24,11 +24,10 @@
 }
 .container-obj-financieros .add-goal-btn {
   align-self: flex-end;
-  height: 5vh;
   background-color: var(--color-primario);
   color: white;
   margin: 10px;
-  padding: 5px;
+  padding: 8px 16px;
   border-radius: 5px;
   display: flex;
   align-items: center;
@@ -38,6 +37,7 @@
   border-top: solid rgba(128, 128, 128, 0.5) 1px;
   display: flex;
   justify-content: space-between;
+  padding: 5px 0;
 }
 .goal-in-list .data-goal {
   display: flex;
@@ -58,10 +58,73 @@
 }
 .data-goal :nth-child(1) h6 {
   color: rgb(9, 9, 63);
+  min-width: max-content;
 }
 .data-goal :nth-child(2) h6 {
   color: rgb(185, 32, 5);
+  min-width: max-content;
+}
+.container-goal-info {
+  overflow: hidden;
+  max-width: 90%;
+  min-width: 90%;
 }
 .container-goal-info h5 {
   text-transform: capitalize;
+  display: flex;
+  align-items: center;
+  width: 260px;
+  max-width: 260px;
+  min-width: max-content;
+  overflow: hidden;
 }
+.container-goal-info h5 .check-goal {
+  color: green;
+  margin-left: auto;
+}
+#modal-modal-title {
+  word-break: break-all;
+  max-width: max-content;
+  overflow: hidden;
+  margin: auto;
+  text-transform: capitalize;
+  color: rgb(23, 23, 134);
+}
+#modal-modal-title p {
+  text-transform: none;
+}
+
+#modal-modal-description {
+  height: 60vh;
+}
+#modal-modal-description form {
+  height: 100%;
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+#modal-modal-description form input {
+  padding: 10px;
+  box-sizing: border-box;
+  border-radius: 5px;
+  margin: 10px 0;
+  border: none;
+  box-shadow: 0 0 8px 3px rgba(128, 128, 128, 0.438);
+  color: rgb(134, 49, 23);
+  text-transform: capitalize;
+}
+#modal-modal-description form label {
+  color: rgb(23, 23, 134);
+  font-size: 1.2rem;
+  font-weight: 300;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+#modal-modal-description form button {
+  border: solid black 1px;
+  margin-top: auto;
+}
+/* .container-modal-edit-goal {
+} */

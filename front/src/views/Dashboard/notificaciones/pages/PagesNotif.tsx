@@ -20,6 +20,45 @@ export const Todo = () => {
           <TrashIcon className="iconos-hero trash-icon-notif" />
         </article>
       </Link>
+      <Link to="/alertas-inversion" className="link-alertas-inversion">
+        <article className="notificacion">
+          <img src={logo} className="logo-notificaciones" />
+          <div className="container-info-notif">
+            <h1>¡Excelente, estas apunto de alcanzar tu objetivo!</h1>
+            <p>
+              Has alcanzado el 40% de tu meta para el fondo de inversión a largo
+              plazo.
+            </p>
+          </div>
+          <TrashIcon className="iconos-hero trash-icon-notif" />
+        </article>
+      </Link>{" "}
+      <Link to="/alertas-inversion" className="link-alertas-inversion">
+        <article className="notificacion">
+          <img src={logo} className="logo-notificaciones" />
+          <div className="container-info-notif">
+            <h1>¡Excelente, estas apunto de alcanzar tu objetivo!</h1>
+            <p>
+              Has alcanzado el 40% de tu meta para el fondo de inversión a largo
+              plazo.
+            </p>
+          </div>
+          <TrashIcon className="iconos-hero trash-icon-notif" />
+        </article>
+      </Link>{" "}
+      <Link to="/alertas-inversion" className="link-alertas-inversion">
+        <article className="notificacion">
+          <img src={logo} className="logo-notificaciones" />
+          <div className="container-info-notif">
+            <h1>¡Excelente, estas apunto de alcanzar tu objetivo!</h1>
+            <p>
+              Has alcanzado el 40% de tu meta para el fondo de inversión a largo
+              plazo.
+            </p>
+          </div>
+          <TrashIcon className="iconos-hero trash-icon-notif" />
+        </article>
+      </Link>
     </section>
   );
 };
@@ -49,6 +88,19 @@ export const ObjetivosNotif = () => {
 export const Recordatorios = () => {
   return (
     <section className="container-page-notif">
+      <Link to="/alertas-inversion" className="link-alertas-inversion">
+        <article className="notificacion">
+          <img src={logo} className="logo-notificaciones" />
+          <div className="container-info-notif">
+            <h1>¡Excelente, estas apunto de alcanzar tu objetivo!</h1>
+            <p>
+              Has alcanzado el 40% de tu meta para el fondo de inversión a largo
+              plazo.
+            </p>
+          </div>
+          <TrashIcon className="iconos-hero trash-icon-notif" />
+        </article>
+      </Link>
       <Link to="/alertas-inversion" className="link-alertas-inversion">
         <article className="notificacion">
           <img src={logo} className="logo-notificaciones" />

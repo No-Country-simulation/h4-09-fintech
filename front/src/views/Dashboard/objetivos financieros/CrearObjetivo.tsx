@@ -72,7 +72,7 @@ function CrearObjetivo() {
       setGoalTargetAmount("");
       setErrors({});
       navigate("/objetivos-financieros");
-      // window.location.reload();
+      window.location.reload();
     } catch (error) {
       console.error("Error:", error);
       alert("Hubo un problema al guardar el objetivo.");
@@ -83,7 +83,7 @@ function CrearObjetivo() {
     <div className="container-crear-objetivo">
       <h1>
         <Link to="/objetivos-financieros" className="link-rrdom">
-          <ArrowLeftIcon className="iconos-hero flecha-izquierda" />
+          <ArrowLeftIcon className="iconos-hero flecha-izquierda arrow-prev-adjust" />
         </Link>
         Nuevo objetivo
       </h1>
@@ -91,10 +91,8 @@ function CrearObjetivo() {
         onSubmit={handleSubmit}
         className="p-4 max-w-md mx-auto border rounded shadow-sm space-y-4"
       >
-        <div>
-          <label htmlFor="goalName" className="block font-medium mb-1">
-            Nombre del Objetivo:
-          </label>
+        <label htmlFor="goalName" className="block font-medium mb-1">
+          Nombre del Objetivo:
           <input
             type="text"
             id="goalName"
@@ -109,12 +107,10 @@ function CrearObjetivo() {
           {errors.name && (
             <p className="text-red-500 text-sm mt-1">{errors.name}</p>
           )}
-        </div>
+        </label>
 
-        <div>
-          <label htmlFor="goalTargetAmount" className="block font-medium mb-1">
-            Valor del Objetivo:
-          </label>
+        <label htmlFor="goalTargetAmount" className="block font-medium mb-1">
+          Valor del Objetivo:
           <input
             type="number"
             id="goalTargetAmount"
@@ -129,7 +125,7 @@ function CrearObjetivo() {
           {errors.targetAmount && (
             <p className="text-red-500 text-sm mt-1">{errors.targetAmount}</p>
           )}
-        </div>
+        </label>
 
         <button
           type="submit"

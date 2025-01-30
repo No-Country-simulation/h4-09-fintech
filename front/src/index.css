@@ -132,6 +132,13 @@ a {
 }
 .link-rrdom {
   color: black !important;
+  height: min-content;
+  width: min-content;
+}
+.arrow-prev-adjust {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .body2 {

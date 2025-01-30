@@ -7,7 +7,7 @@ export const Notificaciones = () => {
     <div className="container-notificaciones">
       <h1>
         <Link to="/dashboard" className="link-rrdom">
-          <ArrowLeftIcon className="iconos-hero flecha-izquierda" />
+          <ArrowLeftIcon className="iconos-hero flecha-izquierda arrow-prev-adjust" />
         </Link>
         Notificaciones
         <EllipsisVerticalIcon className="iconos-hero puntitos" />
