@@ -235,7 +235,13 @@ export const Dashboard: React.FC = () => {
 
       <div onClick={handleOpen} className="fondos-dash">
         <div>
-          <h6>Fondo disponible</h6>${userdata.currentAmount}
+          <h6>Fondo disponible</h6>$
+          {userdata.currentAmount
+            ? userdata.currentAmount.toLocaleString("es-AR", {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              })
+            : "0,00"}
         </div>
         <small>cargar</small>
       </div>

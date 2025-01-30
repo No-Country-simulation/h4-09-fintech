@@ -83,7 +83,7 @@ function CrearObjetivo() {
     <div className="container-crear-objetivo">
       <h1>
         <Link to="/objetivos-financieros" className="link-rrdom">
-          <ArrowLeftIcon className="iconos-hero flecha-izquierda" />
+          <ArrowLeftIcon className="iconos-hero flecha-izquierda arrow-prev-adjust" />
         </Link>
         Nuevo objetivo
       </h1>

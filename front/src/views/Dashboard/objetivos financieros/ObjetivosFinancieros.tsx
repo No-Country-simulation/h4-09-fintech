@@ -5,7 +5,12 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import "./ObjetivosFinancieros.css";
-import { ArrowLeftIcon, PencilIcon } from "@heroicons/react/24/outline";
+import {
+  ArrowLeftIcon,
+  CheckIcon,
+  PencilIcon,
+  XMarkIcon,
+} from "@heroicons/react/24/outline";
 
 // estilos del modal
 const style = {
@@ -17,6 +22,7 @@ const style = {
   height: "80vh",
   bgcolor: "background.paper",
   boxShadow: 24,
+  borderRadius: "8px",
   p: 4,
 };
 
@@ -164,7 +170,7 @@ export const ObjetivosFinancieros = () => {
     <div className="container-obj-financieros">
       <h1>
         <Link to="/dashboard" className="link-rrdom">
-          <ArrowLeftIcon className="iconos-hero flecha-izquierda" />
+          <ArrowLeftIcon className="iconos-hero flecha-izquierda arrow-prev-adjust" />
         </Link>
         Objetivos financieros
       </h1>
@@ -182,7 +188,14 @@ export const ObjetivosFinancieros = () => {
             {objetivosList.map((objetivo) => (
               <div key={objetivo.goalId} className="goal-in-list">
                 <div className="container-goal-info">
-                  <h5>{objetivo.name}</h5>
+                  <h5>
+                    {objetivo.name}
+                    {objetivo.progress >= 100 ? (
+                      <CheckIcon className="iconos-hero check-goal" />
+                    ) : (
+                      ""
+                    )}
+                  </h5>
                   <div className="data-goal">
                     <div>
                       <p>progeso:&nbsp;</p>
@@ -190,7 +203,18 @@ export const ObjetivosFinancieros = () => {
                     </div>
                     <div>
                       <p>monto:&nbsp;</p>
-                      <h6>${objetivo.targetAmount}</h6>
+                      <h6>
+                        $
+                        {objetivo.targetAmount
+                          ? Number(objetivo.targetAmount).toLocaleString(
+                              "es-AR",
+                              {
+                                minimumFractionDigits: 2,
+                                maximumFractionDigits: 2,
+                              }
+                            )
+                          : "0,00"}
+                      </h6>
                     </div>
                   </div>
                 </div>
@@ -209,43 +233,52 @@ export const ObjetivosFinancieros = () => {
           </article>
         )}
       </section>
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            {infoModal.name}
-            <p> Estas apunto de cambiar los datos hacia este objetivo</p>
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            <form onSubmit={handleGoalUpdate}>
-              <label htmlFor="name">
-                Nombre:
-                <input
-                  type="text"
-                  name="name"
-                  id="name"
-                  defaultValue={infoModal.name}
-                />
-              </label>
-              <label htmlFor="targetAmount">
-                Nuevo costo:
-                <input
-                  type="number"
-                  name="targetAmount"
-                  id="targetAmount"
-                  placeholder={`Costo actual:${infoModal.targetAmount}`}
-                />
-              </label>
-              {formError && <p style={{ color: "red" }}>{formError}</p>}
-              <button type="submit">Actualizar</button>
-            </form>
-          </Typography>
-        </Box>
-      </Modal>
+      <div className="container-modal-edit-goal">
+        <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+            <XMarkIcon
+              className="iconos-hero xmark-icono"
+              onClick={handleClose}
+            />
+            <Typography id="modal-modal-title" variant="h6" component="h2">
+              {infoModal.name}
+              <p>
+                {" "}
+                Estas apunto de cambiar <br /> los datos de este objetivo
+              </p>
+            </Typography>
+            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+              <form onSubmit={handleGoalUpdate}>
+                <label htmlFor="name">
+                  Nombre:
+                  <input
+                    type="text"
+                    name="name"
+                    id="name"
+                    defaultValue={infoModal.name}
+                  />
+                </label>
+                <label htmlFor="targetAmount">
+                  Nuevo costo:
+                  <input
+                    type="number"
+                    name="targetAmount"
+                    id="targetAmount"
+                    placeholder={`Costo actual:${infoModal.targetAmount}`}
+                  />
+                </label>
+                {formError && <p style={{ color: "red" }}>{formError}</p>}
+                <button type="submit">Actualizar</button>
+              </form>
+            </Typography>
+          </Box>
+        </Modal>
+      </div>
     </div>
   );
 };

@@ -8,6 +8,7 @@ import {
   CartesianGrid,
   Tooltip,
   ResponsiveContainer,
+  Cell,
 } from "recharts";
 // import BasicSelect from "../../../../../components/MUI/BasicSelect";
 
@@ -18,10 +19,23 @@ interface BarChartComponentProps {
   xAxisKey: string; // Tipo de `xAxisKey` como `string`
   boton: string; // Tipo de `boton` como `string`
 }
+const CustomLabel = (props: any) => {
+  const { x, y, width, value } = props;
+  return (
+    <text
+      x={x + width / 2}
+      y={y - 5}
+      fill="#000"
+      textAnchor="middle"
+      fontSize={10}
+    >
+      {value}%
+    </text>
+  );
+};
 
 const BarChartComponent: React.FC<BarChartComponentProps> = ({
   data,
-  dataKey,
   xAxisKey,
   boton,
 }) => {
@@ -82,11 +96,18 @@ const BarChartComponent: React.FC<BarChartComponentProps> = ({
           />
           <Tooltip />
           <Bar
-            dataKey={dataKey}
-            fill="#0048b2"
+            dataKey={(entry) => Math.min(entry.Progreso, 100)}
             barSize={11.9}
-            label={({ value }) => value}
-          />
+            label={<CustomLabel />}
+          >
+            {data.map((entry, index) => (
+              <Cell
+                key={`cell-${index}`}
+                fill={entry.Progreso >= 100 ? "#00b200" : "#0048b2"}
+              />
+            ))}
+          </Bar>
+
           {/* Usamos `dataKey` como prop */}
         </BarChart>
       </ResponsiveContainer>
