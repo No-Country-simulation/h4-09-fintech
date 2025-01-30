@@ -24,11 +24,10 @@
 }
 .container-obj-financieros .add-goal-btn {
   align-self: flex-end;
-  height: 5vh;
   background-color: var(--color-primario);
   color: white;
   margin: 10px;
-  padding: 5px;
+  padding: 8px 16px;
   border-radius: 5px;
   display: flex;
   align-items: center;
@@ -38,6 +37,7 @@
   border-top: solid rgba(128, 128, 128, 0.5) 1px;
   display: flex;
   justify-content: space-between;
+  padding: 5px 0;
 }
 .goal-in-list .data-goal {
   display: flex;

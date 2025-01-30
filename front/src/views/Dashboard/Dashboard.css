@@ -129,6 +129,8 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  position: absolute;
+  z-index: 1000000;
 }
 .spinner-dash img {
   height: 20vh;
@@ -192,24 +194,13 @@
   justify-content: space-evenly;
   align-items: center;
 }
-.empty-nav {
+
+.xmark-icono {
   position: absolute;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  left: 0;
-  bottom: 0;
-  height: 10%;
-  width: 100%;
-  background-color: var(--color-primario);
-  border-bottom-right-radius: 10px;
-  border-bottom-left-radius: 10px;
-}
-.empty-nav .iconos-hero {
-  color: white;
+  color: var(--color-primario);
+  top: 0;
+  right: 0;
   margin: 10px;
-  height: 70%;
-  width: auto;
 }
 #modal-modal-description form input {
   height: 5vh;

@@ -204,7 +204,7 @@ export const Dashboard: React.FC = () => {
     left: "50%",
     transform: "translate(-50%, -50%)",
     width: "70vw",
-    height: "80vh",
+    height: "45vh",
     bgcolor: "background.paper",
     borderRadius: "10px",
     boxShadow: 24,
@@ -260,9 +260,11 @@ export const Dashboard: React.FC = () => {
         >
           <Box sx={style}>
             <Typography id="modal-modal-title" variant="h6" component="h2">
-              <div className="empty-nav">
-                <XMarkIcon className="iconos-hero" onClick={handleClose} />
-              </div>
+              <XMarkIcon
+                className="iconos-hero xmark-icono"
+                onClick={handleClose}
+              />
+
               <h3>Añadir fondos</h3>
               <p>
                 Ingresa el monto que deseas recargar para agregarlo a tu cuenta.
