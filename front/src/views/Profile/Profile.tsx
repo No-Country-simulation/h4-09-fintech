@@ -7,32 +7,36 @@ import { GoGear } from "react-icons/go";
 import { TbWorld } from "react-icons/tb";
 import { LuMoon } from "react-icons/lu";
 import { RxExit } from "react-icons/rx";
+import { baseUrl } from "../../config/envs"
+import { useFetchDataWithToken } from "../../hooks/useFetchDataWithToken"
+import { IUser } from "../Gestion de Inversiones/GestionInversiones"
 // import { GiReceiveMoney } from "react-icons/gi";
 
 export default function Profile() {
   const [profileImage, setProfileImage] = useState<string | null>(null);
-  const [userName, setUserName] = useState<string | null>(null);
-  const [riskPreference, setRiskPreference] = useState<string | null>(null);
-  
+  // const [riskPreference, setRiskPreference] = useState<string | null>(null);
+  const { data: user } = useFetchDataWithToken<IUser>(`${baseUrl}/api/auth/check-login`)
+  // const [userName, setUserName] = useState<string | null>();
 
-  useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        const response = await fetch("http://localhost:5000/api/auth/check-login");
-        if (response.ok) {
-          const data = await response.json();
-          setUserName(`${data.name} ${data.lastName}`);
-          setRiskPreference(data.riskPreference);
-        } else {
-          console.error("Error al obtener los datos del usuario");
-        }
-      } catch (error) {
-        console.error("Error de red:", error);
-      }
-    };
 
-    fetchUserData();
-  }, []);
+  // useEffect(() => {
+  //   const fetchUserData = async () => {
+  //     try {
+  //       const response = await fetch("http://localhost:5000/api/auth/check-login");
+  //       if (response.ok) {
+  //         const data = await response.json();
+  //         setUserName(`${data.name} ${data.lastName}`);
+  //         setRiskPreference(data.riskPreference);
+  //       } else {
+  //         console.error("Error al obtener los datos del usuario");
+  //       }
+  //     } catch (error) {
+  //       console.error("Error de red:", error);
+  //     }
+  //   };
+
+  //   fetchUserData();
+  // }, []);
 
   // **Cargar imagen inicial desde el backend**
   useEffect(() => {
@@ -67,8 +71,8 @@ export default function Profile() {
   };
 
   return (
-    <>
-      <div className={styles.container}>
+    <div className={styles.pageView}>
+      <div className={styles.contentContainer}>
         <h1 className={styles.title}>Mi cuenta</h1>
 
         <div className={styles.profile}>
@@ -97,14 +101,16 @@ export default function Profile() {
           </div>
 
           <div className={styles.info}>
-            <h3 className={styles.names}>{userName || "Cargando nombre..."}</h3>
+            <h3 className={styles.names}>{user ? `${user.name} ${user.lastName}` : "Cargando nombre..."}</h3>
             {/* <p className={styles.email}>Correo</p> */}
           </div>
 
-          <button className={styles.button}>
+          {/* <button className={styles.button}> */}
             {/* <IupiSmallIcon />|<GiReceiveMoney /> */}
-            {riskPreference || "Cargando..."}
-          </button>
+            {/* {user?.riskPreference || "Cargando..."} */}
+          {/* </button> */}
+
+          <h3 className={styles.subtitle}>Perfil financiero : <span>{user?.riskPreference || "Cargando..." }</span></h3>
         </div>
 
         <Card
@@ -139,6 +145,6 @@ export default function Profile() {
           link="/"
         />
       </div>
-    </>
+    </div>
   );
 }

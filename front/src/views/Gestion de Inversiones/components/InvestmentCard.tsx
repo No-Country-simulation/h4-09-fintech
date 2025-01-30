@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import '../GestionInversiones.css'
 import { IUser } from '../GestionInversiones'
-import { usePatchDataWithToken } from '../../../hooks/usePatchDataWithToken'
 import { baseUrl } from '../../../config/envs'
 import Spinner from '../../../components/spiner/Spiner'
 import { usePostDataWithToken } from '../../../hooks/usePostDataWithToken'
@@ -18,9 +17,9 @@ interface InvestmentCardProps {
 
 const InvestmentCard: React.FC<InvestmentCardProps> = ({ name, cedear, price, percentageLastMonth, percentageLastYear, user }) => {
 	const [selectedAmount, setSelectedAmount] = useState<number>(1)
-	const { loading, error, patchData } = usePatchDataWithToken(`${baseUrl}/api/user/add_funds`)
-  const { postData } = usePostDataWithToken(`${baseUrl}/api/stocks/buy`)
+	const { loading, error, postData } = usePostDataWithToken(`${baseUrl}/api/stocks/buy`)
 	const [showModal, setShowModal] = useState(false)
+	const [isBuying, setIsBuying] = useState(false)
 	const handleShowModal = () => {
 		setShowModal(true)
 	}
@@ -30,25 +29,37 @@ const InvestmentCard: React.FC<InvestmentCardProps> = ({ name, cedear, price, pe
 	}
 
 	const handleConfirmBuy = async () => {
-		if (!user) return
+		if (!user || isBuying) return
 		if (selectedAmount > maxUnits) return
-    const body = {
-      quantity: selectedAmount,
-      pricePerUnit: price,
-      stockSymbol: cedear,
-      stockName: name,
-    }
+
+		setIsBuying(true)
+
+		const body = {
+			quantity: selectedAmount,
+			pricePerUnit: price,
+			stockSymbol: cedear,
+			stockName: name
+		}
 
 		const buyingPrice = selectedAmount * price
 		const negativeBuyingPrice = -buyingPrice
-    //solicitud que le reduce el saldo al usuario
-		const response = await patchData({ amount: negativeBuyingPrice })
-    //solicitud que le agrega la cantidad de acciones al usuario
-    const buyResponse = await postData(body)
-    console.log(buyResponse);
-		console.log(response)
-		setShowModal(false)
-		window.location.reload()
+
+		console.log('user founds', user.currentAmount)
+		console.log('buying price', buyingPrice)
+		console.log('new user founds', user.currentAmount - buyingPrice)
+
+		try {
+			console.log(negativeBuyingPrice)
+			console.log(body)
+
+			await postData(body) // Registra la compra
+		} catch (error) {
+			console.error('Error en la compra:', error)
+		} finally {
+			setShowModal(false)
+			setIsBuying(false) // Permite futuras compras
+			window.location.reload()
+		}
 	}
 
 	// Calcular la cantidad máxima que se puede comprar
