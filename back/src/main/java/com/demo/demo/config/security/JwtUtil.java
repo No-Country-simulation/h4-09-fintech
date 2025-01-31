@@ -28,7 +28,7 @@ public class JwtUtil {
     private  String JWT_SECRET ;
 
     public Date expiration() {
-        return new Date(System.currentTimeMillis() + 1000 * 60 * 60);
+        return new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24);
     }
 
     private SecretKey getKey() {
