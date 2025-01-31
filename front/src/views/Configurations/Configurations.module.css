@@ -1,8 +1,6 @@
 .title {
   text-align: start;
   margin: 10px 20px;
-  color: black;
-  font-size: 36px;
 }
 
 .title a {
@@ -17,6 +15,25 @@
   text-align: center;
 }
 
+.cardContainer{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px; 
+  width: 100%;
+}
+
+.card {
+  width: 100%; 
+  min-height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
 @media (max-width: 767px) {
   .container {
     margin: 10px;
@@ -27,4 +44,23 @@
   .subtitle {
     font-size: 20px;
   }
+}
+
+.pageView {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	min-height: 100vh;
+	min-height: 100dvh;
+	width: 100%;
+}
+.contentContainer {
+	display: flex;
+	flex-direction: column;
+	margin-top: 1rem;
+	width: 90%;
+	max-width: 1000px;
+	gap: 10px;
+	background-color: var(--color-fondo);
+	margin-bottom: 244px;
 }
