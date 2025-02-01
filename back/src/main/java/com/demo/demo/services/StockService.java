@@ -6,6 +6,7 @@ import com.demo.demo.entities.UserEntity;
 import com.demo.demo.exceptions.NotFoundException;
 import com.demo.demo.repositories.StockTransactionRepository;
 import com.demo.demo.repositories.UserRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -65,18 +66,36 @@ public class StockService {
                 .toList();
     }
 
-    public void deleteTransaction(String username, Long transactionId) {
+    @Transactional
+    public void sellStock(String username, Long transactionId, int sellQuantity) {
         UserEntity user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new NotFoundException("User not found"));
 
         StockTransaction transaction = stockTransactionRepository.findById(transactionId)
                 .orElseThrow(() -> new NotFoundException("Transaction not found"));
 
-
+        // Verifica que la transacción pertenece al usuario
         if (!transaction.getUser().getUserId().equals(user.getUserId())) {
-            throw new IllegalArgumentException("You do not have permission to delete this transaction.");
+            throw new IllegalArgumentException("You do not have permission to modify this transaction.");
         }
 
-        stockTransactionRepository.delete(transaction);
+        // Verificar que la cantidad a vender no sea mayor a la cantidad disponible
+        if (sellQuantity > transaction.getQuantity()) {
+            throw new IllegalArgumentException("You cannot sell more than you own.");
+        }
+
+        // Restar la cantidad y actualizar el costo total
+        int remainingQuantity = transaction.getQuantity() - sellQuantity;
+
+        if (remainingQuantity == 0) {
+            // Eliminar la transacción si ya no quedan acciones
+            stockTransactionRepository.delete(transaction);
+        } else {
+            // Actualizar la transacción
+            transaction.setQuantity(remainingQuantity);
+            transaction.setTotalCost(transaction.getPricePerUnit() * remainingQuantity);
+            transaction.setTransactionDate(LocalDateTime.now());
+            stockTransactionRepository.save(transaction);
+        }
     }
 }
