@@ -123,8 +123,19 @@
   text-align: left;
 }
 #modal-modal-description form button {
-  border: solid black 1px;
   margin-top: auto;
 }
-/* .container-modal-edit-goal {
-} */
+.delete-goal-btn {
+  background-color: pink !important;
+  border: solid red 1px !important;
+  color: red !important;
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
+}
+#nested-modal-description {
+  margin: 0;
+  text-align: center;
+  font-family: var(--fuente-principal);
+  font-weight: 300;
+}

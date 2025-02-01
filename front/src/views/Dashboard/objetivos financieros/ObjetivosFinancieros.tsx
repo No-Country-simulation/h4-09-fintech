@@ -9,6 +9,7 @@ import {
   ArrowLeftIcon,
   CheckIcon,
   PencilIcon,
+  TrashIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 
@@ -39,6 +40,7 @@ interface FinancialGoal {
 export const ObjetivosFinancieros = () => {
   const [objetivosList, setObjetivosList] = useState<FinancialGoal[]>([]);
   const [open, setOpen] = React.useState(false);
+  const [openNested, setOpenNested] = React.useState(false);
   const [infoModal, setInfoModal] = useState({
     name: "",
     id: "",
@@ -59,7 +61,43 @@ export const ObjetivosFinancieros = () => {
     setOpen(true);
   };
 
+  // Función para eliminar un objetivo
+  const handleDeleteGoal = async () => {
+    const token = getCookie("authToken");
+    if (!token) {
+      setError("No se encontró un token de autenticación.");
+      return;
+    }
+
+    try {
+      const res = await fetch(
+        `https://h4-09-fintech-production.up.railway.app/api/user/delete_goal/${infoModal.id}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      if (!res.ok) throw new Error("Error al eliminar el objetivo.");
+
+      // Actualizar la lista de objetivos después de la eliminación
+      setObjetivosList((prevGoals) =>
+        prevGoals.filter((goal) => goal.goalId !== infoModal.id)
+      );
+      setError(null);
+      setOpenNested(false);
+      setOpen(false); // Cerrar ambos modales
+    } catch (err) {
+      console.error(err);
+      setError("No se pudo eliminar el objetivo.");
+    }
+  };
+
   const handleClose = () => setOpen(false);
+  const handleCloseNested = () => setOpenNested(false);
 
   // Obtener el token de las cookies
   const getCookie = (name: string): string | null => {
@@ -270,8 +308,55 @@ export const ObjetivosFinancieros = () => {
                   />
                 </label>
                 {formError && <p style={{ color: "red" }}>{formError}</p>}
+                <button
+                  onClick={() => setOpenNested(true)}
+                  className="delete-goal-btn"
+                >
+                  Eliminar Objetivo
+                  <TrashIcon className="iconos-hero" />
+                </button>
                 <button type="submit">Actualizar</button>
               </form>
+            </Typography>
+          </Box>
+        </Modal>
+        <Modal
+          open={openNested}
+          onClose={handleCloseNested}
+          aria-labelledby="nested-modal-title"
+          aria-describedby="nested-modal-description"
+        >
+          <Box
+            sx={{
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              height: "30vh",
+              width: "60vw",
+              bgcolor: "background.paper",
+              boxShadow: 24,
+              borderRadius: "8px",
+              p: 4,
+              backgroundColor: "#f0f0f0", // Fondo gris claro
+              border: "2px solid #1976d2",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "space-evenly",
+              padding: "2%",
+            }}
+          >
+            <Typography id="nested-modal-description" sx={{ mt: 2 }}>
+              ¿Estas seguro que deseas eliminar este objetivo?
+            </Typography>
+            <Typography id="nested-modal-title" variant="h6" component="h2">
+              <button
+                className="delete-goal-btn"
+                onClick={() => handleDeleteGoal()} // Llama a la función correctamente
+              >
+                Eliminar <TrashIcon className="iconos-hero" />
+              </button>
             </Typography>
           </Box>
         </Modal>
