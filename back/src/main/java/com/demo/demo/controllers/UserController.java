@@ -53,6 +53,7 @@ public class UserController {
     public ResponseEntity<ResponseGoalDTO> getGoal(@PathVariable UUID goalId, @CurrentUser UserEntity user) {
         return ResponseEntity.ok(userService.getGoal(goalId, user.getUsername()));
     }
+    @Transactional
     @PatchMapping("/update_goal")
     public ResponseEntity<ResponseGoalDTO> updatePreferences(
             @CurrentUser UserEntity user,

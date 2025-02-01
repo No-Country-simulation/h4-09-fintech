@@ -1,6 +1,7 @@
 package com.demo.demo.config.mappers;
 
 import com.demo.demo.dtos.goal.ResponseGoalDTO;
+import com.demo.demo.dtos.goal.UpdateGoalDTO;
 import com.demo.demo.entities.Goal;
 import com.demo.demo.entities.UserEntity;
 import org.mapstruct.Mapper;

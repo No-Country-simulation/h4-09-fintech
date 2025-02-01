@@ -138,9 +138,9 @@ public class UserService implements UserDetailsService {
                 .findFirst()
                 .orElseThrow(() -> new NotFoundException("Goal not found"));
 
-        goal.setName(dto.name());
-        goal.setTargetDate(dto.targetDate());
-        goal.setTargetAmount(dto.targetAmount());
+        goal.setName(dto.name()!=null ? dto.name() : goal.getName());
+        goal.setTargetDate(dto.targetDate() != null ? dto.targetDate() : goal.getTargetDate());
+        goal.setTargetAmount(dto.targetAmount() != 0.0 ? dto.targetAmount() : goal.getTargetAmount());
 
         return goalMapper.toResponseGoalDTO(goal, user);
     }
