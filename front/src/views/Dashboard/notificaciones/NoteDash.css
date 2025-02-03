@@ -50,6 +50,7 @@
     width: 50vw;
     margin: 0 3vw 5px auto;
     padding: 1.5%;
+    border-radius: 10px;
     border: solid 2px rgba(0, 0, 255, 0.185);
   }
   .info-notes h5 {

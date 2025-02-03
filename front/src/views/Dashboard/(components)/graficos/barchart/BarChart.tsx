@@ -1,4 +1,5 @@
 import React from "react";
+import "./BarChart.css";
 import { Link } from "react-router-dom";
 import {
   BarChart,
