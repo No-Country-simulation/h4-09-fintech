@@ -45,3 +45,26 @@
     font-size: 0.5rem;
   }
 }
+@media (min-width: 768px) {
+  .container-notificacion {
+    width: 50vw;
+    margin: 0 3vw 5px auto;
+    padding: 1.5%;
+    border: solid 2px rgba(0, 0, 255, 0.185);
+  }
+  .info-notes h5 {
+    font-size: 0.9rem;
+  }
+  .info-notes p {
+    font-size: 0.7rem;
+  }
+  .container-notificacion .logo-notificaciones {
+    height: 50px;
+    width: 50px;
+  }
+  .cerrar-not-btn {
+    height: 50%;
+    width: auto;
+    margin: -8px -8px auto auto;
+  }
+}
