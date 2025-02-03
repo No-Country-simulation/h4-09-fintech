@@ -1,27 +1,49 @@
 .container-grafico-torta {
   width: 100%;
-  height: 240px;
+  height: 35.17vh;
+  max-height: 35.17vh;
+  position: relative; /* Asegura que los elementos absolutos se posicionen dentro de este */
+  overflow: visible;
 }
-.btn-ahorro-auto {
-  margin: 2vh auto;
-  background-color: #0048b2;
-  border: none;
-  border-radius: 3px;
-  color: rgb(246, 248, 249);
-}
-.sugerencia-personalizada {
-  border: solid 1px grey;
-  border-radius: 6px;
-  width: 90%;
-  margin: auto;
-  height: auto;
+.sugerencia {
+  position: absolute;
   display: flex;
+  justify-content: space-between;
+  width: 60%;
+  height: 25%;
+  margin-right: 2%;
+  right: 0;
+  top: 50%;
+  transform: translateY(-40%);
+  border: solid #94adb7 1px;
+  padding: 5px;
+  border-radius: 5px;
 }
-.sugerencia-personalizada div * {
+.container-grafico-torta button {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: max-content;
+  background-color: var(--color-primario);
+  border: none;
+  color: var(--color-fondo);
+  padding: 10px 20px;
+  border-radius: 5px;
+}
+.sugerencia div {
   width: auto;
-  text-align: left;
+  max-width: 81%;
+  min-width: 81%;
 }
-.ampolleta-icono {
-  width: 35%;
+.sugerencia h6 {
+  width: max-content;
+  max-width: 100%;
+  font-weight: 500;
+}
+.sugerencia p {
+  font-size: 0.5rem;
+}
+.sugerencia .iconos-hero {
   margin: auto;
 }

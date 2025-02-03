@@ -39,7 +39,7 @@ export default function Navbar() {
               </NavLink>
             </li>
             <li>
-              <NavLink to="/community/forum">
+              <NavLink to="/community">
                 <FaPeopleGroup />
                 Comunidad & Noticias
               </NavLink>

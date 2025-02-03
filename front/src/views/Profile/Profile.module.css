@@ -40,20 +40,16 @@
   align-items: center;
   justify-content: center;
   text-align: center;
+  margin-bottom: 20px;
 }
 .profile.p{
     margin: 0;
 }
 
-.title {
-  margin: 10px 20px;
-  text-align: start;
-  color: black;
-  font-size: 36px;
-}
-
 .names{
   margin: 10px 0px 0px 0px;
+  color:var(--color-primario);
+  font-weight: 500;
 }
 .email{
   margin: 5px 0px 0px 0px;
@@ -61,9 +57,9 @@
 }
 
 .subtitle{
-  color: black;
-  font-size: 32px;
-  text-align: center;
+	font-size: 16px;
+	font-weight: 500;
+	color: var(--color-primario);
 }
 
 .button{
@@ -73,17 +69,36 @@
   height: 40px;
 }
 
+.cardContainer{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px; 
+  width: 100%;
+}
+
+.card {
+  width: 100%; 
+  min-height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.perfilFinanciero{
+  border: solid;
+  color: var(--color-primario);
+  width: 260px;
+  border-radius: 20px;
+}
+
 
 @media (max-width: 767px) {
   .container{
     margin: 10px;
-  }
-  .title{
-    font-size: 30px;
-    margin-bottom: 20px;
-  }
-  .subtitle{
-    font-size: 20px;
   }
 
   .profilePictureContainer {
@@ -100,3 +115,23 @@
     border: 3px solid #0048ba; 
   }
 }
+
+.pageView {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	min-height: 100vh;
+	min-height: 100dvh;
+	width: 100%;
+}
+.contentContainer {
+	display: flex;
+	flex-direction: column;
+	margin-top: 1rem;
+	width: 90%;
+	max-width: 1000px;
+	gap: 10px;
+	background-color: var(--color-fondo);
+	margin-bottom: 244px;
+}
+

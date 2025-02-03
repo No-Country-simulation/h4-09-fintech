@@ -3,7 +3,7 @@
   top: 0;
   left: 0;
   height: 13vh;
-  width: 100vw;
+  width: 100%;
   z-index: 1000;
   background-color: #0048ba;
   display: flex;
@@ -16,6 +16,10 @@
 
 .hidden {
   transform: translateY(-100%);
+}
+
+.navbar{
+  padding: 0px 20px;
 }
 
 .navMenu {

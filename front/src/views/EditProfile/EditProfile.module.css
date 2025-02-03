@@ -12,7 +12,6 @@
   border: 3px solid #0048ba;
 }
 
-
 .defaultIcon{
   width: 100%; 
   height: 100%;
@@ -46,11 +45,10 @@
 }
 
 .title {
-  margin: 10px 20px;
   text-align: start;
   color: black;
-  font-size: 36px;
 }
+
 .title a {
   font-size: 28px;
   color: black;
@@ -68,9 +66,12 @@
   cursor: pointer;
 }
 
-.names {
+.names{
   margin: 10px 0px 0px 0px;
+  color:var(--color-primario);
+  font-weight: 500;
 }
+
 .email {
   margin: 5px 0px 0px 0px;
   color: black;
@@ -83,18 +84,15 @@
 
 .card {
   width: 39%;
-  padding: 10px 5px;
   display: flex;
-
   align-items: center;
   justify-content: space-between;
-  padding: 20px;
   background-color: #f4f4f4;
-  border-radius: 8px;
+  border-radius: 40px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   max-width: 600px;
-  margin: 20px auto;
   transition: all 0.3s ease;
+  padding: 10px 15px;
 }
 
 .card:hover {
@@ -115,14 +113,12 @@
   height: 30px;
 }
 
-/* Hide default HTML checkbox */
 .switch input {
   opacity: 1;
   width: 0;
   height: 0;
 }
 
-/* The slider */
 .slider {
   position: absolute;
   cursor: pointer;
@@ -150,8 +146,6 @@
   transition: 0.4s;
 }
 
-
-
 input:checked + .slider {
   background-color: #5654dd;
   border: 1px solid transparent;
@@ -172,14 +166,17 @@ input:checked + .slider:before {
 }
 
 .formContainer {
-  padding: 20px;
-  max-width: 600px;
-  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px; 
 }
 
 .form {
   display: flex;
   flex-direction: column;
+  width: 600px;
   gap: 20px;
 }
 
@@ -233,20 +230,19 @@ input:checked + .slider:before {
 
 .radiocontainer {
   display: flex;
-  justify-content: center; /* Centra horizontalmente */
-  align-items: center; /* Centra verticalmente */
+  justify-content: center;
+  align-items: center;
+  
 }
 
 .radiobuttonscontainer {
-  width: 40%;
   max-width: 600px;
-  margin: 20px auto;
 }
 
 .radiobuttons {
   display: flex;
-  justify-content: space-between;
-  margin: 30px 0px;
+  flex-direction: column;
+  
 }
 
 .radiobuttons h3 {
@@ -266,8 +262,27 @@ input:checked + .slider:before {
   width: 20px;
   height: 20px;
 }
+.radiobutton{
+  width: 600px;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
 
 @media (max-width: 767px) {
+
+  .form{
+    max-width: 100%;
+  }
+  .radiocontainer{
+    max-width: 100%;
+  }
+  
+
+  .radiobutton{
+    width: 100%;
+  }
+
   .container {
     margin: 10px;
   }
@@ -301,4 +316,23 @@ input:checked + .slider:before {
     max-width: 600px;
     margin: 20px auto;
   }
+}
+
+.pageView {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	min-height: 100vh;
+	min-height: 100dvh;
+	width: 100%;
+}
+.contentContainer {
+	display: flex;
+	flex-direction: column;
+	margin-top: 1rem;
+	width: 90%;
+	max-width: 1000px;
+	gap: 10px;
+	background-color: var(--color-fondo);
+	margin-bottom: 244px;
 }

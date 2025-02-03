@@ -5,6 +5,10 @@
 :root {
   font-family: "Poppins", Inter, system-ui, Avenir, Helvetica, Arial, sans-serif,
     neuton, poppins;
+  /* Fuentes */
+
+  --fuente-principal: "Poppins", Inter, system-ui, Avenir, Helvetica, Arial,
+    sans-serif, neuton, poppins;
   line-height: 1.5;
   /* Grosores de fuentes */
   --font-poppins-300: 300;
@@ -128,6 +132,13 @@ a {
 }
 .link-rrdom {
   color: black !important;
+  height: min-content;
+  width: min-content;
+}
+.arrow-prev-adjust {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .body2 {

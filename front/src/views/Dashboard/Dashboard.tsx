@@ -77,7 +77,6 @@ export const Dashboard: React.FC = () => {
         return res.json();
       })
       .then((data) => {
-        console.log(data);
         setUserData({
           nombre: data.name || "Usuario",
           correo: data.username || "Correo no disponible",
@@ -205,7 +204,7 @@ export const Dashboard: React.FC = () => {
     left: "50%",
     transform: "translate(-50%, -50%)",
     width: "70vw",
-    height: "80vh",
+    height: "45vh",
     bgcolor: "background.paper",
     borderRadius: "10px",
     boxShadow: 24,
@@ -236,7 +235,13 @@ export const Dashboard: React.FC = () => {
 
       <div onClick={handleOpen} className="fondos-dash">
         <div>
-          <h6>Fondo disponible</h6>${userdata.currentAmount}
+          <h6>Fondo disponible</h6>$
+          {userdata.currentAmount
+            ? userdata.currentAmount.toLocaleString("es-AR", {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              })
+            : "0,00"}
         </div>
         <small>cargar</small>
       </div>
@@ -261,9 +266,11 @@ export const Dashboard: React.FC = () => {
         >
           <Box sx={style}>
             <Typography id="modal-modal-title" variant="h6" component="h2">
-              <div className="empty-nav">
-                <XMarkIcon className="iconos-hero" onClick={handleClose} />
-              </div>
+              <XMarkIcon
+                className="iconos-hero xmark-icono"
+                onClick={handleClose}
+              />
+
               <h3>Añadir fondos</h3>
               <p>
                 Ingresa el monto que deseas recargar para agregarlo a tu cuenta.
@@ -272,14 +279,14 @@ export const Dashboard: React.FC = () => {
             <Typography id="modal-modal-description" sx={{ mt: 2 }}>
               <div className="monto-recarga">
                 <h5>Tu monto actual es de :</h5>
-                <span>{userdata.currentAmount}</span>
+                <span>${userdata.currentAmount}</span>
               </div>
               <form onSubmit={handleSubmitModal}>
                 <input
                   type="number"
                   // value={monto}
                   onChange={(e) => setMonto(Number(e.target.value))}
-                  placeholder="Monto"
+                  placeholder="Nuevo monto"
                 />
                 {errorMonto && <span>{errorMonto}</span>}
                 <div className="boton-modal">
