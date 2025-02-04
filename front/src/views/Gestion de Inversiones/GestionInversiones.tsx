@@ -8,8 +8,10 @@ import { useFetchDataWithToken } from '../../hooks/useFetchDataWithToken'
 // import InvestmentCard from './components/InvestmentCard'
 import Spinner from '../../components/spiner/Spiner'
 import UserInvestmentCard from './components/UserInvestmentCard'
+
 import { getInvestmentRecommendation, investmentsTypes, InvestmentType, IUnifyInvestment, IUser, IUserInvestment } from './utils'
 import NewInvestmentCard from './components/NewInvestmentCard'
+
 
 export const GestionInversiones = (): JSX.Element => {
 	const { data: user, loading: loadingUser, error: errorUser } = useFetchDataWithToken<IUser>(`${baseUrl}/api/auth/check-login`)

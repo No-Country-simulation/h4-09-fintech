@@ -7,8 +7,10 @@ import Cookies from 'js-cookie'
 // import { useEffect } from 'react'
 import axios from 'axios'
 import { baseUrl } from '../../../config/envs'
+import { useUser } from '../../../contexts/UserContext'
 
 export default function Auth() {
+	const {fetchUserData} = useUser();
 	const navigate = useNavigate()
 	const googleLogin = async (response: CredentialResponse) => {
 		// console.log(response)
@@ -20,6 +22,7 @@ export default function Auth() {
 		const token = respuesta.data.token
 		// console.log(token) // control
 		Cookies.set('authToken', token, { expires: 1 })
+		await fetchUserData();
 		const isFirstTime = respuesta.data.firstTime
 		if (isFirstTime) {
 			navigate('/onboarding')

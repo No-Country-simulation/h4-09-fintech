@@ -12,6 +12,7 @@ import IupiSmallIcon from '../../../assets/icons/(iupi)/IupiSmallIcon'
 import Eyeicon from '../../../assets/icons/Eyeicon'
 import SlashEyeIcon from '../../../assets/icons/SlashEyeIcon'
 import GoBackIcon from '../../../assets/icons/GoBackIcon'
+import { useUser } from '../../../contexts/UserContext'
 
 export interface IUserData {
 	name: string
@@ -22,6 +23,7 @@ export interface IUserData {
 }
 
 export default function Register() {
+	const {fetchUserData} = useUser();
 	const navigate = useNavigate()
 	const [showPassword, setShowPassword] = useState(false)
 	const [showConfirmPassword, setShowConfirmPassword] = useState(false)
@@ -75,6 +77,7 @@ export default function Register() {
 			const token = response.data.token
 			console.log(token) // control
 			Cookies.set('authToken', token, { expires: 7 })
+			await fetchUserData();
 			alert('Registro exitoso')
 			setUserData({
 				name: '',
