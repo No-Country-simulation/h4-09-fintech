@@ -7,8 +7,10 @@ public record StockTransactionResponseDto(
         String stockSymbol,
         String stockName,
         int quantity,
-        float pricePerUnit,
-        float totalCost,
+        float pricePerUnitBuy,
+        float totalCostBuy,
+        float pricePorUnitNow,
+        float totalCostNow,
         LocalDateTime transactionDate,
         Long id
 ) {}
