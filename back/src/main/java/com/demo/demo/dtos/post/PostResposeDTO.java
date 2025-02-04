@@ -1,5 +1,7 @@
 package com.demo.demo.dtos.post;
 
+import com.demo.demo.dtos.response.UserResponseDTO;
+
 import java.time.LocalDateTime;
 
 public record PostResposeDTO(
@@ -9,6 +11,7 @@ public record PostResposeDTO(
         String text,
         LocalDateTime creationUser,
         LocalDateTime creationDate,
-        String category
+        String category,
+        UserResponseDTO userEntity
 ) {
 }
