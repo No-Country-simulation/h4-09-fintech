@@ -54,7 +54,7 @@ public class AuthController {
         userResponse.setFinancialKnowledge(user.getFinancialKnowledge());
         userResponse.setRiskPreference(user.getRiskPreference());
         userResponse.setCurrentAmount(user.getFunds());
-
+        userResponse.setProfileImageUrl(user.getProfileImageUrl());
         return ResponseEntity.status(200).body(userResponse);
     }
 
