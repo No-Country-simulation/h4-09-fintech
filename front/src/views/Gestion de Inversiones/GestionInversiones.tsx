@@ -1,101 +1,43 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline'
 import './GestionInversiones.css'
 import { Outlet } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { baseUrl } from '../../config/envs'
 import { useFetchDataWithToken } from '../../hooks/useFetchDataWithToken'
-import Cookies from 'js-cookie'
-import InvestmentCard from './components/InvestmentCard'
+// import Cookies from 'js-cookie'
+// import InvestmentCard from './components/InvestmentCard'
 import Spinner from '../../components/spiner/Spiner'
 import UserInvestmentCard from './components/UserInvestmentCard'
-
-export interface IUser {
-	currentAmount: number
-	financialKnowledge: null | string
-	lastName: string
-	mainGoal: null | string
-	name: string
-	onboardingComplete: boolean
-	riskPreference: null | string
-	userId: string
-	username: string
-	profileImageUrl:string
-}
-
-export interface IpreData {
-	symbol: string
-	description: string
-}
-
-export interface InvestmentType {
-	name: string
-	link: string
-}
-export const investmentsTypes: InvestmentType[] = [
-	{ name: 'Cedears', link: 'cedears' },
-	{ name: 'Bonos', link: 'bonds' },
-	{ name: 'Fondos', link: 'investment-funds' },
-	{ name: 'Acciones', link: 'actions' }
-]
-export interface INotFunds {
-	// clave: string
-	data: {
-		cedear: string
-		name: string
-		percentageLastMonth: number
-		percentageLastYear: number
-		price: number
-	}
-}
-export interface IFundsData {
-	cedear: string
-	name: string
-	percentageLastMonth: number
-	percentageLastYear: number
-	price: number
-}
-export interface IUserInvestment {
-	id?: number
-	quantity: number
-	stockSymbol: string
-	stockName: string
-	pricePerUnit: number
-	totalCost: number
-	transactionDate: string
-}
-
-export const getInvestmentRecommendation = (riskPreference: string | undefined | null) => {
-	switch (riskPreference) {
-		case 'Arriesgado':
-			return 'Acciones'
-		case 'Moderado':
-			return 'Cedears y Bonos'
-		default:
-			return 'Fondos'
-	}
-}
+import { getInvestmentRecommendation, investmentsTypes, InvestmentType, IUnifyInvestment, IUser, IUserInvestment } from './utils'
+import NewInvestmentCard from './components/NewInvestmentCard'
 
 export const GestionInversiones = (): JSX.Element => {
+	const { data: user, loading: loadingUser, error: errorUser } = useFetchDataWithToken<IUser>(`${baseUrl}/api/auth/check-login`)
 	const [showSaldo, setShowSaldo] = useState(true)
 	const [selectedInvestmentType, setSelectedInvestmentType] = useState<InvestmentType>(investmentsTypes[0])
-	const [cedearsDetails, setCedearsDetails] = useState<INotFunds[]>([])
-	const [bondsDetails, setBondsDetails] = useState<INotFunds[]>([])
-	const [actionsDetails, setActionsDetails] = useState<INotFunds[]>([])
-	const [fundsDetails, setFundsDetails] = useState<IFundsData[]>([])
-	const [loadingDetails, setLoadingDetails] = useState(false)
+	// console.log('selectedInvestmentType', selectedInvestmentType)
+
+	// const [loadingDetails, setLoadingDetails] = useState(false)
+	// const yourToken = Cookies.get('authToken')
 
 	const { data: userInvestments, loading: loadingUserInvestments } = useFetchDataWithToken<IUserInvestment[] | []>(`${baseUrl}/api/stocks/transactions`)
-	const { data: user, loading: loadingUser, error: errorUser } = useFetchDataWithToken<IUser>(`${baseUrl}/api/auth/check-login`)
-	const { data: cedearsData, loading: loadingCedears } = useFetchDataWithToken<IpreData[]>(`${baseUrl}/api/market/cedears`)
-	const { data: bondsData } = useFetchDataWithToken<IpreData[]>(`${baseUrl}/api/market/bonds`)
-	const { data: actionsData } = useFetchDataWithToken<IpreData[]>(`${baseUrl}/api/market/actions`)
-	const { data: fundsData } = useFetchDataWithToken<IFundsData[]>(`${baseUrl}/api/market/investment-funds`)
-	// console.log('user', user)
-	// console.log('userInvestments', userInvestments)
+	console.log('userInvestments', userInvestments)
+
+	const { data: allInvestments, loading: loadingAllInvestments } = useFetchDataWithToken<IUnifyInvestment[]>(`${baseUrl}/api/market/all-financial`)
+	// console.log('allInvestments', allInvestments)
+
+	const getDisplayedData = () => {
+		if (!allInvestments || allInvestments.length === 0) return [] // Verifica que haya datos
+
+		return allInvestments.filter((investment) => investment.typeAsset === selectedInvestmentType.link)
+	}
+
+	const displayedData = getDisplayedData()
+	// console.log('displayedData', displayedData)
 
 	const userFounds = user?.currentAmount?.toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
 	const investmentRecommendation = getInvestmentRecommendation(user?.riskPreference)
+
 	useEffect(() => {
 		if (user?.riskPreference) {
 			switch (user.riskPreference) {
@@ -110,117 +52,16 @@ export const GestionInversiones = (): JSX.Element => {
 			}
 		}
 	}, [user?.riskPreference, investmentsTypes])
-	const yourToken = Cookies.get('authToken')
-
-	const fetchInvestmentDetails = async (data: IpreData[], type: string) => {
-		setLoadingDetails(true)
-		if (!data) return []
-		const promises = data.map(async (item) => {
-			try {
-				const response = await fetch(`${baseUrl}/api/market/${type}/${item.symbol}?name=${item.description}`, {
-					headers: { Authorization: `Bearer ${yourToken}` }
-				})
-				if (!response.ok) return null
-				const text = await response.text()
-				return text ? JSON.parse(text) : null
-			} catch {
-				return null
-			}
-		})
-		const results = await Promise.all(promises)
-		return results.filter((result) => result !== null) as INotFunds[]
-	}
-
-	useEffect(() => {
-		const fetchAllDetails = async () => {
-			setLoadingDetails(true)
-			try {
-				const [cedears, bonds, actions] = await Promise.all([
-					fetchInvestmentDetails(cedearsData || [], 'cedears'),
-					fetchInvestmentDetails(bondsData || [], 'bonds'),
-					fetchInvestmentDetails(actionsData || [], 'actions')
-				])
-				setCedearsDetails(cedears)
-				setBondsDetails(bonds)
-				setActionsDetails(actions)
-				if (fundsData) setFundsDetails(fundsData)
-			} catch (err) {
-				console.error('Error fetching investment details:', err)
-			} finally {
-				setLoadingDetails(false)
-			}
-		}
-
-		fetchAllDetails()
-	}, [cedearsData, bondsData, actionsData, fundsData])
-
-	const getDisplayedData = () => {
-		switch (selectedInvestmentType.name) {
-			case 'Cedears':
-				return cedearsDetails
-			case 'Bonos':
-				return bondsDetails
-			case 'Acciones':
-				return actionsDetails
-			case 'Fondos':
-				return fundsDetails
-			default:
-				return []
-		}
-	}
-	const displayedData = getDisplayedData()
-	const getSimilarStocks = () => {
-		const similarNotFunds: INotFunds[] = []
-		const similarFunds: IFundsData[] = []
-
-		userInvestments?.forEach((investment) => {
-			// console.log('actionsDetails', actionsDetails)
-
-			const matchedCedear = cedearsDetails?.find((option) => (option as any)?.cedear === investment.stockSymbol)
-			const matchedBond = bondsDetails?.find((option) => (option as any)?.cedear === investment.stockSymbol)
-			const matchedAction = actionsDetails.find((option) => (option as any)?.cedear === investment.stockSymbol)
-			const matchedFund = fundsDetails?.find((option) => option?.cedear === investment.stockSymbol)
-			// console.log('matchedCedear', matchedCedear, 'matchedBond', matchedBond, 'matchedAction', matchedAction, 'matchedFund', matchedFund)
-
-			if (matchedCedear) similarNotFunds.push(matchedCedear)
-			if (matchedBond) similarNotFunds.push(matchedBond)
-			if (matchedAction) similarNotFunds.push(matchedAction)
-			if (matchedFund) similarFunds.push(matchedFund)
-		})
-		// console.log('similarNotFunds', similarNotFunds)
-		// console.log('similarFunds', similarFunds)
-
-		return { similarNotFunds, similarFunds }
-	}
-	const [similarNotFunds, setSimilarNotFunds] = useState<INotFunds[]>([])
-	const [similarFunds, setSimilarFunds] = useState<IFundsData[]>([])
-
-	useEffect(() => {
-		const { similarNotFunds, similarFunds } = getSimilarStocks()
-		setSimilarNotFunds(similarNotFunds)
-		setSimilarFunds(similarFunds)
-	}, [userInvestments, cedearsDetails, bondsDetails, actionsDetails, fundsDetails])
 
 	const getCurrentTotalValue = () => {
 		let totalValue = user?.currentAmount || 0 // Saldo disponible
 
 		userInvestments?.forEach((investment) => {
 			const { stockSymbol, quantity } = investment
-
-			// Buscar el precio actual en cada tipo de inversión
-			const matchedCedear = cedearsDetails.find((item) => (item as any).cedear === stockSymbol)
-			const matchedBond = bondsDetails.find((item) => (item as any).cedear === stockSymbol)
-			const matchedAction = actionsDetails.find((item) => (item as any).cedear === stockSymbol)
-			const matchedFund = fundsDetails.find((item) => item.cedear === stockSymbol)
-
-			// Obtener el precio actual (suponiendo que `price` es la propiedad con el precio actual)
-			const currentPrice = (matchedCedear as any)?.price || (matchedBond as any)?.price || (matchedAction as any)?.price || (matchedFund as any)?.price || 0
-			// console.log('currentPrice', currentPrice)
-
-			// Sumar al total
+			const matchedInvestment = allInvestments?.find((item) => item.name === stockSymbol)
+			const currentPrice = matchedInvestment?.price || 0
 			totalValue += quantity * currentPrice
 		})
-
 		return totalValue
 	}
 
@@ -252,16 +93,9 @@ export const GestionInversiones = (): JSX.Element => {
 				<div className='cardsContainer'>
 					{loadingUserInvestments && <Spinner />}
 					{userInvestments?.map((investment, index) => {
-						// Encuentra el "similarStock" en `similarNotFunds` o `similarFunds`
-						const similarStock = similarNotFunds?.find((stock) => (stock as any).cedear === investment.stockSymbol) || similarFunds?.find((fund) => fund.cedear === investment.stockSymbol)
+						const similarStock = allInvestments?.find((stock) => stock.name === investment.stockSymbol)
 
-						return (
-							<UserInvestmentCard
-								key={index}
-								userInvestment={investment}
-								similarStock={similarStock} // Pasa el similarStock como prop
-							/>
-						)
+						return <UserInvestmentCard key={index} userInvestment={investment} similarStock={similarStock} />
 					})}
 					{!userInvestments || (userInvestments.length === 0 && <p>No tenés inversiones</p>)}
 				</div>
@@ -287,13 +121,11 @@ export const GestionInversiones = (): JSX.Element => {
 				<h5>Añadidos recientemente</h5>
 				<section className='cardsContainer'>
 					<Outlet />
-					{loadingDetails || loadingCedears ? (
+					{loadingAllInvestments ? (
 						<Spinner />
 					) : (
 						displayedData.map((item, index) => {
-							const { name, cedear, price, percentageLastMonth, percentageLastYear } = selectedInvestmentType.name === 'Fondos' ? (item as IFundsData) : (item as INotFunds['data'])
-
-							return <InvestmentCard key={index} name={name} cedear={cedear} price={price} percentageLastMonth={percentageLastMonth} percentageLastYear={percentageLastYear} user={user} />
+							return <NewInvestmentCard key={index} investment={item} user={user} />
 						})
 					)}
 					{displayedData.length === 0 && <p>No hay datos para mostrar. Reintente en unos segundos.</p>}

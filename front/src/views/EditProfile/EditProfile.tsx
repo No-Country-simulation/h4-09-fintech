@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import styles from "./EditProfile.module.css";
 
 import { useFetchDataWithToken } from "../../hooks/useFetchDataWithToken"; // Importé el hook para obtener datos con token
-import { IUser } from "../Gestion de Inversiones/GestionInversiones"; // Importé la interfaz IUser
+import { IUser } from "../Gestion de Inversiones/utils"; // Importé la interfaz IUser
 
 
 const getCookie = (name: string): string | null => {
