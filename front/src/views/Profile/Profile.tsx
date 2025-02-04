@@ -1,7 +1,7 @@
 
-import { baseUrl } from '../../config/envs'
-import { useFetchDataWithToken } from '../../hooks/useFetchDataWithToken'
-import { IUser } from '../Gestion de Inversiones/utils'
+// import { baseUrl } from '../../config/envs'
+// import { useFetchDataWithToken } from '../../hooks/useFetchDataWithToken'
+// import { IUser } from '../Gestion de Inversiones/utils'
 import styles from "./Profile.module.css";
 import Card from "../../components/card/Card";
 import { useEffect, useState} from "react";
