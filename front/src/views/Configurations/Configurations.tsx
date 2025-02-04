@@ -15,7 +15,7 @@ export default function Configurations() {
         <h1 className={styles.title}>
           {" "}
           <Link to="/profile">
-            <FaArrowLeft />
+            <FaArrowLeft className={styles.icon}/>
           </Link>
           Configuración{" "}
         </h1>

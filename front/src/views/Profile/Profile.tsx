@@ -21,6 +21,10 @@ export default function Profile() {
   const { data: user } = useFetchDataWithToken<IUser>(
     `${baseUrl}/api/auth/check-login`
   );
+
+  // Imprime los datos del usuario y la URL de la imagen de perfil
+  console.log("Datos del usuario:", user);
+  console.log("URL de la imagen de perfil:", user?.profileImageUrl);
   
 
   const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -67,9 +71,18 @@ export default function Profile() {
 
         <div className={styles.profile}>
           <div className={styles.profilePictureContainer}>
-            {profileImage ? (
+            {/* {profileImage ? (
               <img
-                src={profileImage}
+                src={user?.profileImageUrl || profileImage}
+                alt="Foto de perfil"
+                className={styles.profilePicture}
+              />
+            ) : (
+              <FaRegUser className={styles.defaultIcon} />
+            )} */}
+            {profileImage || user?.profileImageUrl ? (
+              <img
+                src={profileImage || user?.profileImageUrl} // Usa la imagen subida o la del usuario
                 alt="Foto de perfil"
                 className={styles.profilePicture}
               />
