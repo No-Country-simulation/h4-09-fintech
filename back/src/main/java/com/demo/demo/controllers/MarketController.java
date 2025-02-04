@@ -6,6 +6,7 @@ import com.demo.demo.enums.Cedear;
 import com.demo.demo.models.ActionResponse;
 import com.demo.demo.models.FundProduct;
 import com.demo.demo.services.impl.*;
+import com.demo.demo.utils.ScheduleFinancialAssets;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
@@ -25,6 +26,7 @@ public class MarketController {
 
     private final InvestmentFundService investmentFundService;
     private final MarketService marketService;
+    private final ScheduleFinancialAssets scheduleFinancialAssets;
     @GetMapping("/cedears")
     public ResponseEntity<List<ActionResponse>> getAllCedearNames() {
         return ResponseEntity.ok(marketService.getAll("cedears"));
@@ -79,5 +81,11 @@ public class MarketController {
             String name
     ) {
         return ResponseEntity.ok(marketService.getData(bond,name));
+    }
+
+
+    @GetMapping("/prueba-schedule")
+    public void pruebaSchedule() {
+        scheduleFinancialAssets.getData(true);
     }
 }
