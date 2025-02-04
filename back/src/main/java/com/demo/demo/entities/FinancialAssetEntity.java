@@ -11,6 +11,7 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "financial_assets")
@@ -32,6 +33,8 @@ public class FinancialAssetEntity {
     private LocalDateTime lastUpdate;
     private BigDecimal openingBalance;
 
+    @ManyToMany(mappedBy = "financialAssets")
+    private List<UserEntity> users;
 
     public static FinancialAssetEntity mapper (FinancialResponseDto dto) {
         FinancialAssetEntity financialAssetEntity = new FinancialAssetEntity();

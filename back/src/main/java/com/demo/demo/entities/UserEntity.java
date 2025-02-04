@@ -63,6 +63,17 @@ public class UserEntity implements UserDetails {
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
+            name = "user_financial_assets",
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "financial_asset_id", referencedColumnName = "id")
+    )
+    private List<FinancialAssetEntity> financialAssets;
+
+    @OneToMany(fetch = FetchType.EAGER,mappedBy = "user", cascade = CascadeType.ALL)
+    private List<StockTransaction> stockTransactions;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
             name = "user_role",
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "role_id")

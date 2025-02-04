@@ -19,15 +19,14 @@ public class StockTransaction {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
+    @ManyToOne()
+    @JoinColumn(name = "user_id")
     private UserEntity user;
 
-    private String stockSymbol;
-    private String stockName;
+    Long idSymbol;
     private int quantity;
-    private float pricePerUnit;
-    private float totalCost;
+    private float priceBuy;
+    private float totalCostBuy;
 
     @Column(name = "transaction_date", nullable = false)
     private LocalDateTime transactionDate;

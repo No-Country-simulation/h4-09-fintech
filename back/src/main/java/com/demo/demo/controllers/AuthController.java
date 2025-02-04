@@ -44,6 +44,8 @@ public class AuthController {
 
     @GetMapping("/check-login")
     public ResponseEntity<UserResponseDTO> checkLogin(@CurrentUser UserEntity user) {
+
+
         UserResponseDTO userResponse = new UserResponseDTO();
         userResponse.setUserId(user.getUserId());
         userResponse.setUsername(user.getUsername());
@@ -54,6 +56,12 @@ public class AuthController {
         userResponse.setFinancialKnowledge(user.getFinancialKnowledge());
         userResponse.setRiskPreference(user.getRiskPreference());
         userResponse.setCurrentAmount(user.getFunds());
+//        userResponse.setAccionsAmountTotal(user.getStockTransactions().stream().map(
+//                st -> st.getPriceBuy()* st.getQuantity()
+//        ).reduce(0f, Float::sum));
+        userResponse.setAccionsAmountTotal(user.getFinancialAssets().stream().map(
+                fa -> fa.getPrice().floatValue() * user.getStockTransactions().stream().filter(st -> st.getIdSymbol().equals(fa.getId())).findFirst().get().getQuantity()
+        ).reduce(0f, Float::sum));
         userResponse.setProfileImageUrl(user.getProfileImageUrl());
         return ResponseEntity.status(200).body(userResponse);
     }

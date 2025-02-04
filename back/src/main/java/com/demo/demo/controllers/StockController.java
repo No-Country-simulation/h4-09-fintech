@@ -6,6 +6,7 @@ import com.demo.demo.dtos.response.StockTransactionResponseDto;
 import com.demo.demo.entities.StockTransaction;
 import com.demo.demo.entities.UserEntity;
 import com.demo.demo.services.StockService;
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -20,16 +21,15 @@ import java.util.Map;
 public class StockController {
     private final StockService stockService;
 
+    @Transactional
     @PostMapping("/buy")
     public ResponseEntity<String> buyStock(
             @CurrentUser UserEntity currentUser,
             @RequestBody @Valid BuyStockRequestDto requestDto) {
         String message = stockService.buyStock(
                 currentUser.getUsername(),
-                requestDto.stockSymbol(),
-                requestDto.stockName(),
                 requestDto.quantity(),
-                requestDto.pricePerUnit()
+                requestDto.idSymbol()
         );
         return ResponseEntity.ok(message);
     }
