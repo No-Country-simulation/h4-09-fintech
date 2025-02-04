@@ -6,9 +6,6 @@ import { GoGear } from "react-icons/go";
 import { TbWorld } from "react-icons/tb";
 import { LuMoon } from "react-icons/lu";
 import { RxExit } from "react-icons/rx";
-import { baseUrl } from "../../config/envs";
-import { useFetchDataWithToken } from "../../hooks/useFetchDataWithToken";
-import { IUser } from "../Gestion de Inversiones/GestionInversiones";
 import { useUser } from "../../contexts/UserContext";
 
 const getCookie = (name: string): string | null => {
@@ -19,13 +16,7 @@ const getCookie = (name: string): string | null => {
 
 export default function Profile() {
   const [profileImage, setProfileImage] = useState<string | null>(null);
-  const {logout,user} = useUser();
-
-  // const { data: user } = useFetchDataWithToken<IUser>(
-  //   `${baseUrl}/api/auth/check-login`
-  // );
-
-  // Imprime los datos del usuario y la URL de la imagen de perfil
+  const {logout, user} = useUser();
 
   
   const handleLogout = () => {
@@ -75,18 +66,10 @@ export default function Profile() {
 
         <div className={styles.profile}>
           <div className={styles.profilePictureContainer}>
-            {/* {profileImage ? (
-              <img
-                src={user?.profileImageUrl || profileImage}
-                alt="Foto de perfil"
-                className={styles.profilePicture}
-              />
-            ) : (
-              <FaRegUser className={styles.defaultIcon} />
-            )} */}
+
             {user && user?.url_photo ? (
               <img
-                src={user.url_photo} // Usa la imagen subida o la del usuario
+                src={user.url_photo}
                 alt="Foto de perfil"
                 className={styles.profilePicture}
               />

@@ -12,6 +12,10 @@ import axios from "axios";
 interface User {
   id: string;
   name: string;
+  lastName: string;
+  riskPreference: string;
+  financialKnowledge: string;
+  mainGoal: string;
   email: string;
   url_photo:string;
 }
@@ -52,26 +56,24 @@ export function UserProvider({ children }: UserProviderProps) {
       setLoading(false);
       return;
     }
-
-    try {
-      const response = await fetch(`${baseUrl}/api/auth/check-login`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      if (response.ok) {
-        const userData: User = await response.json();
-
-        setUser(userData);
-      } else {
-      }
-    } catch (error) {
-      console.error("Error en la solicitud:", error);
-    } finally {
-      setLoading(false);
-    }
+   
+      try {
+        const response = await axios.get<User>(`${baseUrl}/api/auth/check-login`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        console.log(response);
+    
+        console.log(response.data.url_photo);
+        setUser(response.data);
+      } catch (error) {
+        console.error("Error en la solicitud:", error);
+      } finally {
+        setLoading(false);
+      
   };
+}
  
   const logout = () => {
       setLoading(true);

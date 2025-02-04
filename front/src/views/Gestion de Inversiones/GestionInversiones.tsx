@@ -20,7 +20,7 @@ export interface IUser {
 	riskPreference: null | string
 	userId: string
 	username: string
-	profileImageUrl:string
+	url_photo:string
 }
 
 export interface IpreData {
