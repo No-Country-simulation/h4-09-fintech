@@ -67,8 +67,9 @@ public class PostController {
             if (posts.isEmpty()) {
                 return ResponseEntity.status(404).body("No hay posts disponibles para la categoría: " + category);
             }
+            List<PostResposeDTO> postsDto = postMapper.toPostResposeDTOList(posts);
 
-            return ResponseEntity.status(200).body(posts); // Devuelve la lista de posts
+            return ResponseEntity.status(200).body(postsDto); // Devuelve la lista de posts
         } catch (Exception e) {
             return ResponseEntity.status(500).body("Error al obtener los posts: " + e.getMessage());
         }
