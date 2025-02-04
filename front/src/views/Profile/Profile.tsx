@@ -9,6 +9,7 @@ import { RxExit } from "react-icons/rx";
 import { baseUrl } from "../../config/envs";
 import { useFetchDataWithToken } from "../../hooks/useFetchDataWithToken";
 import { IUser } from "../Gestion de Inversiones/GestionInversiones";
+import { useUser } from "../../contexts/UserContext";
 
 const getCookie = (name: string): string | null => {
   const cookies = document.cookie.split("; ");
@@ -18,15 +19,18 @@ const getCookie = (name: string): string | null => {
 
 export default function Profile() {
   const [profileImage, setProfileImage] = useState<string | null>(null);
-  const { data: user } = useFetchDataWithToken<IUser>(
-    `${baseUrl}/api/auth/check-login`
-  );
+  const {logout,user} = useUser();
+
+  // const { data: user } = useFetchDataWithToken<IUser>(
+  //   `${baseUrl}/api/auth/check-login`
+  // );
 
   // Imprime los datos del usuario y la URL de la imagen de perfil
-  console.log("Datos del usuario:", user);
-  console.log("URL de la imagen de perfil:", user?.profileImageUrl);
-  
 
+  
+  const handleLogout = () => {
+      logout();
+  }
   const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files?.[0];
     if (selectedFile) {
@@ -63,7 +67,7 @@ export default function Profile() {
       }
     }
   };
-
+  console.log(user);
   return (
     <div className={styles.pageView}>
       <div className={styles.contentContainer}>
@@ -80,9 +84,9 @@ export default function Profile() {
             ) : (
               <FaRegUser className={styles.defaultIcon} />
             )} */}
-            {profileImage || user?.profileImageUrl ? (
+            {user && user?.url_photo ? (
               <img
-                src={profileImage || user?.profileImageUrl} // Usa la imagen subida o la del usuario
+                src={user.url_photo} // Usa la imagen subida o la del usuario
                 alt="Foto de perfil"
                 className={styles.profilePicture}
               />
@@ -147,6 +151,7 @@ export default function Profile() {
             title="Cerrar sesión"
             description="O permanecer conectado y cambiar de usuario"
             link="/"
+            onClick={handleLogout}
           />
         </div>
       </div>

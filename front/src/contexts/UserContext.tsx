@@ -6,18 +6,23 @@ import {
   ReactNode,
 } from "react";
 import { baseUrl } from "../config/envs";
-
+import Cookies from "js-cookie";
+import axios from "axios";
 // Tipos para los datos del usuario y el contexto
 interface User {
   id: string;
   name: string;
   email: string;
+  url_photo:string;
 }
 
 interface UserContextType {
   user: User | null;
   setUser: React.Dispatch<React.SetStateAction<User | null>>;
   loading: boolean;
+  decifrado: (token: string) => User;
+  fetchUserData: () => Promise<void>;
+  logout: () => void;
 }
 
 // Crear el contexto con un valor inicial
@@ -41,6 +46,7 @@ export function UserProvider({ children }: UserProviderProps) {
   const [loading, setLoading] = useState<boolean>(true);
 
   const fetchUserData = async () => {
+    setLoading(true)
     const token = getTokenFromCookies();
     if (!token) {
       setLoading(false);
@@ -50,19 +56,15 @@ export function UserProvider({ children }: UserProviderProps) {
     try {
       const response = await fetch(`${baseUrl}/api/auth/check-login`, {
         headers: {
-          Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6WyJST0xFX1VTRVIiXSwic3ViIjoiYm1AbWFpbC5jb20iLCJpYXQiOjE3Mzc3NjUxNDMsImV4cCI6MTczNzc2ODc0M30.tpMTDzzH5vE1jtr87q2yF0XZ76OGRy_X3BW0BLy5zIo`,
+          Authorization: `Bearer ${token}`,
         },
       });
 
       if (response.ok) {
         const userData: User = await response.json();
+
         setUser(userData);
-        console.log("Datos del usuario:", userData); // Esto mostrará los datos que recibes de la API.
       } else {
-        // console.error(
-        //   "Error al obtener los datos del usuario:",
-        //   response.status
-        // );
       }
     } catch (error) {
       console.error("Error en la solicitud:", error);
@@ -70,13 +72,28 @@ export function UserProvider({ children }: UserProviderProps) {
       setLoading(false);
     }
   };
+ 
+  const logout = () => {
+      setLoading(true);
+      Cookies.remove("authToken");
+      setUser(null);
+      setLoading(false);
+  }
+  const decifrado = (token: string): User => {
+    const base64Url = token.split(".")[1];
+    const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+    const jsonPayload = decodeURIComponent(
+      atob(base64).split("").map((c) => "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2)).join("")
+    );
+    return JSON.parse(jsonPayload) as User;
+  };
 
   useEffect(() => {
     fetchUserData();
   }, []);
 
   return (
-    <UserContext.Provider value={{ user, setUser, loading }}>
+    <UserContext.Provider value={{ user, setUser, loading, decifrado, fetchUserData, logout }}>
       {children}
     </UserContext.Provider>
   );
