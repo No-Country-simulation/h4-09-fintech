@@ -17,7 +17,18 @@ interface User {
   financialKnowledge: string;
   mainGoal: string;
   email: string;
-  url_photo:string;
+  profileImageUrl:string;
+}
+
+interface UserResponse {
+  userId: string;
+  name: string;
+  lastName: string;
+  riskPreference: string;
+  financialKnowledge: string;
+  mainGoal: string;
+  username: string;
+  profileImageUrl:string;
 }
 
 interface UserContextType {
@@ -58,15 +69,25 @@ export function UserProvider({ children }: UserProviderProps) {
     }
    
       try {
-        const response = await axios.get<User>(`${baseUrl}/api/auth/check-login`, {
+        const response = await axios.get<UserResponse>(`${baseUrl}/api/auth/check-login`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         });
         console.log(response);
-    
-        console.log(response.data.url_photo);
-        setUser(response.data);
+        
+        const {username:email,userId:id,name,lastName,financialKnowledge,mainGoal,profileImageUrl,riskPreference} = response.data;
+
+        setUser({
+          email,
+          id,
+          name,
+          lastName,
+          financialKnowledge,
+          mainGoal,
+          profileImageUrl,
+          riskPreference
+        });
       } catch (error) {
         console.error("Error en la solicitud:", error);
       } finally {

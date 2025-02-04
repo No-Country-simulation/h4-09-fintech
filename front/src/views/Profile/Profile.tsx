@@ -1,12 +1,13 @@
 import styles from "./Profile.module.css";
 import Card from "../../components/card/Card";
-import { useState} from "react";
+import { useEffect, useState} from "react";
 import { FaRegUser, FaCamera } from "react-icons/fa";
 import { GoGear } from "react-icons/go";
 import { TbWorld } from "react-icons/tb";
 import { LuMoon } from "react-icons/lu";
 import { RxExit } from "react-icons/rx";
 import { useUser } from "../../contexts/UserContext";
+import axios from "axios";
 
 const getCookie = (name: string): string | null => {
   const cookies = document.cookie.split("; ");
@@ -16,8 +17,11 @@ const getCookie = (name: string): string | null => {
 
 export default function Profile() {
   const [profileImage, setProfileImage] = useState<string | null>(null);
-  const {logout, user} = useUser();
+  const {logout, user,setUser} = useUser();
 
+  useEffect(()=> {
+    setProfileImage(user?.profileImageUrl || null);
+  },[])
   
   const handleLogout = () => {
       logout();
@@ -32,27 +36,22 @@ export default function Profile() {
       }
 
       const formData = new FormData();
-      formData.append("image", selectedFile);
+      formData.append("file", selectedFile);
 
       try {
-        const response = await fetch(
+        const response = await axios.patch(
           "https://h4-09-fintech-production.up.railway.app/api/user/upload-image",
+          formData,
           {
-            method: "POST",
             headers: {
               Authorization: `Bearer ${token}`,
+              "Content-Type": "multipart/form-data", // Importante para enviar archivos
             },
-            body: formData,
           }
         );
-
-        const data = await response.json();
-
-        if (data.success) {
-          setProfileImage(data.imageUrl);
-        } else {
-          console.error("Error al subir la imagen:", data.message);
-        }
+          setProfileImage(response.data);
+          console.log(response.data)
+          setUser({...user!,profileImageUrl:response.data})
       } catch (error) {
         console.error("Error de red al subir la imagen:", error);
       }
@@ -67,9 +66,9 @@ export default function Profile() {
         <div className={styles.profile}>
           <div className={styles.profilePictureContainer}>
 
-            {user && user?.url_photo ? (
+            {(user && user?.profileImageUrl ) && profileImage ? (
               <img
-                src={user.url_photo}
+                src={profileImage}
                 alt="Foto de perfil"
                 className={styles.profilePicture}
               />
