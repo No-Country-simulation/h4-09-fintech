@@ -1,3 +1,7 @@
+
+import { baseUrl } from '../../config/envs'
+import { useFetchDataWithToken } from '../../hooks/useFetchDataWithToken'
+import { IUser } from '../Gestion de Inversiones/utils'
 import styles from "./Profile.module.css";
 import Card from "../../components/card/Card";
 import { useEffect, useState} from "react";
@@ -10,13 +14,15 @@ import { useUser } from "../../contexts/UserContext";
 import axios from "axios";
 import Spinner from "../../components/spiner/Spiner";
 
+
 const getCookie = (name: string): string | null => {
-  const cookies = document.cookie.split("; ");
-  const cookie = cookies.find((row) => row.startsWith(`${name}=`));
-  return cookie ? decodeURIComponent(cookie.split("=")[1]) : null;
-};
+	const cookies = document.cookie.split('; ')
+	const cookie = cookies.find((row) => row.startsWith(`${name}=`))
+	return cookie ? decodeURIComponent(cookie.split('=')[1]) : null
+}
 
 export default function Profile() {
+
   const [profileImage, setProfileImage] = useState<string | null>(null);
   const {logout, user,setUser} = useUser();
   const [loading,setLoading] = useState<boolean>(false);
@@ -87,31 +93,23 @@ export default function Profile() {
             )
           }
 
-            <label htmlFor="imageUpload" className={styles.cameraIcon}>
-              <FaCamera />
-            </label>
 
-            <input
-              id="imageUpload"
-              type="file"
-              accept="image/*"
-              onChange={handleImageChange}
-              style={{ display: "none" }}
-            />
-          </div>
+						<label htmlFor='imageUpload' className={styles.cameraIcon}>
+							<FaCamera />
+						</label>
 
-          <div className={styles.info}>
-            <h3 className={styles.names}>
-              {user ? `${user.name} ${user.lastName}` : "Cargando nombre..."}
-            </h3>
-          </div>
-          <div className={styles.perfilFinanciero}>
-          <h3 className={styles.subtitle}>
-            Perfil financiero :{" "}
-            <span>{user?.riskPreference || "Cargando..."}</span>
-          </h3>
-          </div>
-        </div>
+						<input id='imageUpload' type='file' accept='image/*' onChange={handleImageChange} style={{ display: 'none' }} />
+					</div>
+
+					<div className={styles.info}>
+						<h3 className={styles.names}>{user ? `${user.name} ${user.lastName}` : 'Cargando nombre...'}</h3>
+					</div>
+					<div className={styles.perfilFinanciero}>
+						<h3 className={styles.subtitle}>
+							Perfil financiero : <span>{user?.riskPreference || 'Cargando...'}</span>
+						</h3>
+					</div>
+				</div>
 
         <div className={styles.cardContainer}>
           <Card

@@ -4,9 +4,14 @@ import { FaRegUser, FaCamera } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import styles from "./EditProfile.module.css";
 
+
+import { useFetchDataWithToken } from "../../hooks/useFetchDataWithToken"; // Importé el hook para obtener datos con token
+import { IUser } from "../Gestion de Inversiones/utils"; // Importé la interfaz IUser
+
 import { useUser } from "../../contexts/UserContext";
 import axios from "axios";
 import Spinner from "../../components/spiner/Spiner";
+
 
 
 const getCookie = (name: string): string | null => {
