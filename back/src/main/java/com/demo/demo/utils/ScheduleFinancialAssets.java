@@ -178,5 +178,9 @@ public class ScheduleFinancialAssets {
             this.getData(false);
         }
     }
+
+    public void seedDb() {
+        this.getData(true);
+    }
 }
 
