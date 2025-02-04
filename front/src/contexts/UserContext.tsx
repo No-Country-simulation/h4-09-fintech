@@ -18,6 +18,8 @@ interface User {
   mainGoal: string;
   email: string;
   profileImageUrl:string;
+  currentAmount: number;
+  onboardingComplete:boolean
 }
 
 interface UserResponse {
@@ -26,9 +28,11 @@ interface UserResponse {
   lastName: string;
   riskPreference: string;
   financialKnowledge: string;
+  currentAmount: number;
   mainGoal: string;
   username: string;
   profileImageUrl:string;
+  onboardingComplete:boolean
 }
 
 interface UserContextType {
@@ -76,7 +80,7 @@ export function UserProvider({ children }: UserProviderProps) {
         });
         console.log(response);
         
-        const {username:email,userId:id,name,lastName,financialKnowledge,mainGoal,profileImageUrl,riskPreference} = response.data;
+        const {username:email,userId:id,name,lastName,financialKnowledge,mainGoal,profileImageUrl,riskPreference,currentAmount,onboardingComplete} = response.data;
 
         setUser({
           email,
@@ -86,7 +90,9 @@ export function UserProvider({ children }: UserProviderProps) {
           financialKnowledge,
           mainGoal,
           profileImageUrl,
-          riskPreference
+          riskPreference,
+          currentAmount,
+          onboardingComplete
         });
       } catch (error) {
         console.error("Error en la solicitud:", error);

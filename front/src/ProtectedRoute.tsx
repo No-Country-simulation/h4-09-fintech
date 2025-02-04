@@ -1,6 +1,5 @@
 import { Navigate, Outlet } from 'react-router-dom';
 import { useUser } from './contexts/UserContext';
-import Spinner from './components/spiner/Spiner';
 
 
 export default function ProtectedRoute() {
@@ -9,5 +8,5 @@ export default function ProtectedRoute() {
 	return loading ? 
     (<div className=''>  </div>) 
     : user && !loading ? <Outlet /> 
-    : <Navigate to={'/auth/login'} />;
+    : <Navigate to={'/auth'} />;
 }

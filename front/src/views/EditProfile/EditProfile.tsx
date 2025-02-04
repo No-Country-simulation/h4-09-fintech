@@ -4,9 +4,9 @@ import { FaRegUser, FaCamera } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import styles from "./EditProfile.module.css";
 
-import { useFetchDataWithToken } from "../../hooks/useFetchDataWithToken"; // Importé el hook para obtener datos con token
-import { IUser } from "../Gestion de Inversiones/GestionInversiones"; // Importé la interfaz IUser
-import { baseUrl } from "../../config/envs";
+import { useUser } from "../../contexts/UserContext";
+import axios from "axios";
+import Spinner from "../../components/spiner/Spiner";
 
 
 const getCookie = (name: string): string | null => {
@@ -39,6 +39,7 @@ const fetchGoogleProfileImage = async (googleToken: string) => {
 };
 
 export default function EditProfile() {
+  const {user,setUser} = useUser();
   const [profileImage, setProfileImage] = useState<string | null>(null);
   const [selectedOption, setSelectedOption] = useState("");
   const [isPro, setIsPro] = useState(false);
@@ -46,148 +47,50 @@ export default function EditProfile() {
   const [isPasswordDisabled, setIsPasswordDisabled] = useState(true);
   const navigate = useNavigate();
   const [userName, setUserName] = useState<string | null>(null);
-  const [email, setEmail] = useState<string | null>(null);
   const [password, setPassword] = useState<string | null>(null);
   const [isGoogleUser] = useState<boolean>(false);
-  const [error, setError] = useState<string | null>(null);
-
-  const { data: user } = useFetchDataWithToken<IUser>(
-    "https://h4-09-fintech-production.up.railway.app/api/auth/check-login"
-  );
-
-  useEffect(() => {
-    if (user) {
-      setUserName(`${user.name} ${user.lastName}`); // Actualizo el nombre completo
-      setEmail(user.username || null); // Actualizo el correo electrónico
-    }
-  }, [user]); 
+  const [loading,setLoading] = useState<boolean>(false);
 
 
   useEffect(() => {
-    const token = getCookie("authToken");
-    const googleToken = getCookie("googleAuthToken");
+    setSelectedOption(user?.riskPreference || "");
+      setProfileImage(user?.profileImageUrl || null);
+  }, []); 
 
-    if (!token && !googleToken) {
-      console.error("No se encontró el token de autorización.");
-      return;
-    }
 
-    const fetchProfileImage = async () => {
-      try {
-        if (googleToken) {
-          const googleProfileImage = await fetchGoogleProfileImage(googleToken);
-          if (googleProfileImage) {
-            setProfileImage(googleProfileImage);
-          } else {
-            setProfileImage(null);
-          }
-        } else {
-          const response = await fetch(
-            "https://h4-09-fintech-production.up.railway.app/api/user/profile-image",
-            {
-              method: "GET",
-              headers: {
-                Authorization: `Bearer ${token}`,
-                "Content-Type": "application/json",
-              },
-            }
-          );
 
-          if (!response.ok)
-            throw new Error("Error al obtener la imagen de perfil");
-
-          const data = await response.json();
-          setProfileImage(data.imageUrl || null);
-        }
-      } catch (error) {
-        console.error("Error al obtener la imagen de perfil:", error);
+  const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedFile = e.target.files?.[0];
+    if (selectedFile) {
+      const token = getCookie("authToken");
+      if (!token) {
+        console.error("No se encontró el token de autorización.");
+        return;
       }
-    };
 
-    fetchProfileImage();
-  }, []);
+      const formData = new FormData();
+      formData.append("file", selectedFile);
 
-  useEffect(() => {
-    const token = getCookie("authToken");
-
-    if (!token) {
-      console.error("El token de autorización no está presente.");
-      setError("No se encontró el token de autorización.");
-      return;
-    }
-
-    const fetchUserData = async () => {
       try {
-        const response = await fetch(
-          "https://h4-09-fintech-production.up.railway.app/api/auth/check-login",
+        setLoading(true);
+        const response = await axios.patch(
+          "https://h4-09-fintech-production.up.railway.app/api/user/upload-image",
+          formData,
           {
-            method: "GET",
             headers: {
               Authorization: `Bearer ${token}`,
-              "Content-Type": "application/json",
+              "Content-Type": "multipart/form-data", // Importante para enviar archivos
             },
           }
         );
-
-        if (!response.ok) {
-          throw new Error("Error al obtener los datos del usuario");
-        }
-
-        const data = await response.json();
-        setUserName(`${data.name} ${data.lastName}`);
+          setProfileImage(response.data);
+          console.log(response.data)
+          setUser({...user!,profileImageUrl:response.data})
       } catch (error) {
-        console.error("Error de red:", error);
-        setError("Error al obtener los datos del usuario.");
+        console.error("Error de red al subir la imagen:", error);
+      }finally{
+        setLoading(false);
       }
-    };
-
-    fetchUserData();
-  }, []);
-
-
-  const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    console.log(file);
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        setProfileImage(reader.result as string);
-      };
-      reader.readAsDataURL(file);
-      const formData =new FormData();
-      formData.append("file", file);
-      uploadProfileImage(formData);
-    }
-  };
-
-  const uploadProfileImage = async (formData: FormData) => {
-    try {
-      const response = await fetch(`${baseUrl}/api/user/upload-image`, {
-        method: "PATCH",
-        headers: {
-          Authorization: `Bearer ${getCookie("authToken")}`,
-        },
-        body: formData,
-      });
-  
-      if (!response.ok) {
-        const errorMessage = await response.text();
-        console.error("Error en la subida:", errorMessage);
-        alert(`Error al subir la imagen: ${response.status} ${response.statusText}`);
-        return;
-      }
-  
-      const data = await response.json();
-      // if (data?.profileImageUrl) {
-      //   setProfileImage(data.profileImageUrl);
-      // } else {
-      //   console.warn("Respuesta inesperada:", data);
-      //   alert("La imagen se subió, pero no se recibió la URL esperada.");
-      // }
-      setProfileImage(data);
-    } catch (error) {
-      console.error("Error en la subida de imagen:", error);
-      alert("Error al subir la imagen. Revisa la consola para más detalles.");
     }
   };
 
@@ -204,7 +107,7 @@ export default function EditProfile() {
   };
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value);
+    setUserName(e.target.value);
   };
 
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -221,19 +124,23 @@ export default function EditProfile() {
           Datos financieros y personales
         </h1>
 
-        {error && <div className={styles.error}>{error}</div>}
-
         <div className={styles.profile}>
           <div className={styles.profilePictureContainer}>
-            {profileImage ? (
-              <img
-                src={profileImage}
-                alt="Foto de perfil"
-                className={styles.profilePicture}
-              />
-            ) : (
-              <FaRegUser className={styles.defaultIcon} />
-            )}
+          {
+            loading ? (<div className={styles.spinnerContainer}>
+              <Spinner/>
+            </div>) : (
+              (user && user?.profileImageUrl ) && profileImage ? (
+                <img
+                  src={profileImage}
+                  alt="Foto de perfil"
+                  className={styles.profilePicture}
+                />
+              ) : (
+                <FaRegUser className={styles.defaultIcon} />
+              )
+            )
+          }
 
             {!isGoogleUser && (
               <label htmlFor="imageUpload" className={styles.cameraIcon}>
@@ -245,7 +152,7 @@ export default function EditProfile() {
               id="imageUpload"
               type="file"
               accept="image/.jpg, image/jpeg, image/png"
-              onChange={handleImageUpload}
+              onChange={handleImageChange}
               style={{ display: "none" }}
             />
           </div>
@@ -276,8 +183,8 @@ export default function EditProfile() {
               <input
                 type="text"
                 id="name"
-                placeholder={userName || "Nombre completo"}
-                value={userName || ""}
+                placeholder={user?.name || "Nombre completo"}
+                value={user?.name || ""}
                 onChange={handleNameChange}
                 disabled={isNameDisabled}
                 required
@@ -296,8 +203,8 @@ export default function EditProfile() {
               <input
                 type="email"
                 id="email"
-                placeholder={email || "Correo electrónico"}
-                value={email || ""}
+                placeholder={user?.email || "Correo electrónico"}
+                value={user?.email || ""}
                 onChange={handleEmailChange}
                 required
                 disabled

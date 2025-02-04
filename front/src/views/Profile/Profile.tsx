@@ -8,6 +8,7 @@ import { LuMoon } from "react-icons/lu";
 import { RxExit } from "react-icons/rx";
 import { useUser } from "../../contexts/UserContext";
 import axios from "axios";
+import Spinner from "../../components/spiner/Spiner";
 
 const getCookie = (name: string): string | null => {
   const cookies = document.cookie.split("; ");
@@ -18,6 +19,7 @@ const getCookie = (name: string): string | null => {
 export default function Profile() {
   const [profileImage, setProfileImage] = useState<string | null>(null);
   const {logout, user,setUser} = useUser();
+  const [loading,setLoading] = useState<boolean>(false);
 
   useEffect(()=> {
     setProfileImage(user?.profileImageUrl || null);
@@ -39,6 +41,7 @@ export default function Profile() {
       formData.append("file", selectedFile);
 
       try {
+        setLoading(true);
         const response = await axios.patch(
           "https://h4-09-fintech-production.up.railway.app/api/user/upload-image",
           formData,
@@ -54,6 +57,8 @@ export default function Profile() {
           setUser({...user!,profileImageUrl:response.data})
       } catch (error) {
         console.error("Error de red al subir la imagen:", error);
+      }finally{
+        setLoading(false);
       }
     }
   };
@@ -66,15 +71,21 @@ export default function Profile() {
         <div className={styles.profile}>
           <div className={styles.profilePictureContainer}>
 
-            {(user && user?.profileImageUrl ) && profileImage ? (
-              <img
-                src={profileImage}
-                alt="Foto de perfil"
-                className={styles.profilePicture}
-              />
-            ) : (
-              <FaRegUser className={styles.defaultIcon} />
-            )}
+          {
+            loading ? (<div className={styles.spinnerContainer}>
+              <Spinner/>
+            </div>) : (
+              (user && user?.profileImageUrl ) && profileImage ? (
+                <img
+                  src={profileImage}
+                  alt="Foto de perfil"
+                  className={styles.profilePicture}
+                />
+              ) : (
+                <FaRegUser className={styles.defaultIcon} />
+              )
+            )
+          }
 
             <label htmlFor="imageUpload" className={styles.cameraIcon}>
               <FaCamera />

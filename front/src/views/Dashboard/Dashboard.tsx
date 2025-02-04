@@ -54,13 +54,13 @@ export const Dashboard: React.FC = () => {
 
   // SOLICITUD PARA "OBJETIVOS FINANCIEROS Y PROGRESO"
   useEffect(() => {
-    // setLoadingUserData(true);
     const token = getCookie("authToken");
     if (!token) {
       setError("No se encontró un token de autenticación.");
       return;
     }
-
+    setLoadingUserData(true);
+   
     fetch(`https://h4-09-fintech-production.up.railway.app/api/user/goals`, {
       method: "GET",
       headers: {
@@ -80,6 +80,8 @@ export const Dashboard: React.FC = () => {
       .catch((err) => {
         console.error(err);
         setError("No se pudieron cargar los objetivos.");
+      }).finally(() => {
+        setLoadingUserData(false);
       });
   }, []);
 
@@ -189,8 +191,8 @@ export const Dashboard: React.FC = () => {
           user?.profileImageUrl === null ? <UserIcon id="foto-perfil" /> : <img src={user?.profileImageUrl} id="foto-perfil" />
         }
         <div>
-          <h2>¡Hola {userdata.nombre}!</h2>
-          <small className="correo-usuario-dash">{userdata.correo}</small>
+          <h2>¡Hola {user?.name}!</h2>
+          <small className="correo-usuario-dash">{user?.email}</small>
         </div>
         <small className="free-plan">Free plan</small>
       </div>
@@ -198,8 +200,8 @@ export const Dashboard: React.FC = () => {
       <div onClick={handleOpen} className="fondos-dash">
         <div>
           <h6>Fondo disponible</h6>$
-          {userdata.currentAmount
-            ? userdata.currentAmount.toLocaleString("es-AR", {
+          {user?.currentAmount
+            ? user?.currentAmount.toLocaleString("es-AR", {
                 minimumFractionDigits: 2,
                 maximumFractionDigits: 2,
               })

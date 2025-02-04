@@ -4,5 +4,10 @@ import { useUser } from './contexts/UserContext';
 
 export default function PublicRoutes() {
 	const {user,loading} = useUser();
-	return user && !loading ? <Navigate to={'/dashboard'} /> : <Outlet />;
+	return !user && !loading 
+            ?  <Outlet />
+            : (user && !loading) && user.onboardingComplete ? 
+            <Navigate to={'/dashboard'} /> 
+            : <Navigate to={'/onboarding'} />
+            ;
 }
