@@ -1,9 +1,11 @@
 package com.demo.demo.services.impl;
 
 import com.demo.demo.dtos.response.CedearResponseDto;
+import com.demo.demo.entities.FinancialAssetEntity;
 import com.demo.demo.enums.Cedear;
 import com.demo.demo.models.ActionResponse;
 import com.demo.demo.models.CedearApiResponse;
+import com.demo.demo.repositories.FinancialAssetRepository;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Service;
@@ -19,11 +21,13 @@ import java.util.List;
 public class MarketService {
     private final RestTemplate restTemplate;
     private final ObjectMapper objectMapper;
+    private final FinancialAssetRepository financialAssetRepository;
     private final String baseUrlAll ="https://analisistecnico.com.ar/services/datafeed/search?limit=30&query=&type=%s&exchange=BCBA";
     private final String urlBase = "https://analisistecnico.com.ar/services/datafeed/history?symbol=%s&resolution=D&from=%d&to=%d";
-    public MarketService(ObjectMapper objectMapper) {
+    public MarketService(ObjectMapper objectMapper,FinancialAssetRepository financialAssetRepository) {
         this.restTemplate = new RestTemplate();
         this.objectMapper = objectMapper;
+        this.financialAssetRepository = financialAssetRepository;
     }
 
     public List<ActionResponse> getAll (String type) {
@@ -38,6 +42,10 @@ public class MarketService {
             }
         }
         return null;
+    }
+
+    public List<FinancialAssetEntity> getAllAssets () {
+        return financialAssetRepository.findAll();
     }
 
     public CedearResponseDto getData(String symbol,String name) {

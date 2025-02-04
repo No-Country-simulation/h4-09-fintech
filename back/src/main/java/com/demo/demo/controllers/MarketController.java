@@ -2,6 +2,7 @@ package com.demo.demo.controllers;
 
 
 import com.demo.demo.dtos.response.CedearResponseDto;
+import com.demo.demo.entities.FinancialAssetEntity;
 import com.demo.demo.enums.Cedear;
 import com.demo.demo.models.ActionResponse;
 import com.demo.demo.models.FundProduct;
@@ -84,8 +85,9 @@ public class MarketController {
     }
 
 
-    @GetMapping("/prueba-schedule")
-    public void pruebaSchedule() {
-        scheduleFinancialAssets.getData(true);
+    @GetMapping("/all-financial")
+    public ResponseEntity<List<FinancialAssetEntity>> pruebaSchedule() {
+    return ResponseEntity.ok(marketService.getAllAssets());
     }
+
 }
