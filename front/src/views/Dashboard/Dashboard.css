@@ -263,6 +263,7 @@
   }
   .fondos-dash small {
     font-size: 1rem;
+    cursor: pointer;
   }
   .container-sub-g {
     width: 100%;

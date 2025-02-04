@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./BarChart.css";
 import { Link } from "react-router-dom";
 import {
@@ -11,15 +11,14 @@ import {
   ResponsiveContainer,
   Cell,
 } from "recharts";
-// import BasicSelect from "../../../../../components/MUI/BasicSelect";
 
-// Definir las interfaces para las props
 interface BarChartComponentProps {
-  data: { name: string; Progreso: number }[]; // Ajustamos el tipo de `data` para que sea un array de objetos con propiedades `name` y `ventas`
-  dataKey: string; // Tipo de `dataKey` como `string`
-  xAxisKey: string; // Tipo de `xAxisKey` como `string`
-  boton: string; // Tipo de `boton` como `string`
+  data: { name: string; Progreso: number }[];
+  dataKey: string;
+  xAxisKey: string;
+  boton: string;
 }
+
 const CustomLabel = (props: any) => {
   const { x, y, width, value } = props;
   return (
@@ -40,6 +39,19 @@ const BarChartComponent: React.FC<BarChartComponentProps> = ({
   xAxisKey,
   boton,
 }) => {
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [barSize, setBarSize] = useState(11.9); // Valor inicial del grosor de las barras
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+      // Cambiar el grosor de las barras según el ancho de la ventana
+      setBarSize(window.innerWidth > 425 ? 20 : 11.9);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
     <div className="box-section">
       <div className="container-sub-g">
@@ -60,6 +72,7 @@ const BarChartComponent: React.FC<BarChartComponentProps> = ({
           color: "var(--color-fondo)",
           borderRadius: "100px",
         }}
+        className="toggle-btn-barchart"
       >
         {boton || "Sin objetivos"}
       </Link>
@@ -77,28 +90,28 @@ const BarChartComponent: React.FC<BarChartComponentProps> = ({
         >
           <CartesianGrid vertical={false} />
           <XAxis
-            dataKey={xAxisKey} // Cambiar a `xAxisKey` para usar la prop
+            dataKey={xAxisKey}
             tick={{
               fontSize: 8,
               fill: "#000000",
               fontWeight: "var(--font-poppins-300)",
-            }} // Cambia el tamaño y color del texto en el eje X
+            }}
             axisLine={false}
           />
           <YAxis
-            domain={[0, 100]} // Limita el rango entre 0 y 200
-            ticks={[0, 25, 50, 75, 100]} // Especifica los valores donde deben aparecer las marcas
+            domain={[0, 100]}
+            ticks={[0, 25, 50, 75, 100]}
             tick={{
-              fontSize: 10,
+              fontSize: windowWidth > 425 ? 14 : 10,
               fill: "#000000",
               fontWeight: "var(--font-poppins-300)",
-            }} // Personaliza las etiquetas
+            }}
             axisLine={false}
           />
           <Tooltip />
           <Bar
             dataKey={(entry) => Math.min(entry.Progreso, 100)}
-            barSize={11.9}
+            barSize={barSize} // Usar el valor dinámico de barSize
             label={<CustomLabel />}
           >
             {data.map((entry, index) => (
@@ -108,8 +121,6 @@ const BarChartComponent: React.FC<BarChartComponentProps> = ({
               />
             ))}
           </Bar>
-
-          {/* Usamos `dataKey` como prop */}
         </BarChart>
       </ResponsiveContainer>
     </div>
