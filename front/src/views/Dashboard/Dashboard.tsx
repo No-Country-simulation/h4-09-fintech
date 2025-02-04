@@ -13,6 +13,7 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
+import { useUser } from "../../contexts/UserContext";
 
 // Tipados
 interface UserData {
@@ -29,11 +30,12 @@ interface FinancialGoal {
 
 export const Dashboard: React.FC = () => {
   // ESTADOS
-  const [userdata, setUserData] = useState<UserData>({
+  const [userdata] = useState<UserData>({
     nombre: "",
     correo: "",
   });
-  const [loadingUserData, setLoadingUserData] = useState<boolean>(true);
+  const {user} = useUser();
+  const [loadingUserData, setLoadingUserData] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [btnObjetivo, setBtnObjetivo] = useState("Cargando...");
   const [objetivos, setObjetivos] = useState<FinancialGoal[]>([]);
@@ -50,49 +52,6 @@ export const Dashboard: React.FC = () => {
     return cookie ? decodeURIComponent(cookie.split("=")[1]) : null;
   };
 
-  // SOLICITUD PARA "DATOS DE USUARIO"
-  useEffect(() => {
-    const token = getCookie("authToken");
-    if (!token) {
-      console.error("El token de autorización no está presente.");
-      setError("No se encontró el token de autorización.");
-      setLoadingUserData(false);
-      return;
-    }
-
-    fetch(
-      `https://h4-09-fintech-production.up.railway.app/api/auth/check-login`,
-      {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-      }
-    )
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error("Error al obtener los datos del usuario");
-        }
-        return res.json();
-      })
-      .then((data) => {
-        setUserData({
-          nombre: data.name || "Usuario",
-          correo: data.username || "Correo no disponible",
-          currentAmount: data.currentAmount || 0, // Aseguramos que currentAmount esté disponible
-        });
-        setError(null);
-      })
-      .catch((err: Error) => {
-        console.error(err);
-        setError(
-          "Por motivos de seguridad tu sesión ha expirado. Vuelve a iniciar sesión."
-        );
-      })
-      .finally(() => setLoadingUserData(false));
-  }, []);
-
   // SOLICITUD PARA "OBJETIVOS FINANCIEROS Y PROGRESO"
   useEffect(() => {
     const token = getCookie("authToken");
@@ -100,7 +59,8 @@ export const Dashboard: React.FC = () => {
       setError("No se encontró un token de autenticación.");
       return;
     }
-
+    setLoadingUserData(true);
+   
     fetch(`https://h4-09-fintech-production.up.railway.app/api/user/goals`, {
       method: "GET",
       headers: {
@@ -120,6 +80,8 @@ export const Dashboard: React.FC = () => {
       .catch((err) => {
         console.error(err);
         setError("No se pudieron cargar los objetivos.");
+      }).finally(() => {
+        setLoadingUserData(false);
       });
   }, []);
 
@@ -225,10 +187,12 @@ export const Dashboard: React.FC = () => {
       </h1>
       <NoteDash />
       <div className="container-usuario flex">
-        <UserIcon id="foto-perfil" />
+        {
+          user?.profileImageUrl === null ? <UserIcon id="foto-perfil" /> : <img src={user?.profileImageUrl} id="foto-perfil" />
+        }
         <div>
-          <h2>¡Hola {userdata.nombre}!</h2>
-          <small className="correo-usuario-dash">{userdata.correo}</small>
+          <h2>¡Hola {user?.name}!</h2>
+          <small className="correo-usuario-dash">{user?.email}</small>
         </div>
         <small className="free-plan">Free plan</small>
       </div>
@@ -236,8 +200,8 @@ export const Dashboard: React.FC = () => {
       <div onClick={handleOpen} className="fondos-dash">
         <div>
           <h6>Fondo disponible</h6>$
-          {userdata.currentAmount
-            ? userdata.currentAmount.toLocaleString("es-AR", {
+          {user?.currentAmount
+            ? user?.currentAmount.toLocaleString("es-AR", {
                 minimumFractionDigits: 2,
                 maximumFractionDigits: 2,
               })

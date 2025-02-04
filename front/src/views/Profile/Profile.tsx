@@ -1,14 +1,14 @@
 import styles from "./Profile.module.css";
 import Card from "../../components/card/Card";
-import { useState} from "react";
+import { useEffect, useState} from "react";
 import { FaRegUser, FaCamera } from "react-icons/fa";
 import { GoGear } from "react-icons/go";
 import { TbWorld } from "react-icons/tb";
 import { LuMoon } from "react-icons/lu";
 import { RxExit } from "react-icons/rx";
-import { baseUrl } from "../../config/envs";
-import { useFetchDataWithToken } from "../../hooks/useFetchDataWithToken";
-import { IUser } from "../Gestion de Inversiones/GestionInversiones";
+import { useUser } from "../../contexts/UserContext";
+import axios from "axios";
+import Spinner from "../../components/spiner/Spiner";
 
 const getCookie = (name: string): string | null => {
   const cookies = document.cookie.split("; ");
@@ -18,15 +18,16 @@ const getCookie = (name: string): string | null => {
 
 export default function Profile() {
   const [profileImage, setProfileImage] = useState<string | null>(null);
-  const { data: user } = useFetchDataWithToken<IUser>(
-    `${baseUrl}/api/auth/check-login`
-  );
+  const {logout, user,setUser} = useUser();
+  const [loading,setLoading] = useState<boolean>(false);
 
-  // Imprime los datos del usuario y la URL de la imagen de perfil
-  console.log("Datos del usuario:", user);
-  console.log("URL de la imagen de perfil:", user?.profileImageUrl);
+  useEffect(()=> {
+    setProfileImage(user?.profileImageUrl || null);
+  },[])
   
-
+  const handleLogout = () => {
+      logout();
+  }
   const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files?.[0];
     if (selectedFile) {
@@ -37,33 +38,31 @@ export default function Profile() {
       }
 
       const formData = new FormData();
-      formData.append("image", selectedFile);
+      formData.append("file", selectedFile);
 
       try {
-        const response = await fetch(
+        setLoading(true);
+        const response = await axios.patch(
           "https://h4-09-fintech-production.up.railway.app/api/user/upload-image",
+          formData,
           {
-            method: "POST",
             headers: {
               Authorization: `Bearer ${token}`,
+              "Content-Type": "multipart/form-data", // Importante para enviar archivos
             },
-            body: formData,
           }
         );
-
-        const data = await response.json();
-
-        if (data.success) {
-          setProfileImage(data.imageUrl);
-        } else {
-          console.error("Error al subir la imagen:", data.message);
-        }
+          setProfileImage(response.data);
+          console.log(response.data)
+          setUser({...user!,profileImageUrl:response.data})
       } catch (error) {
         console.error("Error de red al subir la imagen:", error);
+      }finally{
+        setLoading(false);
       }
     }
   };
-
+  console.log(user);
   return (
     <div className={styles.pageView}>
       <div className={styles.contentContainer}>
@@ -71,24 +70,22 @@ export default function Profile() {
 
         <div className={styles.profile}>
           <div className={styles.profilePictureContainer}>
-            {/* {profileImage ? (
-              <img
-                src={user?.profileImageUrl || profileImage}
-                alt="Foto de perfil"
-                className={styles.profilePicture}
-              />
-            ) : (
-              <FaRegUser className={styles.defaultIcon} />
-            )} */}
-            {profileImage || user?.profileImageUrl ? (
-              <img
-                src={profileImage || user?.profileImageUrl} // Usa la imagen subida o la del usuario
-                alt="Foto de perfil"
-                className={styles.profilePicture}
-              />
-            ) : (
-              <FaRegUser className={styles.defaultIcon} />
-            )}
+
+          {
+            loading ? (<div className={styles.spinnerContainer}>
+              <Spinner/>
+            </div>) : (
+              (user && user?.profileImageUrl ) && profileImage ? (
+                <img
+                  src={profileImage}
+                  alt="Foto de perfil"
+                  className={styles.profilePicture}
+                />
+              ) : (
+                <FaRegUser className={styles.defaultIcon} />
+              )
+            )
+          }
 
             <label htmlFor="imageUpload" className={styles.cameraIcon}>
               <FaCamera />
@@ -147,6 +144,7 @@ export default function Profile() {
             title="Cerrar sesión"
             description="O permanecer conectado y cambiar de usuario"
             link="/"
+            onClick={handleLogout}
           />
         </div>
       </div>
