@@ -43,7 +43,7 @@ import PublicRoutes from "./PublicRoute";
 import ProtectedRoute from "./ProtectedRoute";
 import { useEffect } from "react";
 import { useUser } from "./contexts/UserContext";
-import Spinner from "./components/spiner/Spiner";
+// import Spinner from "./components/spiner/Spiner";
 
 function App() {
   const {fetchUserData} = useUser();

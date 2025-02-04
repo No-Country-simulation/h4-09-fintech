@@ -30,7 +30,7 @@ interface FinancialGoal {
 
 export const Dashboard: React.FC = () => {
   // ESTADOS
-  const [userdata, setUserData] = useState<UserData>({
+  const [userdata] = useState<UserData>({
     nombre: "",
     correo: "",
   });

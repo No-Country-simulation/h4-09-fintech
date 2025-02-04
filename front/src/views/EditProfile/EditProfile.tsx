@@ -15,28 +15,28 @@ const getCookie = (name: string): string | null => {
   return cookie ? decodeURIComponent(cookie.split("=")[1]) : null;
 };
 
-const fetchGoogleProfileImage = async (googleToken: string) => {
-  try {
-    const response = await fetch(
-      "https://www.googleapis.com/oauth2/v3/userinfo",
-      {
-        headers: {
-          Authorization: `Bearer ${googleToken}`,
-        },
-      }
-    );
+// const fetchGoogleProfileImage = async (googleToken: string) => {
+//   try {
+//     const response = await fetch(
+//       "https://www.googleapis.com/oauth2/v3/userinfo",
+//       {
+//         headers: {
+//           Authorization: `Bearer ${googleToken}`,
+//         },
+//       }
+//     );
 
-    if (!response.ok) {
-      throw new Error("Error al obtener la imagen de Google");
-    }
+//     if (!response.ok) {
+//       throw new Error("Error al obtener la imagen de Google");
+//     }
 
-    const data = await response.json();
-    return data.picture || null;
-  } catch (error) {
-    console.error("Error al obtener la imagen de Google:", error);
-    return null;
-  }
-};
+//     const data = await response.json();
+//     return data.picture || null;
+//   } catch (error) {
+//     console.error("Error al obtener la imagen de Google:", error);
+//     return null;
+//   }
+// };
 
 export default function EditProfile() {
   const {user,setUser} = useUser();

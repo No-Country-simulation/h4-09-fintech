@@ -8,5 +8,5 @@ export default function ProtectedRoute() {
 	return loading ? 
     (<div className=''>  </div>) 
     : user && !loading ? <Outlet /> 
-    : <Navigate to={'/auth'} />;
+    : <Navigate to={'/'} />;
 }

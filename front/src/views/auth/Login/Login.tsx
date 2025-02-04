@@ -13,7 +13,7 @@ import SlashEyeIcon from "../../../assets/icons/SlashEyeIcon";
 
 export default function Login() {
   const navigate = useNavigate();
-  const { setUser, decifrado, user, fetchUserData } = useUser(); // Destructura setUser del contexto
+  const { fetchUserData } = useUser(); // Destructura setUser del contexto
   const [showPassword, setShowPassword] = useState(false);
   const [loginData, setLoginData] = useState({
     email: "",
