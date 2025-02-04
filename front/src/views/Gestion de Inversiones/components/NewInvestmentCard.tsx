@@ -12,6 +12,8 @@ interface newInvestmentCardProps {
 }
 
 const NewInvestmentCard: React.FC<newInvestmentCardProps> = ({ investment, user }) => {
+	console.log('investment', investment);
+	
 	const [selectedAmount, setSelectedAmount] = useState<number>(1)
 	const { loading, error, postData } = usePostDataWithToken(`${baseUrl}/api/stocks/buy`)
 	const [showModal, setShowModal] = useState(false)
