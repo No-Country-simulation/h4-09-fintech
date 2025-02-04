@@ -112,24 +112,24 @@ export interface Authority {
 }
 
 export interface UserEntity {
-	userId: string
-	username: string
-	name: string
-	lastName: string
-	password: string | null
-	onboardingComplete: boolean
-	mainGoal: string | null
-	financialKnowledge: string | null
-	riskPreference: string | null
-	funds: number
-	goals: string[] // Cambiar "any" si tienes un tipo específico para las metas
-	notifications: string[] // Cambiar "any" si tienes un tipo específico para las notificaciones
-	roles: Role[]
-	authorities: Authority[]
-	enabled: boolean
-	accountNonExpired: boolean
-	accountNonLocked: boolean
-	credentialsNonExpired: boolean
+	userId?: string
+	username?: string
+	name?: string
+	lastName?: string
+	password?: string | null
+	onboardingComplete?: boolean
+	mainGoal?: string | null
+	financialKnowledge?: string | null
+	riskPreference?: string | null
+	funds?: number
+	goals?: string[] // Cambiar "any" si tienes un tipo específico para las metas
+	notifications?: string[] // Cambiar "any" si tienes un tipo específico para las notificaciones
+	roles?: Role[]
+	authorities?: Authority[]
+	enabled?: boolean
+	accountNonExpired?: boolean
+	accountNonLocked?: boolean
+	credentialsNonExpired?: boolean
 }
 
 export interface ExampleObject {

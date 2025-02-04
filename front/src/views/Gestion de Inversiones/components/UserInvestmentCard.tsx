@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { IFundsData, INotFunds, IUserInvestment } from '../GestionInversiones'
+import { IFundsData, INotFunds, IUnifyInvestment, IUserInvestment } from '../utils'
 import '../GestionInversiones.css'
 import { baseUrl } from '../../../config/envs'
 import { usePatchDataWithToken } from '../../../hooks/usePatchDataWithToken'
@@ -7,7 +7,7 @@ import Spinner from '../../../components/spiner/Spiner'
 
 type Props = {
 	userInvestment: IUserInvestment
-	similarStock?: IFundsData | INotFunds | undefined
+	similarStock?: IFundsData | INotFunds | undefined | IUnifyInvestment
 }
 
 export default function UserInvestmentCard({ userInvestment, similarStock }: Props) {

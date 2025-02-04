@@ -8,11 +8,12 @@ interface CardProps {
     title?: string; 
     description?: string; 
     link?:string;
+    onClick?: () => void
   }
 
-export default function Card({ icon, title, description, link}: CardProps) {
+export default function Card({ icon, title, description, link,onClick}: CardProps) {
   return (
-    <div className={styles.card}>
+    <div className={styles.card} onClick={onClick}>
       <div className={styles.icon}>
         <i className="fas fa-info-circle"></i>{" "}
         {icon}

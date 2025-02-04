@@ -13,7 +13,7 @@ import SlashEyeIcon from "../../../assets/icons/SlashEyeIcon";
 
 export default function Login() {
   const navigate = useNavigate();
-  const { setUser } = useUser(); // Destructura setUser del contexto
+  const { fetchUserData } = useUser(); // Destructura setUser del contexto
   const [showPassword, setShowPassword] = useState(false);
   const [loginData, setLoginData] = useState({
     email: "",
@@ -36,12 +36,9 @@ export default function Login() {
     try {
       const response = await axios.post(`${baseUrl}/api/auth/login`, loginData);
       const token = response.data.token;
-      const user = response.data.user; // Asegúrate de obtener los datos del usuario
+     
       Cookies.set("authToken", token, { expires: 1 });
-
-      // Aquí actualizas el contexto con los datos del usuario
-      setUser(user); // Enviar los datos del usuario al contexto
-
+      await fetchUserData();
       navigate("/dashboard");
       alert("Login exitoso");
     } catch (error) {
