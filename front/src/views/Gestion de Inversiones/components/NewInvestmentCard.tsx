@@ -1,21 +1,17 @@
 import React, { useState } from 'react'
 import '../GestionInversiones.css'
-import { IUser } from '../utils'
+import { IUnifyInvestment, IUser } from '../utils'
 import { baseUrl } from '../../../config/envs'
 import Spinner from '../../../components/spiner/Spiner'
 import { usePostDataWithToken } from '../../../hooks/usePostDataWithToken'
 // import Spinner from '../../../components/spiner/Spiner'
 
-interface InvestmentCardProps {
-	name: string
-	cedear: string
-	price: number
-	percentageLastMonth: number
-	percentageLastYear: number
+interface newInvestmentCardProps {
+	investment: IUnifyInvestment
 	user: IUser | null
 }
 
-const InvestmentCard: React.FC<InvestmentCardProps> = ({ name, cedear, price, percentageLastMonth, percentageLastYear, user }) => {
+const NewInvestmentCard: React.FC<newInvestmentCardProps> = ({ investment, user }) => {
 	const [selectedAmount, setSelectedAmount] = useState<number>(1)
 	const { loading, error, postData } = usePostDataWithToken(`${baseUrl}/api/stocks/buy`)
 	const [showModal, setShowModal] = useState(false)
@@ -36,12 +32,12 @@ const InvestmentCard: React.FC<InvestmentCardProps> = ({ name, cedear, price, pe
 
 		const body = {
 			quantity: selectedAmount,
-			pricePerUnit: price,
-			stockSymbol: cedear,
-			stockName: name
+			pricePerUnit: investment.price,
+			stockSymbol: investment.name,
+			stockName: investment.description
 		}
 
-		const buyingPrice = selectedAmount * price
+		const buyingPrice = selectedAmount * investment.price
 		const negativeBuyingPrice = -buyingPrice
 
 		console.log('user founds', user.currentAmount)
@@ -63,7 +59,7 @@ const InvestmentCard: React.FC<InvestmentCardProps> = ({ name, cedear, price, pe
 	}
 
 	// Calcular la cantidad máxima que se puede comprar
-	const maxUnits = user?.currentAmount ? Math.floor(user.currentAmount / price) : 0
+	const maxUnits = user?.currentAmount ? Math.floor(user.currentAmount / investment.price) : 0
 
 	const buttonDisabled = selectedAmount > maxUnits || selectedAmount < 1
 
@@ -71,17 +67,17 @@ const InvestmentCard: React.FC<InvestmentCardProps> = ({ name, cedear, price, pe
 		<>
 			<div className='card' onClick={handleShowModal}>
 				<div className='cardHeader'>
-					<p className='cardTitle'>{name}</p>
-					<p className='clave'>{cedear}</p>
+					<p className='cardTitle'>{investment.description}</p>
+					<p className='clave'>{investment.name}</p>
 				</div>
 				<div className='cardHeader'>
-					<p>Precio: ${price.toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
+					<p>Precio: ${investment.price.toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
 					<div className='porcentajes'>
 						<p>
-							Variación último mes <span className={percentageLastMonth > 0 ? 'subida' : 'bajada'}>{percentageLastMonth}%</span>
+							Variación último mes <span className={investment.percentageLastMonth > 0 ? 'subida' : 'bajada'}>{investment.percentageLastMonth}%</span>
 						</p>
 						<p>
-							Variación último año <span className={percentageLastYear > 0 ? 'subida' : 'bajada'}>{percentageLastYear}%</span>
+							Variación último año <span className={investment.percentageLastYear > 0 ? 'subida' : 'bajada'}>{investment.percentageLastYear}%</span>
 						</p>
 					</div>
 				</div>
@@ -98,7 +94,7 @@ const InvestmentCard: React.FC<InvestmentCardProps> = ({ name, cedear, price, pe
 								maximumFractionDigits: 2
 							})}
 						</span>
-						<span>Precio unitario: ${price.toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+						<span>Precio unitario: ${investment.price.toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
 						<span>
 							Máximo que puedes comprar: <b>{maxUnits}</b> unidades
 						</span>
@@ -121,4 +117,4 @@ const InvestmentCard: React.FC<InvestmentCardProps> = ({ name, cedear, price, pe
 	)
 }
 
-export default InvestmentCard
+export default NewInvestmentCard
