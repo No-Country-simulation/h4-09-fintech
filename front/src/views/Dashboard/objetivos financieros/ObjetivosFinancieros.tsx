@@ -33,7 +33,7 @@ interface FinancialGoal {
   targetDate: string;
   targetAmount: string;
   goalId: string;
-  progress: number;
+  progressTotal: number;
 }
 
 // Componente principal
@@ -225,7 +225,7 @@ export const ObjetivosFinancieros = () => {
                 <div className="container-goal-info">
                   <h5>
                     {objetivo.name}
-                    {objetivo.progress >= 100 ? (
+                    {objetivo.progressTotal >= 100 ? (
                       <CheckIcon className="iconos-hero check-goal" />
                     ) : (
                       ""
@@ -234,7 +234,7 @@ export const ObjetivosFinancieros = () => {
                   <div className="data-goal">
                     <div>
                       <p>Progreso:&nbsp;</p>
-                      <h6>{objetivo.progress}%</h6>
+                      <h6>{objetivo.progressTotal}%</h6>
                     </div>
                     <div>
                       <p>Monto:&nbsp;</p>

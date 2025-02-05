@@ -26,7 +26,7 @@ interface UserData {
 interface FinancialGoal {
   name: string;
   targetAmount: string;
-  progress: number;
+  progressTotal: number;
 }
 
 interface Notificacion {
@@ -169,7 +169,6 @@ export const Dashboard: React.FC = () => {
       setTimeout(() => {
         window.location.reload();
       }, 2000);
-      
     }
   };
 
@@ -256,7 +255,7 @@ export const Dashboard: React.FC = () => {
       <BarChartComponent
         data={objetivos.map((goal) => ({
           name: goal.name,
-          Progreso: goal.progress,
+          Progreso: goal.progressTotal,
         }))}
         dataKey="Progreso"
         xAxisKey="name"
@@ -304,14 +303,14 @@ export const Dashboard: React.FC = () => {
           </Box>
         </Modal>
       </div>
-       {isModalOpen && (
-              <Modals
-                isOpen={isModalOpen}
-                title="Mensaje"
-                message={modalMessage}
-                onClose={() => setIsModalOpen(false)}
-              />
-            )}
+      {isModalOpen && (
+        <Modals
+          isOpen={isModalOpen}
+          title="Mensaje"
+          message={modalMessage}
+          onClose={() => setIsModalOpen(false)}
+        />
+      )}
     </div>
   );
 };
