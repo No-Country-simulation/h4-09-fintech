@@ -1,12 +1,6 @@
-:root {
-    --color-nav-li: #ffc700;
-    --color-fondo-navbar: #0048B2;
-    --color-texto: #fff;
-  }
-  
   .footer {
-    background-color: var(--color-fondo-navbar); 
-    color: var(--color-texto); 
+    background-color: var(--color-primario); 
+    color: var(--color-fondo); 
     text-align: center;
     width: 100%;
   }
@@ -60,14 +54,14 @@
   
   .footerLinks li a,
   .socialLinks li a {
-    color: var(--color-texto);
+    color: var(--color-fondo);
     text-decoration: none;
     transition: color 0.3s ease;
   }
   
   .footerLinks li a:hover,
   .socialLinks li a:hover {
-    color: var(--color-nav-li); 
+    color: var(--color-disabled); 
   }
 
   

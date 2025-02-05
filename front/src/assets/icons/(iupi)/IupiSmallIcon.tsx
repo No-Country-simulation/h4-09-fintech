@@ -7,8 +7,10 @@ export default function IupiSmallIcon() {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
+      style={{ filter: "brightness(0) invert(1)" }}
     >
       <rect width="57.1717" height="40" fill="url(#pattern0_63_288)" />
+      
       <defs>
         <pattern
           id="pattern0_63_288"

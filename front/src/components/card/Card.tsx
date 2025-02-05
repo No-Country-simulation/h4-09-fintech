@@ -11,28 +11,28 @@ interface CardProps {
     onClick?: () => void
   }
 
-export default function Card({ icon, title, description, link,onClick}: CardProps) {
-  return (
-    <div className={styles.card} onClick={onClick}>
-      <div className={styles.icon}>
-        <i className="fas fa-info-circle"></i>{" "}
-        {icon}
+  export default function Card({ icon, title, description, link, onClick }: CardProps) {
+    const CardContent = (
+      <div className={styles.card} onClick={onClick}>
+        <div className={styles.icon}>
+          <i className="fas fa-info-circle"></i>{" "}
+          {icon}
+        </div>
+        <div className={styles.textContainer}>
+          <h2 className={styles.subtitle}>{title}</h2>
+          <p className={styles.description}>{description}</p>
+        </div>
+        <div>
+          <FaArrowRightLong className={styles.iconArrow} />
+        </div>
       </div>
-      <div className={styles.textContainer}>
-        <h2 className={styles.subtitle}>{title}</h2>
-        <p className={styles.description}>
-          {description}
-        </p>
-      </div>
-      <div>
-      {link ? (
-          <Link to={link} className={styles.arrowLink}>
-            <FaArrowRightLong className={styles.iconArrow}/>
-          </Link>
-        ) : (
-          <FaArrowRightLong className={styles.iconArrow}/>
-        )}
-      </div>
-    </div>
-  );
-}
+    );
+  
+    return link ? (
+      <Link to={link} className={styles.cardLink}>
+        {CardContent}
+      </Link>
+    ) : (
+      CardContent
+    );
+  }
