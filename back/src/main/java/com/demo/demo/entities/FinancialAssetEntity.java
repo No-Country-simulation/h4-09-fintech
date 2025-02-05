@@ -2,6 +2,7 @@ package com.demo.demo.entities;
 
 
 import com.demo.demo.dtos.response.FinancialResponseDto;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.api.client.util.DateTime;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -34,6 +35,7 @@ public class FinancialAssetEntity {
     private BigDecimal openingBalance;
 
     @ManyToMany(mappedBy = "financialAssets")
+    @JsonIgnore
     private List<UserEntity> users;
 
     public static FinancialAssetEntity mapper (FinancialResponseDto dto) {
