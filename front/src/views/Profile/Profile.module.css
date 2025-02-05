@@ -1,58 +1,59 @@
 .profilePictureContainer {
-  position: relative; 
-  width: 150px; 
-  height: 150px; 
+	position: relative;
+	width: 150px;
+	height: 150px;
 }
 
 .profilePicture {
-  width: 100%; 
-  height: 100%;
-  border-radius: 50%; 
-  object-fit: cover;
-  border: 3px solid #0048ba; 
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
+	object-fit: cover;
+	border: 3px solid #0048ba;
 }
 
-.defaultIcon{
-  width: 100%; 
-  height: 100%;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 3px solid #0048ba; 
+.defaultIcon {
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
+	object-fit: cover;
+	border: 3px solid #0048ba;
 }
 
 .cameraIcon {
-  position: absolute; 
-  bottom: 0; 
-  right: 0; 
-  background-color: white; 
-  border-radius: 50%; 
-  padding: 8px 10px 4px 8px; 
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
-  cursor: pointer; 
-  color: #0048ba; 
-  font-size: 24px; 
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	background-color: white;
+	border-radius: 50%;
+	padding: 8px 10px 4px 8px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+	cursor: pointer;
+	color: #0048ba;
+	font-size: 24px;
 }
 
 .profile {
-  display: flex;
-  flex-direction: column; 
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  margin-bottom: 20px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	margin-bottom: 20px;
+	gap: 10px;
 }
-.profile.p{
-    margin: 0;
+.profile.p {
+	margin: 0;
 }
 
-.names{
-  margin: 10px 0px 0px 0px;
-  color:var(--color-primario);
-  font-weight: 500;
+.names {
+	margin: 10px 0px 0px 0px;
+	color: var(--color-primario);
+	font-weight: 500;
 }
-.email{
-  margin: 5px 0px 0px 0px;
-  color:black;
+.email {
+	margin: 5px 0px 0px 0px;
+	color: black;
 }
 
 .title {
@@ -71,58 +72,58 @@
 	color: var(--color-primario);
 }
 
-.button{
-  margin-top: 10px;
-  border-radius: 20px;
-  width: 200px;
-  height: 40px;
+.button {
+	margin-top: 10px;
+	border-radius: 20px;
+	width: 200px;
+	height: 40px;
 }
 
-.cardContainer{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 16px; 
-  width: 100%;
+.cardContainer {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 16px;
+	width: 100%;
 }
 
 .card {
-  width: 100%; 
-  min-height: 100px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+	width: 100%;
+	min-height: 100px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
 }
 
-.perfilFinanciero{
-  border: solid;
-  color: var(--color-primario);
-  width: 260px;
-  border-radius: 20px;
+.perfilFinanciero {
+	border: 1px solid;
+	color: var(--color-primario);
+	width: 260px;
+	border-radius: 8px;
+	padding: 10px;
 }
-
 
 @media (max-width: 767px) {
-  .container{
-    margin: 10px;
-  }
+	.container {
+		margin: 10px;
+	}
 
-  .profilePictureContainer {
-    position: relative; 
-    width: 100px; 
-    height: 100px; 
-    margin-right: 20px; 
-  }
+	.profilePictureContainer {
+		position: relative;
+		width: 100px;
+		height: 100px;
+		margin-right: 20px;
+	}
 
-  .defaultIcon{
-    width: 100%; 
-    height: 100%;
-    border-radius: 50%; 
-    border: 3px solid #0048ba; 
-  }
+	.defaultIcon {
+		width: 100%;
+		height: 100%;
+		border-radius: 50%;
+		border: 3px solid #0048ba;
+	}
 }
 
 .pageView {
@@ -143,4 +144,3 @@
 	background-color: var(--color-fondo);
 	margin-bottom: 244px;
 }
-
