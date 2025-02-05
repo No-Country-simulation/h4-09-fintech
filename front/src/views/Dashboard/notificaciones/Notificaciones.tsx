@@ -7,7 +7,6 @@ interface Notificacion {
   id: string;
   title: string;
   message: string;
-  // Agrega otros campos si es necesario
 }
 export const Notificaciones = () => {
   const [notifiesList, setNotifiesList] = useState<Notificacion[]>([]);
@@ -21,11 +20,6 @@ export const Notificaciones = () => {
   //Solicitud para todas las notificaciones
   useEffect(() => {
     const token = getCookie("authToken");
-    // if (!token) {
-    //   setError("No se encontró un token de autenticación.");
-    //   setIsLoading(false);
-    //   return;
-    // }
     const fetchNotifies = async () => {
       try {
         const res = await fetch(
@@ -40,6 +34,8 @@ export const Notificaciones = () => {
         );
         if (!res.ok) throw new Error("Error al obtener las notificaciones.");
         const data = await res.json();
+        console.log(data);
+
         setNotifiesList(data);
       } catch (err) {
         console.error(err);
