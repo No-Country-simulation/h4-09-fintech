@@ -1,19 +1,31 @@
 import { useState } from 'react'
-import { IFundsData, INotFunds, IUnifyInvestment, IUserInvestment } from '../utils'
+import { IFundsData, INotFunds, IUnifyInvestment } from '../utils'
 import '../GestionInversiones.css'
 import { baseUrl } from '../../../config/envs'
 import { usePatchDataWithToken } from '../../../hooks/usePatchDataWithToken'
 import Spinner from '../../../components/spiner/Spiner'
 
+export interface IUserInvestmentCardProp {
+	id: number
+	pricePerUnitBuy: number
+	pricePorUnitNow: number
+	quantity: number
+	stockName: string
+	stockSymbol: string
+	totalCostBuy: number
+	totalCostNow: number
+	transactionDate: string
+}
+
 type Props = {
-	userInvestment: IUserInvestment
+	userInvestment: IUserInvestmentCardProp
 	similarStock?: IFundsData | INotFunds | undefined | IUnifyInvestment
 }
 
 export default function UserInvestmentCard({ userInvestment, similarStock }: Props) {
-	const currentPrice = similarStock && 'price' in similarStock ? (similarStock as IFundsData).price : undefined
+	// const currentPrice = similarStock && 'price' in similarStock ? (similarStock as IFundsData).price : undefined
 	// Calcula la variación en porcentaje
-	const variationPercentage = currentPrice !== undefined ? ((currentPrice - userInvestment.pricePerUnit) / userInvestment.pricePerUnit) * 100 : undefined
+	const variationPercentage = userInvestment.pricePerUnitBuy/ userInvestment.pricePorUnitNow - 1
 	// Determina el color según la variación
 	const variationColor = variationPercentage !== undefined ? (variationPercentage > 0 ? 'green' : variationPercentage < 0 ? 'red' : 'blue') : 'gray'
 	// console.log('userInvestment', userInvestment)
@@ -44,10 +56,8 @@ export default function UserInvestmentCard({ userInvestment, similarStock }: Pro
 			console.error(error)
 			alert('Hubo un error al realizar la operación')
 		}
-		if (currentPrice === undefined) {
-			return
-		}
-		await patchDataFunds({ amount: quantityToSell * currentPrice })
+
+		await patchDataFunds({ amount: quantityToSell * userInvestment.pricePorUnitNow })
 		console.log(dataFunds)
 
 		alert('Operación realizada con éxito')
@@ -64,7 +74,7 @@ export default function UserInvestmentCard({ userInvestment, similarStock }: Pro
 				<div className='cardHeader'>
 					<p>
 						Precio de compra: $
-						{userInvestment.pricePerUnit.toLocaleString('es-AR', {
+						{userInvestment.pricePerUnitBuy.toLocaleString('es-AR', {
 							minimumFractionDigits: 2,
 							maximumFractionDigits: 2
 						})}
@@ -75,12 +85,7 @@ export default function UserInvestmentCard({ userInvestment, similarStock }: Pro
 				<div className='cardHeader'>
 					<p>
 						Precio actual:{' '}
-						{currentPrice !== undefined
-							? `$${currentPrice.toLocaleString('es-AR', {
-									minimumFractionDigits: 2,
-									maximumFractionDigits: 2
-							  })}`
-							: 'Cargando...'}
+						{userInvestment.pricePorUnitNow}
 					</p>
 					{/* Muestra la variación en porcentaje */}
 					{variationPercentage !== undefined && (

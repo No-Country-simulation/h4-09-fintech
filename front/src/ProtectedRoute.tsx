@@ -4,7 +4,7 @@ import { useUser } from './contexts/UserContext';
 
 export default function ProtectedRoute() {
 	const {user,loading} = useUser();
-    console.log(user);
+    // console.log(user);
 	return loading ? 
     (<div className=''>  </div>) 
     : user && !loading ? <Outlet /> 

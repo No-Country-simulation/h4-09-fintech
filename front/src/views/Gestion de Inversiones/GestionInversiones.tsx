@@ -7,14 +7,16 @@ import { useFetchDataWithToken } from '../../hooks/useFetchDataWithToken'
 // import Cookies from 'js-cookie'
 // import InvestmentCard from './components/InvestmentCard'
 import Spinner from '../../components/spiner/Spiner'
-import UserInvestmentCard from './components/UserInvestmentCard'
+import UserInvestmentCard, { IUserInvestmentCardProp } from './components/UserInvestmentCard'
 
-import { getInvestmentRecommendation, investmentsTypes, InvestmentType, IUnifyInvestment, IUser, IUserInvestment } from './utils'
+import { getInvestmentRecommendation, investmentsTypes, InvestmentType, IUnifyInvestment, IUser } from './utils'
 import NewInvestmentCard from './components/NewInvestmentCard'
 
 
 export const GestionInversiones = (): JSX.Element => {
 	const { data: user, loading: loadingUser, error: errorUser } = useFetchDataWithToken<IUser>(`${baseUrl}/api/auth/check-login`)
+	console.log('user', user);
+	
 	const [showSaldo, setShowSaldo] = useState(true)
 	const [selectedInvestmentType, setSelectedInvestmentType] = useState<InvestmentType>(investmentsTypes[0])
 	// console.log('selectedInvestmentType', selectedInvestmentType)
@@ -22,16 +24,16 @@ export const GestionInversiones = (): JSX.Element => {
 	// const [loadingDetails, setLoadingDetails] = useState(false)
 	// const yourToken = Cookies.get('authToken')
 
-	const { data: userInvestments, loading: loadingUserInvestments } = useFetchDataWithToken<IUserInvestment[] | []>(`${baseUrl}/api/stocks/transactions`)
+	const { data: userInvestments, loading: loadingUserInvestments } = useFetchDataWithToken<IUserInvestmentCardProp[] | []>(`${baseUrl}/api/stocks/transactions`)
 	console.log('userInvestments', userInvestments)
 
 	const { data: allInvestments, loading: loadingAllInvestments } = useFetchDataWithToken<IUnifyInvestment[]>(`${baseUrl}/api/market/all-financial`)
-	// console.log('allInvestments', allInvestments)
+	console.log('allInvestments', allInvestments)
 
 	const getDisplayedData = () => {
 		if (!allInvestments || allInvestments.length === 0) return [] // Verifica que haya datos
 
-		return allInvestments.filter((investment) => investment.typeAsset === selectedInvestmentType.link)
+		return allInvestments?.filter((investment) => investment.typeAsset === selectedInvestmentType.link)
 	}
 
 	const displayedData = getDisplayedData()
@@ -107,11 +109,15 @@ export const GestionInversiones = (): JSX.Element => {
 				</h3>
 				<small>*tu saldo disponible mas el valor actual de tus inversiones</small>
 				<br />
+				<br />
 				<div className='headerContainer'>
 					<h3 className='subtitle'>¿En qué desea invertir?</h3>
 				</div>
 				<p>Invertí de manera fácil y rápida en el mercado.</p>
-				<h5>En base a tu perfil, te recomendamos esta cartera de inversiones: {investmentRecommendation}</h5>
+				<br />
+				<h5>
+					En base a tu perfil, te recomendamos esta cartera de inversiones: <span className='recomendation'>{investmentRecommendation}</span>{' '}
+				</h5>
 
 				<div className='inversiones-btn-group'>
 					{investmentsTypes.map((boton, index) => (
