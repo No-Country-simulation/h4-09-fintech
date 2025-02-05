@@ -1,9 +1,5 @@
 package com.demo.demo.dtos.request;
 
-import com.demo.demo.enums.FinancialKnowledge;
-import com.demo.demo.enums.MainGoal;
-import com.demo.demo.enums.RiskPreference;
-import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,7 +16,7 @@ public class UpdateUserPreferencesDto {
     private String riskPreference;
 
     //@NotNull(message = "onbarding")
-    private boolean onbardingComplete;
+    private boolean onboardingComplete;
 
 
 }

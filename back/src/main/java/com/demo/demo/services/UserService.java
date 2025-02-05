@@ -24,7 +24,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 @RequiredArgsConstructor
@@ -53,7 +52,7 @@ public class UserService implements UserDetailsService {
         user.setMainGoal(dto.getMainGoal());
         user.setFinancialKnowledge(dto.getFinancialKnowledge());
         user.setRiskPreference(dto.getRiskPreference());
-        user.setOnboardingComplete(dto.isOnbardingComplete()); //se agrego el booleano para verificar si es la primera vez.
+        user.setOnboardingComplete(dto.isOnboardingComplete()); //se agrego el booleano para verificar si es la primera vez.
         userRepository.save(user);
 
         return new UserPreferencesResponseDto(
