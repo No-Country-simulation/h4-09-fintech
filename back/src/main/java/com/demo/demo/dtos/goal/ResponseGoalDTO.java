@@ -1,7 +1,6 @@
 package com.demo.demo.dtos.goal;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.UUID;
 
 public record ResponseGoalDTO(
@@ -13,6 +12,8 @@ public record ResponseGoalDTO(
 
     float targetAmount,
     float currentAmount,
-    float progress
+    float progressFunds,
+    float progressActions,
+    float progressTotal
 ) {
 }
