@@ -29,22 +29,30 @@ interface FinancialGoal {
   progress: number;
 }
 
+interface Notificacion {
+  id: string;
+  title: string;
+  message: string;
+}
+
 export const Dashboard: React.FC = () => {
   // ESTADOS
   const [userdata] = useState<UserData>({
     nombre: "",
     correo: "",
   });
-  const {user} = useUser();
+  const { user } = useUser();
+  const [notifiesList, setNotifiesList] = useState<Notificacion[]>([]);
   const [loadingUserData, setLoadingUserData] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [btnObjetivo, setBtnObjetivo] = useState("Cargando...");
   const [objetivos, setObjetivos] = useState<FinancialGoal[]>([]);
   const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
   const [monto, setMonto] = useState<number>(0);
   const [errorMonto, setErrorMonto] = useState<string>("");
+  // Funciones (Fx)
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
@@ -56,7 +64,7 @@ export const Dashboard: React.FC = () => {
     return cookie ? decodeURIComponent(cookie.split("=")[1]) : null;
   };
 
-  // SOLICITUD PARA "OBJETIVOS FINANCIEROS Y PROGRESO"
+  // GET de "OBJETIVOS FINANCIEROS Y PROGRESO"
   useEffect(() => {
     const token = getCookie("authToken");
     if (!token) {
@@ -64,7 +72,7 @@ export const Dashboard: React.FC = () => {
       return;
     }
     setLoadingUserData(true);
-   
+
     fetch(`https://h4-09-fintech-production.up.railway.app/api/user/goals`, {
       method: "GET",
       headers: {
@@ -84,11 +92,35 @@ export const Dashboard: React.FC = () => {
       .catch((err) => {
         console.error(err);
         setError("No se pudieron cargar los objetivos.");
-      }).finally(() => {
+      })
+      .finally(() => {
         setLoadingUserData(false);
       });
   }, []);
-
+  //GET de "ALL NOTIFICACIONES"
+  useEffect(() => {
+    const token = getCookie("authToken");
+    const fetchNotifies = async () => {
+      try {
+        const res = await fetch(
+          `https://h4-09-fintech-production.up.railway.app/api/notifications/all`,
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        if (!res.ok) throw new Error("Error al obtener las notificaciones.");
+        const data = await res.json();
+        setNotifiesList(data);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    fetchNotifies();
+  }, []);
   // Función para manejar el envío del formulario
   const handleSubmitModal = (event: React.FormEvent) => {
     event.preventDefault();
@@ -194,11 +226,13 @@ export const Dashboard: React.FC = () => {
           <BellAlertIcon className="iconos-hero" />
         </Link>
       </h1>
-      <NoteDash />
+      <NoteDash notificaciones={notifiesList} />
       <div className="container-usuario flex">
-        {
-          user?.profileImageUrl === null ? <UserIcon id="foto-perfil" /> : <img src={user?.profileImageUrl} id="foto-perfil" />
-        }
+        {user?.profileImageUrl === null ? (
+          <UserIcon id="foto-perfil" />
+        ) : (
+          <img src={user?.profileImageUrl} id="foto-perfil" />
+        )}
         <div>
           <h2>¡Hola {user?.name}!</h2>
           <small className="correo-usuario-dash">{user?.email}</small>
