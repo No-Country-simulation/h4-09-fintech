@@ -2,7 +2,7 @@ import { ArrowLeftIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./CrearObjetivo.css";
-import Modal from "../../../components/modal/Modal";
+import Modals from "../../../components/modal/Modals";
 
 interface FinancialGoal {
   name: string;
@@ -146,7 +146,7 @@ function CrearObjetivo() {
         </button>
       </form>
       {isModalOpen && (
-        <Modal
+        <Modals
           isOpen={isModalOpen}
           title="Mensaje"
           message={modalMessage}

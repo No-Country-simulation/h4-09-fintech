@@ -13,6 +13,7 @@ import Eyeicon from '../../../assets/icons/Eyeicon'
 import SlashEyeIcon from '../../../assets/icons/SlashEyeIcon'
 import GoBackIcon from '../../../assets/icons/GoBackIcon'
 import { useUser } from '../../../contexts/UserContext'
+import Modals from "../../../components/modal/Modals";
 
 export interface IUserData {
 	name: string
@@ -27,6 +28,8 @@ export default function Register() {
 	const navigate = useNavigate()
 	const [showPassword, setShowPassword] = useState(false)
 	const [showConfirmPassword, setShowConfirmPassword] = useState(false)
+	const [isModalOpen, setIsModalOpen] = useState(false);
+	const [modalMessage, setModalMessage] = useState("");
 	const [errors, setErrors] = useState({
 		name: '',
 		lastName: '',
@@ -66,7 +69,9 @@ export default function Register() {
 		setIsLoading(true)
 		// Validar que las contraseñas coincidan
 		if (userData.password !== userData.confirmPassword) {
-			alert('Las contraseñas no coinciden')
+			// alert('Las contraseñas no coinciden')
+			setModalMessage('Las contraseñas no coinciden');
+      		setIsModalOpen(true);
 			setIsLoading(false)
 			return
 		}
@@ -78,7 +83,9 @@ export default function Register() {
 			console.log(token) // control
 			Cookies.set('authToken', token, { expires: 7 })
 			await fetchUserData();
-			alert('Registro exitoso')
+			// alert('Registro exitoso')
+			setModalMessage('Registro exitoso');
+      		setIsModalOpen(true);
 			setUserData({
 				name: '',
 				lastName: '',
@@ -93,7 +100,9 @@ export default function Register() {
 			} else {
 				console.error(error)
 			}
-			alert('Hubo un error al registrarte')
+			// alert('Hubo un error al registrarte')
+			setModalMessage('Hubo un error al registrarte');
+      		setIsModalOpen(true);
 		} finally {
 			setIsLoading(false)
 		}
@@ -195,6 +204,14 @@ export default function Register() {
 					<Link to={'#'}>Política de privacidad.</Link>
 				</small>
 			</form>
+			{isModalOpen && (
+					<Modals
+					  isOpen={isModalOpen}
+					  title="Mensaje"
+					  message={modalMessage}
+					  onClose={() => setIsModalOpen(false)}
+					/>
+				  )}
 		</div>
 	)
 }

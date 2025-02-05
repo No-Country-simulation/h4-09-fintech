@@ -5,6 +5,7 @@ import styles from '../community.module.css'
 import Spinner from '../../../components/spiner/Spiner'
 import { Link, useParams } from 'react-router-dom'
 import GoBackIcon from '../../../assets/icons/GoBackIcon'
+import Modals from "../../../components/modal/Modals";
 
 export default function Create() {
 	const params = useParams()
@@ -17,6 +18,8 @@ export default function Create() {
 		text: '',
 		category: params.category
 	})
+	const [isModalOpen, setIsModalOpen] = useState(false);
+	const [modalMessage, setModalMessage] = useState("");
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault()
@@ -28,7 +31,9 @@ export default function Create() {
 			text: '',
 			category: params.category
 		})
-		alert('Posteo enviado')
+		// alert('Posteo enviado')
+		setModalMessage('Posteo enviado');
+      	setIsModalOpen(true);
 	}
 
 	return (
@@ -63,6 +68,14 @@ export default function Create() {
 					</button>
 				</form>
 			</div>
+			{isModalOpen && (
+					<Modals
+					  isOpen={isModalOpen}
+					  title="Mensaje"
+					  message={modalMessage}
+					  onClose={() => setIsModalOpen(false)}
+					/>
+				  )}
 		</div>
 	)
 }

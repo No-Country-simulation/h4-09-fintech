@@ -1,6 +1,6 @@
 import styles from "./Navbar.module.css";
 import { NavLink, useLocation } from "react-router-dom";
-import IupiSmallIcon from "../../assets/icons/(iupi)/IupiSmallIcon";
+import IupiSmallIcon from "../../assets/icons/(iupi)/IupiIconNavbar";
 import { LuLayoutDashboard } from "react-icons/lu";
 import { FaHandHoldingDollar } from "react-icons/fa6";
 import { FaPeopleGroup } from "react-icons/fa6";

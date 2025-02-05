@@ -1,4 +1,4 @@
-import styles from "./Modal.module.css";
+import styles from "./Modals.module.css";
 
 interface ModalProps {
   isOpen: boolean;
@@ -7,7 +7,7 @@ interface ModalProps {
   onClose: () => void;
 }
 
-export default function Modal({ isOpen, title, message, onClose }: ModalProps) {
+export default function Modals({ isOpen, title, message, onClose }: ModalProps) {
   if (!isOpen) return null; // No renderizar si no está abierto
 
   return (

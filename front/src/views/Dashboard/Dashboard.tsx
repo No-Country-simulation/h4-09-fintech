@@ -14,6 +14,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import { useUser } from "../../contexts/UserContext";
+import Modals from "../../components/modal/Modals";
 
 // Tipados
 interface UserData {
@@ -44,6 +45,9 @@ export const Dashboard: React.FC = () => {
   const handleClose = () => setOpen(false);
   const [monto, setMonto] = useState<number>(0);
   const [errorMonto, setErrorMonto] = useState<string>("");
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
 
   // Función para obtener una cookie específica
   const getCookie = (name: string): string | null => {
@@ -127,8 +131,13 @@ export const Dashboard: React.FC = () => {
         .finally(() => setLoadingUserData(false));
       setOpen(false);
 
-      alert(`Monto de recarga: ${monto}`);
-      window.location.reload();
+      // alert(`Monto de recarga: ${monto}`);
+      setModalMessage(`Monto de recarga: ${monto}`);
+      setIsModalOpen(true);
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
+      
     }
   };
 
@@ -261,6 +270,14 @@ export const Dashboard: React.FC = () => {
           </Box>
         </Modal>
       </div>
+       {isModalOpen && (
+              <Modals
+                isOpen={isModalOpen}
+                title="Mensaje"
+                message={modalMessage}
+                onClose={() => setIsModalOpen(false)}
+              />
+            )}
     </div>
   );
 };
