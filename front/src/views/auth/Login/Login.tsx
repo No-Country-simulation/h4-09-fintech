@@ -10,6 +10,7 @@ import GoBackIcon from "../../../assets/icons/GoBackIcon";
 import IupiSmallIcon from "../../../assets/icons/(iupi)/IupiSmallIcon";
 import Eyeicon from "../../../assets/icons/Eyeicon";
 import SlashEyeIcon from "../../../assets/icons/SlashEyeIcon";
+import Modals from "../../../components/modal/Modals";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -29,6 +30,9 @@ export default function Login() {
     }));
   };
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
+
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
     setIsLoading(true);
@@ -39,15 +43,20 @@ export default function Login() {
      
       Cookies.set("authToken", token, { expires: 1 });
       await fetchUserData();
+      // navigate("/dashboard");
+      setModalMessage("Login exitoso");
+      setIsModalOpen(true);
       navigate("/dashboard");
-      alert("Login exitoso");
+      // alert("Login exitoso");
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
         console.error(error.response.data);
       } else {
         console.error(error);
       }
-      alert("Usuario o contraseña invalidos");
+      // alert("Usuario o contraseña invalidos");
+      setModalMessage("Usuario o contraseña invalidos");
+      setIsModalOpen(true);
     } finally {
       setIsLoading(false);
     }
@@ -132,6 +141,14 @@ export default function Login() {
           <Link to="/auth/register">Registrate acá</Link>
         </div>
       </form>
+      {isModalOpen && (
+              <Modals
+                isOpen={isModalOpen}
+                title="Mensaje"
+                message={modalMessage}
+                onClose={() => setIsModalOpen(false)}
+              />
+            )}
     </div>
   );
 }
