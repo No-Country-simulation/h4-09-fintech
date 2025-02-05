@@ -17,9 +17,10 @@ interface User {
   financialKnowledge: string;
   mainGoal: string;
   email: string;
-  profileImageUrl:string;
+  profileImageUrl: string;
   currentAmount: number;
-  onboardingComplete:boolean
+  onboardingComplete: boolean;
+  accionsAmountTotal: number;
 }
 
 interface UserResponse {
@@ -31,8 +32,9 @@ interface UserResponse {
   currentAmount: number;
   mainGoal: string;
   username: string;
-  profileImageUrl:string;
-  onboardingComplete:boolean
+  profileImageUrl: string;
+  onboardingComplete: boolean;
+  accionsAmountTotal: number;
 }
 
 interface UserContextType {
@@ -65,54 +67,72 @@ export function UserProvider({ children }: UserProviderProps) {
   const [loading, setLoading] = useState<boolean>(true);
 
   const fetchUserData = async () => {
-    setLoading(true)
+    setLoading(true);
     const token = getTokenFromCookies();
     if (!token) {
       setLoading(false);
       return;
     }
-   
-      try {
-        const response = await axios.get<UserResponse>(`${baseUrl}/api/auth/check-login`, {
+
+    try {
+      const response = await axios.get<UserResponse>(
+        `${baseUrl}/api/auth/check-login`,
+        {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        });
-        console.log(response);
-        
-        const {username:email,userId:id,name,lastName,financialKnowledge,mainGoal,profileImageUrl,riskPreference,currentAmount,onboardingComplete} = response.data;
+        }
+      );
+      console.log(response);
 
-        setUser({
-          email,
-          id,
-          name,
-          lastName,
-          financialKnowledge,
-          mainGoal,
-          profileImageUrl,
-          riskPreference,
-          currentAmount,
-          onboardingComplete
-        });
-      } catch (error) {
-        console.error("Error en la solicitud:", error);
-      } finally {
-        setLoading(false);
-      
-  };
-}
- 
-  const logout = () => {
-      setLoading(true);
-      Cookies.remove("authToken");
-      setUser(null);
+      const {
+        username: email,
+        userId: id,
+        name,
+        lastName,
+        financialKnowledge,
+        mainGoal,
+        profileImageUrl,
+        riskPreference,
+        currentAmount,
+        onboardingComplete,
+        accionsAmountTotal,
+      } = response.data;
+
+      setUser({
+        email,
+        id,
+        name,
+        lastName,
+        financialKnowledge,
+        mainGoal,
+        profileImageUrl,
+        riskPreference,
+        currentAmount,
+        onboardingComplete,
+        accionsAmountTotal,
+      });
+    } catch (error) {
+      console.error("Error en la solicitud:", error);
+    } finally {
       setLoading(false);
-  }
+    }
+  };
+
+  const logout = () => {
+    setLoading(true);
+    Cookies.remove("authToken");
+    setUser(null);
+    setLoading(false);
+  };
   const decifrado = (token: string): User => {
     const base64Url = token.split(".")[1];
     const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
     const jsonPayload = decodeURIComponent(
-      atob(base64).split("").map((c) => "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2)).join("")
+      atob(base64)
+        .split("")
+        .map((c) => "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2))
+        .join("")
     );
     return JSON.parse(jsonPayload) as User;
   };
@@ -122,7 +142,9 @@ export function UserProvider({ children }: UserProviderProps) {
   }, []);
 
   return (
-    <UserContext.Provider value={{ user, setUser, loading, decifrado, fetchUserData, logout }}>
+    <UserContext.Provider
+      value={{ user, setUser, loading, decifrado, fetchUserData, logout }}
+    >
       {children}
     </UserContext.Provider>
   );

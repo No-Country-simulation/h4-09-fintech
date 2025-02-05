@@ -50,12 +50,15 @@ export const Dashboard: React.FC = () => {
   const [open, setOpen] = React.useState(false);
   const [monto, setMonto] = useState<number>(0);
   const [errorMonto, setErrorMonto] = useState<string>("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
   // Funciones (Fx)
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modalMessage, setModalMessage] = useState("");
+  // FONDO TOTAL: current + actions
+  const currentAmount = user?.currentAmount ?? 0;
+  const totalActions = user?.accionsAmountTotal ?? 0;
+  const foundsTotal = currentAmount + totalActions;
 
   // Función para obtener una cookie específica
   const getCookie = (name: string): string | null => {
@@ -240,7 +243,7 @@ export const Dashboard: React.FC = () => {
       </div>
 
       <div onClick={handleOpen} className="fondos-dash">
-        <div>
+        <div className="fondo-disponible">
           <h6>Fondo disponible</h6>$
           {user?.currentAmount
             ? user?.currentAmount.toLocaleString("es-AR", {
@@ -248,6 +251,32 @@ export const Dashboard: React.FC = () => {
                 maximumFractionDigits: 2,
               })
             : "0,00"}
+        </div>
+        <div className="other-funds">
+          <div>
+            <h6>Fondo Total</h6>
+            <span>
+              $
+              {foundsTotal
+                ? foundsTotal.toLocaleString("es-AR", {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2,
+                  })
+                : "0,00"}
+            </span>
+          </div>
+          <div>
+            <h6>Total acciones</h6>
+            <span>
+              $
+              {user?.accionsAmountTotal
+                ? user?.accionsAmountTotal.toLocaleString("es-AR", {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2,
+                  })
+                : "0,00"}
+            </span>
+          </div>
         </div>
         <small>cargar</small>
       </div>
@@ -278,9 +307,7 @@ export const Dashboard: React.FC = () => {
               />
 
               <h3>Añadir fondos</h3>
-              <p>
-                Ingresa el monto que deseas recargar para agregarlo a tu cuenta.
-              </p>
+              <p>Ingresa la cantidad dinero que deseas cargar a tu cartera </p>
             </Typography>
             <Typography id="modal-modal-description" sx={{ mt: 2 }}>
               <div className="monto-recarga">

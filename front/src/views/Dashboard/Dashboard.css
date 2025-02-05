@@ -15,6 +15,7 @@
 
 #foto-perfil {
   height: 90%;
+  max-height: 90%;
   width: auto;
   border-radius: 50%;
   border: solid rgb(0, 72, 178) 2px;
@@ -147,13 +148,13 @@
   height: 26.92%;
 }
 .fondos-dash {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   border: dashed rgba(0, 128, 0, 0.288) 1px;
   padding: 5%;
   box-sizing: border-box;
   border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   width: 94vw;
   min-height: 12.31vh;
   height: 12.31vh;
@@ -162,6 +163,29 @@
 .fondos-dash h6 {
   color: #01255c;
   font-weight: 200;
+}
+.fondos-dash .other-funds {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  max-height: 12.31vh;
+  /* margin-top: 2%; */
+  /* margin-right: auto;
+  margin-left: 4%; */
+  line-height: 0;
+  flex: 0.4;
+}
+.fondos-dash .fondo-disponible {
+  flex: 0.45;
+  min-width: max-content;
+}
+.fondos-dash .other-funds h6 {
+  font-size: 0.5rem;
+  /* margin-top: 2px; */
+}
+.fondos-dash .other-funds span {
+  font-size: 0.5rem;
 }
 #modal-modal-title h3 {
   color: #01255c;
@@ -223,8 +247,15 @@
     border: dashed rgba(0, 128, 0, 0.288) 2px;
     padding: 5%;
     background-color: #01255c1c;
-    width: 50vw;
+    /* width: 60vw; */
   }
+
+  .fondos-dash .other-funds {
+    flex-direction: row;
+    justify-content: space-evenly;
+    flex: 2;
+  }
+
   .titulo-dash .container-bell {
     height: 45%;
   }
@@ -264,6 +295,16 @@
   .fondos-dash small {
     font-size: 1rem;
     cursor: pointer;
+  }
+  .fondos-dash .other-funds {
+    line-height: initial;
+    height: max-content;
+  }
+  .fondos-dash .other-funds h6 {
+    font-size: 1rem;
+  }
+  .fondos-dash .other-funds span {
+    font-size: 1rem;
   }
   .container-sub-g {
     width: 100%;
