@@ -33,8 +33,8 @@ public class FinancialAssetEntity {
     private LocalDateTime lastUpdate;
     private BigDecimal openingBalance;
 
-    @ManyToMany(mappedBy = "financialAssets")
-    private List<UserEntity> users;
+//    @ManyToMany(mappedBy = "financialAssets")
+//    private List<UserEntity> users;
 
     public static FinancialAssetEntity mapper (FinancialResponseDto dto) {
         FinancialAssetEntity financialAssetEntity = new FinancialAssetEntity();
