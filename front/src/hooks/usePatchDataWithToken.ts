@@ -32,7 +32,7 @@ export const usePatchDataWithToken = <T>(url: string): Params<T> => {
 			// Realizar la solicitud POST
 			const response = await axios.patch(url, body, { headers })
 			const jsonData: T = response.data
-			console.log(jsonData)
+			// console.log(jsonData)
 
 			setData(jsonData)
 		} catch (err) {

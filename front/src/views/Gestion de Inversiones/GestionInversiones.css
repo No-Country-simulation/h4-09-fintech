@@ -518,3 +518,6 @@
 		}
 	}
 }
+.recomendation {
+	color: var(--color-primario);
+}

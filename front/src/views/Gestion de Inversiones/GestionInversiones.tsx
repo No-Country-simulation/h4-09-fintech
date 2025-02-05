@@ -109,11 +109,15 @@ export const GestionInversiones = (): JSX.Element => {
 				</h3>
 				<small>*tu saldo disponible mas el valor actual de tus inversiones</small>
 				<br />
+				<br />
 				<div className='headerContainer'>
 					<h3 className='subtitle'>¿En qué desea invertir?</h3>
 				</div>
 				<p>Invertí de manera fácil y rápida en el mercado.</p>
-				<h5>En base a tu perfil, te recomendamos esta cartera de inversiones: {investmentRecommendation}</h5>
+				<br />
+				<h5>
+					En base a tu perfil, te recomendamos esta cartera de inversiones: <span className='recomendation'>{investmentRecommendation}</span>{' '}
+				</h5>
 
 				<div className='inversiones-btn-group'>
 					{investmentsTypes.map((boton, index) => (

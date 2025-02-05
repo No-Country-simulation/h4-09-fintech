@@ -12,7 +12,7 @@ interface newInvestmentCardProps {
 }
 
 const NewInvestmentCard: React.FC<newInvestmentCardProps> = ({ investment, user }) => {
-	console.log('investment', investment);
+	// console.log('investment', investment);
 	
 	const [selectedAmount, setSelectedAmount] = useState<number>(1)
 	const { loading, error, postData } = usePostDataWithToken(`${baseUrl}/api/stocks/buy`)
@@ -34,9 +34,10 @@ const NewInvestmentCard: React.FC<newInvestmentCardProps> = ({ investment, user 
 
 		const body = {
 			quantity: selectedAmount,
-			pricePerUnit: investment.price,
-			stockSymbol: investment.name,
-			stockName: investment.description
+			// pricePerUnit: investment.price,
+			// stockSymbol: investment.name,
+			// stockName: investment.description
+			idSymbol: investment.id,
 		}
 
 		const buyingPrice = selectedAmount * investment.price
