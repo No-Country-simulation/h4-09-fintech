@@ -14,7 +14,7 @@ import java.util.Map;
 import java.util.UUID;
 
 public interface PagosService {
-    DepositoResponseDto createDeposito(CreateDepositoDto dto, UserEntity user);
+    DepositoResponseDto createDeposito(CreateDepositoDto dto, UserEntity user,String comprobante);
     RetiroResponseDto createRetiro(CreateRetiroDto dto, UserEntity user);
     List<DepositoResponseDto> getDepositos();
     List<RetiroResponseDto> getRetiros();

@@ -42,6 +42,27 @@ public class CloudinaryServiceImpl {
       }
     }
 
+
+    public String uploadFile(MultipartFile file, String publicId) throws Exception {
+        try {
+            if (file.isEmpty()) {
+                throw new IllegalArgumentException("El archivo está vacío");
+            }
+
+            Map<String, Object> params = ObjectUtils.asMap(
+                    "public_id", publicId // Aquí solo asignamos el public_id, sin otras configuraciones
+            );
+
+            Map<String, Object> resp = cloudinary.uploader().upload(file.getBytes(), params);
+
+            // Obtener la URL segura del archivo subido
+            String secureUrl = (String) resp.get("secure_url");
+            return secureUrl;
+        } catch (Exception e) {
+            throw new Exception("Error al subir la imagen: " + e.getMessage());
+        }
+    }
+
     @SuppressWarnings("rawtypes")
     public Map delete(String publicId) throws IOException {
         Map result = cloudinary.uploader().destroy(publicId, ObjectUtils.emptyMap());

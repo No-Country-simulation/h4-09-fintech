@@ -7,6 +7,7 @@ import com.demo.demo.dtos.response.DepositoResponseDto;
 import com.demo.demo.dtos.response.RetiroResponseDto;
 import com.demo.demo.entities.UserEntity;
 import com.demo.demo.services.PagosService;
+import com.demo.demo.services.impl.CloudinaryServiceImpl;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -18,11 +19,18 @@ import org.springframework.web.multipart.MultipartFile;
 @RequiredArgsConstructor
 public class PagosController {
     private final PagosService pagosService;
-
+    private final CloudinaryServiceImpl cloudinaryService;
     @PostMapping("/depositos")
     public ResponseEntity<DepositoResponseDto> createDeposito (@RequestParam("file") MultipartFile file,
-                                                               @RequestBody CreateDepositoDto dto, @CurrentUser UserEntity currentUser) {
-        return ResponseEntity.status(201).body(pagosService.createDeposito(dto, currentUser));
+                                                               @RequestParam float monto, @CurrentUser UserEntity currentUser) {
+        String publicId = "image_" + System.currentTimeMillis();
+        CreateDepositoDto dto = new CreateDepositoDto(monto);
+        try {
+            String commprobante = cloudinaryService.uploadFile(file,publicId );
+            return ResponseEntity.status(201).body(pagosService.createDeposito(dto, currentUser, commprobante));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
 

@@ -31,9 +31,10 @@ public class PagosServiceImpl implements PagosService {
 
     @Override
     @Transactional
-    public DepositoResponseDto createDeposito(CreateDepositoDto dto, UserEntity user) {
+    public DepositoResponseDto createDeposito(CreateDepositoDto dto, UserEntity user,String comprobante) {
 
         DepositoEntity deposito = DepositoEntity.createDeposito(dto.monto(), user);
+        deposito.setComprobante(comprobante);
         deposito = depositoRepository.save(deposito);
         return deposito.createResponseDto();
     }
