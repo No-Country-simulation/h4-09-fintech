@@ -10,6 +10,7 @@ import com.demo.demo.entities.UserEntity;
 public interface AuthService {
     AuthResponseDto login(LoginRequestDto dto);
     AuthResponseDto register(RegisterRequestDto dto);
+    AuthResponseDto loginAdmin(LoginRequestDto dto);
     //recover password
     void sendPasswordResetLink(EmailResetPasswordDTO emailResetPasswordDTO);
     String generateResetLink(UserEntity user);

@@ -10,7 +10,6 @@ import com.demo.demo.dtos.response.AuthResponseDto;
 import com.demo.demo.entities.RoleEntity;
 import com.demo.demo.entities.UserEntity;
 import com.demo.demo.exceptions.BadRequestException;
-import com.demo.demo.exceptions.ErrorResponse;
 import com.demo.demo.exceptions.NotFoundException;
 import com.demo.demo.repositories.RoleRepository;
 import com.demo.demo.repositories.UserRepository;
@@ -31,6 +30,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicReference;
 
 @Service
 @RequiredArgsConstructor
@@ -53,6 +53,25 @@ public class AuthServiceImpl implements AuthService {
         }
         UserEntity user = userRepository.findByUsername(dto.getEmail())
                 .orElseThrow(() -> new NotFoundException(String.format("User not found with email: %s", dto.getEmail())));
+        String token = jwtUtil.generateToken(user);
+        return new AuthResponseDto(token);
+    }
+
+    @Override
+    public AuthResponseDto loginAdmin(LoginRequestDto dto) {
+        try {
+            authenticationManager
+                    .authenticate(new UsernamePasswordAuthenticationToken(dto.getEmail(), dto.getPassword()));
+        } catch (Exception e) {
+            throw new BadRequestException("Invalid username or password");
+        }
+        UserEntity user = userRepository.findByUsername(dto.getEmail())
+                .orElseThrow(() -> new NotFoundException(String.format("User not found with email: %s", dto.getEmail())));
+        boolean isAdmin = user.getRoles().stream()
+                .anyMatch(role -> "ROLE_ADMIN".equals(role.getRoleName()));
+        if (!isAdmin) {
+            throw new BadRequestException("Not admin");
+        }
         String token = jwtUtil.generateToken(user);
         return new AuthResponseDto(token);
     }
