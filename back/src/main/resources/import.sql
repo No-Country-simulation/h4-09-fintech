@@ -53,3 +53,8 @@ INSERT INTO retiros (retiro_id,user_id,monto,fecha_request,cbu,status) VALUES ('
 INSERT INTO retiros (retiro_id,user_id,monto,fecha_request,cbu,status) VALUES ('8125cd10-9705-4ff8-95f1-280894211bb4','e181fea9-82ad-4984-ba5d-3628aba208d8',12000,'2025-01-15','123958582139585','PENDIENTE');
 INSERT INTO retiros (retiro_id,user_id,monto,fecha_request,cbu,status) VALUES ('e2c4eb14-5ef2-4b95-9cd9-d87d5fc1b949','a1e750b8-c9b1-4a01-989c-31a933411c30',16000,'2025-01-18','123958582139586','PENDIENTE');
 INSERT INTO retiros (retiro_id,user_id,monto,fecha_request,cbu,status) VALUES ('55efad22-fc38-4402-a720-68c3ad0fbb73','a56b8c94-c4dc-4e61-b16d-fdfa635bbd02',14000,'2025-01-07','123958582139588','PENDIENTE');
+
+
+-- CREAR CUENTA DE BANCO DEFAULT
+
+INSERT INTO cuentas_banco (id, titular, cbu, alias, cuit, user_created_id, fecha_creacion, fecha_modificacion, user_updated_id)VALUES ('b7d78b74-2e4b-4d25-984f-88ec7b4db123', 'IUPI FINTECH', '1234567890123456789012','IUPI.FINTECH.ALIAS', '20-12345678-9', '6adfed88-3f3f-46bd-81a7-ea79ea58793d',CURRENT_DATE, CURRENT_DATE, '6adfed88-3f3f-46bd-81a7-ea79ea58793d');

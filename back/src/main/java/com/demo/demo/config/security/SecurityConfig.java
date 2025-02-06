@@ -38,6 +38,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> {
                     auth.requestMatchers(HttpMethod.GET, "/api/auth/check-login").hasRole("USER");
                     auth.requestMatchers("/api/admin/pagos/depositos").hasRole("ADMIN");
+                    auth.requestMatchers(HttpMethod.PUT,"/api/admin/cuenta-banco").hasRole("ADMIN");
                     auth.requestMatchers("/api/auth/**",
                                     "/api/admin/auth/login",
                                     "/v3/api-docs",
