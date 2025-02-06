@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { ResponseRetiros, usePagos } from '../../../context/PagosContext';
 import ModalRetiro from '../modal/ModalRetiro';
+import Logo from '../../../assets/icons/Logo';
+import Spinner from '../../../components/Spiner';
 
 const LiberarPagos = () => {
   const [showModal, setShowModal] = useState<boolean>(false);
@@ -8,7 +10,7 @@ const LiberarPagos = () => {
   const [retirosState, setRetirosState] = useState<ResponseRetiros[]>([]);
   const [retirosFiltrados, SetRetirosFiltrados] = useState<ResponseRetiros[]>([]);
   const [status, setStatus] = useState<string>('PENDIENTE');
-  const { retiros, fetchRetiros } = usePagos();
+  const { retiros, fetchRetiros, loading } = usePagos();
   useEffect(() => {
     fetchRetiros();
   }, []);
@@ -24,7 +26,13 @@ const LiberarPagos = () => {
     SetRetirosFiltrados(retirosFiltrados);
   };
 
-  return (
+  return loading ? (
+    <div className="w-full  backdrop-blur-sm h-screen flex  flex-col gap-8 justify-center items-center">
+      {' '}
+      <Logo />
+      <Spinner />
+    </div>
+  ) : (
     <div className="p-6">
       {showModal && <ModalRetiro setShowModal={setShowModal} retiroSelect={retiroSelect} />}
       <div className="flex justify-between">

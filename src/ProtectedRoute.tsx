@@ -10,16 +10,21 @@ import { useCuentaBanco } from './context/CuentaBancoContext';
 
 export default function ProtectedRoute() {
   const { user, loading, message: messageUser, setMessage: setMessageUser } = useUser();
-  const { message, setMessage, setMessageError, messageError } = usePagos();
-  const { cuentaMessage, setCuentaMessage, cuentaMessageError, setCuentaMessageError } =
-    useCuentaBanco();
+  const { message, setMessage, setMessageError, messageError, loading: loadingPagos } = usePagos();
+  const {
+    cuentaMessage,
+    setCuentaMessage,
+    cuentaMessageError,
+    setCuentaMessageError,
+    loading: loadingCuenta,
+  } = useCuentaBanco();
   useEffect(() => {
     if (message) {
       toast.success(message);
       setMessage('');
     }
   }, [message]);
-
+  console.log(loadingCuenta, loadingPagos);
   useEffect(() => {
     if (messageError) {
       toast.error(messageError);

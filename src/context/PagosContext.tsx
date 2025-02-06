@@ -82,7 +82,7 @@ export function PagoProvider({ children }: PagosProviderProps) {
     setLoading(true);
     try {
       const { data } = await api<ResponseDepositos[]>('/api/admin/pagos/depositos');
-      console.log(data);
+
       setDepositos(data);
     } catch (error) {
       console.log(error);
@@ -93,6 +93,7 @@ export function PagoProvider({ children }: PagosProviderProps) {
 
   const fetchRetiros = async () => {
     try {
+      setLoading(true);
       const { data } = await api<ResponseRetiros[]>('/api/admin/pagos/retiros');
       setRetiros(data);
     } catch (error) {

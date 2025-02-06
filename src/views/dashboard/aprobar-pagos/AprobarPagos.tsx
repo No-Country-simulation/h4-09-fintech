@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { ResponseDepositos, usePagos } from '../../../context/PagosContext';
 import Modal from '../modal/ModalDeposito';
+import Logo from '../../../assets/icons/Logo';
+import Spinner from '../../../components/Spiner';
 
 // const pagos: PagoAprobProps[] = [
 //   {
@@ -50,7 +52,7 @@ const AprobarPagos = () => {
   const [depositosState, setDepositosState] = useState<ResponseDepositos[]>([]);
   const [depositosFiltrados, SetDepositosFiltrados] = useState<ResponseDepositos[]>([]);
   const [status, setStatus] = useState<string>('PENDIENTE');
-  const { depositos, fetchDepositos } = usePagos();
+  const { depositos, fetchDepositos, loading } = usePagos();
   useEffect(() => {
     fetchDepositos();
     setDepositosState(depositos);
@@ -66,7 +68,13 @@ const AprobarPagos = () => {
     const pagosFiltrados = depositosState.filter((pago) => pago.status === status);
     SetDepositosFiltrados(pagosFiltrados);
   };
-  return (
+  return loading ? (
+    <div className="w-full backdrop-blur-sm h-screen flex  flex-col gap-8 justify-center items-center">
+      {' '}
+      <Logo />
+      <Spinner />
+    </div>
+  ) : (
     <div className="p-6">
       {showModal && <Modal setShowModal={setShowModal} depositoSelect={depositoSelect} />}
       <div className="flex justify-between">
