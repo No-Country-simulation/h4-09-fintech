@@ -57,4 +57,4 @@ INSERT INTO retiros (retiro_id,user_id,monto,fecha_request,cbu,status) VALUES ('
 
 -- CREAR CUENTA DE BANCO DEFAULT
 
-INSERT INTO cuentas_banco (id, titular, cbu, alias, cuit, user_created_id, fecha_creacion, fecha_modificacion, user_updated_id)VALUES ('b7d78b74-2e4b-4d25-984f-88ec7b4db123', 'IUPI FINTECH', '1234567890123456789012','IUPI.FINTECH.ALIAS', '20-12345678-9', '6adfed88-3f3f-46bd-81a7-ea79ea58793d',CURRENT_DATE, CURRENT_DATE, '6adfed88-3f3f-46bd-81a7-ea79ea58793d');
+INSERT INTO cuentas_banco (id, titular, cbu, alias, cuit, user_created_id, fecha_creacion, fecha_modificacion, user_updated_id)VALUES ('b7d78b74-2e4b-4d25-984f-88ec7b4db123', 'IUPI FINTECH', '1234567890123456789012','IUPI.FINTECH.ALIAS', '20123456789', '6adfed88-3f3f-46bd-81a7-ea79ea58793d',CURRENT_DATE, CURRENT_DATE, '6adfed88-3f3f-46bd-81a7-ea79ea58793d');
