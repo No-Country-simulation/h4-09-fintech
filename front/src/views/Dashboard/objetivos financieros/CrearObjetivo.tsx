@@ -85,7 +85,9 @@ function CrearObjetivo() {
       }, 2000); // Espera antes de redirigir
     } catch (error) {
       console.error("Error:", error);
-      setModalMessage("Hubo un problema al guardar el objetivo. Inténtalo de nuevo.");
+      setModalMessage(
+        "Hubo un problema al guardar el objetivo. Inténtalo de nuevo."
+      );
       setIsModalOpen(true);
     }
   };
@@ -137,6 +139,7 @@ function CrearObjetivo() {
             <p className="text-red-500 text-sm mt-1">{errors.targetAmount}</p>
           )}
         </label>
+        <hr></hr>
 
         <button
           type="submit"
