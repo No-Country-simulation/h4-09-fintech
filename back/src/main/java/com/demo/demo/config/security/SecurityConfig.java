@@ -37,13 +37,14 @@ public class SecurityConfig {
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .authorizeHttpRequests(auth -> {
                     auth.requestMatchers(HttpMethod.GET, "/api/auth/check-login").hasRole("USER");
+
                     auth.requestMatchers("/api/auth/**",
                                     "/v3/api-docs",
                                     "/v3/api-docs/**",
                                     "/api/v1/public/**",
                                     "/swagger-ui/**",
                                     "/swagger-ui.html").permitAll();
-
+                    auth.requestMatchers("/api/auth/reset_password").authenticated();
                     auth.anyRequest().authenticated();
                 })
                 .csrf(AbstractHttpConfigurer::disable)

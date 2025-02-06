@@ -10,7 +10,6 @@ import com.demo.demo.dtos.response.AuthResponseDto;
 import com.demo.demo.entities.RoleEntity;
 import com.demo.demo.entities.UserEntity;
 import com.demo.demo.exceptions.BadRequestException;
-import com.demo.demo.exceptions.ErrorResponse;
 import com.demo.demo.exceptions.NotFoundException;
 import com.demo.demo.repositories.RoleRepository;
 import com.demo.demo.repositories.UserRepository;
@@ -104,11 +103,11 @@ public class AuthServiceImpl implements AuthService {
 
     public String generateResetLink(UserEntity user) {
         String token = jwtUtil.generateToken(user);
-        return "http://localhost:8080?token=" + token;
+        return "https://iupi-sample.vercel.app/auth/recovery-password" + token;
     }
 
     public void applyNewPassword(ResetPasswordDTO resetPasswordDTO) {
-        if (!resetPasswordDTO.repeatPassword().equals(resetPasswordDTO.password()))
+        if (!resetPasswordDTO.confirmPassword().equals(resetPasswordDTO.password()))
             throw new RuntimeException("Passwords do not match");
 
         UserDetails userContext = getUserContext();
