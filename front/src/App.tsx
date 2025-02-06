@@ -43,6 +43,8 @@ import PublicRoutes from "./PublicRoute";
 import ProtectedRoute from "./ProtectedRoute";
 import { useEffect } from "react";
 import { useUser } from "./contexts/UserContext";
+import { SendEmail } from "./views/auth/Recovery/SendEmail";
+import { RecoveryPassword } from "./views/auth/Recovery/RecoveryPassword";
 // import Spinner from "./components/spiner/Spiner";
 
 function App() {
@@ -63,6 +65,8 @@ function App() {
           <Route index element={<Auth />} />
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
+          <Route path="send-email" element={<SendEmail />} />
+          <Route path="recovery-password" element={<RecoveryPassword/>} />
         </Route>
       </Route>
 
