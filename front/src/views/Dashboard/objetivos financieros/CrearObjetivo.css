@@ -17,28 +17,31 @@
   margin-right: 10px;
 }
 .container-crear-objetivo form {
-  text-align: center;
   border-radius: 5px;
   height: 70vh;
-  width: 100%;
+  width: 90%;
   display: flex;
   flex-direction: column;
   align-items: center;
   margin: 2vh auto auto auto;
   color: var(--color-primario);
 }
+.container-crear-objetivo form hr {
+  width: 90%;
+}
 .container-crear-objetivo input {
-  margin: 10px;
   height: 5vh;
-  width: 50vw;
-  box-shadow: 0 0 8px 3px rgba(128, 128, 128, 0.438);
-  border: none;
+  width: 100%;
+  /* box-shadow: 0 0 8px 3px rgba(128, 128, 128, 0.438); */
+  border: solid grey 1px;
   padding: 10px;
   box-sizing: border-box;
   border-radius: 5px;
 }
-
 .container-crear-objetivo form :nth-child(3) {
+  margin: 5vh auto auto auto;
+}
+.container-crear-objetivo form :nth-child(4) {
   margin: auto auto 5vh auto;
 }
 
