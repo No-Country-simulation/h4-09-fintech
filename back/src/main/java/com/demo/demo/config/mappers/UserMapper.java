@@ -1,6 +1,7 @@
 package com.demo.demo.config.mappers;
 
 import com.demo.demo.dtos.request.RegisterRequestDto;
+import com.demo.demo.dtos.response.UserAdminResponseDTO;
 import com.demo.demo.entities.UserEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -12,4 +13,5 @@ public interface UserMapper {
     @Mapping(target = "lastName", source = "lastName")
     @Mapping(target = "roles", source = "roles")
     UserEntity toUserEntity(RegisterRequestDto dto);
+
 }
