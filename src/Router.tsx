@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 
 import ProtectedRoute from './ProtectedRoute';
 import PublicRoutes from './PublicRoute';
@@ -22,7 +22,7 @@ const Router = () => {
         <Route element={<PublicRoutes />}>
           <Route path="/login" element={<Login />} />
         </Route>
-        <Route path="*" element={<>404</>} />
+        <Route path="*" element={<Navigate to={'/login'} />} />
       </Routes>
     </>
   );
