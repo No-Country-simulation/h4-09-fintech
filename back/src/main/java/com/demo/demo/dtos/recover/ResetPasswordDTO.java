@@ -8,6 +8,6 @@ public record ResetPasswordDTO(
                 message = "La contraseña debe contener al menos 8 caracteres, una letra mayúscula, una letra minúscula, un número y un carácter especial."
         )
         String password,
-        String confirmPassword
+        String repeatPassword
 ) {
 }

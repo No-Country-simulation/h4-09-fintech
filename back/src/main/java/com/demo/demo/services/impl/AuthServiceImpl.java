@@ -123,11 +123,11 @@ public class AuthServiceImpl implements AuthService {
 
     public String generateResetLink(UserEntity user) {
         String token = jwtUtil.generateToken(user);
-        return "https://iupi-sample.vercel.app/auth/recovery-password?token=" + token;
+        return "http://localhost:8080?token=" + token;
     }
 
     public void applyNewPassword(ResetPasswordDTO resetPasswordDTO) {
-        if (!resetPasswordDTO.confirmPassword().equals(resetPasswordDTO.password()))
+        if (!resetPasswordDTO.repeatPassword().equals(resetPasswordDTO.password()))
             throw new RuntimeException("Passwords do not match");
 
         UserDetails userContext = getUserContext();
