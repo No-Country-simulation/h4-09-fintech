@@ -32,6 +32,7 @@ export const usePostDataWithToken = <T>(url: string): Params<T> => {
 			// Realizar la solicitud POST
 			const response = await axios.post(url, body, { headers })
 			const jsonData: T = response.data
+			console.log(jsonData)
 
 			setData(jsonData)
 		} catch (err) {

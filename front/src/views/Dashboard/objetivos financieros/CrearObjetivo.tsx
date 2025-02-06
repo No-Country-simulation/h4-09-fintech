@@ -2,6 +2,7 @@ import { ArrowLeftIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./CrearObjetivo.css";
+import Modals from "../../../components/modal/Modals";
 
 interface FinancialGoal {
   name: string;
@@ -18,6 +19,9 @@ function CrearObjetivo() {
   }>({});
 
   const navigate = useNavigate();
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
 
   // Función para obtener una cookie específica
   const getCookie = (name: string): string | null => {
@@ -67,15 +71,22 @@ function CrearObjetivo() {
 
       if (!response.ok) throw new Error("Error al crear el objetivo");
 
-      alert("Has creado un nuevo objetivo");
+      setModalMessage("Has creado un nuevo objetivo");
+      setIsModalOpen(true);
+      console.log("Modal debería abrirse:", isModalOpen);
+
       setGoalName("");
       setGoalTargetAmount("");
       setErrors({});
-      navigate("/objetivos-financieros");
-      window.location.reload();
+
+      setTimeout(() => {
+        navigate("/objetivos-financieros");
+        // window.location.reload();
+      }, 2000); // Espera antes de redirigir
     } catch (error) {
       console.error("Error:", error);
-      alert("Hubo un problema al guardar el objetivo.");
+      setModalMessage("Hubo un problema al guardar el objetivo. Inténtalo de nuevo.");
+      setIsModalOpen(true);
     }
   };
 
@@ -134,6 +145,14 @@ function CrearObjetivo() {
           Guardar Objetivo
         </button>
       </form>
+      {isModalOpen && (
+        <Modals
+          isOpen={isModalOpen}
+          title="Mensaje"
+          message={modalMessage}
+          onClose={() => setIsModalOpen(false)}
+        />
+      )}
     </div>
   );
 }

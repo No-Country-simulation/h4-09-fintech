@@ -4,9 +4,16 @@ import { useUser } from './contexts/UserContext';
 
 export default function PublicRoutes() {
 	const {user,loading} = useUser();
-	return !user && !loading 
+    console.log('user', user);
+    console.log('loading', loading);
+  
+    if (loading) {
+        return <div className=''>  </div>;
+    }
+    
+	return !user 
             ?  <Outlet />
-            : (user && !loading) && user.onboardingComplete ? 
+            : user && user.onboardingComplete ? 
             <Navigate to={'/dashboard'} /> 
             : <Navigate to={'/onboarding'} />
             ;

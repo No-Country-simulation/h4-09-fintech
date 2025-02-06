@@ -1,11 +1,10 @@
-/* Estilos base */
-.recharts-x-axis .recharts-cartesian-axis-tick {
+/* Estilos base .recharts-x-axis .recharts-cartesian-axis-tick {
   font-size: 12px;
 }
 
 .recharts-y-axis .recharts-cartesian-axis-tick {
   font-size: 12px;
-}
+} */
 
 /* Ajustes para pantallas pequeñas */
 @media (min-width: 768px) {
@@ -18,12 +17,8 @@
   }
 }
 
-@media (max-width: 425px) {
-  .recharts-x-axis .recharts-cartesian-axis-tick {
-    font-size: 80px;
-  }
-
-  .recharts-y-axis .recharts-cartesian-axis-tick {
-    font-size: 8px;
+@media (min-width: 425px) {
+  .box-section .toggle-btn-barchart {
+    font-size: 0.8rem !important;
   }
 }

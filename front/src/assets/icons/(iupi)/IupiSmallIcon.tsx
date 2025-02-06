@@ -9,6 +9,7 @@ export default function IupiSmallIcon() {
       xmlnsXlink="http://www.w3.org/1999/xlink"
     >
       <rect width="57.1717" height="40" fill="url(#pattern0_63_288)" />
+      
       <defs>
         <pattern
           id="pattern0_63_288"

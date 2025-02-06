@@ -56,6 +56,36 @@ const data = [
     Egresos: 439,
     amt: 2100,
   },
+  {
+    name: "Agosto",
+    Ingresos: 200,
+    Egresos: 1000,
+    amt: 2290,
+  },
+  {
+    name: "Septiembre",
+    Ingresos: 278,
+    Egresos: 399,
+    amt: 2000,
+  },
+  {
+    name: "Octubre",
+    Ingresos: 189,
+    Egresos: 490,
+    amt: 2181,
+  },
+  {
+    name: "Noviembre",
+    Ingresos: 239,
+    Egresos: 388,
+    amt: 2500,
+  },
+  {
+    name: "Diciembre",
+    Ingresos: 349,
+    Egresos: 439,
+    amt: 2100,
+  },
 ];
 
 const Example = () => {

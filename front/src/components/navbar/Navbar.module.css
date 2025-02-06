@@ -18,7 +18,7 @@
   transform: translateY(-100%);
 }
 
-.navbar{
+.navbar {
   padding: 0px 20px;
 }
 
@@ -40,7 +40,7 @@
 
 .navMenu a {
   text-decoration: none;
-  color: white;
+  color: var(--color-disabled);
   font-size: 1rem;
 }
 .navMenu a.active {
@@ -49,10 +49,9 @@
 }
 
 .navMenu a:hover {
-  color: #ffc700;
+  color: var(--color-fondo);
   transition: color 0.3s ease;
 }
-
 
 @media (max-width: 767px) {
   .logo {
