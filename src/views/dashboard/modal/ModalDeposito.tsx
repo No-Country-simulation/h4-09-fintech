@@ -1,7 +1,6 @@
 import { CircleX } from 'lucide-react';
 import { ResponseDepositos, usePagos } from '../../../context/PagosContext';
 import Spinner from '../../../components/Spiner';
-import { toast } from 'react-toastify';
 
 interface Props {
   setShowModal: React.Dispatch<React.SetStateAction<boolean>>;

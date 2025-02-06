@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import styles from '../login/login.module.css';
-import { useNavigate } from 'react-router-dom';
+
 import { useUser } from '../../context/UserContext';
 import SlashEyeIcon from '../../assets/icons/SlashEyeIcon';
 import Eyeicon from '../../assets/icons/Eyeicon';
@@ -8,7 +8,6 @@ import Spinner from '../../components/Spiner';
 import IupiSmallIcon from '../../assets/icons/IupiSmallIcon';
 
 export default function Login() {
-  const navigate = useNavigate();
   const { loading, login } = useUser();
   const [showPassword, setShowPassword] = useState(false);
   const [loginData, setLoginData] = useState({

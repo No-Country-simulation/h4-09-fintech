@@ -1,5 +1,5 @@
 import { CircleX } from 'lucide-react';
-import Spinner from '../Spiner';
+
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useCuentaBanco } from '../../context/CuentaBancoContext';
