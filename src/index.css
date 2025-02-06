@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: 'Poppins', Inter, system-ui, Avenir, Helvetica, Arial, sans-serif, neuton, poppins;
+  /* Fuentes */
+
+  --fuente-principal: 'Poppins', Inter, system-ui, Avenir, Helvetica, Arial, sans-serif, neuton,
+    poppins;
+  line-height: 1.5;
+  /* Grosores de fuentes */
+  --font-poppins-300: 300;
+  --font-poppins-400: 400;
+  --font-poppins-500: 500;
+  --font-poppins-600: 600;
+  --font-poppins-700: 700;
+
+  /* Definición de variables de color */
+  --color-primario: #0048b2;
+  --color-fondo: #f6f8f9;
+  --color-neutral-600: #33454c;
+  --color-neutral-principal: #232f34;
+  --color-disabled: #94adb7;
+  --color-secundario: #00378a;
+  --color-boton-fondo: #f6f8f9;
+  --color-notificaciones: #e2eaf3;
+
+  color-scheme: light dark;
+  /* color: #0048b2; */
+  background-color: var(--color-fondo);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
