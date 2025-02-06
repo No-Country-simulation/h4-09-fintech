@@ -57,9 +57,9 @@ export default function Auth() {
 					<Link to={'/auth/register'} className='secondaryButton'>
 						Registrarse
 					</Link>
-					{/* <Link to='#' className={style.link}>
+					<Link to='/auth/send-email' className={style.link}>
 						Olvidé mi contraseña
-					</Link> */}
+					</Link>
 				</div>
 
 				<div className={style.separador}>
