@@ -50,13 +50,12 @@ public class NotificationService {
                         "Datos del usuario:\n" +
                         "- Nombre: %s\n" +
                         "- Conocimiento financiero: %s\n" +
-                        "- Meta principal: %s\n" +
                         "- Preferencia de riesgo: %s\n" +
                         "- Progreso actual: %d%%\n" +
                         "- Mensaje motivador y educativo:\n"+
                         "- Respondeme en menos de 250 caracteres.\n"+
                         "- mostrando el porcentage del progreso en el mensaje.",
-                user.getName(), user.getFinancialKnowledge(), user.getMainGoal(), user.getRiskPreference(), (int)((user.getFunds() * 100) / user.getGoals().get(0).getTargetAmount()));
+                user.getName(), user.getFinancialKnowledge(), user.getRiskPreference(), (int)((user.getFunds() * 100) / user.getGoals().get(0).getTargetAmount()));
     }
 
     public NotificationResponseDTO notificationIsRead(

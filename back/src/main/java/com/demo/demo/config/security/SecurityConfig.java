@@ -46,7 +46,7 @@ public class SecurityConfig {
                                     "/api/v1/public/**",
                                     "/swagger-ui/**",
                                     "/swagger-ui.html").permitAll();
-
+                    auth.requestMatchers("/api/auth/reset_password").authenticated();
                     auth.anyRequest().authenticated();
                 })
                 .csrf(AbstractHttpConfigurer::disable)
