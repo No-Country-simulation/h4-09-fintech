@@ -123,7 +123,7 @@ public class AuthServiceImpl implements AuthService {
 
     public String generateResetLink(UserEntity user) {
         String token = jwtUtil.generateToken(user);
-        return "https://iupi-sample.vercel.app/auth/recovery-password" + token;
+        return "https://iupi-sample.vercel.app/auth/recovery-password?token=" + token;
     }
 
     public void applyNewPassword(ResetPasswordDTO resetPasswordDTO) {
