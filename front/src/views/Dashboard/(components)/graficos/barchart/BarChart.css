@@ -1,13 +1,44 @@
-/* Estilos base .recharts-x-axis .recharts-cartesian-axis-tick {
-  font-size: 12px;
+.box-section .toggle-btn-barchart {
+  font-size: 0.8rem !important;
+  position: relative;
+  overflow: hidden; /* Oculta el brillo que se sale del botón */
 }
 
-.recharts-y-axis .recharts-cartesian-axis-tick {
-  font-size: 12px;
-} */
+/* Efecto de brillo */
+.box-section .toggle-btn-barchart::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.8) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  animation: brillo 2s infinite;
+}
+
+/* Animación del brillo */
+@keyframes brillo {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+@media (min-width: 1024px) {
+  .box-section .toggle-btn-barchart::before {
+    animation: none;
+  }
+}
 
 /* Ajustes para pantallas pequeñas */
-@media (min-width: 768px) {
+
+/* @media (min-width: 768px) {
   .recharts-x-axis .recharts-cartesian-axis-tick {
     font-size: 10px;
   }
@@ -20,5 +51,7 @@
 @media (min-width: 425px) {
   .box-section .toggle-btn-barchart {
     font-size: 0.8rem !important;
+    background-color: aqua !important;
+    animation-delay: 4s;
   }
-}
+} */
