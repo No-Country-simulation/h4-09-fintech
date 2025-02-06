@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { ResponseDepositos, usePagos } from '../../../context/PagosContext';
+import Modal from '../modal/ModalDeposito';
 
 // const pagos: PagoAprobProps[] = [
 //   {
@@ -44,6 +45,8 @@ import { ResponseDepositos, usePagos } from '../../../context/PagosContext';
 // ];
 
 const AprobarPagos = () => {
+  const [showModal, setShowModal] = useState<boolean>(false);
+  const [depositoSelect, setDepositoSelect] = useState<ResponseDepositos | null>(null);
   const [depositosState, setDepositosState] = useState<ResponseDepositos[]>([]);
   const [depositosFiltrados, SetDepositosFiltrados] = useState<ResponseDepositos[]>([]);
   const [status, setStatus] = useState<string>('PENDIENTE');
@@ -58,10 +61,6 @@ const AprobarPagos = () => {
     SetDepositosFiltrados(depositos.filter((pago) => pago.status === 'PENDIENTE'));
   }, [depositos]);
 
-  const aprobarPago = (id: string) => {
-    console.log(id);
-  };
-
   const filtrarPagos = (status: string) => {
     setStatus(status);
     const pagosFiltrados = depositosState.filter((pago) => pago.status === status);
@@ -69,6 +68,7 @@ const AprobarPagos = () => {
   };
   return (
     <div className="p-6">
+      {showModal && <Modal setShowModal={setShowModal} depositoSelect={depositoSelect} />}
       <div className="flex justify-between">
         <h1 className="text-2xl font-bold mb-4">Aprobar pagos</h1>
         <div className="flex items-center gap-2">
@@ -140,7 +140,10 @@ const AprobarPagos = () => {
                   <td className="border p-3 text-center">
                     {pago.status === 'PENDIENTE' ? (
                       <button
-                        onClick={() => aprobarPago(pago.userId)}
+                        onClick={() => {
+                          setDepositoSelect(pago);
+                          setShowModal(true);
+                        }}
                         className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition"
                       >
                         Aprobar

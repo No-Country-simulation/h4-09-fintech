@@ -1,10 +1,6 @@
 import { useState } from 'react';
 import styles from '../login/login.module.css';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-
-import Cookies from 'js-cookie';
-import { baseUrl } from '../../config/envs';
 import { useUser } from '../../context/UserContext';
 import SlashEyeIcon from '../../assets/icons/SlashEyeIcon';
 import Eyeicon from '../../assets/icons/Eyeicon';
@@ -13,13 +9,12 @@ import IupiSmallIcon from '../../assets/icons/IupiSmallIcon';
 
 export default function Login() {
   const navigate = useNavigate();
-  const { fetchUserData } = useUser(); // Destructura setUser del contexto
+  const { loading, login } = useUser();
   const [showPassword, setShowPassword] = useState(false);
   const [loginData, setLoginData] = useState({
     email: '',
     password: '',
   });
-  const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (e: { target: { name: string; value: string } }) => {
     const { name, value } = e.target;
@@ -31,26 +26,7 @@ export default function Login() {
 
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
-    setIsLoading(true);
-
-    try {
-      const response = await axios.post(`${baseUrl}/api/admin/auth/login`, loginData);
-      const token = response.data.token;
-
-      Cookies.set('authToken', token, { expires: 1 });
-      await fetchUserData();
-      navigate('/dashboard');
-      alert('Login exitoso');
-    } catch (error) {
-      if (axios.isAxiosError(error) && error.response) {
-        console.error(error.response.data);
-      } else {
-        console.error(error);
-      }
-      alert('Usuario o contraseña invalidos');
-    } finally {
-      setIsLoading(false);
-    }
+    await login(loginData);
   };
 
   return (
@@ -100,7 +76,7 @@ export default function Login() {
             </button>
           </div>
         </div>
-        {isLoading ? (
+        {loading ? (
           <button type="button" className={styles.buttonEnabled} disabled>
             <Spinner />
           </button>

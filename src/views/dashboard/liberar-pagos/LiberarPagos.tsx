@@ -1,54 +1,10 @@
 import { useEffect, useState } from 'react';
-import { PagoLibProps, ResponseRetiros, usePagos } from '../../../context/PagosContext';
-
-const pagos: PagoLibProps[] = [
-  {
-    id: '1',
-    userId: '1001',
-    name: 'Juan',
-    lastName: 'Pérez',
-    dni: '30123456',
-    monto: 5000,
-    fecha: '2024-02-05',
-    status: 'pendiente',
-    cbu: '0123456789012345678901',
-  },
-  {
-    id: '2',
-    userId: '1002',
-    name: 'María',
-    lastName: 'Gómez',
-    dni: '31234567',
-    monto: 7000,
-    fecha: '2024-02-04',
-    status: 'aprobado',
-    cbu: '0987654321098765432109',
-  },
-  {
-    id: '3',
-    userId: '1003',
-    name: 'Carlos',
-    lastName: 'López',
-    dni: '32345678',
-    monto: 6000,
-    fecha: '2024-02-03',
-    status: 'rechazado',
-    cbu: '1234567890123456789012',
-  },
-  {
-    id: '4',
-    userId: '1004',
-    name: 'Ana',
-    lastName: 'Martínez',
-    dni: '33456789',
-    monto: 4500,
-    fecha: '2024-02-02',
-    status: 'pendiente',
-    cbu: '9876543210987654321098',
-  },
-];
+import { ResponseRetiros, usePagos } from '../../../context/PagosContext';
+import ModalRetiro from '../modal/ModalRetiro';
 
 const LiberarPagos = () => {
+  const [showModal, setShowModal] = useState<boolean>(false);
+  const [retiroSelect, setRetiroSelect] = useState<ResponseRetiros | null>(null);
   const [retirosState, setRetirosState] = useState<ResponseRetiros[]>([]);
   const [retirosFiltrados, SetRetirosFiltrados] = useState<ResponseRetiros[]>([]);
   const [status, setStatus] = useState<string>('PENDIENTE');
@@ -67,12 +23,10 @@ const LiberarPagos = () => {
     const retirosFiltrados = retirosState.filter((pago) => pago.status === status);
     SetRetirosFiltrados(retirosFiltrados);
   };
-  const liberarPago = (id: string) => {
-    console.log(id);
-  };
 
   return (
     <div className="p-6">
+      {showModal && <ModalRetiro setShowModal={setShowModal} retiroSelect={retiroSelect} />}
       <div className="flex justify-between">
         <h1 className="text-2xl font-bold mb-4">Aprobar pagos</h1>
         <div className="flex items-center gap-2">
@@ -82,9 +36,9 @@ const LiberarPagos = () => {
             onChange={(e) => filtrarPagos(e.target.value)}
             className="border rounded px-3 py-1"
           >
-            <option value="pendiente">Pendiente</option>
-            <option value="aprobado">Aprobado</option>
-            <option value="rechazado">Rechazado</option>
+            <option value="PENDIENTE">Pendiente</option>
+            <option value="APROBADO">Aprobado</option>
+            <option value="RECHAZADO">Rechazado</option>
           </select>
         </div>
       </div>
@@ -134,7 +88,10 @@ const LiberarPagos = () => {
                   <td className="border p-3 text-center">
                     {pago.status === 'PENDIENTE' && (
                       <button
-                        onClick={() => liberarPago(pago.userId)}
+                        onClick={() => {
+                          setRetiroSelect(pago);
+                          setShowModal(!showModal);
+                        }}
                         className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition"
                       >
                         Aprobar
@@ -145,8 +102,8 @@ const LiberarPagos = () => {
               ))
             ) : (
               <tr>
-                <td colSpan={10} className="border p-3 text-center">
-                  No hay pagos registrados
+                <td colSpan={11} className="border p-3 text-center">
+                  No hay pagos {status.toLowerCase()} registrados
                 </td>
               </tr>
             )}

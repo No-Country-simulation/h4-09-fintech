@@ -2,6 +2,7 @@ import { createContext, useState, useContext, useEffect, ReactNode } from 'react
 import { baseUrl } from '../config/envs';
 import Cookies from 'js-cookie';
 import api from '../utils/axios';
+import axios from 'axios';
 // Tipos para los datos del usuario y el contexto
 interface User {
   id: string;
@@ -11,6 +12,11 @@ interface User {
   roleName: string;
 }
 
+interface LoginData {
+  email: string;
+  password: string;
+}
+
 interface UserContextType {
   user: User | null;
   setUser: React.Dispatch<React.SetStateAction<User | null>>;
@@ -18,6 +24,11 @@ interface UserContextType {
   decifrado: (token: string) => User;
   fetchUserData: () => Promise<void>;
   logout: () => void;
+  message: string;
+  setMessage: React.Dispatch<React.SetStateAction<string>>;
+  messageError: string;
+  setMessageError: React.Dispatch<React.SetStateAction<string>>;
+  login: (loginData: LoginData) => Promise<void>;
 }
 
 // Crear el contexto con un valor inicial
@@ -45,7 +56,8 @@ export function useUser() {
 export function UserProvider({ children }: UserProviderProps) {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
-
+  const [message, setMessage] = useState<string>('');
+  const [messageError, setMessageError] = useState<string>('');
   const fetchUserData = async () => {
     setLoading(true);
     const token = getTokenFromCookies();
@@ -64,6 +76,25 @@ export function UserProvider({ children }: UserProviderProps) {
       setUser(data);
     } catch (error) {
       console.error('Error en la solicitud:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const login = async (loginData: LoginData) => {
+    setLoading(true);
+
+    try {
+      const response = await api.post(`${baseUrl}/api/admin/auth/login`, loginData);
+      const token = response.data.token;
+      Cookies.set('authToken', token, { expires: 1 });
+      setMessage('Bienvenido!');
+      await fetchUserData();
+    } catch (error) {
+      if (axios.isAxiosError(error) && error.response && error.response.status === 400) {
+        console.error(error.response.data);
+      }
+      setMessageError('Usuario o contraseña incorrectos');
     } finally {
       setLoading(false);
     }
@@ -92,7 +123,21 @@ export function UserProvider({ children }: UserProviderProps) {
   }, []);
 
   return (
-    <UserContext.Provider value={{ user, setUser, loading, decifrado, fetchUserData, logout }}>
+    <UserContext.Provider
+      value={{
+        user,
+        setUser,
+        loading,
+        decifrado,
+        fetchUserData,
+        logout,
+        message,
+        setMessage,
+        messageError,
+        setMessageError,
+        login,
+      }}
+    >
       {children}
     </UserContext.Provider>
   );
