@@ -39,12 +39,14 @@ Ante la falta de opciones de crédito accesible, IUPI ofrece a las familias la p
 
 | 🏛️ **Nombre**             | 📧 **LinkedIn**                          | 🎨 **Github**      | **Rol**        |
 |--------------------|-------------------------------------|-------------------|----------------|
-| Lucel Da Silva     | linkedin | github    | rol     |
-| Edivaldo Gomez   | linkedin  |   github    | rol       |
-| Leon Asturizaga    | linkedin | github  | rol       |
 | Gabriel Gotlib    | [Gabriel-Gotlib](https://www.linkedin.com/in/gabriel-gotlib-5855197b/) | [Gabriel Gtlib](https://github.com/Gagotlib)  | Frontend       |
 | Jorge Hernriquez       | [jorge-henriquez-novoa](https://linkedin.com/in/jorge-henriquez-novoa/) | jorgea-hn       | Frontend        |
-| Alejandro Verduguez       | [Alejandro Verduguez Vidal](https://www.linkedin.com/in/alejandro-verduguez/) | [alelex10](https://github.com/alelex10)       | Backend        |
+| Leon Asturizaga    | linkedin | github  |  Frontend        |
+| Santiago Perez Kay    | [santiagoperezkay](https://www.linkedin.com/in/santiagoperezkay/) | github  |  Backend        |
+| Alejandro Verduguez   | [Alejandro Verduguez Vidal](https://www.linkedin.com/in/alejandro-verduguez/) | [alelex10](https://github.com/alelex10)       |   Backend        |
+| Catriel Escobar    | [catrielescobar]([https://www.linkedin.com/in/santiagoperezkay/](https://www.linkedin.com/in/catrielescobar/)) | github  |  Backend        |
+| Facundo Aguero     | [facundo-nicolas-aguero](https://www.linkedin.com/in/facundo-nicolas-aguero/)     |   Backend        | 
+
 
 ---
 
@@ -55,7 +57,7 @@ Ante la falta de opciones de crédito accesible, IUPI ofrece a las familias la p
 ---
 
 ## 🎥 Video Promocional
-[Video](#)
+[Video](https://youtu.be/7FEeeC9Dz4Q)
 
 ---
 
