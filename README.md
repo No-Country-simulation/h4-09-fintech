@@ -44,7 +44,7 @@ Ante la falta de opciones de crédito accesible, IUPI ofrece a las familias la p
 | Leon Asturizaga    | linkedin | github  |  Frontend        |
 | Santiago Perez Kay    | [santiagoperezkay](https://www.linkedin.com/in/santiagoperezkay/) | [github](https://github.com/SantiagoPerezKay)  |  Backend        |
 | Alejandro Verduguez   | [Alejandro Verduguez Vidal](https://www.linkedin.com/in/alejandro-verduguez/) | [alelex10](https://github.com/alelex10)       |   Backend        |
-| Catriel Escobar    | [catrielescobar]([https://www.linkedin.com/in/santiagoperezkay/](https://www.linkedin.com/in/catrielescobar/)) | [github](https://github.com/Catriel-Escobar)  |  Backend        |
+| Catriel Escobar    | [catrielescobar](https://www.linkedin.com/in/catrielescobar/) | [github](https://github.com/Catriel-Escobar)  |  Backend        |
 | Facundo Aguero     | [facundo-nicolas-aguero](https://www.linkedin.com/in/facundo-nicolas-aguero/)     |  [github](https://github.com/Dota43ver) |  Backend        | 
 
 
