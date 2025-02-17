@@ -52,8 +52,13 @@ Ante la falta de opciones de crédito accesible, IUPI ofrece a las familias la p
 
 ## 💽 Deployment
 - **Frontend:** [IUPI Frontend](https://iupi-sample.vercel.app/)
-- **Frontend/Admin:** [IUPI ADMIN](https://iupi-admin.netlify.app/)
 - **Backend:** [IUPI Backend](https://h4-09-fintech-production.up.railway.app)
+- **Frontend/Admin:** [IUPI ADMIN](https://iupi-admin.netlify.app/)
+
+  **Credenciales de prueba admin:**
+  - Usuario: `admin@gmail.com`
+  - Contraseña: `@Admin1125`
+
 
 ---
 
