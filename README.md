@@ -71,7 +71,7 @@ Ante la falta de opciones de crédito accesible, IUPI ofrece a las familias la p
 
 ## 🔌 Recursos Adicionales
 - [Google Drive del proyecto](#)
-- [Swagger](https://h4-09-fintech-production.up.railway.app/swagger-ui/index.html)
+- [Swagger](h4-09-fintech-production.up.railway.app/swagger-ui/index.html)
 
 ---
 
